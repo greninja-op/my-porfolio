@@ -94,12 +94,16 @@ export default function MacMenuBar({
         zIndex: 1000,
         boxShadow: '0 2px 0px #000000'
       }}
-      onClick={() => setActiveMenu(null)}
     >
-      {/* Left Menu Items */}
+      {/* Left Menu Items with Mouse Enter Hover Dropdowns */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
         {menus.map((menu) => (
-          <div key={menu.name} style={{ position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+          <div
+            key={menu.name}
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setActiveMenu(menu.name)}
+            onMouseLeave={() => setActiveMenu(null)}
+          >
             <button
               onClick={() => setActiveMenu(activeMenu === menu.name ? null : menu.name)}
               style={{
@@ -111,7 +115,8 @@ export default function MacMenuBar({
                 fontFamily: 'var(--font-mac-title)',
                 fontSize: '1.2rem',
                 fontWeight: 'bold',
-                borderRadius: '3px'
+                borderRadius: '3px',
+                transition: 'background 0.1s ease, color 0.1s ease'
               }}
             >
               {menu.name}
@@ -131,7 +136,8 @@ export default function MacMenuBar({
                   display: 'flex',
                   flexDirection: 'column',
                   zIndex: 1001,
-                  padding: '4px 0'
+                  padding: '4px 0',
+                  animation: 'menuDrop 0.12s ease-out'
                 }}
               >
                 {menu.items.map((item, idx) => (
@@ -213,6 +219,13 @@ export default function MacMenuBar({
           {timeStr}
         </span>
       </div>
+
+      <style>{`
+        @keyframes menuDrop {
+          from { opacity: 0; transform: translateY(-4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
