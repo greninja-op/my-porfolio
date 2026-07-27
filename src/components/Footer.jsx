@@ -82,7 +82,7 @@ export default function Footer() {
             }}
           >
             <div>
-              © {new Date().getFullYear()} Athul (`greninja-op`). All rights reserved.
+              © {new Date().getFullYear()} Arjun Sabu (`@greninja-op`). All rights reserved.
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span>Crafted with React, Vite & Modern CSS</span>

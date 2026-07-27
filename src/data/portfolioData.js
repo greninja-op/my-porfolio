@@ -1,12 +1,13 @@
 export const personalInfo = {
-  name: "Athul",
+  name: "Arjun Sabu",
   handle: "greninja-op",
+  shortHandle: "greninja",
   title: "AI Systems & Full-Stack Reliability Engineer",
   tagline: "Building self-preventing reliability loops, agent observability & high-performance Web systems.",
   location: "India",
-  email: "athul.dev@example.com",
+  email: "arjun.sabu@example.com",
   github: "https://github.com/greninja-op",
-  linkedin: "https://linkedin.com/in/greninja-op",
+  linkedin: "https://linkedin.com/in/arjun-sabu",
   twitter: "https://twitter.com/greninja_op",
   bio: "Passionate AI systems engineer focused on autonomous agent reliability, telemetry-driven self-healing, high-throughput pipelines, and crafting modern visual web experiences. Creator of ChronoLens (Agents of SigNoz track entry) and active open-source contributor.",
   stats: [
