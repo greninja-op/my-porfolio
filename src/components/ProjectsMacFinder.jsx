@@ -1,140 +1,238 @@
 import React, { useState } from 'react';
 import { projects } from '../data/portfolioData';
+import GetInfoModal from './GetInfoModal';
 
-export default function ProjectsMacFinder({ activeExtensions = [] }) {
-  const filteredProjects = activeExtensions.length > 0
-    ? projects.filter((p) => p.techStack.some((tech) => activeExtensions.includes(tech)))
-    : projects;
+export default function ProjectsMacFinder({ activeExtensions = [], onOpenApp }) {
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'icon'
+  const [selectedFolder, setSelectedFolder] = useState('all'); // 'all', 'ai', 'security', 'distributed', 'media'
+  const [selectedProjectId, setSelectedProjectId] = useState(projects[0].id);
+  const [getInfoProject, setGetInfoProject] = useState(null);
+
+  const filteredProjects = projects.filter((p) => {
+    // Extension filter check
+    if (activeExtensions.length > 0) {
+      const matchExt = p.techStack.some((tech) => activeExtensions.includes(tech));
+      if (!matchExt) return false;
+    }
+    // Folder filter check
+    if (selectedFolder === 'ai') return p.category.includes('AI');
+    if (selectedFolder === 'security') return p.category.includes('Security');
+    if (selectedFolder === 'distributed') return p.category.includes('Distributed');
+    return true;
+  });
 
   const displayList = filteredProjects.length > 0 ? filteredProjects : projects;
-  const [selectedId, setSelectedId] = useState(displayList[0].id);
-
-  const selectedProj = displayList.find((p) => p.id === selectedId) || displayList[0];
+  const activeProj = displayList.find((p) => p.id === selectedProjectId) || displayList[0];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontFamily: 'var(--font-mac-title)' }}>
-      {/* Finder Header Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '0.5rem', flexWrap: 'wrap' }}>
-        <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-          {displayList.length} items in "Proud Works" • {activeExtensions.length > 0 ? `Filtered by ${activeExtensions.join(', ')}` : 'System 7 Volume'}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontFamily: 'var(--font-mac-title)' }}>
+      {/* Finder Header Toolbar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={() => setViewMode('icon')}
+            className={`mac-btn ${viewMode === 'icon' ? 'mac-btn-purple' : ''}`}
+          >
+            ▦ Icon View
+          </button>
+          <button
+            onClick={() => setViewMode('list')}
+            className={`mac-btn ${viewMode === 'list' ? 'mac-btn-purple' : ''}`}
+          >
+            ≡ List View
+          </button>
+          <button
+            onClick={() => setGetInfoProject(activeProj)}
+            className="mac-btn mac-btn-lime"
+          >
+            ℹ️ Get Info (⌘I)
+          </button>
         </div>
-        <div style={{ fontSize: '1.1rem', color: 'var(--mac-purple-dark)' }}>
-          System 7 Finder
+
+        <div style={{ fontSize: '1.05rem', fontWeight: 'bold' }}>
+          Volume: Hard Drive:Projects ({displayList.length} items)
         </div>
       </div>
 
-      {/* Main Finder Split View */}
-      <div style={{ display: 'grid', gridTemplateColumns: '210px 1fr', gap: '1rem' }}>
-        {/* Left Item List */}
-        <div className="mac-group-box" style={{ padding: '0.6rem' }}>
-          <span className="mac-group-label">Applications</span>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '0.5rem' }}>
-            {displayList.map((proj) => (
-              <button
-                key={proj.id}
-                onClick={() => setSelectedId(proj.id)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.4rem 0.6rem',
-                  border: '2px solid #000',
-                  background: selectedId === proj.id ? 'var(--mac-purple)' : '#ffffff',
-                  color: selectedId === proj.id ? '#ffffff' : '#000000',
-                  boxShadow: selectedId === proj.id ? '2px 2px 0px #000' : 'none',
-                  cursor: 'pointer',
-                  fontFamily: 'var(--font-mac-title)',
-                  fontSize: '1.1rem',
-                  fontWeight: 'bold',
-                  textAlign: 'left',
-                  borderRadius: '4px'
-                }}
-              >
-                <span>{proj.icon}</span>
-                <span>{proj.title}</span>
-              </button>
-            ))}
+      {/* Main Split View Container */}
+      <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: '0.85rem' }}>
+        {/* Left Folder Hierarchy Sidebar */}
+        <div className="mac-group-box" style={{ padding: '0.5rem' }}>
+          <span className="mac-group-label">Hard Drive Folders</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginTop: '0.4rem' }}>
+            <button
+              onClick={() => setSelectedFolder('all')}
+              style={{
+                textAlign: 'left',
+                padding: '0.3rem 0.5rem',
+                border: '1px solid #000',
+                background: selectedFolder === 'all' ? 'var(--mac-purple)' : '#fff',
+                color: selectedFolder === 'all' ? '#fff' : '#000',
+                fontFamily: 'var(--font-mac-title)',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              📁 / Projects (All)
+            </button>
+            <button
+              onClick={() => setSelectedFolder('ai')}
+              style={{
+                textAlign: 'left',
+                padding: '0.3rem 0.5rem',
+                border: '1px solid #000',
+                background: selectedFolder === 'ai' ? 'var(--mac-purple)' : '#fff',
+                color: selectedFolder === 'ai' ? '#fff' : '#000',
+                fontFamily: 'var(--font-mac-title)',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              📁 / AI & Models
+            </button>
+            <button
+              onClick={() => setSelectedFolder('security')}
+              style={{
+                textAlign: 'left',
+                padding: '0.3rem 0.5rem',
+                border: '1px solid #000',
+                background: selectedFolder === 'security' ? 'var(--mac-purple)' : '#fff',
+                color: selectedFolder === 'security' ? '#fff' : '#000',
+                fontFamily: 'var(--font-mac-title)',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              📁 / Security & Storage
+            </button>
+            <button
+              onClick={() => setSelectedFolder('distributed')}
+              style={{
+                textAlign: 'left',
+                padding: '0.3rem 0.5rem',
+                border: '1px solid #000',
+                background: selectedFolder === 'distributed' ? 'var(--mac-purple)' : '#fff',
+                color: selectedFolder === 'distributed' ? '#fff' : '#000',
+                fontFamily: 'var(--font-mac-title)',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+            >
+              📁 / Distributed Systems
+            </button>
+            <button
+              onClick={() => onOpenApp('resume')}
+              style={{
+                textAlign: 'left',
+                padding: '0.3rem 0.5rem',
+                border: '1px solid #000',
+                background: 'var(--mac-yellow)',
+                color: '#000',
+                fontFamily: 'var(--font-mac-title)',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                marginTop: '0.5rem'
+              }}
+            >
+              📄 Resume.pdf ↗
+            </button>
           </div>
         </div>
 
-        {/* Right Detail Inspection Panel */}
-        <div className="mac-group-box" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <span className="mac-group-label">File Details: {selectedProj.title}</span>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem', marginTop: '0.4rem' }}>
-              <span
-                style={{
-                  background: 'var(--mac-pink)',
-                  color: '#fff',
-                  border: '1px solid #000',
-                  padding: '1px 8px',
-                  fontSize: '1rem',
-                  fontWeight: 'bold'
-                }}
-              >
-                {selectedProj.badge}
-              </span>
-              <span style={{ fontSize: '1rem', color: '#666' }}>Kind: {selectedProj.category}</span>
-            </div>
+        {/* Right Viewport: Icon View or List View */}
+        <div className="mac-group-box">
+          <span className="mac-group-label">Contents of /{selectedFolder}</span>
 
-            <h3 style={{ fontSize: '1.5rem', color: '#000', marginBottom: '0.2rem' }}>
-              {selectedProj.title}
-            </h3>
-            <p style={{ fontSize: '1.1rem', color: 'var(--mac-purple-dark)', fontWeight: 'bold', marginBottom: '0.6rem' }}>
-              {selectedProj.subtitle}
-            </p>
-
-            <p style={{ fontFamily: 'var(--font-mac-body)', fontSize: '0.95rem', lineHeight: 1.5, color: '#222', marginBottom: '0.8rem' }}>
-              {selectedProj.description}
-            </p>
-
-            {/* Key Capabilities */}
-            <div style={{ marginBottom: '0.8rem' }}>
-              <div style={{ fontWeight: 'bold', fontSize: '1.05rem', marginBottom: '0.3rem' }}>Capabilities:</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                {selectedProj.features.map((f, i) => (
-                  <div key={i} style={{ fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <span style={{ color: 'var(--mac-lime)', fontWeight: 'bold' }}>•</span>
-                    <span>{f}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tech Stack Pills */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
-              {selectedProj.techStack.map((tech, i) => (
-                <span
-                  key={i}
+          {viewMode === 'icon' ? (
+            /* Large Icon Grid View */
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '1rem', padding: '0.5rem' }}>
+              {displayList.map((p) => (
+                <div
+                  key={p.id}
+                  onClick={() => setSelectedProjectId(p.id)}
+                  onDoubleClick={() => onOpenApp(p.id)}
                   style={{
-                    background: 'var(--mac-cyan)',
-                    border: '1px solid #000',
-                    padding: '2px 6px',
-                    fontSize: '0.9rem',
-                    fontWeight: 'bold',
-                    boxShadow: '1px 1px 0px #000'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    padding: '0.5rem',
+                    border: selectedProjectId === p.id ? '2px solid #000' : '1px transparent',
+                    background: selectedProjectId === p.id ? 'rgba(181, 96, 232, 0.2)' : 'transparent',
+                    cursor: 'pointer',
+                    borderRadius: '6px'
                   }}
                 >
-                  {tech}
-                </span>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '8px', background: 'var(--mac-pink)', border: '2px solid #000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', boxShadow: '2px 2px 0px #000' }}>
+                    {p.icon}
+                  </div>
+                  <div style={{ fontSize: '1rem', fontWeight: 'bold', textAlign: 'center', wordBreak: 'break-word' }}>
+                    {p.title}.app
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
+          ) : (
+            /* Table List View */
+            <div style={{ marginTop: '0.4rem', overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+                <thead>
+                  <tr style={{ background: 'var(--mac-purple)', color: '#fff', borderBottom: '2px solid #000', textAlign: 'left' }}>
+                    <th style={{ padding: '0.4rem' }}>Name</th>
+                    <th style={{ padding: '0.4rem' }}>Kind</th>
+                    <th style={{ padding: '0.4rem' }}>Badge</th>
+                    <th style={{ padding: '0.4rem' }}>Size</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayList.map((p) => (
+                    <tr
+                      key={p.id}
+                      onClick={() => setSelectedProjectId(p.id)}
+                      onDoubleClick={() => onOpenApp(p.id)}
+                      style={{
+                        borderBottom: '1px solid #ddd',
+                        background: selectedProjectId === p.id ? 'rgba(181, 96, 232, 0.2)' : '#fff',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <td style={{ padding: '0.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span>{p.icon}</span>
+                        <span>{p.title}.app</span>
+                      </td>
+                      <td style={{ padding: '0.4rem' }}>{p.category}</td>
+                      <td style={{ padding: '0.4rem' }}>{p.badge}</td>
+                      <td style={{ padding: '0.4rem' }}>1,400+ commits</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
-          {/* Action Links */}
-          <div style={{ borderTop: '2px solid #000', paddingTop: '0.6rem', display: 'flex', gap: '0.6rem', justifyContent: 'flex-end' }}>
-            <a
-              href={selectedProj.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mac-btn mac-btn-purple"
-              style={{ textDecoration: 'none' }}
-            >
-              📦 GitHub Repository ↗
-            </a>
-          </div>
+          {/* Active Selection Details Preview Footer */}
+          {activeProj && (
+            <div style={{ borderTop: '2px solid #000', marginTop: '0.8rem', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <div>
+                <strong>Selected: {activeProj.title}</strong> — {activeProj.subtitle}
+              </div>
+              <div style={{ display: 'flex', gap: '0.4rem' }}>
+                <button onClick={() => setGetInfoProject(activeProj)} className="mac-btn mac-btn-lime">
+                  ℹ️ Info
+                </button>
+                <button onClick={() => onOpenApp(activeProj.id)} className="mac-btn mac-btn-purple">
+                  🚀 Launch App
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Command + I Get Info Inspector Modal */}
+      {getInfoProject && (
+        <GetInfoModal project={getInfoProject} onClose={() => setGetInfoProject(null)} />
+      )}
     </div>
   );
 }

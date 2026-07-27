@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MacMenuBar from './components/MacMenuBar';
 import DesktopIcons from './components/DesktopIcons';
 import MacWindow from './components/MacWindow';
@@ -9,6 +9,9 @@ import TheChooserApp from './components/TheChooserApp';
 import ControlPanelsApp from './components/ControlPanelsApp';
 import ExtensionsManagerApp from './components/ExtensionsManagerApp';
 import SystemBombDialog from './components/SystemBombDialog';
+import SpotlightSearch from './components/SpotlightSearch';
+import LaunchpadOverlay from './components/LaunchpadOverlay';
+import ResumeMacWindow from './components/ResumeMacWindow';
 import ChronoLensApp from './components/ChronoLensApp';
 import MemoireApp from './components/MemoireApp';
 import NuvaultApp from './components/NuvaultApp';
@@ -25,6 +28,7 @@ export default function App() {
     about: true,
     chronolens: true,
     about_computer: false,
+    resume: false,
     chooser: false,
     control_panels: false,
     extensions: false,
@@ -43,6 +47,7 @@ export default function App() {
     about: 10,
     chronolens: 15,
     about_computer: 12,
+    resume: 16,
     chooser: 14,
     control_panels: 13,
     extensions: 11,
@@ -57,13 +62,27 @@ export default function App() {
     puzzle: 20
   });
 
-  const [topZIndex, setTopZIndex] = useState(30);
+  const [topZIndex, setTopZIndex] = useState(35);
   const [soundMuted, setSoundMuted] = useState(false);
   const [colorTheme, setColorTheme] = useState('cyberpop');
   const [activeExtensions, setActiveExtensions] = useState([
     'Python', 'OpenTelemetry', 'React', 'TypeScript', 'Go', 'WebCrypto', 'Docker'
   ]);
   const [bombOpen, setBombOpen] = useState(false);
+  const [spotlightOpen, setSpotlightOpen] = useState(false);
+  const [launchpadOpen, setLaunchpadOpen] = useState(false);
+
+  // Keyboard shortcut listener for Cmd + Space / Ctrl + Space (Spotlight Search)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.code === 'Space') {
+        e.preventDefault();
+        setSpotlightOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Web Audio Synthesizer (Clicks, Beeps, Trash Crinkles)
   const playSystemSound = (freq = 800, duration = 0.08, type = 'square') => {
@@ -102,6 +121,7 @@ export default function App() {
         about: false,
         chronolens: false,
         about_computer: false,
+        resume: false,
         chooser: false,
         control_panels: false,
         extensions: false,
@@ -148,7 +168,7 @@ export default function App() {
   };
 
   const handleEmptyTrash = () => {
-    playSystemSound(300, 0.25, 'sawtooth'); // Iconic paper crinkle sound simulation!
+    playSystemSound(300, 0.25, 'sawtooth');
     resetExtensions();
     handleLaunchApp('closeAll');
   };
@@ -175,6 +195,8 @@ export default function App() {
           setBombOpen(true);
         }}
         onEmptyTrash={handleEmptyTrash}
+        onOpenSpotlight={() => setSpotlightOpen(true)}
+        onOpenLaunchpad={() => setLaunchpadOpen(true)}
       />
 
       {/* Desktop Icons */}
@@ -197,6 +219,22 @@ export default function App() {
           icon=""
         >
           <AboutThisComputerApp />
+        </MacWindow>
+
+        {/* Resume.pdf Document Window */}
+        <MacWindow
+          id="resume"
+          title="📄 Resume_ArjunSabu.pdf"
+          themeColor="var(--mac-purple)"
+          isOpen={openWindows.resume}
+          onClose={() => handleCloseApp('resume')}
+          onFocus={() => focusWindow('resume')}
+          zIndex={windowZIndices.resume}
+          defaultPos={{ top: 50, left: 90 }}
+          defaultSize={{ width: 680, height: 480 }}
+          icon="📄"
+        >
+          <ResumeMacWindow />
         </MacWindow>
 
         {/* 2. The Chooser Network Hub App */}
@@ -340,17 +378,17 @@ export default function App() {
         {/* Projects Finder Window */}
         <MacWindow
           id="projects"
-          title="📁 Projects.finder — Proud Works"
+          title="📁 Projects.finder — Work Explorer"
           themeColor="var(--mac-yellow)"
           isOpen={openWindows.projects}
           onClose={() => handleCloseApp('projects')}
           onFocus={() => focusWindow('projects')}
           zIndex={windowZIndices.projects}
           defaultPos={{ top: 60, left: 100 }}
-          defaultSize={{ width: 700, height: 460 }}
+          defaultSize={{ width: 720, height: 470 }}
           icon="📁"
         >
-          <ProjectsMacFinder activeExtensions={activeExtensions} />
+          <ProjectsMacFinder activeExtensions={activeExtensions} onOpenApp={handleLaunchApp} />
         </MacWindow>
 
         {/* Skills Control Panel Window */}
@@ -435,7 +473,21 @@ export default function App() {
 
       </div>
 
-      {/* 5. System Error / Bomb Dialog Easter Egg */}
+      {/* Spotlight Search Floating Overlay (⌘ + Space) */}
+      <SpotlightSearch
+        isOpen={spotlightOpen}
+        onClose={() => setSpotlightOpen(false)}
+        onOpenApp={handleLaunchApp}
+      />
+
+      {/* Launchpad Grid Overlay */}
+      <LaunchpadOverlay
+        isOpen={launchpadOpen}
+        onClose={() => setLaunchpadOpen(false)}
+        onOpenApp={handleLaunchApp}
+      />
+
+      {/* System Error / Bomb Dialog Easter Egg */}
       <SystemBombDialog
         isOpen={bombOpen}
         onRestart={() => {

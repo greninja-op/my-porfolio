@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
 
-export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTriggerBomb, onEmptyTrash }) {
+export default function MacMenuBar({
+  onOpenApp,
+  soundMuted,
+  toggleSound,
+  onTriggerBomb,
+  onEmptyTrash,
+  onOpenSpotlight,
+  onOpenLaunchpad
+}) {
   const [timeStr, setTimeStr] = useState('');
   const [activeMenu, setActiveMenu] = useState(null);
 
@@ -21,6 +29,8 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTrigg
       items: [
         { label: 'About This Computer...', action: () => onOpenApp('about_computer') },
         { label: 'About Arjun Sabu', action: () => onOpenApp('about') },
+        { label: 'Launchpad Grid (All Apps)', action: onOpenLaunchpad },
+        { label: 'Resume.pdf (CV Document)', action: () => onOpenApp('resume') },
         { label: 'The Chooser (Network Hub)', action: () => onOpenApp('chooser') },
         { label: 'Control Panels (Themes)', action: () => onOpenApp('control_panels') },
         { label: 'Desk Accessory: Calculator', action: () => onOpenApp('calculator') },
@@ -32,6 +42,7 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTrigg
       items: [
         { label: 'Open Projects Finder', action: () => onOpenApp('projects') },
         { label: 'Extensions Manager (Tech Filter)', action: () => onOpenApp('extensions') },
+        { label: 'Spotlight Search (⌘ + Space)', action: onOpenSpotlight },
         { label: 'Open Terminal.cli', action: () => onOpenApp('terminal') },
         { label: 'Close All Windows', action: () => onOpenApp('closeAll') }
       ]
@@ -55,6 +66,7 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTrigg
     {
       name: 'Special',
       items: [
+        { label: 'Launchpad Grid 🚀', action: onOpenLaunchpad },
         { label: 'Crash System 💣 (Easter Egg)', action: onTriggerBomb },
         { label: 'Empty Trash 🗑️', action: onEmptyTrash },
         { label: 'Restart Macintosh 🔄', action: () => window.location.reload() }
@@ -160,8 +172,23 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTrigg
         ))}
       </div>
 
-      {/* Right Apple OS Status Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#000000' }}>
+      {/* Right Apple OS Status Bar & Shortcuts */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#000000' }}>
+        <button
+          onClick={onOpenSpotlight}
+          title="Spotlight Search (⌘ + Space)"
+          style={{
+            background: 'var(--mac-yellow)',
+            border: '1px solid #000',
+            padding: '0 5px',
+            fontFamily: 'var(--font-mac-title)',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          🔍 Spotlight
+        </button>
         <button
           onClick={toggleSound}
           title="Toggle System Sounds"
@@ -179,7 +206,7 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTrigg
           style={{
             border: '1px solid #000',
             padding: '0 5px',
-            background: 'var(--mac-yellow)',
+            background: 'var(--mac-lime)',
             fontSize: '1rem'
           }}
         >
