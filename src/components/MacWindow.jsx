@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function MacWindow({
   id,
@@ -6,87 +6,193 @@ export default function MacWindow({
   themeColor = 'var(--mac-purple)',
   isOpen = true,
   onClose,
+  onFocus,
+  zIndex = 10,
   children,
-  defaultPos = { top: '80px', left: '10%' },
-  width = 'auto',
-  maxWidth = '850px',
-  zIndex = 10
+  defaultPos = { top: 70, left: 100 },
+  defaultSize = { width: 720, height: 480 },
+  icon = '📁'
 }) {
   const [pos, setPos] = useState(defaultPos);
+  const [size, setSize] = useState(defaultSize);
+  const [isMaximized, setIsMaximized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isResizing, setIsResizing] = useState(false);
+  const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
+  const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0 });
 
-  if (!isOpen) return null;
+  if (!isOpen || isMinimized) return null;
 
-  const handleMouseDown = (e) => {
+  // Window Drag Handler
+  const handleTitleMouseDown = (e) => {
+    e.stopPropagation();
+    onFocus(id);
+    if (isMaximized) return;
     setIsDragging(true);
-    const rect = e.currentTarget.parentElement.getBoundingClientRect();
-    setDragOffset({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
+    dragStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      top: pos.top,
+      left: pos.left
+    };
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    setPos({
-      top: `${Math.max(35, e.clientY - dragOffset.y)}px`,
-      left: `${Math.max(10, e.clientX - dragOffset.x)}px`
-    });
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (isDragging) {
+        const dx = e.clientX - dragStart.current.x;
+        const dy = e.clientY - dragStart.current.y;
+        setPos({
+          top: Math.max(32, dragStart.current.top + dy),
+          left: Math.max(10, dragStart.current.left + dx)
+        });
+      } else if (isResizing) {
+        const dw = e.clientX - resizeStart.current.x;
+        const dh = e.clientY - resizeStart.current.y;
+        setSize({
+          width: Math.max(380, resizeStart.current.width + dw),
+          height: Math.max(260, resizeStart.current.height + dh)
+        });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      setIsResizing(false);
+    };
+
+    if (isDragging || isResizing) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isResizing]);
+
+  // Window Resize Handle
+  const handleResizeMouseDown = (e) => {
+    e.stopPropagation();
+    onFocus(id);
+    setIsResizing(true);
+    resizeStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      width: size.width,
+      height: size.height
+    };
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  const toggleMaximize = () => {
+    setIsMaximized(!isMaximized);
   };
 
   return (
     <div
       className="mac-window active-window"
+      onClick={() => onFocus(id)}
       style={{
-        position: 'absolute',
-        top: pos.top,
-        left: pos.left,
-        width: width,
-        maxWidth: maxWidth,
+        position: 'fixed',
+        top: isMaximized ? '32px' : `${pos.top}px`,
+        left: isMaximized ? '0px' : `${pos.left}px`,
+        width: isMaximized ? '100vw' : `${size.width}px`,
+        height: isMaximized ? 'calc(100vh - 32px)' : `${size.height}px`,
         zIndex: zIndex,
-        userSelect: 'none'
+        userSelect: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: 'var(--mac-shadow-lg)',
+        transition: isDragging || isResizing ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.2s ease, height 0.2s ease',
+        animation: 'macWinOpen 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
       }}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
     >
-      {/* System 7 Horizontal Striped Titlebar */}
+      {/* System 7 Pinstripe Titlebar */}
       <div
         className="mac-titlebar"
-        style={{ background: themeColor }}
-        onMouseDown={handleMouseDown}
+        style={{ background: themeColor, cursor: isMaximized ? 'default' : 'grab' }}
+        onMouseDown={handleTitleMouseDown}
       >
-        {/* Close Box Button */}
-        <button
-          className="mac-close-box"
-          onClick={onClose}
-          title="Close Window"
-        />
+        {/* Left Close & Minimize Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', zIndex: 2 }}>
+          <button
+            className="mac-close-box"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose(id);
+            }}
+            title="Close Window"
+          />
+          <button
+            className="mac-close-box"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMaximize();
+            }}
+            style={{ background: isMaximized ? 'var(--mac-cyan)' : '#ffffff' }}
+            title={isMaximized ? 'Restore' : 'Maximize'}
+          >
+            <span style={{ fontSize: '8px', lineHeight: 1 }}>{isMaximized ? '▼' : '▲'}</span>
+          </button>
+        </div>
 
-        {/* Horizontal Pinstripes */}
+        {/* Pinstripes */}
         <div className="mac-titlebar-stripes" />
 
         {/* Title Tag */}
-        <div className="mac-titlebar-title">{title}</div>
+        <div className="mac-titlebar-title" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span>{icon}</span>
+          <span>{title}</span>
+        </div>
 
-        <div style={{ width: '14px' }} />
+        <div style={{ width: '32px' }} />
       </div>
 
-      {/* Window Body */}
+      {/* Window Body Container */}
       <div
         style={{
+          flex: 1,
           padding: '1.25rem',
           background: '#ffffff',
-          maxHeight: '80vh',
-          overflowY: 'auto'
+          overflowY: 'auto',
+          position: 'relative'
         }}
       >
         {children}
       </div>
+
+      {/* Bottom Resize Handle */}
+      {!isMaximized && (
+        <div
+          onMouseDown={handleResizeMouseDown}
+          style={{
+            position: 'absolute',
+            bottom: '2px',
+            right: '2px',
+            width: '16px',
+            height: '16px',
+            cursor: 'nwse-resize',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '10px',
+            color: '#000',
+            fontWeight: 'bold',
+            zIndex: 10
+          }}
+          title="Resize Window"
+        >
+          ◢
+        </div>
+      )}
+
+      <style>{`
+        @keyframes macWinOpen {
+          from { transform: scale(0.92); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
