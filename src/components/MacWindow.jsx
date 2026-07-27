@@ -46,7 +46,7 @@ export default function MacWindow({
     };
   };
 
-  // Multi-Edge & Corner Resize Handlers
+  // Full 8-Direction Edge & Corner Resize Handlers
   const handleStartResize = (e, direction) => {
     e.stopPropagation();
     onFocus(id);
@@ -77,24 +77,39 @@ export default function MacWindow({
 
         let newW = resizeStart.current.width;
         let newH = resizeStart.current.height;
+        let newT = resizeStart.current.top;
         let newL = resizeStart.current.left;
 
-        if (resizeDirection.includes('right') || resizeDirection === 'corner-br') {
+        // RIGHT & CORNERS (top-right, bottom-right)
+        if (resizeDirection.includes('right')) {
           newW = Math.max(320, resizeStart.current.width + dx);
         }
-        if (resizeDirection.includes('bottom') || resizeDirection === 'corner-br' || resizeDirection === 'corner-bl') {
-          newH = Math.max(200, resizeStart.current.height + dy);
-        }
-        if (resizeDirection === 'corner-bl') {
-          const calculatedW = Math.max(320, resizeStart.current.width - dx);
-          if (calculatedW !== 320) {
+
+        // LEFT & CORNERS (top-left, bottom-left)
+        if (resizeDirection.includes('left')) {
+          const calcW = Math.max(320, resizeStart.current.width - dx);
+          if (calcW !== 320) {
             newL = resizeStart.current.left + dx;
           }
-          newW = calculatedW;
+          newW = calcW;
+        }
+
+        // BOTTOM & CORNERS (bottom-left, bottom-right)
+        if (resizeDirection.includes('bottom')) {
+          newH = Math.max(200, resizeStart.current.height + dy);
+        }
+
+        // TOP & CORNERS (top-left, top-right)
+        if (resizeDirection.includes('top')) {
+          const calcH = Math.max(200, resizeStart.current.height - dy);
+          if (calcH !== 200) {
+            newT = Math.max(32, resizeStart.current.top + dy);
+          }
+          newH = calcH;
         }
 
         setSize({ width: newW, height: newH });
-        if (resizeDirection === 'corner-bl') setPos((p) => ({ ...p, left: newL }));
+        setPos({ top: newT, left: newL });
       }
     };
 
@@ -177,7 +192,7 @@ export default function MacWindow({
         {/* Full-Width Continuous System 7 Pinstripe Grill */}
         <div className="mac-titlebar-stripes" style={{ left: '68px', right: '12px' }} />
 
-        {/* Centered Title Tag Pill that sits above pinstripes and adapts gracefully as window resizes */}
+        {/* Centered Title Tag Pill */}
         <div
           className="mac-titlebar-title"
           style={{
@@ -208,28 +223,57 @@ export default function MacWindow({
         {children}
       </div>
 
-      {/* Invisible Edge & Corner Resize Handles */}
+      {/* Full 8-Direction Edge & Corner Resize Handles (All 4 Corners + All 4 Edges) */}
       {!isMaximized && !isMobile && (
         <>
+          {/* Top Edge */}
           <div
-            onMouseDown={(e) => handleStartResize(e, 'right')}
-            style={{ position: 'absolute', top: '32px', right: '0px', width: '8px', bottom: '16px', cursor: 'ew-resize', zIndex: 14 }}
-            title="Resize Width"
+            onMouseDown={(e) => handleStartResize(e, 'top')}
+            style={{ position: 'absolute', top: '0px', left: '18px', right: '18px', height: '6px', cursor: 'ns-resize', zIndex: 14 }}
+            title="Resize Top Height"
           />
+          {/* Bottom Edge */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'bottom')}
-            style={{ position: 'absolute', bottom: '0px', left: '16px', right: '16px', height: '8px', cursor: 'ns-resize', zIndex: 14 }}
-            title="Resize Height"
+            style={{ position: 'absolute', bottom: '0px', left: '18px', right: '18px', height: '6px', cursor: 'ns-resize', zIndex: 14 }}
+            title="Resize Bottom Height"
           />
+          {/* Left Edge */}
           <div
-            onMouseDown={(e) => handleStartResize(e, 'corner-br')}
+            onMouseDown={(e) => handleStartResize(e, 'left')}
+            style={{ position: 'absolute', top: '18px', left: '0px', bottom: '18px', width: '6px', cursor: 'ew-resize', zIndex: 14 }}
+            title="Resize Left Width"
+          />
+          {/* Right Edge */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'right')}
+            style={{ position: 'absolute', top: '18px', right: '0px', bottom: '18px', width: '6px', cursor: 'ew-resize', zIndex: 14 }}
+            title="Resize Right Width"
+          />
+
+          {/* Top-Left Corner */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'top-left')}
+            style={{ position: 'absolute', top: '0px', left: '0px', width: '18px', height: '18px', cursor: 'nwse-resize', zIndex: 15 }}
+            title="Drag Top-Left Corner to Resize Window"
+          />
+          {/* Top-Right Corner */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'top-right')}
+            style={{ position: 'absolute', top: '0px', right: '0px', width: '18px', height: '18px', cursor: 'nesw-resize', zIndex: 15 }}
+            title="Drag Top-Right Corner to Resize Window"
+          />
+          {/* Bottom-Right Corner */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'bottom-right')}
             style={{ position: 'absolute', bottom: '0px', right: '0px', width: '18px', height: '18px', cursor: 'nwse-resize', zIndex: 15 }}
-            title="Drag Corner to Resize Window"
+            title="Drag Bottom-Right Corner to Resize Window"
           />
+          {/* Bottom-Left Corner */}
           <div
-            onMouseDown={(e) => handleStartResize(e, 'corner-bl')}
+            onMouseDown={(e) => handleStartResize(e, 'bottom-left')}
             style={{ position: 'absolute', bottom: '0px', left: '0px', width: '18px', height: '18px', cursor: 'nesw-resize', zIndex: 15 }}
-            title="Drag Corner to Resize Window"
+            title="Drag Bottom-Left Corner to Resize Window"
           />
         </>
       )}
