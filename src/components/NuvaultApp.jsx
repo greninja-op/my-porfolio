@@ -22,11 +22,26 @@ export default function NuvaultApp() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', fontFamily: 'var(--font-mac-title)' }}>
-      {/* Top Header */}
+      {/* Top Header with Crisp Official Logo */}
       <div style={{ borderBottom: '2px solid #000', paddingBottom: '0.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.4rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ fontSize: '2rem' }}>{pData.icon}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+            <img
+              src={pData.logoImg}
+              alt="Nuvault Crisp Logo"
+              style={{
+                width: '52px',
+                height: '52px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                border: '2px solid #000',
+                boxShadow: '2px 2px 0px #000',
+                background: '#000'
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
             <div>
               <h2 style={{ fontSize: '1.8rem', color: '#000', lineHeight: 1 }}>{pData.title}</h2>
               <span style={{ fontSize: '1.1rem', color: 'var(--mac-purple-dark)', fontWeight: 'bold' }}>
@@ -49,7 +64,7 @@ export default function NuvaultApp() {
           </span>
         </div>
 
-        {/* Primary Action Buttons: GitHub Link & Website Link */}
+        {/* Action Buttons */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: '0.6rem' }}>
           <a
             href={pData.github}

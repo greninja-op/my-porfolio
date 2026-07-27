@@ -25,10 +25,11 @@ import MacCalculatorApp from './components/MacCalculatorApp';
 import MacPuzzleApp from './components/MacPuzzleApp';
 
 export default function App() {
+  // Initial startup state: ONLY "About Arjun Sabu" profile window is opened on page load/refresh
   const [openWindows, setOpenWindows] = useState({
     about: true,
-    chronolens: true,
-    notes: true,
+    chronolens: false,
+    notes: false,
     about_computer: false,
     resume: false,
     chooser: false,
@@ -207,6 +208,22 @@ export default function App() {
       {/* Desktop Workspace Viewport */}
       <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
 
+        {/* About Arjun Sabu Profile Info Window (ONLY ONE OPEN ON PAGE LOAD) */}
+        <MacWindow
+          id="about"
+          title=" About Arjun Sabu (greninja-op)"
+          themeColor="var(--mac-purple)"
+          isOpen={openWindows.about}
+          onClose={() => handleCloseApp('about')}
+          onFocus={() => focusWindow('about')}
+          zIndex={windowZIndices.about}
+          defaultPos={{ top: 40, left: 50 }}
+          defaultSize={{ width: 620, height: 430 }}
+          icon=""
+        >
+          <AboutArjunApp onOpenApp={handleLaunchApp} />
+        </MacWindow>
+
         {/* 📝 Notes.app Standalone Application */}
         <MacWindow
           id="notes"
@@ -311,22 +328,6 @@ export default function App() {
             toggleExtension={toggleExtension}
             resetExtensions={resetExtensions}
           />
-        </MacWindow>
-
-        {/* About Arjun Sabu Info Window */}
-        <MacWindow
-          id="about"
-          title=" About Arjun Sabu (greninja-op)"
-          themeColor="var(--mac-purple)"
-          isOpen={openWindows.about}
-          onClose={() => handleCloseApp('about')}
-          onFocus={() => focusWindow('about')}
-          zIndex={windowZIndices.about}
-          defaultPos={{ top: 40, left: 50 }}
-          defaultSize={{ width: 620, height: 430 }}
-          icon=""
-        >
-          <AboutArjunApp onOpenApp={handleLaunchApp} />
         </MacWindow>
 
         {/* ChronoLens Standalone App */}
