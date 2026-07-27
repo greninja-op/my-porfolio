@@ -18,7 +18,7 @@ export default function MacWindow({
   const [isMaximized, setIsMaximized] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [resizeDirection, setResizeDirection] = useState(null); // 'right', 'bottom', 'corner-br', 'corner-bl'
+  const [resizeDirection, setResizeDirection] = useState(null);
   const [btnHover, setBtnHover] = useState(false);
   const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
   const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0, top: 0, left: 0 });
@@ -197,14 +197,14 @@ export default function MacWindow({
           {/* Right Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'right')}
-            style={{ position: 'absolute', top: '32px', right: '0px', width: '6px', bottom: '10px', cursor: 'ew-resize', zIndex: 12 }}
+            style={{ position: 'absolute', top: '32px', right: '0px', width: '6px', bottom: '16px', cursor: 'ew-resize', zIndex: 12 }}
             title="Resize Width"
           />
 
           {/* Bottom Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'bottom')}
-            style={{ position: 'absolute', bottom: '0px', left: '10px', right: '10px', height: '6px', cursor: 'ns-resize', zIndex: 12 }}
+            style={{ position: 'absolute', bottom: '0px', left: '16px', right: '16px', height: '6px', cursor: 'ns-resize', zIndex: 12 }}
             title="Resize Height"
           />
 
@@ -213,18 +213,19 @@ export default function MacWindow({
             onMouseDown={(e) => handleStartResize(e, 'corner-br')}
             style={{
               position: 'absolute',
-              bottom: '2px',
-              right: '2px',
-              width: '16px',
-              height: '16px',
+              bottom: '6px',
+              right: '8px',
+              width: '14px',
+              height: '14px',
               cursor: 'nwse-resize',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '10px',
-              color: '#000',
+              fontSize: '11px',
+              color: '#000000',
               fontWeight: 'bold',
-              zIndex: 14
+              zIndex: 14,
+              lineHeight: 1
             }}
             title="Resize Window"
           >
@@ -236,18 +237,19 @@ export default function MacWindow({
             onMouseDown={(e) => handleStartResize(e, 'corner-bl')}
             style={{
               position: 'absolute',
-              bottom: '2px',
-              left: '2px',
-              width: '16px',
-              height: '16px',
+              bottom: '6px',
+              left: '8px',
+              width: '14px',
+              height: '14px',
               cursor: 'nesw-resize',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '10px',
-              color: '#000',
+              fontSize: '11px',
+              color: '#000000',
               fontWeight: 'bold',
-              zIndex: 14
+              zIndex: 14,
+              lineHeight: 1
             }}
             title="Resize Window"
           >
