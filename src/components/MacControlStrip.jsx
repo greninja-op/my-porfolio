@@ -12,6 +12,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
 
   return (
     <div
+      className="mac-control-strip"
       style={{
         position: 'fixed',
         bottom: '0px',
@@ -24,14 +25,15 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         borderRadius: '8px 8px 0 0',
         display: 'flex',
         alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0 0.75rem',
+        gap: '0.4rem',
+        padding: '0 0.6rem',
         zIndex: 900,
         boxShadow: '0 -2px 0px #000000',
-        fontFamily: 'var(--font-mac-title)'
+        fontFamily: 'var(--font-mac-title)',
+        maxWidth: '96vw'
       }}
     >
-      <span style={{ fontSize: '1rem', fontWeight: 'bold', color: '#000' }}>Control Strip:</span>
+      <span style={{ fontSize: '0.95rem', fontWeight: 'bold', color: '#000', whiteSpace: 'nowrap' }}>Strip:</span>
 
       {apps.map((app) => {
         const isOpen = openWindows[app.id];
@@ -50,20 +52,21 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
               color: isOpen ? '#ffffff' : '#000000',
               border: '2px solid #000',
               boxShadow: isOpen ? '1px 1px 0px #000' : 'none',
-              padding: '0.1rem 0.6rem',
-              fontSize: '1rem',
+              padding: '0.1rem 0.5rem',
+              fontSize: '0.95rem',
               fontWeight: 'bold',
               fontFamily: 'var(--font-mac-title)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '0.3rem',
-              borderRadius: '4px'
+              borderRadius: '4px',
+              whiteSpace: 'nowrap'
             }}
           >
             <span>{app.icon}</span>
             <span>{app.name}</span>
-            {isOpen && <span style={{ fontSize: '8px', color: '#fff' }}>●</span>}
+            {isOpen && <span style={{ fontSize: '7px', color: '#fff' }}>●</span>}
           </button>
         );
       })}

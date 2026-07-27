@@ -9,8 +9,8 @@ export default function MacWindow({
   onFocus,
   zIndex = 10,
   children,
-  defaultPos = { top: 60, left: 80 },
-  defaultSize = { width: 680, height: 460 },
+  defaultPos = { top: 50, left: 50 },
+  defaultSize = { width: 660, height: 440 },
   icon = '📁'
 }) {
   const [pos, setPos] = useState(defaultPos);
@@ -22,53 +22,78 @@ export default function MacWindow({
   const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
   const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0 });
 
+  // Responsive check for mobile auto-fit
+  const isMobile = window.innerWidth <= 768;
+
   if (!isOpen || isMinimized) return null;
 
-  // Window Drag Handler
-  const handleTitleMouseDown = (e) => {
-    e.stopPropagation();
+  // Window Drag Handlers (Mouse & Touch)
+  const handleStartDrag = (clientX, clientY) => {
     onFocus(id);
-    if (isMaximized) return;
+    if (isMaximized || isMobile) return;
     setIsDragging(true);
     dragStart.current = {
-      x: e.clientX,
-      y: e.clientY,
+      x: clientX,
+      y: clientY,
       top: pos.top,
       left: pos.left
     };
   };
 
+  const handleTitleMouseDown = (e) => {
+    e.stopPropagation();
+    handleStartDrag(e.clientX, e.clientY);
+  };
+
+  const handleTitleTouchStart = (e) => {
+    e.stopPropagation();
+    if (e.touches && e.touches[0]) {
+      handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  };
+
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMove = (clientX, clientY) => {
       if (isDragging) {
-        const dx = e.clientX - dragStart.current.x;
-        const dy = e.clientY - dragStart.current.y;
+        const dx = clientX - dragStart.current.x;
+        const dy = clientY - dragStart.current.y;
         setPos({
           top: Math.max(32, Math.min(window.innerHeight - 100, dragStart.current.top + dy)),
           left: Math.max(10, Math.min(window.innerWidth - 100, dragStart.current.left + dx))
         });
       } else if (isResizing) {
-        const dw = e.clientX - resizeStart.current.x;
-        const dh = e.clientY - resizeStart.current.y;
+        const dw = clientX - resizeStart.current.x;
+        const dh = clientY - resizeStart.current.y;
         setSize({
-          width: Math.max(340, resizeStart.current.width + dw),
-          height: Math.max(220, resizeStart.current.height + dh)
+          width: Math.max(320, resizeStart.current.width + dw),
+          height: Math.max(200, resizeStart.current.height + dh)
         });
       }
     };
 
-    const handleMouseUp = () => {
+    const handleMouseMove = (e) => handleMove(e.clientX, e.clientY);
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
+    const handleEnd = () => {
       setIsDragging(false);
       setIsResizing(false);
     };
 
     if (isDragging || isResizing) {
       window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('mouseup', handleEnd);
+      window.addEventListener('touchmove', handleTouchMove);
+      window.addEventListener('touchend', handleEnd);
     }
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseup', handleEnd);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleEnd);
     };
   }, [isDragging, isResizing]);
 
@@ -95,11 +120,11 @@ export default function MacWindow({
       onClick={() => onFocus(id)}
       style={{
         position: 'fixed',
-        top: isMaximized ? '32px' : `${pos.top}px`,
-        left: isMaximized ? '0px' : `${pos.left}px`,
-        width: isMaximized ? '100vw' : `${size.width}px`,
-        height: isMaximized ? 'calc(100vh - 66px)' : `${size.height}px`,
-        maxHeight: 'calc(100vh - 66px)',
+        top: isMobile ? '36px' : isMaximized ? '32px' : `${pos.top}px`,
+        left: isMobile ? '2vw' : isMaximized ? '0px' : `${pos.left}px`,
+        width: isMobile ? '96vw' : isMaximized ? '100vw' : `${size.width}px`,
+        height: isMobile ? 'calc(100vh - 72px)' : isMaximized ? 'calc(100vh - 66px)' : `${size.height}px`,
+        maxHeight: isMobile ? 'calc(100vh - 72px)' : 'calc(100vh - 66px)',
         zIndex: zIndex,
         userSelect: 'none',
         display: 'flex',
@@ -112,8 +137,9 @@ export default function MacWindow({
       {/* System 7 Pinstripe Titlebar */}
       <div
         className="mac-titlebar"
-        style={{ background: themeColor, cursor: isMaximized ? 'default' : 'grab' }}
+        style={{ background: themeColor, cursor: isMaximized || isMobile ? 'default' : 'grab' }}
         onMouseDown={handleTitleMouseDown}
+        onTouchStart={handleTitleTouchStart}
       >
         {/* Left Close & Minimize Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px', zIndex: 2 }}>
@@ -156,7 +182,7 @@ export default function MacWindow({
       </div>
 
       {/* Bottom Resize Handle */}
-      {!isMaximized && (
+      {!isMaximized && !isMobile && (
         <div
           onMouseDown={handleResizeMouseDown}
           style={{

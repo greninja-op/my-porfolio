@@ -14,13 +14,14 @@ export default function DesktopIcons({ onOpenApp }) {
 
   return (
     <div
+      className="mac-desktop-icons-container"
       style={{
         position: 'fixed',
-        top: '50px',
-        right: '20px',
+        top: '45px',
+        right: '15px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.25rem',
+        gap: '0.85rem',
         zIndex: 5
       }}
     >
@@ -32,7 +33,7 @@ export default function DesktopIcons({ onOpenApp }) {
           onClick={() => onOpenApp(icon.id)}
         >
           <div className="mac-desktop-icon-img" style={{ background: icon.color }}>
-            <span style={{ fontSize: '1.5rem' }}>{icon.emoji}</span>
+            <span style={{ fontSize: '1.4rem' }}>{icon.emoji}</span>
           </div>
           <div className="mac-desktop-icon-label">{icon.name}</div>
         </div>

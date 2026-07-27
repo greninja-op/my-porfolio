@@ -41,6 +41,7 @@ html, body, #root {
   font-family: var(--font-mac-body);
   color: var(--mac-border);
   user-select: none;
+  touch-action: manipulation;
 }
 
 /* Classic Macintosh System 7 Dither Desktop Wallpaper with Pop Teal/Cyan Pattern */
@@ -56,8 +57,8 @@ body {
 
 /* Scrollbars - Classic Mac 90s Style */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
   background: #f0f0f0;
@@ -82,7 +83,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 70px);
 }
 
 .mac-window.active-window {
@@ -138,6 +139,9 @@ body {
   box-shadow: 2px 2px 0px #000;
   margin: 0 auto;
   white-space: nowrap;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Close Square Box */
@@ -165,7 +169,7 @@ body {
 /* Mac Window Body Inner Container */
 .mac-window-body {
   flex: 1;
-  padding: 1rem;
+  padding: 0.85rem;
   background: #ffffff;
   overflow-y: auto;
   overflow-x: hidden;
@@ -178,7 +182,7 @@ body {
   background: linear-gradient(180deg, #ffffff 0%, var(--mac-surface-gray) 100%);
   border: 2px solid #000000;
   border-radius: 6px;
-  padding: 0.35rem 0.85rem;
+  padding: 0.35rem 0.75rem;
   font-family: var(--font-mac-title);
   font-size: 1.05rem;
   font-weight: 700;
@@ -209,16 +213,8 @@ body {
   color: #ffffff;
 }
 
-.mac-btn-purple:hover {
-  background: #a246d8;
-}
-
 .mac-btn-lime {
   background: var(--mac-lime);
-}
-
-.mac-btn-lime:hover {
-  background: #8cd623;
 }
 
 .mac-btn-pink {
@@ -230,7 +226,7 @@ body {
 .mac-group-box {
   border: 2px solid #000000;
   border-radius: 6px;
-  padding: 0.85rem;
+  padding: 0.75rem;
   background: #ffffff;
   box-shadow: inset 2px 2px 0px rgba(0,0,0,0.04);
   position: relative;
@@ -239,64 +235,31 @@ body {
 .mac-group-label {
   position: absolute;
   top: -10px;
-  left: 12px;
+  left: 10px;
   background: #ffffff;
-  padding: 0 5px;
+  padding: 0 4px;
   font-family: var(--font-mac-title);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: bold;
   border: 1px solid #000;
 }
 
-/* Slider Controls */
-.mac-slider {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 8px;
-  background: #e2e8f0;
-  border: 2px solid #000;
-  border-radius: 4px;
-  outline: none;
-}
-
-.mac-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 22px;
-  background: var(--mac-lime);
-  border: 2px solid #000;
-  border-radius: 3px;
-  box-shadow: 2px 2px 0px #000;
-  cursor: pointer;
-}
-
 /* Retro Desktop Icon */
 .mac-desktop-icon {
-  width: 75px;
+  width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   cursor: pointer;
-  padding: 6px;
+  padding: 4px;
   border-radius: 6px;
   transition: all 0.15s ease;
 }
 
-.mac-desktop-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.mac-desktop-icon.selected {
-  background: var(--mac-purple);
-  box-shadow: 2px 2px 0px #000;
-}
-
 .mac-desktop-icon-img {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -308,11 +271,40 @@ body {
 
 .mac-desktop-icon-label {
   font-family: var(--font-mac-title);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #ffffff;
   background: #000000;
   padding: 1px 4px;
   border-radius: 3px;
   text-align: center;
   word-break: break-word;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+  .mac-window {
+    width: 96vw !important;
+    left: 2vw !important;
+    top: 36px !important;
+    max-height: calc(100vh - 72px) !important;
+  }
+  .mac-desktop-icons-container {
+    right: 10px !important;
+    top: 40px !important;
+    gap: 0.5rem !important;
+  }
+  .mac-desktop-icon {
+    width: 60px !important;
+  }
+  .mac-desktop-icon-img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .mac-desktop-icon-label {
+    font-size: 0.8rem !important;
+  }
+  .mac-control-strip {
+    width: 98vw !important;
+    overflow-x: auto !important;
+  }
 }
