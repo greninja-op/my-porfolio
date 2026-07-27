@@ -191,70 +191,52 @@ export default function MacWindow({
         {children}
       </div>
 
-      {/* Multi-Edge & Corner Resize Handles */}
+      {/* Invisible Edge & Corner Resize Handles (Clean Layout without Clashing Arrow Symbols) */}
       {!isMaximized && !isMobile && (
         <>
           {/* Right Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'right')}
-            style={{ position: 'absolute', top: '32px', right: '0px', width: '6px', bottom: '16px', cursor: 'ew-resize', zIndex: 12 }}
+            style={{ position: 'absolute', top: '32px', right: '0px', width: '8px', bottom: '16px', cursor: 'ew-resize', zIndex: 14 }}
             title="Resize Width"
           />
 
           {/* Bottom Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'bottom')}
-            style={{ position: 'absolute', bottom: '0px', left: '16px', right: '16px', height: '6px', cursor: 'ns-resize', zIndex: 12 }}
+            style={{ position: 'absolute', bottom: '0px', left: '16px', right: '16px', height: '8px', cursor: 'ns-resize', zIndex: 14 }}
             title="Resize Height"
           />
 
-          {/* Bottom-Right Corner Handle */}
+          {/* Bottom-Right Corner Resize Hitbox */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'corner-br')}
             style={{
               position: 'absolute',
-              bottom: '6px',
-              right: '8px',
-              width: '14px',
-              height: '14px',
+              bottom: '0px',
+              right: '0px',
+              width: '18px',
+              height: '18px',
               cursor: 'nwse-resize',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '11px',
-              color: '#000000',
-              fontWeight: 'bold',
-              zIndex: 14,
-              lineHeight: 1
+              zIndex: 15
             }}
-            title="Resize Window"
-          >
-            ◢
-          </div>
+            title="Drag Corner to Resize Window"
+          />
 
-          {/* Bottom-Left Corner Handle */}
+          {/* Bottom-Left Corner Resize Hitbox */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'corner-bl')}
             style={{
               position: 'absolute',
-              bottom: '6px',
-              left: '8px',
-              width: '14px',
-              height: '14px',
+              bottom: '0px',
+              left: '0px',
+              width: '18px',
+              height: '18px',
               cursor: 'nesw-resize',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '11px',
-              color: '#000000',
-              fontWeight: 'bold',
-              zIndex: 14,
-              lineHeight: 1
+              zIndex: 15
             }}
-            title="Resize Window"
-          >
-            ◣
-          </div>
+            title="Drag Corner to Resize Window"
+          />
         </>
       )}
     </div>
