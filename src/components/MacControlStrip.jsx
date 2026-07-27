@@ -6,6 +6,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
     { id: 'memoire', name: 'Memoire.app', icon: '🧠', color: 'var(--mac-purple)' },
     { id: 'nuvault', name: 'Nuvault.app', icon: '🔐', color: 'var(--mac-cyan)' },
     { id: 'cfls', name: 'CFLS.app', icon: '🔒', color: 'var(--mac-lime)' },
+    { id: 'macgit', name: 'MacGit.app', icon: '🐙', color: 'var(--mac-purple)' },
     { id: 'notes', name: 'Notes.app', icon: '📝', color: 'var(--mac-yellow)' },
     { id: 'projects', name: 'Projects.finder', icon: '📁', color: 'var(--mac-yellow)' },
     { id: 'resume', name: 'Resume.pdf', icon: '📄', color: '#ffffff' },

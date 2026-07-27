@@ -13,6 +13,7 @@ import SpotlightSearch from './components/SpotlightSearch';
 import LaunchpadOverlay from './components/LaunchpadOverlay';
 import ResumeMacWindow from './components/ResumeMacWindow';
 import MacNotesApp from './components/MacNotesApp';
+import MacGitApp from './components/MacGitApp';
 import ChronoLensApp from './components/ChronoLensApp';
 import MemoireApp from './components/MemoireApp';
 import NuvaultApp from './components/NuvaultApp';
@@ -25,11 +26,11 @@ import MacCalculatorApp from './components/MacCalculatorApp';
 import MacPuzzleApp from './components/MacPuzzleApp';
 
 export default function App() {
-  // Initial startup state: ONLY "About Arjun Sabu" profile window is opened on page load/refresh
   const [openWindows, setOpenWindows] = useState({
     about: true,
     chronolens: false,
     notes: false,
+    macgit: false,
     about_computer: false,
     resume: false,
     chooser: false,
@@ -50,6 +51,7 @@ export default function App() {
     about: 10,
     chronolens: 12,
     notes: 16,
+    macgit: 17,
     about_computer: 12,
     resume: 14,
     chooser: 14,
@@ -123,6 +125,7 @@ export default function App() {
         about: false,
         chronolens: false,
         notes: false,
+        macgit: false,
         about_computer: false,
         resume: false,
         chooser: false,
@@ -208,7 +211,7 @@ export default function App() {
       {/* Desktop Workspace Viewport */}
       <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
 
-        {/* About Arjun Sabu Profile Info Window (ONLY ONE OPEN ON PAGE LOAD) */}
+        {/* About Arjun Sabu Profile Info Window */}
         <MacWindow
           id="about"
           title=" About Arjun Sabu (greninja-op)"
@@ -222,6 +225,22 @@ export default function App() {
           icon=""
         >
           <AboutArjunApp onOpenApp={handleLaunchApp} />
+        </MacWindow>
+
+        {/* 🐙 MacGit.app — Retro GitHub TCP/IP Client */}
+        <MacWindow
+          id="macgit"
+          title="🐙 MacGit v1.0 — GitHub TCP/IP Client"
+          themeColor="var(--mac-purple)"
+          isOpen={openWindows.macgit}
+          onClose={() => handleCloseApp('macgit')}
+          onFocus={() => focusWindow('macgit')}
+          zIndex={windowZIndices.macgit}
+          defaultPos={{ top: 60, left: 140 }}
+          defaultSize={{ width: 740, height: 490 }}
+          icon="🐙"
+        >
+          <MacGitApp />
         </MacWindow>
 
         {/* 📝 Notes.app Standalone Application */}
