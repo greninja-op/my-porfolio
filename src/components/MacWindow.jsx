@@ -23,44 +23,13 @@ export default function MacWindow({
   const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
   const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0, top: 0, left: 0 });
 
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 768 : false;
 
   useEffect(() => {
     if (isOpen) {
       setIsMinimized(false);
     }
   }, [isOpen, zIndex]);
-
-  if (!isOpen || isMinimized) return null;
-
-  // Titlebar Drag Handlers
-  const handleStartDrag = (clientX, clientY) => {
-    onFocus(id);
-    if (isMaximized || isMobile) return;
-    setIsDragging(true);
-    dragStart.current = {
-      x: clientX,
-      y: clientY,
-      top: pos.top,
-      left: pos.left
-    };
-  };
-
-  // Full 8-Direction Edge & Corner Resize Handlers
-  const handleStartResize = (e, direction) => {
-    e.stopPropagation();
-    onFocus(id);
-    if (isMaximized || isMobile) return;
-    setResizeDirection(direction);
-    resizeStart.current = {
-      x: e.clientX,
-      y: e.clientY,
-      width: size.width,
-      height: size.height,
-      top: pos.top,
-      left: pos.left
-    };
-  };
 
   useEffect(() => {
     const handleMove = (clientX, clientY) => {
@@ -138,6 +107,38 @@ export default function MacWindow({
       window.removeEventListener('touchend', handleEnd);
     };
   }, [isDragging, resizeDirection]);
+
+  // Return early AFTER all React Hooks have been called at top level
+  if (!isOpen || isMinimized) return null;
+
+  // Titlebar Drag Handlers
+  const handleStartDrag = (clientX, clientY) => {
+    onFocus(id);
+    if (isMaximized || isMobile) return;
+    setIsDragging(true);
+    dragStart.current = {
+      x: clientX,
+      y: clientY,
+      top: pos.top,
+      left: pos.left
+    };
+  };
+
+  // Full 8-Direction Edge & Corner Resize Handlers
+  const handleStartResize = (e, direction) => {
+    e.stopPropagation();
+    onFocus(id);
+    if (isMaximized || isMobile) return;
+    setResizeDirection(direction);
+    resizeStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      width: size.width,
+      height: size.height,
+      top: pos.top,
+      left: pos.left
+    };
+  };
 
   return (
     <div
