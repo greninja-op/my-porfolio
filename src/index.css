@@ -113,18 +113,21 @@ p, span, div, label, input, textarea, select {
   position: relative;
 }
 
+/* Skeuomorphic 3D Embossed Pinstripe Grill with Subtle Inset Shadow Lines */
 .mac-titlebar-stripes {
   position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 80px;
-  right: 80px;
+  top: 7px;
+  bottom: 7px;
+  left: 68px;
+  right: 12px;
   background: repeating-linear-gradient(
-    0deg,
-    transparent,
+    180deg,
+    rgba(0, 0, 0, 0.45) 0px,
+    rgba(0, 0, 0, 0.45) 1px,
+    rgba(255, 255, 255, 0.45) 1px,
+    rgba(255, 255, 255, 0.45) 2px,
     transparent 2px,
-    rgba(0, 0, 0, 0.4) 2px,
-    rgba(0, 0, 0, 0.4) 4px
+    transparent 4px
   );
   pointer-events: none;
 }
