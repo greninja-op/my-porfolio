@@ -19,15 +19,15 @@ export default function MacWindow({
   const [isMinimized, setIsMinimized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
+  const [btnHover, setBtnHover] = useState(false);
   const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
   const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0 });
 
-  // Responsive check for mobile auto-fit
   const isMobile = window.innerWidth <= 768;
 
   if (!isOpen || isMinimized) return null;
 
-  // Window Drag Handlers (Mouse & Touch)
+  // Drag Handlers
   const handleStartDrag = (clientX, clientY) => {
     onFocus(id);
     if (isMaximized || isMobile) return;
@@ -97,7 +97,6 @@ export default function MacWindow({
     };
   }, [isDragging, isResizing]);
 
-  // Window Resize Handle
   const handleResizeMouseDown = (e) => {
     e.stopPropagation();
     onFocus(id);
@@ -141,26 +140,46 @@ export default function MacWindow({
         onMouseDown={handleTitleMouseDown}
         onTouchStart={handleTitleTouchStart}
       >
-        {/* Left Close & Minimize Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', zIndex: 2 }}>
+        {/* Left Retro-Modern macOS Traffic Light Buttons */}
+        <div
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 2 }}
+          onMouseEnter={() => setBtnHover(true)}
+          onMouseLeave={() => setBtnHover(false)}
+        >
+          {/* Close Button (Red) */}
           <button
-            className="mac-close-box"
             onClick={(e) => {
               e.stopPropagation();
               onClose(id);
             }}
+            className="mac-traffic-btn mac-traffic-close"
             title="Close Window"
-          />
+          >
+            {btnHover ? '✕' : ''}
+          </button>
+
+          {/* Minimize Button (Yellow) */}
           <button
-            className="mac-close-box"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMinimized(true);
+            }}
+            className="mac-traffic-btn mac-traffic-minimize"
+            title="Minimize Window"
+          >
+            {btnHover ? '−' : ''}
+          </button>
+
+          {/* Fullscreen / Maximize Button (Green) */}
+          <button
             onClick={(e) => {
               e.stopPropagation();
               toggleMaximize();
             }}
-            style={{ background: isMaximized ? 'var(--mac-cyan)' : '#ffffff' }}
-            title={isMaximized ? 'Restore' : 'Maximize'}
+            className="mac-traffic-btn mac-traffic-expand"
+            title={isMaximized ? 'Restore' : 'Fullscreen / Maximize'}
           >
-            <span style={{ fontSize: '8px', lineHeight: 1 }}>{isMaximized ? '▼' : '▲'}</span>
+            {btnHover ? (isMaximized ? '▼' : '▲') : ''}
           </button>
         </div>
 
@@ -173,7 +192,7 @@ export default function MacWindow({
           <span>{title}</span>
         </div>
 
-        <div style={{ width: '32px' }} />
+        <div style={{ width: '56px' }} />
       </div>
 
       {/* Window Inner Body Container */}

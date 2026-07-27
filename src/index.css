@@ -112,8 +112,8 @@ body {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  left: 32px;
-  right: 32px;
+  left: 54px;
+  right: 54px;
   background-image: repeating-linear-gradient(
     180deg,
     #000000 0px,
@@ -144,26 +144,49 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Close Square Box */
-.mac-close-box {
+/* Retro-Modern macOS Traffic Light Control Buttons */
+.mac-traffic-btn {
   width: 14px;
   height: 14px;
-  background: #ffffff;
+  border-radius: 50%;
   border: 2px solid #000000;
-  box-shadow: 1px 1px 0px #000;
+  box-shadow: 1px 1px 0px #000000;
   cursor: pointer;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  outline: none;
+  transition: transform 0.1s ease, filter 0.1s ease;
 }
 
-.mac-close-box:hover {
-  background: var(--mac-pink);
+.mac-traffic-btn:hover {
+  transform: scale(1.15);
+  filter: brightness(1.1);
 }
 
-.mac-close-box:active {
-  background: #000;
+.mac-traffic-btn:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+/* Red Close */
+.mac-traffic-close {
+  background: #ff5f56;
+}
+
+/* Yellow Minimize */
+.mac-traffic-minimize {
+  background: #ffbd2e;
+}
+
+/* Green Maximize / Fullscreen */
+.mac-traffic-expand {
+  background: #27c93f;
 }
 
 /* Mac Window Body Inner Container */
