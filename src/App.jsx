@@ -70,7 +70,7 @@ export default function App() {
     puzzle: 20
   });
 
-  const [topZIndex, setTopZIndex] = useState(35);
+  const [topZIndex, setTopZIndex] = useState(50);
   const [volume, setVolume] = useState(0.8);
   const [soundMuted, setSoundMuted] = useState(false);
   const [alertSound, setAlertSound] = useState('sosumi');
@@ -126,10 +126,6 @@ export default function App() {
   const playAlertSound = (name = alertSound) => {
     if (soundMuted || volume <= 0) return;
     try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-
       if (name === 'sosumi') {
         playSystemSound(650, 0.09, 'square');
         setTimeout(() => playSystemSound(850, 0.12, 'square'), 100);
@@ -145,12 +141,13 @@ export default function App() {
     } catch (e) {}
   };
 
+  // Atomic Focus Window Booster
   const focusWindow = (id) => {
-    setTopZIndex((prev) => prev + 1);
-    setWindowZIndices((prev) => ({
-      ...prev,
-      [id]: topZIndex + 1
-    }));
+    setTopZIndex((prev) => {
+      const nextZ = prev + 5;
+      setWindowZIndices((w) => ({ ...w, [id]: nextZ }));
+      return nextZ;
+    });
   };
 
   const handleLaunchApp = (id) => {
@@ -226,7 +223,7 @@ export default function App() {
       about_computer: 12,
       resume: 14,
       chooser: 14,
-      control_panels: 15,
+      control_panels: 60,
       extensions: 11,
       memoire: 12,
       nuvault: 14,
@@ -238,6 +235,7 @@ export default function App() {
       calculator: 19,
       puzzle: 20
     });
+    setTopZIndex(65);
   };
 
   const toggleExtension = (extId) => {
@@ -363,7 +361,7 @@ export default function App() {
           onClose={() => handleCloseApp('about')}
           onFocus={() => focusWindow('about')}
           zIndex={windowZIndices.about}
-          defaultPos={{ top: 40, left: 280 }}
+          defaultPos={{ top: 40, left: 240 }}
           defaultSize={{ width: 620, height: 430 }}
           icon=""
         >
@@ -379,7 +377,7 @@ export default function App() {
           onClose={() => handleCloseApp('macgit')}
           onFocus={() => focusWindow('macgit')}
           zIndex={windowZIndices.macgit}
-          defaultPos={{ top: 60, left: 310 }}
+          defaultPos={{ top: 55, left: 260 }}
           defaultSize={{ width: 740, height: 490 }}
           icon="🐙"
         >
@@ -395,7 +393,7 @@ export default function App() {
           onClose={() => handleCloseApp('notes')}
           onFocus={() => focusWindow('notes')}
           zIndex={windowZIndices.notes}
-          defaultPos={{ top: 75, left: 320 }}
+          defaultPos={{ top: 70, left: 280 }}
           defaultSize={{ width: 720, height: 470 }}
           icon="📝"
         >
@@ -459,7 +457,7 @@ export default function App() {
           onClose={() => handleCloseApp('control_panels')}
           onFocus={() => focusWindow('control_panels')}
           zIndex={windowZIndices.control_panels}
-          defaultPos={{ top: 60, left: 160 }}
+          defaultPos={{ top: 50, left: 200 }}
           defaultSize={{ width: 680, height: 490 }}
           icon="🎛️"
         >
@@ -684,14 +682,14 @@ export default function App() {
         <SpotlightSearch
           isOpen={spotlightOpen}
           onClose={() => setSpotlightOpen(false)}
-          onLaunchApp={handleLaunchApp}
+          onOpenApp={handleLaunchApp}
         />
 
         {/* Launchpad Fullscreen Overlay */}
         <LaunchpadOverlay
           isOpen={launchpadOpen}
           onClose={() => setLaunchpadOpen(false)}
-          onLaunchApp={handleLaunchApp}
+          onOpenApp={handleLaunchApp}
         />
 
       </div>
