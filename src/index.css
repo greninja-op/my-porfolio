@@ -36,6 +36,33 @@
   cursor: var(--cursor-mac-arrow);
 }
 
+/* Custom Pop Macintosh Vibrant Colored Scrollbars */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-left: 2px solid #000000;
+  border-top: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mac-purple);
+  border: 2px solid #000000;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mac-pink);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
 a, button, input[type="button"], select, .mac-desktop-icon, .mac-traffic-btn {
   cursor: var(--cursor-mac-pointer) !important;
 }
