@@ -32,7 +32,7 @@ export default function MacMenuBar({
         { label: 'Launchpad Grid (All Apps)', action: onOpenLaunchpad },
         { label: 'Resume.pdf (CV Document)', action: () => onOpenApp('resume') },
         { label: 'The Chooser (Network Hub)', action: () => onOpenApp('chooser') },
-        { label: 'Control Panels (Themes)', action: () => onOpenApp('control_panels') },
+        { label: 'Control Center (Themes & Audio)', action: () => onOpenApp('control_panels') },
         { label: 'Desk Accessory: Calculator', action: () => onOpenApp('calculator') },
         { label: 'Desk Accessory: Puzzle 15', action: () => onOpenApp('puzzle') }
       ]
@@ -40,6 +40,7 @@ export default function MacMenuBar({
     {
       name: 'File',
       items: [
+        { label: 'Open Control Center', action: () => onOpenApp('control_panels') },
         { label: 'Open Projects Finder', action: () => onOpenApp('projects') },
         { label: 'Extensions Manager (Tech Filter)', action: () => onOpenApp('extensions') },
         { label: 'Spotlight Search (⌘ + Space)', action: onOpenSpotlight },
@@ -66,6 +67,7 @@ export default function MacMenuBar({
     {
       name: 'Special',
       items: [
+        { label: 'Control Center 🎛️', action: () => onOpenApp('control_panels') },
         { label: 'Launchpad Grid 🚀', action: onOpenLaunchpad },
         { label: 'Crash System 💣 (Easter Egg)', action: onTriggerBomb },
         { label: 'Empty Trash 🗑️', action: onEmptyTrash },
@@ -107,45 +109,44 @@ export default function MacMenuBar({
             <button
               onClick={() => setActiveMenu(activeMenu === menu.name ? null : menu.name)}
               style={{
-                background: activeMenu === menu.name ? '#000000' : 'transparent',
+                background: activeMenu === menu.name ? 'var(--mac-purple)' : 'transparent',
                 color: activeMenu === menu.name ? '#ffffff' : '#000000',
                 border: 'none',
-                padding: '0.1rem 0.6rem',
-                cursor: 'pointer',
+                padding: '0.2rem 0.6rem',
+                fontSize: menu.name === '' ? '1.35rem' : '1.15rem',
                 fontFamily: 'var(--font-mac-title)',
-                fontSize: '1.2rem',
                 fontWeight: 'bold',
-                borderRadius: '3px',
-                transition: 'background 0.1s ease, color 0.1s ease'
+                cursor: 'pointer',
+                borderRadius: '3px'
               }}
             >
               {menu.name}
             </button>
 
-            {/* Dropdown Menu */}
+            {/* Dropdown Menu Panel */}
             {activeMenu === menu.name && (
               <div
                 style={{
                   position: 'absolute',
-                  top: '26px',
+                  top: '28px',
                   left: 0,
                   background: '#ffffff',
                   border: '2px solid #000000',
-                  boxShadow: '4px 4px 0px #000000',
-                  minWidth: '240px',
+                  boxShadow: 'var(--mac-shadow-md)',
+                  minWidth: '220px',
                   display: 'flex',
                   flexDirection: 'column',
-                  zIndex: 1001,
                   padding: '4px 0',
-                  animation: 'menuDrop 0.12s ease-out'
+                  zIndex: 1001,
+                  animation: 'menuDrop 0.1s ease'
                 }}
               >
                 {menu.items.map((item, idx) => (
                   <button
                     key={idx}
                     onClick={() => {
-                      item.action();
                       setActiveMenu(null);
+                      item.action();
                     }}
                     style={{
                       background: 'transparent',
@@ -179,7 +180,26 @@ export default function MacMenuBar({
       </div>
 
       {/* Right Apple OS Status Bar & Shortcuts */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#000000' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#000000' }}>
+        {/* Dedicated Control Center Shortcut Icon */}
+        <button
+          onClick={() => onOpenApp('control_panels')}
+          title="Open Macintosh Control Center / Control Panel"
+          style={{
+            background: 'var(--mac-pink)',
+            color: '#ffffff',
+            border: '1px solid #000',
+            padding: '0 6px',
+            fontFamily: 'var(--font-mac-title)',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            boxShadow: '1px 1px 0px #000'
+          }}
+        >
+          🎛️ Control Center
+        </button>
+
         <button
           onClick={onOpenSpotlight}
           title="Spotlight Search (⌘ + Space)"
