@@ -12,6 +12,7 @@ import ExtensionsManagerApp from './components/ExtensionsManagerApp';
 import SystemBombDialog from './components/SystemBombDialog';
 import SpotlightSearch from './components/SpotlightSearch';
 import LaunchpadOverlay from './components/LaunchpadOverlay';
+import ScreensaverOverlay from './components/ScreensaverOverlay';
 import ResumeMacWindow from './components/ResumeMacWindow';
 import MacNotesApp from './components/MacNotesApp';
 import MacGitApp from './components/MacGitApp';
@@ -70,8 +71,18 @@ export default function App() {
   });
 
   const [topZIndex, setTopZIndex] = useState(35);
+  const [volume, setVolume] = useState(0.8);
   const [soundMuted, setSoundMuted] = useState(false);
+  const [alertSound, setAlertSound] = useState('sosumi');
+  const [desktopPattern, setDesktopPattern] = useState('purple_dots');
+  const [accentColor, setAccentColor] = useState('purple');
+  const [fontSmoothing, setFontSmoothing] = useState('pixel');
   const [colorTheme, setColorTheme] = useState('cyberpop');
+  const [crtShader, setCrtShader] = useState(false);
+  const [screensaverActive, setScreensaverActive] = useState(false);
+  const [windowAnimations, setWindowAnimations] = useState(true);
+  const [desktopItemsVisible, setDesktopItemsVisible] = useState(true);
+
   const [activeExtensions, setActiveExtensions] = useState([
     'Python', 'OpenTelemetry', 'React', 'TypeScript', 'Go', 'WebCrypto', 'Docker'
   ]);
@@ -90,8 +101,9 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // System Sound & Alert Sound Synthesizer
   const playSystemSound = (freq = 800, duration = 0.08, type = 'square') => {
-    if (soundMuted) return;
+    if (soundMuted || volume <= 0) return;
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtx) return;
@@ -100,15 +112,37 @@ export default function App() {
       const gain = ctx.createGain();
       osc.type = type;
       osc.frequency.setValueAtTime(freq, ctx.currentTime);
-      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.setValueAtTime(0.05 * volume, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
       osc.connect(gain);
       gain.connect(ctx.destination);
       osc.start();
       osc.stop(ctx.currentTime + duration);
     } catch (e) {
-      // Audio autoplay policy fallback
+      // Audio fallback
     }
+  };
+
+  const playAlertSound = (name = alertSound) => {
+    if (soundMuted || volume <= 0) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+
+      if (name === 'sosumi') {
+        playSystemSound(650, 0.09, 'square');
+        setTimeout(() => playSystemSound(850, 0.12, 'square'), 100);
+      } else if (name === 'wild_eep') {
+        playSystemSound(1200, 0.07, 'sawtooth');
+      } else if (name === 'indigo') {
+        playSystemSound(440, 0.15, 'sine');
+        setTimeout(() => playSystemSound(880, 0.2, 'sine'), 120);
+      } else if (name === 'quack') {
+        playSystemSound(180, 0.18, 'sawtooth');
+        setTimeout(() => playSystemSound(140, 0.15, 'sawtooth'), 80);
+      }
+    } catch (e) {}
   };
 
   const focusWindow = (id) => {
@@ -120,7 +154,7 @@ export default function App() {
   };
 
   const handleLaunchApp = (id) => {
-    playSystemSound(900, 0.08);
+    playAlertSound();
     if (id === 'closeAll') {
       setOpenWindows({
         about: false,
@@ -162,6 +196,50 @@ export default function App() {
     }));
   };
 
+  const resetLayout = () => {
+    playSystemSound(1300, 0.15);
+    setOpenWindows({
+      about: true,
+      chronolens: false,
+      notes: false,
+      macgit: false,
+      about_computer: false,
+      resume: false,
+      chooser: false,
+      control_panels: true,
+      extensions: false,
+      memoire: false,
+      nuvault: false,
+      cfls: false,
+      projects: false,
+      skills: false,
+      contact: false,
+      terminal: false,
+      calculator: false,
+      puzzle: false
+    });
+    setWindowZIndices({
+      about: 10,
+      chronolens: 12,
+      notes: 16,
+      macgit: 17,
+      about_computer: 12,
+      resume: 14,
+      chooser: 14,
+      control_panels: 15,
+      extensions: 11,
+      memoire: 12,
+      nuvault: 14,
+      cfls: 13,
+      projects: 11,
+      skills: 15,
+      contact: 17,
+      terminal: 18,
+      calculator: 19,
+      puzzle: 20
+    });
+  };
+
   const toggleExtension = (extId) => {
     playSystemSound(1000, 0.05);
     setActiveExtensions((prev) =>
@@ -180,6 +258,46 @@ export default function App() {
     handleLaunchApp('closeAll');
   };
 
+  // Dynamic Wallpaper Pattern Generator
+  const getDesktopBgStyle = () => {
+    if (desktopPattern === 'teal_grid') {
+      return {
+        backgroundColor: '#008080',
+        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.3) 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      };
+    }
+    if (desktopPattern === 'platinum_gray') {
+      return {
+        backgroundColor: '#7b8794',
+        backgroundImage: 'repeating-linear-gradient(0deg, #626d7a, #626d7a 1px, transparent 1px, transparent 4px)',
+        backgroundSize: '100% 4px'
+      };
+    }
+    if (desktopPattern === 'checkerboard') {
+      return {
+        backgroundColor: '#475569',
+        backgroundImage: 'repeating-conic-gradient(#334155 0% 25%, #475569 0% 50%)',
+        backgroundSize: '20px 20px'
+      };
+    }
+    if (desktopPattern === 'starfield') {
+      return {
+        backgroundColor: '#090d16',
+        backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px), radial-gradient(#48c6ff 1px, transparent 1px)',
+        backgroundSize: '30px 30px',
+        backgroundPosition: '0 0, 15px 15px'
+      };
+    }
+    // Default Purple System 7 Dots
+    return {
+      backgroundColor: '#8c71e0',
+      backgroundImage: 'radial-gradient(#ffffff 15%, transparent 16%), radial-gradient(#ffffff 15%, transparent 16%)',
+      backgroundSize: '24px 24px',
+      backgroundPosition: '0 0, 12px 12px'
+    };
+  };
+
   return (
     <div
       style={{
@@ -189,9 +307,30 @@ export default function App() {
         top: 0,
         left: 0,
         overflow: 'hidden',
-        filter: colorTheme === 'monochrome' ? 'grayscale(100%) contrast(140%)' : 'none'
+        ...getDesktopBgStyle(),
+        filter: colorTheme === 'monochrome' ? 'grayscale(100%) contrast(160%)' : 'none'
       }}
     >
+      {/* CRT Scanline & Phosphor Shader Overlay */}
+      {crtShader && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            pointerEvents: 'none',
+            zIndex: 99990,
+            background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%), linear-gradient(90deg, rgba(255,0,0,0.03), rgba(0,255,0,0.01), rgba(0,0,255,0.03))',
+            backgroundSize: '100% 3px, 6px 100%'
+          }}
+        />
+      )}
+
+      {/* 90s Flying Toasters & Starfield Screensaver Overlay */}
+      <ScreensaverOverlay isActive={screensaverActive} onWake={() => setScreensaverActive(false)} />
+
       {/* Top System 7 Apple Menu Bar */}
       <MacMenuBar
         onOpenApp={handleLaunchApp}
@@ -210,7 +349,7 @@ export default function App() {
       <DesktopWidgets playSystemSound={playSystemSound} />
 
       {/* Desktop Icons */}
-      <DesktopIcons onOpenApp={handleLaunchApp} onEmptyTrash={handleEmptyTrash} />
+      {desktopItemsVisible && <DesktopIcons onOpenApp={handleLaunchApp} onEmptyTrash={handleEmptyTrash} />}
 
       {/* Desktop Workspace Viewport */}
       <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
@@ -224,7 +363,7 @@ export default function App() {
           onClose={() => handleCloseApp('about')}
           onFocus={() => focusWindow('about')}
           zIndex={windowZIndices.about}
-          defaultPos={{ top: 40, left: 300 }}
+          defaultPos={{ top: 40, left: 280 }}
           defaultSize={{ width: 620, height: 430 }}
           icon=""
         >
@@ -314,21 +453,40 @@ export default function App() {
         {/* 3. Control Panels Theme & Audio Switcher */}
         <MacWindow
           id="control_panels"
-          title="🎛️ Control Panel — Monitors & Audio"
+          title="🎛️ Control Panel — System Control Center"
           themeColor="var(--mac-pink)"
           isOpen={openWindows.control_panels}
           onClose={() => handleCloseApp('control_panels')}
           onFocus={() => focusWindow('control_panels')}
           zIndex={windowZIndices.control_panels}
-          defaultPos={{ top: 90, left: 150 }}
-          defaultSize={{ width: 620, height: 430 }}
+          defaultPos={{ top: 60, left: 160 }}
+          defaultSize={{ width: 680, height: 490 }}
           icon="🎛️"
         >
           <ControlPanelsApp
+            volume={volume}
+            setVolume={setVolume}
             soundMuted={soundMuted}
             toggleSound={() => setSoundMuted(!soundMuted)}
-            colorTheme={colorTheme}
-            changeTheme={setColorTheme}
+            alertSound={alertSound}
+            setAlertSound={setAlertSound}
+            playAlertSound={playAlertSound}
+            desktopPattern={desktopPattern}
+            setDesktopPattern={setDesktopPattern}
+            accentColor={accentColor}
+            setAccentColor={setAccentColor}
+            fontSmoothing={fontSmoothing}
+            setFontSmoothing={setFontSmoothing}
+            monochromeMode={colorTheme === 'monochrome'}
+            toggleMonochrome={() => setColorTheme(colorTheme === 'monochrome' ? 'cyberpop' : 'monochrome')}
+            crtShader={crtShader}
+            setCrtShader={setCrtShader}
+            triggerScreensaver={() => setScreensaverActive(true)}
+            windowAnimations={windowAnimations}
+            setWindowAnimations={setWindowAnimations}
+            desktopItemsVisible={desktopItemsVisible}
+            setDesktopItemsVisible={setDesktopItemsVisible}
+            resetLayout={resetLayout}
             playSystemSound={playSystemSound}
           />
         </MacWindow>
@@ -404,146 +562,142 @@ export default function App() {
         {/* CFLS Standalone App */}
         <MacWindow
           id="cfls"
-          title="🔒 CFLS.app — Real-Time File Lock Sync"
+          title="🔒 CFLS.app — Lock-Free Protocol Engine"
           themeColor="var(--mac-lime)"
           isOpen={openWindows.cfls}
           onClose={() => handleCloseApp('cfls')}
           onFocus={() => focusWindow('cfls')}
           zIndex={windowZIndices.cfls}
           defaultPos={{ top: 115, left: 200 }}
-          defaultSize={{ width: 660, height: 440 }}
+          defaultSize={{ width: 640, height: 430 }}
           icon="🔒"
         >
           <CFLSApp />
         </MacWindow>
 
-        {/* Projects Finder Window */}
+        {/* Projects Finder Browser */}
         <MacWindow
           id="projects"
-          title="📁 Projects.finder — Work Explorer"
+          title="📁 Finder — Projects & Codebases"
           themeColor="var(--mac-yellow)"
           isOpen={openWindows.projects}
           onClose={() => handleCloseApp('projects')}
           onFocus={() => focusWindow('projects')}
           zIndex={windowZIndices.projects}
-          defaultPos={{ top: 60, left: 100 }}
-          defaultSize={{ width: 720, height: 470 }}
+          defaultPos={{ top: 55, left: 220 }}
+          defaultSize={{ width: 680, height: 460 }}
           icon="📁"
         >
-          <ProjectsMacFinder activeExtensions={activeExtensions} onOpenApp={handleLaunchApp} />
+          <ProjectsMacFinder onOpenApp={handleLaunchApp} activeExtensions={activeExtensions} />
         </MacWindow>
 
-        {/* Skills Control Panel Window */}
+        {/* Tech Stack & Skills Control Panel */}
         <MacWindow
           id="skills"
-          title="🎛️ Control Panel — Capabilities"
-          themeColor="var(--mac-lime)"
+          title="🎛️ System Control Panel — Tech Stack & RAM"
+          themeColor="var(--mac-purple)"
           isOpen={openWindows.skills}
           onClose={() => handleCloseApp('skills')}
           onFocus={() => focusWindow('skills')}
           zIndex={windowZIndices.skills}
-          defaultPos={{ top: 95, left: 130 }}
-          defaultSize={{ width: 660, height: 440 }}
+          defaultPos={{ top: 80, left: 240 }}
+          defaultSize={{ width: 640, height: 440 }}
           icon="🎛️"
         >
           <SkillsMacControlPanel />
         </MacWindow>
 
-        {/* Terminal Window */}
+        {/* Contact Dialog */}
+        <MacWindow
+          id="contact"
+          title="✉️ System Mail — Connect with Arjun"
+          themeColor="var(--mac-pink)"
+          isOpen={openWindows.contact}
+          onClose={() => handleCloseApp('contact')}
+          onFocus={() => focusWindow('contact')}
+          zIndex={windowZIndices.contact}
+          defaultPos={{ top: 100, left: 260 }}
+          defaultSize={{ width: 560, height: 410 }}
+          icon="✉️"
+        >
+          <ContactMacDialog playSystemSound={playSystemSound} />
+        </MacWindow>
+
+        {/* Interactive Mac Terminal */}
         <MacWindow
           id="terminal"
-          title="💻 Terminal.cli — Console"
+          title="💻 System Terminal v7.0 (zsh)"
           themeColor="#000000"
           isOpen={openWindows.terminal}
           onClose={() => handleCloseApp('terminal')}
           onFocus={() => focusWindow('terminal')}
           zIndex={windowZIndices.terminal}
-          defaultPos={{ top: 110, left: 220 }}
-          defaultSize={{ width: 620, height: 420 }}
+          defaultPos={{ top: 120, left: 280 }}
+          defaultSize={{ width: 660, height: 430 }}
           icon="💻"
         >
-          <TerminalMac />
+          <TerminalMac onLaunchApp={handleLaunchApp} />
         </MacWindow>
 
-        {/* Contact Dialog Window */}
-        <MacWindow
-          id="contact"
-          title="✉️ Mail.dialog — Transmit Message"
-          themeColor="var(--mac-purple)"
-          isOpen={openWindows.contact}
-          onClose={() => handleCloseApp('contact')}
-          onFocus={() => focusWindow('contact')}
-          zIndex={windowZIndices.contact}
-          defaultPos={{ top: 80, left: 150 }}
-          defaultSize={{ width: 580, height: 420 }}
-          icon="✉️"
-        >
-          <ContactMacDialog />
-        </MacWindow>
-
-        {/* Calculator Desk Accessory */}
+        {/* Mac Calculator */}
         <MacWindow
           id="calculator"
-          title="🧮 Calculator"
-          themeColor="var(--mac-pink)"
+          title="🧮 Desk Accessory — Calculator"
+          themeColor="var(--mac-purple)"
           isOpen={openWindows.calculator}
           onClose={() => handleCloseApp('calculator')}
           onFocus={() => focusWindow('calculator')}
           zIndex={windowZIndices.calculator}
-          defaultPos={{ top: 130, left: 260 }}
-          defaultSize={{ width: 260, height: 360 }}
+          defaultPos={{ top: 140, left: 300 }}
+          defaultSize={{ width: 340, height: 380 }}
           icon="🧮"
         >
-          <MacCalculatorApp />
+          <MacCalculatorApp playSystemSound={playSystemSound} />
         </MacWindow>
 
-        {/* 15-Puzzle Desk Accessory */}
+        {/* Mac Puzzle Game */}
         <MacWindow
           id="puzzle"
-          title="🧩 Puzzle 15"
+          title="🧩 Desk Accessory — 15-Puzzle Game"
           themeColor="var(--mac-cyan)"
           isOpen={openWindows.puzzle}
           onClose={() => handleCloseApp('puzzle')}
           onFocus={() => focusWindow('puzzle')}
           zIndex={windowZIndices.puzzle}
-          defaultPos={{ top: 145, left: 290 }}
-          defaultSize={{ width: 260, height: 340 }}
+          defaultPos={{ top: 160, left: 320 }}
+          defaultSize={{ width: 360, height: 410 }}
           icon="🧩"
         >
-          <MacPuzzleApp />
+          <MacPuzzleApp playSystemSound={playSystemSound} />
         </MacWindow>
+
+        {/* System Bomb Error Modal */}
+        <SystemBombDialog
+          isOpen={bombOpen}
+          onRestart={() => {
+            setBombOpen(false);
+            resetLayout();
+          }}
+        />
+
+        {/* Spotlight Search Overlay */}
+        <SpotlightSearch
+          isOpen={spotlightOpen}
+          onClose={() => setSpotlightOpen(false)}
+          onLaunchApp={handleLaunchApp}
+        />
+
+        {/* Launchpad Fullscreen Overlay */}
+        <LaunchpadOverlay
+          isOpen={launchpadOpen}
+          onClose={() => setLaunchpadOpen(false)}
+          onLaunchApp={handleLaunchApp}
+        />
 
       </div>
 
-      {/* Spotlight Search Floating Overlay (⌘ + Space) */}
-      <SpotlightSearch
-        isOpen={spotlightOpen}
-        onClose={() => setSpotlightOpen(false)}
-        onOpenApp={handleLaunchApp}
-      />
-
-      {/* Launchpad Grid Overlay */}
-      <LaunchpadOverlay
-        isOpen={launchpadOpen}
-        onClose={() => setLaunchpadOpen(false)}
-        onOpenApp={handleLaunchApp}
-      />
-
-      {/* System Error / Bomb Dialog Easter Egg */}
-      <SystemBombDialog
-        isOpen={bombOpen}
-        onRestart={() => {
-          playSystemSound(1000, 0.1);
-          setBombOpen(false);
-        }}
-      />
-
-      {/* Bottom Macintosh Control Strip Taskbar */}
-      <MacControlStrip
-        openWindows={openWindows}
-        onFocusApp={focusWindow}
-        onLaunchApp={handleLaunchApp}
-      />
+      {/* System 7 Bottom Control Strip / Dock */}
+      <MacControlStrip openWindows={openWindows} onFocusApp={focusWindow} onLaunchApp={handleLaunchApp} />
     </div>
   );
 }
