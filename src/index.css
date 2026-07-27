@@ -1,36 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=VT323&family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-dark: #070a12;
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --bg-card-hover: rgba(30, 41, 59, 0.75);
-  --bg-glass: rgba(11, 17, 32, 0.85);
+  /* Vibrant Retro Synth/Pop Colors from Image 1 */
+  --mac-purple: #b560e8;
+  --mac-purple-dark: #8b3ab8;
+  --mac-pink: #ff66b2;
+  --mac-cyan: #48c6ff;
+  --mac-lime: #9ee635;
+  --mac-yellow: #ffdb38;
+  
+  --mac-bg-dark: #000000;
+  --mac-surface: #ffffff;
+  --mac-surface-gray: #e6e8eb;
+  
+  --mac-border: #000000;
+  --mac-shadow: 4px 4px 0px #000000;
+  --mac-shadow-lg: 6px 6px 0px #000000;
 
-  --accent-violet: #8b5cf6;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-pink: #ec4899;
-
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-
-  --border-glow: rgba(139, 92, 246, 0.25);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-mac-title: 'VT323', 'Chicago', 'Courier New', monospace;
+  --font-mac-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'Fira Code', monospace;
-
-  --shadow-glow: 0 10px 30px -10px rgba(139, 92, 246, 0.3);
-  --shadow-cyan: 0 10px 30px -10px rgba(6, 182, 212, 0.3);
-
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
-
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -39,217 +28,299 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: var(--font-body);
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
+html, body {
+  min-height: 100vh;
+  background-color: var(--mac-bg-dark);
+  font-family: var(--font-mac-body);
+  color: var(--mac-border);
   overflow-x: hidden;
+  user-select: none;
 }
 
+/* Classic Macintosh System 7 Dither Desktop Wallpaper with Pop Teal/Cyan Pattern */
 body {
-  min-height: 100vh;
-  line-height: 1.6;
+  background-color: #1a0f2b;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
-    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 10% 20%, rgba(181, 96, 232, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(72, 198, 255, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(158, 230, 53, 0.15) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, rgba(72, 198, 255, 0.15) 0px, rgba(72, 198, 255, 0.15) 2px, transparent 2px, transparent 8px),
+    repeating-linear-gradient(-45deg, rgba(255, 102, 178, 0.15) 0px, rgba(255, 102, 178, 0.15) 2px, transparent 2px, transparent 8px);
   background-attachment: fixed;
 }
 
-/* Custom Scrollbar */
+/* Scrollbars - Classic Mac 90s Style */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 14px;
+  height: 14px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: #f0f0f0;
+  border-left: 2px solid #000;
+  background-image: repeating-linear-gradient(45deg, #ddd 0, #ddd 1px, transparent 0, transparent 4px);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
-  border-radius: 4px;
+  background: var(--mac-purple);
+  border: 2px solid #000;
+  box-shadow: inset 1px 1px 0 #fff;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-violet);
+  background: var(--mac-pink);
 }
 
-/* Utility Layout */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section {
-  padding: 6rem 0;
-}
-
-/* Typography Helpers */
-.gradient-text {
-  background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gradient-text-cyan {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 3.5rem;
-}
-
-.section-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
-  border-radius: 9999px;
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid var(--border-glow);
-  color: var(--accent-violet);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-}
-
-.section-subtitle {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  max-width: 650px;
-  margin: 0 auto;
-}
-
-/* Glass Card */
-.glass-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-normal);
-}
-
-.glass-card:hover {
-  border-color: var(--border-glow);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-4px);
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  text-decoration: none;
-  border: none;
-  outline: none;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent-violet) 0%, #6d28d9 100%);
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 6px 28px rgba(139, 92, 246, 0.65);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-primary);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  transform: translateY(-2px);
-}
-
-.btn-sm {
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-}
-
-/* Badge */
-.badge {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
+/* Classic Mac OS System 7 Window Window Frame */
+.mac-window {
+  background: #ffffff;
+  border: 2px solid var(--mac-border);
+  box-shadow: var(--mac-shadow);
   border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mac-window.active-window {
+  box-shadow: var(--mac-shadow-lg);
+  border-color: #000;
+}
+
+/* System 7 Horizontal Striped Titlebar */
+.mac-titlebar {
+  height: 28px;
+  background: var(--mac-purple);
+  border-bottom: 2px solid var(--mac-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Classic Horizontal Pinstripes in Titlebar */
+.mac-titlebar-stripes {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 32px;
+  right: 32px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    #000000 0px,
+    #000000 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.mac-titlebar-title {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border: 2px solid #000000;
+  padding: 0 10px;
+  font-family: var(--font-mac-title);
+  font-size: 1.15rem;
+  font-weight: 700;
   letter-spacing: 0.05em;
+  color: #000000;
+  box-shadow: 2px 2px 0px #000;
+  margin: 0 auto;
 }
 
-.badge-violet {
-  background: rgba(139, 92, 246, 0.15);
-  color: #c4b5fd;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-}
-
-.badge-cyan {
-  background: rgba(6, 182, 212, 0.15);
-  color: #67e8f9;
-  border: 1px solid rgba(6, 182, 212, 0.3);
-}
-
-.badge-emerald {
-  background: rgba(16, 185, 129, 0.15);
-  color: #6ee7b7;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-/* Modal Overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(4, 7, 15, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 100;
+/* Close Square Box */
+.mac-close-box {
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  box-shadow: 1px 1px 0px #000;
+  cursor: pointer;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
-  animation: fadeIn 0.25s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.mac-close-box:hover {
+  background: var(--mac-pink);
 }
 
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-  .section {
-    padding: 4rem 0;
-  }
+.mac-close-box:active {
+  background: #000;
+}
+
+/* Mac Button - Retro Pop Skeuomorphic 3D Button */
+.mac-btn {
+  background: linear-gradient(180deg, #ffffff 0%, var(--mac-surface-gray) 100%);
+  border: 2px solid #000000;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-mac-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.1s ease;
+  outline: none;
+}
+
+.mac-btn:hover {
+  background: var(--mac-cyan);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.mac-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+  background: var(--mac-pink);
+}
+
+.mac-btn-purple {
+  background: var(--mac-purple);
+  color: #ffffff;
+}
+
+.mac-btn-purple:hover {
+  background: #a246d8;
+}
+
+.mac-btn-lime {
+  background: var(--mac-lime);
+}
+
+.mac-btn-lime:hover {
+  background: #8cd623;
+}
+
+.mac-btn-pink {
+  background: var(--mac-pink);
+  color: #ffffff;
+}
+
+/* Retro System 7 Dialog / Group Box Panel */
+.mac-group-box {
+  border: 2px solid #000000;
+  border-radius: 6px;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.mac-group-label {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  background: #ffffff;
+  padding: 0 6px;
+  font-family: var(--font-mac-title);
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #000;
+}
+
+/* Slider Controls (Mac OS Control Panel Style) */
+.mac-slider {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border: 2px solid #000;
+  border-radius: 5px;
+  outline: none;
+}
+
+.mac-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 24px;
+  background: var(--mac-lime);
+  border: 2px solid #000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px #000;
+  cursor: pointer;
+}
+
+.mac-slider::-webkit-slider-thumb:hover {
+  background: var(--mac-cyan);
+}
+
+/* Radio Button / Checkbox Mac Style */
+.mac-radio {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  display: inline-block;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.mac-radio.checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: var(--mac-purple);
+  border-radius: 2px;
+}
+
+/* Retro Desktop Icon */
+.mac-desktop-icon {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.mac-desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mac-desktop-icon.selected {
+  background: var(--mac-purple);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.mac-desktop-icon-img {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mac-pink);
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0px #000;
+  border-radius: 8px;
+}
+
+.mac-desktop-icon-label {
+  font-family: var(--font-mac-title);
+  font-size: 1rem;
+  color: #ffffff;
+  background: #000000;
+  padding: 1px 5px;
+  border-radius: 3px;
+  text-align: center;
+  word-break: break-word;
 }
