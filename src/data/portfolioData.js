@@ -12,7 +12,7 @@ export const personalInfo = {
   bio: "Passionate AI systems engineer focused on autonomous agent reliability, telemetry-driven self-healing, high-throughput distributed protocols, and zero-trust cloud vaults. Creator of ChronoLens, Nuvault, Memoire, and CFLS.",
   stats: [
     { label: "Proud Core Projects", value: "4 Apps" },
-    { label: "Hackathons", value: "Agents of SigNoz" },
+    { label: "Hackathons", value: "Agents of SigNoz Winner" },
     { label: "Reliability Uptime", value: "99.9%" },
     { label: "GitHub Commits", value: "1,400+" }
   ]
@@ -31,6 +31,8 @@ export const projects = [
     id: "chronolens",
     title: "ChronoLens",
     icon: "⚡",
+    logoImg: "/assets/chronolens-logo.png",
+    bannerImg: "/assets/chronolens-banner.png",
     subtitle: "Closed-Loop Predictive SRE Control Plane on SigNoz",
     category: "AI & Observability",
     badge: "SigNoz Hackathon Winner",
