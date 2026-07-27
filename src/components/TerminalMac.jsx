@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { personalInfo, projects, skillCategories, terminalHelp } from '../data/portfolioData';
 
-export default function TerminalMac() {
+export default function TerminalMac({ onLaunchApp }) {
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState([
     { type: 'output', text: ' Macintosh System 7 Cyber CLI (greninja-op v1.3)' },
-    { type: 'output', text: 'Type "help" or "projects" to query System 7 desktop.' }
+    { type: 'output', text: 'Type "help" or "open <app>" to interact with System 7 desktop.' }
   ]);
 
   const handleCommand = (cmdStr) => {
@@ -52,14 +52,39 @@ export default function TerminalMac() {
         setHistory([]);
         return;
 
+      case 'stats':
+        newHistory.push({
+          type: 'output',
+          text: personalInfo.stats.map((s) => `${s.label.padEnd(24)} → ${s.value}`).join('\n')
+        });
+        break;
+
       case '':
         break;
 
       default:
-        newHistory.push({
-          type: 'output',
-          text: `Command not recognized: "${cleanCmd}". Type "help" for a list of available commands.`
-        });
+        // Handle open <appName> commands
+        if (cleanCmd.startsWith('open ')) {
+          const appName = cleanCmd.replace('open ', '').trim();
+          const appMap = {
+            chronolens: 'chronolens', memoire: 'memoire', nuvault: 'nuvault', cfls: 'cfls',
+            macgit: 'macgit', notes: 'notes', projects: 'projects', resume: 'resume',
+            chooser: 'chooser', control_panels: 'control_panels', terminal: 'terminal',
+            calculator: 'calculator', puzzle: 'puzzle', about: 'about'
+          };
+          const appId = appMap[appName] || appMap[appName.replace('.app', '').replace('.finder', '').replace('.pdf', '').replace('.cli', '')];
+          if (appId && onLaunchApp) {
+            onLaunchApp(appId);
+            newHistory.push({ type: 'output', text: `Opening ${appName}...` });
+          } else {
+            newHistory.push({ type: 'output', text: `open: No application "${appName}" found. Type "help" for commands.` });
+          }
+        } else {
+          newHistory.push({
+            type: 'output',
+            text: `Command not recognized: "${cleanCmd}". Type "help" for a list of available commands.`
+          });
+        }
         break;
     }
 
@@ -74,7 +99,7 @@ export default function TerminalMac() {
 
   return (
     <div style={{ background: '#000000', color: 'var(--mac-lime)', padding: '1rem', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontSize: '0.9rem', minHeight: '320px', display: 'flex', flexDirection: 'column', border: '2px solid #000' }}>
-      <div style={{ flex: 1, overflowY: 'auto', marginBottom: '0.5rem', whitespace: 'pre-wrap' }}>
+      <div style={{ flex: 1, overflowY: 'auto', marginBottom: '0.5rem', whiteSpace: 'pre-wrap' }}>
         {history.map((item, idx) => (
           <div key={idx} style={{ marginBottom: '0.4rem' }}>
             {item.type === 'input' ? (
