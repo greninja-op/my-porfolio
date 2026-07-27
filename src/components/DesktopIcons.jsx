@@ -7,7 +7,8 @@ export default function DesktopIcons({ onOpenApp, onEmptyTrash }) {
     { id: 'nuvault', name: 'Nuvault.app', color: '#48c6ff', emoji: '🔐' },
     { id: 'cfls', name: 'CFLS.app', color: '#9ee635', emoji: '🔒' },
     { id: 'projects', name: 'Projects.finder', color: '#ffdb38', emoji: '📁' },
-    { id: 'extensions', name: 'Extensions.mgr', color: '#a3e635', emoji: '🧩' },
+    { id: 'resume', name: 'Resume.pdf', color: '#ffffff', emoji: '📄' },
+    { id: 'extensions', name: 'Extensions.mgr', color: '#9ee635', emoji: '🧩' },
     { id: 'chooser', name: 'The Chooser', color: '#48c6ff', emoji: '📡' },
     { id: 'control_panels', name: 'Control Panel', color: '#ff66b2', emoji: '🎛️' },
     { id: 'terminal', name: 'Terminal.cli', color: '#000000', emoji: '💻' },
@@ -28,11 +29,16 @@ export default function DesktopIcons({ onOpenApp, onEmptyTrash }) {
       style={{
         position: 'fixed',
         top: '42px',
-        right: '15px',
+        right: '20px',
+        bottom: '85px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.75rem',
-        zIndex: 5
+        flexWrap: 'wrap-reverse',
+        alignContent: 'flex-start',
+        gap: '0.65rem',
+        zIndex: 5,
+        maxHeight: 'calc(100vh - 130px)',
+        overflow: 'visible'
       }}
     >
       {icons.map((icon) => (
@@ -43,7 +49,7 @@ export default function DesktopIcons({ onOpenApp, onEmptyTrash }) {
           onClick={() => handleClick(icon.id)}
         >
           <div className="mac-desktop-icon-img" style={{ background: icon.color }}>
-            <span style={{ fontSize: '1.4rem' }}>{icon.emoji}</span>
+            <span style={{ fontSize: '1.35rem' }}>{icon.emoji}</span>
           </div>
           <div className="mac-desktop-icon-label">{icon.name}</div>
         </div>

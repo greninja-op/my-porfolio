@@ -83,7 +83,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100vh - 85px);
 }
 
 .mac-window.active-window {
@@ -174,17 +174,14 @@ body {
   box-shadow: none;
 }
 
-/* Red Close */
 .mac-traffic-close {
   background: #ff5f56;
 }
 
-/* Yellow Minimize */
 .mac-traffic-minimize {
   background: #ffbd2e;
 }
 
-/* Green Maximize / Fullscreen */
 .mac-traffic-expand {
   background: #27c93f;
 }
@@ -269,20 +266,20 @@ body {
 
 /* Retro Desktop Icon */
 .mac-desktop-icon {
-  width: 70px;
+  width: 68px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3px;
   cursor: pointer;
-  padding: 4px;
+  padding: 3px;
   border-radius: 6px;
   transition: all 0.15s ease;
 }
 
 .mac-desktop-icon-img {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,13 +291,14 @@ body {
 
 .mac-desktop-icon-label {
   font-family: var(--font-mac-title);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #ffffff;
   background: #000000;
   padding: 1px 4px;
   border-radius: 3px;
   text-align: center;
   word-break: break-word;
+  line-height: 1.1;
 }
 
 /* Mobile Responsiveness Improvements */
@@ -309,22 +307,23 @@ body {
     width: 96vw !important;
     left: 2vw !important;
     top: 36px !important;
-    max-height: calc(100vh - 72px) !important;
+    max-height: calc(100vh - 85px) !important;
   }
   .mac-desktop-icons-container {
     right: 10px !important;
     top: 40px !important;
+    bottom: 80px !important;
     gap: 0.5rem !important;
   }
   .mac-desktop-icon {
-    width: 60px !important;
+    width: 58px !important;
   }
   .mac-desktop-icon-img {
-    width: 34px !important;
-    height: 34px !important;
+    width: 32px !important;
+    height: 32px !important;
   }
   .mac-desktop-icon-label {
-    font-size: 0.8rem !important;
+    font-size: 0.78rem !important;
   }
   .mac-control-strip {
     width: 98vw !important;
