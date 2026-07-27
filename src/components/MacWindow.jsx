@@ -144,10 +144,10 @@ export default function MacWindow({
         animation: 'macWinOpen 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
       }}
     >
-      {/* System 7 Pinstripe Titlebar */}
+      {/* System 7 Full-Width Pinstripe Titlebar */}
       <div
         className="mac-titlebar"
-        style={{ background: themeColor, cursor: isMaximized || isMobile ? 'default' : 'grab' }}
+        style={{ background: themeColor, cursor: isMaximized || isMobile ? 'default' : 'grab', position: 'relative' }}
         onMouseDown={(e) => {
           e.stopPropagation();
           handleStartDrag(e.clientX, e.clientY);
@@ -157,9 +157,9 @@ export default function MacWindow({
           if (e.touches && e.touches[0]) handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
         }}
       >
-        {/* Left Retro Traffic Light Buttons Container */}
+        {/* Left Retro Traffic Light Buttons */}
         <div
-          style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 5, width: '60px', flexShrink: 0 }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 10, position: 'relative' }}
           onMouseEnter={() => setBtnHover(true)}
           onMouseLeave={() => setBtnHover(false)}
         >
@@ -174,35 +174,33 @@ export default function MacWindow({
           </button>
         </div>
 
-        {/* Pinstripes */}
-        <div className="mac-titlebar-stripes" style={{ left: '68px', right: '68px' }} />
+        {/* Full-Width Continuous System 7 Pinstripe Grill */}
+        <div className="mac-titlebar-stripes" style={{ left: '68px', right: '12px' }} />
 
-        {/* Title Tag with Automatic Truncation to Prevent Overlapping Traffic Light Buttons */}
+        {/* Centered Title Tag Pill that sits above pinstripes and adapts gracefully as window resizes */}
         <div
           className="mac-titlebar-title"
           style={{
-            position: 'relative',
-            left: 'auto',
-            transform: 'none',
-            flex: 1,
-            textAlign: 'center',
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: themeColor,
+            padding: '0 8px',
+            maxWidth: 'calc(100% - 140px)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
-            maxWidth: 'calc(100% - 130px)',
-            zIndex: 3,
+            zIndex: 5,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px'
+            gap: '6px',
+            borderLeft: '1px solid rgba(0,0,0,0.3)',
+            borderRight: '1px solid rgba(0,0,0,0.3)'
           }}
         >
           <span>{icon}</span>
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
         </div>
-
-        {/* Right Balance Spacer */}
-        <div style={{ width: '60px', flexShrink: 0 }} />
       </div>
 
       {/* Window Body Container */}
