@@ -157,9 +157,9 @@ export default function MacWindow({
           if (e.touches && e.touches[0]) handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
         }}
       >
-        {/* Left Retro Traffic Light Buttons */}
+        {/* Left Retro Traffic Light Buttons Container */}
         <div
-          style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 2 }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 5, width: '60px', flexShrink: 0 }}
           onMouseEnter={() => setBtnHover(true)}
           onMouseLeave={() => setBtnHover(false)}
         >
@@ -175,15 +175,34 @@ export default function MacWindow({
         </div>
 
         {/* Pinstripes */}
-        <div className="mac-titlebar-stripes" />
+        <div className="mac-titlebar-stripes" style={{ left: '68px', right: '68px' }} />
 
-        {/* Title Tag */}
-        <div className="mac-titlebar-title" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        {/* Title Tag with Automatic Truncation to Prevent Overlapping Traffic Light Buttons */}
+        <div
+          className="mac-titlebar-title"
+          style={{
+            position: 'relative',
+            left: 'auto',
+            transform: 'none',
+            flex: 1,
+            textAlign: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            maxWidth: 'calc(100% - 130px)',
+            zIndex: 3,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px'
+          }}
+        >
           <span>{icon}</span>
-          <span>{title}</span>
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{title}</span>
         </div>
 
-        <div style={{ width: '56px' }} />
+        {/* Right Balance Spacer */}
+        <div style={{ width: '60px', flexShrink: 0 }} />
       </div>
 
       {/* Window Body Container */}
@@ -191,50 +210,27 @@ export default function MacWindow({
         {children}
       </div>
 
-      {/* Invisible Edge & Corner Resize Handles (Clean Layout without Clashing Arrow Symbols) */}
+      {/* Invisible Edge & Corner Resize Handles */}
       {!isMaximized && !isMobile && (
         <>
-          {/* Right Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'right')}
             style={{ position: 'absolute', top: '32px', right: '0px', width: '8px', bottom: '16px', cursor: 'ew-resize', zIndex: 14 }}
             title="Resize Width"
           />
-
-          {/* Bottom Edge Resize Handle */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'bottom')}
             style={{ position: 'absolute', bottom: '0px', left: '16px', right: '16px', height: '8px', cursor: 'ns-resize', zIndex: 14 }}
             title="Resize Height"
           />
-
-          {/* Bottom-Right Corner Resize Hitbox */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'corner-br')}
-            style={{
-              position: 'absolute',
-              bottom: '0px',
-              right: '0px',
-              width: '18px',
-              height: '18px',
-              cursor: 'nwse-resize',
-              zIndex: 15
-            }}
+            style={{ position: 'absolute', bottom: '0px', right: '0px', width: '18px', height: '18px', cursor: 'nwse-resize', zIndex: 15 }}
             title="Drag Corner to Resize Window"
           />
-
-          {/* Bottom-Left Corner Resize Hitbox */}
           <div
             onMouseDown={(e) => handleStartResize(e, 'corner-bl')}
-            style={{
-              position: 'absolute',
-              bottom: '0px',
-              left: '0px',
-              width: '18px',
-              height: '18px',
-              cursor: 'nesw-resize',
-              zIndex: 15
-            }}
+            style={{ position: 'absolute', bottom: '0px', left: '0px', width: '18px', height: '18px', cursor: 'nesw-resize', zIndex: 15 }}
             title="Drag Corner to Resize Window"
           />
         </>
