@@ -47,7 +47,6 @@ export default function DesktopIcons({ onOpenApp, onEmptyTrash }) {
         <div
           key={icon.id}
           className="mac-desktop-icon"
-          onDoubleClick={() => handleClick(icon.id)}
           onClick={() => handleClick(icon.id)}
         >
           <div className="mac-desktop-icon-img" style={{ background: icon.color }}>

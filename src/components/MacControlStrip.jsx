@@ -20,14 +20,25 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
   const [dragPos, setDragPos] = useState({ x: 0, y: 0 });
   const [hoverIndex, setHoverIndex] = useState(null);
   const [hoveredApp, setHoveredApp] = useState(null);
+
   const dockRef = useRef(null);
-  const dragStartOffset = useRef({ x: 0, y: 0 });
+  const mouseDownCandidate = useRef(null);
 
   useEffect(() => {
     const handleMove = (clientX, clientY) => {
+      // If user holds mouse down and moves > 6px, activate drag state
+      if (mouseDownCandidate.current && !draggingId) {
+        const dx = Math.abs(clientX - mouseDownCandidate.current.x);
+        const dy = Math.abs(clientY - mouseDownCandidate.current.y);
+        if (dx > 6 || dy > 6) {
+          setDraggingId(mouseDownCandidate.current.id);
+          setDragPos({ x: clientX - 25, y: clientY - 25 });
+        }
+      }
+
       if (!draggingId) return;
 
-      setDragPos({ x: clientX - dragStartOffset.current.x, y: clientY - dragStartOffset.current.y });
+      setDragPos({ x: clientX - 25, y: clientY - 25 });
 
       if (dockRef.current) {
         const rect = dockRef.current.getBoundingClientRect();
@@ -50,6 +61,8 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
     };
 
     const handleEnd = (clientX, clientY) => {
+      mouseDownCandidate.current = null;
+
       if (!draggingId) return;
 
       if (dockRef.current) {
@@ -86,12 +99,11 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
       }
     };
 
-    if (draggingId) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleTouchMove);
-      window.addEventListener('touchend', handleTouchEnd);
-    }
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -100,10 +112,12 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
     };
   }, [draggingId, hoverIndex, dockApps, desktopApps]);
 
-  const startDrag = (appId, clientX, clientY) => {
-    setDraggingId(appId);
-    dragStartOffset.current = { x: 25, y: 25 };
-    setDragPos({ x: clientX - 25, y: 25 });
+  const handleAppClick = (appId) => {
+    if (openWindows[appId]) {
+      onFocusApp(appId);
+    } else {
+      onLaunchApp(appId);
+    }
   };
 
   return (
@@ -113,14 +127,9 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         <div
           key={app.id}
           onMouseDown={(e) => {
-            e.stopPropagation();
-            startDrag(app.id, e.clientX, e.clientY);
+            mouseDownCandidate.current = { x: e.clientX, y: e.clientY, id: app.id };
           }}
-          onTouchStart={(e) => {
-            e.stopPropagation();
-            if (e.touches[0]) startDrag(app.id, e.touches[0].clientX, e.touches[0].clientY);
-          }}
-          onDoubleClick={() => onLaunchApp(app.id)}
+          onClick={() => handleAppClick(app.id)}
           style={{
             position: 'fixed',
             top: `${app.posY}px`,
@@ -130,7 +139,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
             flexDirection: 'column',
             alignItems: 'center',
             gap: '4px',
-            cursor: 'grab'
+            cursor: 'pointer'
           }}
         >
           <div
@@ -229,12 +238,12 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
               onMouseEnter={() => setHoveredApp(app.id)}
               onMouseLeave={() => setHoveredApp(null)}
               onMouseDown={(e) => {
-                e.stopPropagation();
-                startDrag(app.id, e.clientX, e.clientY);
+                mouseDownCandidate.current = { x: e.clientX, y: e.clientY, id: app.id };
               }}
               onTouchStart={(e) => {
-                e.stopPropagation();
-                if (e.touches[0]) startDrag(app.id, e.touches[0].clientX, e.touches[0].clientY);
+                if (e.touches && e.touches[0]) {
+                  mouseDownCandidate.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, id: app.id };
+                }
               }}
             >
               {/* Tooltip Label */}
@@ -263,13 +272,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
 
               {/* Modern macOS Dock Icon Button */}
               <button
-                onClick={() => {
-                  if (isOpen) {
-                    onFocusApp(app.id);
-                  } else {
-                    onLaunchApp(app.id);
-                  }
-                }}
+                onClick={() => handleAppClick(app.id)}
                 style={{
                   width: '42px',
                   height: '42px',
@@ -281,7 +284,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: '1.4rem',
-                  cursor: 'grab',
+                  cursor: 'pointer',
                   transition: 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1)',
                   transform: isHovered ? 'translateY(-6px) scale(1.16)' : 'translateY(0) scale(1)',
                   outline: 'none',
