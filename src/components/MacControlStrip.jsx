@@ -6,6 +6,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
     { id: 'memoire', name: 'Memoire.app', icon: '🧠', color: 'var(--mac-purple)' },
     { id: 'nuvault', name: 'Nuvault.app', icon: '🔐', color: 'var(--mac-cyan)' },
     { id: 'cfls', name: 'CFLS.app', icon: '🔒', color: 'var(--mac-lime)' },
+    { id: 'notes', name: 'Notes.app', icon: '📝', color: 'var(--mac-yellow)' },
     { id: 'projects', name: 'Projects.finder', icon: '📁', color: 'var(--mac-yellow)' },
     { id: 'resume', name: 'Resume.pdf', icon: '📄', color: '#ffffff' },
     { id: 'chooser', name: 'The Chooser', icon: '📡', color: 'var(--mac-cyan)' },
@@ -21,20 +22,17 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
   const dockRef = useRef(null);
   const dragStartOffset = useRef({ x: 0, y: 0 });
 
-  // Handle Dragging Logic across Screen
   useEffect(() => {
     const handleMove = (clientX, clientY) => {
       if (!draggingId) return;
 
       setDragPos({ x: clientX - dragStartOffset.current.x, y: clientY - dragStartOffset.current.y });
 
-      // Check proximity to Dock
       if (dockRef.current) {
         const rect = dockRef.current.getBoundingClientRect();
         const isNearDock = clientY >= rect.top - 50 && clientY <= rect.bottom + 40;
 
         if (isNearDock) {
-          // Calculate insertion index based on cursor X position
           const iconWidth = 52;
           const relativeX = clientX - rect.left;
           const calculatedIndex = Math.max(0, Math.min(dockApps.length, Math.floor(relativeX / iconWidth)));
@@ -60,7 +58,6 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         const appObj = [...dockApps, ...desktopApps].find((a) => a.id === draggingId);
 
         if (isInsideDock && appObj) {
-          // Place into / Re-order Dock
           const filteredDock = dockApps.filter((a) => a.id !== draggingId);
           const targetIdx = hoverIndex !== null ? Math.min(hoverIndex, filteredDock.length) : filteredDock.length;
 
@@ -68,7 +65,6 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
           setDockApps(filteredDock);
           setDesktopApps((prev) => prev.filter((a) => a.id !== draggingId));
         } else if (appObj) {
-          // Dragged Out of Dock onto Desktop
           setDockApps((prev) => prev.filter((a) => a.id !== draggingId));
           setDesktopApps((prev) => {
             const exists = prev.find((a) => a.id === draggingId);
@@ -111,7 +107,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
 
   return (
     <>
-      {/* Floating Standalone Desktop Apps (Dragged out of Dock) */}
+      {/* Floating Standalone Desktop Apps */}
       {desktopApps.map((app) => (
         <div
           key={app.id}
@@ -191,7 +187,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         </div>
       )}
 
-      {/* Dynamic Adjusting Floating macOS Dock */}
+      {/* Dynamic Floating macOS Dock */}
       <div
         ref={dockRef}
         className="mac-control-strip"

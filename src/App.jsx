@@ -12,6 +12,7 @@ import SystemBombDialog from './components/SystemBombDialog';
 import SpotlightSearch from './components/SpotlightSearch';
 import LaunchpadOverlay from './components/LaunchpadOverlay';
 import ResumeMacWindow from './components/ResumeMacWindow';
+import MacNotesApp from './components/MacNotesApp';
 import ChronoLensApp from './components/ChronoLensApp';
 import MemoireApp from './components/MemoireApp';
 import NuvaultApp from './components/NuvaultApp';
@@ -27,6 +28,7 @@ export default function App() {
   const [openWindows, setOpenWindows] = useState({
     about: true,
     chronolens: true,
+    notes: false,
     about_computer: false,
     resume: false,
     chooser: false,
@@ -46,6 +48,7 @@ export default function App() {
   const [windowZIndices, setWindowZIndices] = useState({
     about: 10,
     chronolens: 15,
+    notes: 16,
     about_computer: 12,
     resume: 16,
     chooser: 14,
@@ -72,7 +75,6 @@ export default function App() {
   const [spotlightOpen, setSpotlightOpen] = useState(false);
   const [launchpadOpen, setLaunchpadOpen] = useState(false);
 
-  // Keyboard shortcut listener for Cmd + Space / Ctrl + Space (Spotlight Search)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.code === 'Space') {
@@ -84,7 +86,6 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Web Audio Synthesizer (Clicks, Beeps, Trash Crinkles)
   const playSystemSound = (freq = 800, duration = 0.08, type = 'square') => {
     if (soundMuted) return;
     try {
@@ -120,6 +121,7 @@ export default function App() {
       setOpenWindows({
         about: false,
         chronolens: false,
+        notes: false,
         about_computer: false,
         resume: false,
         chooser: false,
@@ -204,6 +206,22 @@ export default function App() {
 
       {/* Desktop Workspace Viewport */}
       <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
+
+        {/* 📝 Notes.app Standalone Application */}
+        <MacWindow
+          id="notes"
+          title="📝 Notes.app — Retro Text Pad"
+          themeColor="var(--mac-yellow)"
+          isOpen={openWindows.notes}
+          onClose={() => handleCloseApp('notes')}
+          onFocus={() => focusWindow('notes')}
+          zIndex={windowZIndices.notes}
+          defaultPos={{ top: 60, left: 110 }}
+          defaultSize={{ width: 720, height: 470 }}
+          icon="📝"
+        >
+          <MacNotesApp />
+        </MacWindow>
 
         {/* 1. About This Computer... App */}
         <MacWindow

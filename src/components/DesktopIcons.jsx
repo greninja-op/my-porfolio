@@ -6,6 +6,7 @@ export default function DesktopIcons({ onOpenApp, onEmptyTrash }) {
     { id: 'memoire', name: 'Memoire.app', color: '#b560e8', emoji: '🧠' },
     { id: 'nuvault', name: 'Nuvault.app', color: '#48c6ff', emoji: '🔐' },
     { id: 'cfls', name: 'CFLS.app', color: '#9ee635', emoji: '🔒' },
+    { id: 'notes', name: 'Notes.app', color: '#ffdb38', emoji: '📝' },
     { id: 'projects', name: 'Projects.finder', color: '#ffdb38', emoji: '📁' },
     { id: 'resume', name: 'Resume.pdf', color: '#ffffff', emoji: '📄' },
     { id: 'extensions', name: 'Extensions.mgr', color: '#9ee635', emoji: '🧩' },
