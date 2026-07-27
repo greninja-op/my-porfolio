@@ -18,14 +18,13 @@ export default function MacWindow({
   const [isMaximized, setIsMaximized] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [isResizing, setIsResizing] = useState(false);
+  const [resizeDirection, setResizeDirection] = useState(null); // 'right', 'bottom', 'corner-br', 'corner-bl'
   const [btnHover, setBtnHover] = useState(false);
   const dragStart = useRef({ x: 0, y: 0, top: 0, left: 0 });
-  const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0 });
+  const resizeStart = useRef({ x: 0, y: 0, width: 0, height: 0, top: 0, left: 0 });
 
   const isMobile = window.innerWidth <= 768;
 
-  // Crucial Bug Fix: Whenever window receives focus or isOpen changes, un-minimize automatically!
   useEffect(() => {
     if (isOpen) {
       setIsMinimized(false);
@@ -34,7 +33,7 @@ export default function MacWindow({
 
   if (!isOpen || isMinimized) return null;
 
-  // Drag Handlers
+  // Titlebar Drag Handlers
   const handleStartDrag = (clientX, clientY) => {
     onFocus(id);
     if (isMaximized || isMobile) return;
@@ -47,16 +46,20 @@ export default function MacWindow({
     };
   };
 
-  const handleTitleMouseDown = (e) => {
+  // Multi-Edge & Corner Resize Handlers
+  const handleStartResize = (e, direction) => {
     e.stopPropagation();
-    handleStartDrag(e.clientX, e.clientY);
-  };
-
-  const handleTitleTouchStart = (e) => {
-    e.stopPropagation();
-    if (e.touches && e.touches[0]) {
-      handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
-    }
+    onFocus(id);
+    if (isMaximized || isMobile) return;
+    setResizeDirection(direction);
+    resizeStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      width: size.width,
+      height: size.height,
+      top: pos.top,
+      left: pos.left
+    };
   };
 
   useEffect(() => {
@@ -68,13 +71,30 @@ export default function MacWindow({
           top: Math.max(32, Math.min(window.innerHeight - 100, dragStart.current.top + dy)),
           left: Math.max(10, Math.min(window.innerWidth - 100, dragStart.current.left + dx))
         });
-      } else if (isResizing) {
-        const dw = clientX - resizeStart.current.x;
-        const dh = clientY - resizeStart.current.y;
-        setSize({
-          width: Math.max(320, resizeStart.current.width + dw),
-          height: Math.max(200, resizeStart.current.height + dh)
-        });
+      } else if (resizeDirection) {
+        const dx = clientX - resizeStart.current.x;
+        const dy = clientY - resizeStart.current.y;
+
+        let newW = resizeStart.current.width;
+        let newH = resizeStart.current.height;
+        let newL = resizeStart.current.left;
+
+        if (resizeDirection.includes('right') || resizeDirection === 'corner-br') {
+          newW = Math.max(320, resizeStart.current.width + dx);
+        }
+        if (resizeDirection.includes('bottom') || resizeDirection === 'corner-br' || resizeDirection === 'corner-bl') {
+          newH = Math.max(200, resizeStart.current.height + dy);
+        }
+        if (resizeDirection === 'corner-bl') {
+          const calculatedW = Math.max(320, resizeStart.current.width - dx);
+          if (calculatedW !== 320) {
+            newL = resizeStart.current.left + dx;
+          }
+          newW = calculatedW;
+        }
+
+        setSize({ width: newW, height: newH });
+        if (resizeDirection === 'corner-bl') setPos((p) => ({ ...p, left: newL }));
       }
     };
 
@@ -87,10 +107,10 @@ export default function MacWindow({
 
     const handleEnd = () => {
       setIsDragging(false);
-      setIsResizing(false);
+      setResizeDirection(null);
     };
 
-    if (isDragging || isResizing) {
+    if (isDragging || resizeDirection) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleEnd);
       window.addEventListener('touchmove', handleTouchMove);
@@ -102,23 +122,7 @@ export default function MacWindow({
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleEnd);
     };
-  }, [isDragging, isResizing]);
-
-  const handleResizeMouseDown = (e) => {
-    e.stopPropagation();
-    onFocus(id);
-    setIsResizing(true);
-    resizeStart.current = {
-      x: e.clientX,
-      y: e.clientY,
-      width: size.width,
-      height: size.height
-    };
-  };
-
-  const toggleMaximize = () => {
-    setIsMaximized(!isMaximized);
-  };
+  }, [isDragging, resizeDirection]);
 
   return (
     <div
@@ -136,7 +140,7 @@ export default function MacWindow({
         display: 'flex',
         flexDirection: 'column',
         boxShadow: 'var(--mac-shadow-lg)',
-        transition: isDragging || isResizing ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.2s ease, height 0.2s ease',
+        transition: isDragging || resizeDirection ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.15s ease, height 0.15s ease',
         animation: 'macWinOpen 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
       }}
     >
@@ -144,48 +148,28 @@ export default function MacWindow({
       <div
         className="mac-titlebar"
         style={{ background: themeColor, cursor: isMaximized || isMobile ? 'default' : 'grab' }}
-        onMouseDown={handleTitleMouseDown}
-        onTouchStart={handleTitleTouchStart}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          handleStartDrag(e.clientX, e.clientY);
+        }}
+        onTouchStart={(e) => {
+          e.stopPropagation();
+          if (e.touches && e.touches[0]) handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }}
       >
-        {/* Left Retro-Modern macOS Traffic Light Buttons */}
+        {/* Left Retro Traffic Light Buttons */}
         <div
           style={{ display: 'flex', alignItems: 'center', gap: '6px', zIndex: 2 }}
           onMouseEnter={() => setBtnHover(true)}
           onMouseLeave={() => setBtnHover(false)}
         >
-          {/* Close Button (Red) */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose(id);
-            }}
-            className="mac-traffic-btn mac-traffic-close"
-            title="Close Window"
-          >
+          <button onClick={(e) => { e.stopPropagation(); onClose(id); }} className="mac-traffic-btn mac-traffic-close" title="Close Window">
             {btnHover ? '✕' : ''}
           </button>
-
-          {/* Minimize Button (Yellow) */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMinimized(true);
-            }}
-            className="mac-traffic-btn mac-traffic-minimize"
-            title="Minimize Window"
-          >
+          <button onClick={(e) => { e.stopPropagation(); setIsMinimized(true); }} className="mac-traffic-btn mac-traffic-minimize" title="Minimize Window">
             {btnHover ? '−' : ''}
           </button>
-
-          {/* Fullscreen / Maximize Button (Green) */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleMaximize();
-            }}
-            className="mac-traffic-btn mac-traffic-expand"
-            title={isMaximized ? 'Restore' : 'Fullscreen / Maximize'}
-          >
+          <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="mac-traffic-btn mac-traffic-expand" title={isMaximized ? 'Restore' : 'Fullscreen'}>
             {btnHover ? (isMaximized ? '▼' : '▲') : ''}
           </button>
         </div>
@@ -202,42 +186,75 @@ export default function MacWindow({
         <div style={{ width: '56px' }} />
       </div>
 
-      {/* Window Inner Body Container */}
+      {/* Window Body Container */}
       <div className="mac-window-body">
         {children}
       </div>
 
-      {/* Bottom Resize Handle */}
+      {/* Multi-Edge & Corner Resize Handles */}
       {!isMaximized && !isMobile && (
-        <div
-          onMouseDown={handleResizeMouseDown}
-          style={{
-            position: 'absolute',
-            bottom: '2px',
-            right: '2px',
-            width: '16px',
-            height: '16px',
-            cursor: 'nwse-resize',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '10px',
-            color: '#000',
-            fontWeight: 'bold',
-            zIndex: 10
-          }}
-          title="Resize Window"
-        >
-          ◢
-        </div>
-      )}
+        <>
+          {/* Right Edge Resize Handle */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'right')}
+            style={{ position: 'absolute', top: '32px', right: '0px', width: '6px', bottom: '10px', cursor: 'ew-resize', zIndex: 12 }}
+            title="Resize Width"
+          />
 
-      <style>{`
-        @keyframes macWinOpen {
-          from { transform: scale(0.94); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
+          {/* Bottom Edge Resize Handle */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'bottom')}
+            style={{ position: 'absolute', bottom: '0px', left: '10px', right: '10px', height: '6px', cursor: 'ns-resize', zIndex: 12 }}
+            title="Resize Height"
+          />
+
+          {/* Bottom-Right Corner Handle */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'corner-br')}
+            style={{
+              position: 'absolute',
+              bottom: '2px',
+              right: '2px',
+              width: '16px',
+              height: '16px',
+              cursor: 'nwse-resize',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '10px',
+              color: '#000',
+              fontWeight: 'bold',
+              zIndex: 14
+            }}
+            title="Resize Window"
+          >
+            ◢
+          </div>
+
+          {/* Bottom-Left Corner Handle */}
+          <div
+            onMouseDown={(e) => handleStartResize(e, 'corner-bl')}
+            style={{
+              position: 'absolute',
+              bottom: '2px',
+              left: '2px',
+              width: '16px',
+              height: '16px',
+              cursor: 'nesw-resize',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '10px',
+              color: '#000',
+              fontWeight: 'bold',
+              zIndex: 14
+            }}
+            title="Resize Window"
+          >
+            ◣
+          </div>
+        </>
+      )}
     </div>
   );
 }
