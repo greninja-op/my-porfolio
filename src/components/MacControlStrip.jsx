@@ -34,9 +34,9 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         const isNearDock = clientY >= rect.top - 50 && clientY <= rect.bottom + 40;
 
         if (isNearDock) {
-          const iconWidth = 52;
+          const itemWidth = 110;
           const relativeX = clientX - rect.left;
-          const calculatedIndex = Math.max(0, Math.min(dockApps.length, Math.floor(relativeX / iconWidth)));
+          const calculatedIndex = Math.max(0, Math.min(dockApps.length, Math.floor(relativeX / itemWidth)));
           setHoverIndex(calculatedIndex);
         } else {
           setHoverIndex(null);
@@ -108,7 +108,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
 
   return (
     <>
-      {/* Floating Standalone Desktop Apps */}
+      {/* Floating Standalone Desktop Apps (Dragged out of Control Strip) */}
       {desktopApps.map((app) => (
         <div
           key={app.id}
@@ -135,23 +135,23 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
         >
           <div
             style={{
-              width: '44px',
-              height: '44px',
-              borderRadius: '10px',
+              padding: '0.2rem 0.6rem',
+              borderRadius: '6px',
               background: app.color,
+              color: app.color === '#ffffff' ? '#000' : '#fff',
               border: '2px solid #000',
               boxShadow: '3px 3px 0px #000',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.4rem'
+              gap: '0.4rem',
+              fontSize: '0.95rem',
+              fontWeight: 'bold',
+              fontFamily: 'var(--font-mac-title)'
             }}
           >
-            {app.icon}
+            <span>{app.icon}</span>
+            <span>{app.name}</span>
           </div>
-          <span style={{ fontFamily: 'var(--font-mac-title)', fontSize: '0.85rem', color: '#fff', background: '#000', padding: '1px 4px', borderRadius: '3px' }}>
-            {app.name}
-          </span>
         </div>
       ))}
 
@@ -165,30 +165,33 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
             zIndex: 9999,
             pointerEvents: 'none',
             opacity: 0.9,
-            transform: 'scale(1.15)',
+            transform: 'scale(1.1)',
             transition: 'transform 0.05s ease'
           }}
         >
           <div
             style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+              padding: '0.3rem 0.7rem',
+              borderRadius: '6px',
               background: 'var(--mac-purple)',
+              color: '#fff',
               border: '2px solid #000',
-              boxShadow: '5px 5px 0px #000',
+              boxShadow: '4px 4px 0px #000',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.5rem'
+              gap: '0.4rem',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              fontFamily: 'var(--font-mac-title)'
             }}
           >
             {([...dockApps, ...desktopApps].find((a) => a.id === draggingId) || {}).icon || '📱'}
+            <span>{([...dockApps, ...desktopApps].find((a) => a.id === draggingId) || {}).name}</span>
           </div>
         </div>
       )}
 
-      {/* Dynamic Floating macOS Dock */}
+      {/* System 7 Vibrant Pop Control Strip Taskbar */}
       <div
         ref={dockRef}
         className="mac-control-strip"
@@ -197,21 +200,26 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
           bottom: '12px',
           left: '50%',
           transform: 'translateX(-50%)',
-          height: '56px',
+          height: '46px',
           background: 'linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%)',
           border: '2px solid #000000',
-          borderRadius: '16px',
+          borderRadius: '12px',
           boxShadow: '4px 4px 0px #000000',
           display: 'flex',
           alignItems: 'center',
-          gap: hoverIndex !== null ? '1.2rem' : '0.6rem',
-          padding: '0 0.85rem',
+          gap: hoverIndex !== null ? '0.8rem' : '0.45rem',
+          padding: '0 0.75rem',
           zIndex: 900,
           fontFamily: 'var(--font-mac-title)',
           transition: 'all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1)',
-          maxWidth: '96vw'
+          maxWidth: '96vw',
+          overflowX: 'auto'
         }}
       >
+        <span style={{ fontSize: '1rem', fontWeight: 'bold', color: '#000', whiteSpace: 'nowrap', marginRight: '0.2rem' }}>
+          Control Strip:
+        </span>
+
         {dockApps.map((app, index) => {
           const isOpen = openWindows[app.id];
           const isHovered = hoveredApp === app.id;
@@ -223,7 +231,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
               style={{
                 position: 'relative',
                 transition: 'transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                transform: isShifted ? 'translateX(18px)' : 'translateX(0px)'
+                transform: isShifted ? 'translateX(14px)' : 'translateX(0px)'
               }}
               onMouseEnter={() => setHoveredApp(app.id)}
               onMouseLeave={() => setHoveredApp(null)}
@@ -236,31 +244,7 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
                 if (e.touches[0]) startDrag(app.id, e.touches[0].clientX, e.touches[0].clientY);
               }}
             >
-              {/* Tooltip */}
-              {isHovered && !draggingId && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '-34px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: '#000000',
-                    color: '#ffffff',
-                    padding: '2px 8px',
-                    border: '1px solid #ffffff',
-                    borderRadius: '4px',
-                    fontSize: '0.9rem',
-                    fontWeight: 'bold',
-                    whiteSpace: 'nowrap',
-                    boxShadow: '2px 2px 0px #000',
-                    zIndex: 901
-                  }}
-                >
-                  {app.name}
-                </div>
-              )}
-
-              {/* Dock Icon Button */}
+              {/* Vibrant Colored App Button */}
               <button
                 onClick={() => {
                   if (isOpen) {
@@ -270,42 +254,34 @@ export default function MacControlStrip({ openWindows, onFocusApp, onLaunchApp }
                   }
                 }}
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '10px',
-                  background: app.color,
+                  background: isOpen ? app.color : '#ffffff',
+                  color: isOpen ? (app.color === '#ffffff' ? '#000' : '#ffffff') : '#000000',
                   border: '2px solid #000000',
-                  boxShadow: isHovered ? '3px 3px 0px #000' : '1px 1px 0px #000',
+                  boxShadow: isHovered ? '2px 2px 0px #000' : isOpen ? '1px 1px 0px #000' : 'none',
+                  padding: '0.2rem 0.65rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 'bold',
+                  fontFamily: 'var(--font-mac-title)',
+                  cursor: 'grab',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.4rem',
-                  cursor: 'grab',
-                  transition: 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                  transform: isHovered ? 'translateY(-6px) scale(1.16)' : 'translateY(0) scale(1)',
+                  gap: '0.4rem',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  transition: 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), background 0.15s ease',
+                  transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
                   outline: 'none',
                   opacity: draggingId === app.id ? 0.3 : 1
                 }}
               >
                 <span>{app.icon}</span>
+                <span>{app.name}</span>
+                {isOpen && (
+                  <span style={{ fontSize: '8px', color: app.color === '#ffffff' ? '#000' : '#fff' }}>
+                    ●
+                  </span>
+                )}
               </button>
-
-              {/* Active Dot */}
-              {isOpen && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '-6px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '5px',
-                    height: '5px',
-                    borderRadius: '50%',
-                    background: '#000000',
-                    boxShadow: '0 0 4px var(--mac-pink)'
-                  }}
-                />
-              )}
             </div>
           );
         })}
