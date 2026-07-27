@@ -28,7 +28,7 @@ export default function App() {
   const [openWindows, setOpenWindows] = useState({
     about: true,
     chronolens: true,
-    notes: false,
+    notes: true,
     about_computer: false,
     resume: false,
     chooser: false,
@@ -47,10 +47,10 @@ export default function App() {
 
   const [windowZIndices, setWindowZIndices] = useState({
     about: 10,
-    chronolens: 15,
+    chronolens: 12,
     notes: 16,
     about_computer: 12,
-    resume: 16,
+    resume: 14,
     chooser: 14,
     control_panels: 13,
     extensions: 11,
@@ -58,7 +58,7 @@ export default function App() {
     nuvault: 14,
     cfls: 13,
     projects: 11,
-    skills: 16,
+    skills: 15,
     contact: 17,
     terminal: 18,
     calculator: 19,
@@ -216,7 +216,7 @@ export default function App() {
           onClose={() => handleCloseApp('notes')}
           onFocus={() => focusWindow('notes')}
           zIndex={windowZIndices.notes}
-          defaultPos={{ top: 60, left: 110 }}
+          defaultPos={{ top: 75, left: 180 }}
           defaultSize={{ width: 720, height: 470 }}
           icon="📝"
         >

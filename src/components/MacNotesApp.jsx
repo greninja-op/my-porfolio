@@ -4,12 +4,11 @@ export default function MacNotesApp() {
   const defaultNotes = [
     {
       id: 'note_1',
-      folder: 'Project Brainstorms',
+      folder: 'Project Ideas',
       title: 'ChronoLens SigNoz Hackathon Plan',
       content: `⚡ ChronoLens — Predictive Reliability Loop Architecture\n\n1. Telemetry Ingestion: Stream live OpenTelemetry traces from SigNoz API feed.\n2. SLO Breach Forecasting: Predict p99 latency spikes >2.5s before outage.\n3. Reversible Mitigation: Dynamic traffic shed & LLM agent loop breaker.\n4. Audit Receipt: Issue digital receipt of "the outage that never happened".`,
       date: 'Today, 07:15 PM',
-      font: 'VT323',
-      color: 'var(--mac-yellow)'
+      font: 'VT323'
     },
     {
       id: 'note_2',
@@ -17,34 +16,38 @@ export default function MacNotesApp() {
       title: 'Memoire Context Vector Decays',
       content: `🧠 Memoire — Long-Term AI Memory Graph\n\n- Index multi-step agent trajectories into vector similarity space.\n- Decay old episodic memories using half-life weight algorithm.\n- Sub-millisecond prompt injection for autonomous agent loops.`,
       date: 'Yesterday, 04:30 PM',
-      font: 'Fira Code',
-      color: 'var(--mac-lime)'
+      font: 'Fira Code'
     },
     {
       id: 'note_3',
       folder: 'Quick Snippets',
-      title: 'Nuvault WebCrypto Keys',
-      content: `🔐 Nuvault Zero-Knowledge Cryptography\n\nconst key = await window.crypto.subtle.generateKey(\n  { name: 'AES-GCM', length: 256 },\n  true,\n  ['encrypt', 'decrypt']\n);\n// Client-side encryption before socket transmission`,
+      title: 'Nuvault WebCrypto Key Gen',
+      content: `🔐 Nuvault Zero-Knowledge Cryptography\n\nconst key = await window.crypto.subtle.generateKey(\n  { name: 'AES-GCM', length: 256 },\n  true,\n  ['encrypt', 'decrypt']\n);\n// Client-side WebCrypto encryption before socket transmission`,
       date: 'July 25, 2026',
-      font: 'Fira Code',
-      color: 'var(--mac-cyan)'
+      font: 'Fira Code'
     }
   ];
 
   const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem('mac_portfolio_notes');
-    return saved ? JSON.parse(saved) : defaultNotes;
+    try {
+      const saved = localStorage.getItem('mac_portfolio_notes');
+      return saved ? JSON.parse(saved) : defaultNotes;
+    } catch (e) {
+      return defaultNotes;
+    }
   });
 
-  const [selectedNoteId, setSelectedNoteId] = useState('note_1');
+  const [selectedNoteId, setSelectedNoteId] = useState(notes[0]?.id || 'note_1');
   const [selectedFolder, setSelectedFolder] = useState('All Notes');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('mac_portfolio_notes', JSON.stringify(notes));
+    try {
+      localStorage.setItem('mac_portfolio_notes', JSON.stringify(notes));
+    } catch (e) {}
   }, [notes]);
 
-  const activeNote = notes.find((n) => n.id === selectedNoteId) || notes[0];
+  const activeNote = notes.find((n) => n.id === selectedNoteId) || notes[0] || defaultNotes[0];
 
   const filteredNotes = notes.filter((n) => {
     const matchFolder = selectedFolder === 'All Notes' || n.folder === selectedFolder;
@@ -57,12 +60,11 @@ export default function MacNotesApp() {
   const handleCreateNote = () => {
     const newNote = {
       id: `note_${Date.now()}`,
-      folder: selectedFolder === 'All Notes' ? 'Project Brainstorms' : selectedFolder,
+      folder: selectedFolder === 'All Notes' ? 'Project Ideas' : selectedFolder,
       title: 'Untitled Note',
-      content: 'Start typing your retro Macintosh note here...',
+      content: 'Type your notes here...',
       date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      font: 'VT323',
-      color: 'var(--mac-yellow)'
+      font: 'VT323'
     };
     setNotes([newNote, ...notes]);
     setSelectedNoteId(newNote.id);
@@ -91,24 +93,27 @@ export default function MacNotesApp() {
     );
   };
 
-  const folders = ['All Notes', 'Project Brainstorms', 'Architecture Ideas', 'Quick Snippets'];
+  const folders = ['All Notes', 'Project Ideas', 'Architecture Ideas', 'Quick Snippets'];
+
+  const charCount = activeNote.content.length;
+  const wordCount = activeNote.content.trim() ? activeNote.content.trim().split(/\s+/).length : 0;
 
   return (
     <div style={{ fontFamily: 'var(--font-mac-title)', display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
-      {/* Top Toolbar */}
+      {/* Top System 7 Notepad Toolbar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '2px solid #000', paddingBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
           <button onClick={handleCreateNote} className="mac-btn mac-btn-purple">
             ✏️ New Note +
           </button>
           <button onClick={() => handleDeleteNote(activeNote.id)} className="mac-btn mac-btn-pink">
-            🗑️ Delete
+            🗑️ Delete Note
           </button>
         </div>
 
-        {/* Note Font Selector & Highlighter Selector */}
+        {/* Note Font Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>Font:</span>
+          <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>Typography:</span>
           <select
             value={activeNote ? activeNote.font : 'VT323'}
             onChange={(e) => updateActiveNoteField('font', e.target.value)}
@@ -118,22 +123,23 @@ export default function MacNotesApp() {
               fontFamily: 'var(--font-mac-title)',
               fontSize: '1rem',
               fontWeight: 'bold',
-              borderRadius: '4px'
+              borderRadius: '4px',
+              background: '#fff'
             }}
           >
-            <option value="VT323">VT323 Pixel Font</option>
-            <option value="Fira Code">Fira Code Mono</option>
-            <option value="Inter">Inter Sans</option>
+            <option value="VT323">Classic Mac Chicago (VT323)</option>
+            <option value="Fira Code">Monaco / Fira Code</option>
+            <option value="Inter">Geneva / Inter Body</option>
           </select>
         </div>
       </div>
 
       {/* Main 3-Pane Split View */}
-      <div style={{ display: 'grid', gridTemplateColumns: '160px 210px 1fr', gap: '0.75rem', flex: 1, minHeight: '320px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '150px 200px 1fr', gap: '0.75rem', flex: 1, minHeight: '340px' }}>
         {/* Pane 1: Folders Sidebar */}
         <div className="mac-group-box" style={{ padding: '0.4rem' }}>
-          <span className="mac-group-label">Folders</span>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginTop: '0.5rem' }}>
+          <span className="mac-group-label">System Folders</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginTop: '0.5rem' }}>
             {folders.map((f) => (
               <button
                 key={f}
@@ -159,7 +165,7 @@ export default function MacNotesApp() {
 
         {/* Pane 2: Notes Search & List */}
         <div className="mac-group-box" style={{ padding: '0.4rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-          <span className="mac-group-label">Notes ({filteredNotes.length})</span>
+          <span className="mac-group-label">Saved Notes ({filteredNotes.length})</span>
           <input
             type="text"
             value={searchQuery}
@@ -174,7 +180,7 @@ export default function MacNotesApp() {
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', overflowY: 'auto', flex: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', overflowY: 'auto', flex: 1, maxHeight: '250px' }}>
             {filteredNotes.map((n) => (
               <button
                 key={n.id}
@@ -193,15 +199,15 @@ export default function MacNotesApp() {
                 <div style={{ fontFamily: 'var(--font-mac-title)', fontSize: '1.1rem', fontWeight: 'bold', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {n.title || 'Untitled Note'}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#666' }}>{n.date}</div>
+                <div style={{ fontSize: '0.75rem', color: '#555' }}>{n.date}</div>
               </button>
             ))}
           </div>
         </div>
 
         {/* Pane 3: Note Writing Pad Area */}
-        <div className="mac-group-box" style={{ background: '#fef3c7', display: 'flex', flexDirection: 'column' }}>
-          <span className="mac-group-label">Notes Pad — {activeNote.title}</span>
+        <div className="mac-group-box" style={{ background: '#fef3c7', display: 'flex', flexDirection: 'column', padding: '0.6rem' }}>
+          <span className="mac-group-label">Notepad Pad — {activeNote.title}</span>
 
           <textarea
             value={activeNote.content}
@@ -222,6 +228,12 @@ export default function MacNotesApp() {
               paddingTop: '0.5rem'
             }}
           />
+
+          {/* Real-time Status Counter Footer */}
+          <div style={{ borderTop: '1px solid #000', paddingTop: '0.3rem', marginTop: '0.4rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', color: '#444' }}>
+            <span>Words: <strong>{wordCount}</strong> • Chars: <strong>{charCount}</strong></span>
+            <span>Saved in LocalStorage ✓</span>
+          </div>
         </div>
       </div>
     </div>
