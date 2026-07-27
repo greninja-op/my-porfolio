@@ -341,6 +341,15 @@ export default function App() {
         onEmptyTrash={handleEmptyTrash}
         onOpenSpotlight={() => setSpotlightOpen(true)}
         onOpenLaunchpad={() => setLaunchpadOpen(true)}
+        volume={volume}
+        setVolume={setVolume}
+        monochromeMode={colorTheme === 'monochrome'}
+        toggleMonochrome={() => setColorTheme(colorTheme === 'monochrome' ? 'cyberpop' : 'monochrome')}
+        crtShader={crtShader}
+        setCrtShader={setCrtShader}
+        triggerScreensaver={() => setScreensaverActive(true)}
+        desktopPattern={desktopPattern}
+        setDesktopPattern={setDesktopPattern}
       />
 
       {/* Retro Desktop Widgets */}
@@ -451,7 +460,7 @@ export default function App() {
         {/* 3. Control Panels Theme & Audio Switcher */}
         <MacWindow
           id="control_panels"
-          title="🎛️ Control Panel — System Control Center"
+          title="⚙️ Settings — System Control Center"
           themeColor="var(--mac-pink)"
           isOpen={openWindows.control_panels}
           onClose={() => handleCloseApp('control_panels')}

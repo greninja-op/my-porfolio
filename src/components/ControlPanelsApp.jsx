@@ -55,7 +55,7 @@ export default function ControlPanelsApp({
     <div style={{ fontFamily: 'var(--font-mac-title)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {/* Header Banner */}
       <div style={{ borderBottom: '2px solid #000', paddingBottom: '0.6rem' }}>
-        <h2 style={{ fontSize: '1.75rem', color: '#000', lineHeight: 1 }}>🎛️ Control Panel — System Control Center</h2>
+        <h2 style={{ fontSize: '1.75rem', color: '#000', lineHeight: 1 }}>⚙️ Settings — System Control Center</h2>
         <span style={{ fontSize: '1.05rem', color: 'var(--mac-purple-dark)', fontWeight: 'bold' }}>
           Hardware Audio, Display Monitors, Desktop Themes & System Settings
         </span>
