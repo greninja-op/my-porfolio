@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MacMenuBar from './components/MacMenuBar';
 import DesktopIcons from './components/DesktopIcons';
+import DesktopWidgets from './components/DesktopWidgets';
 import MacWindow from './components/MacWindow';
 import MacControlStrip from './components/MacControlStrip';
 import AboutArjunApp from './components/AboutArjunApp';
@@ -205,6 +206,9 @@ export default function App() {
         onOpenLaunchpad={() => setLaunchpadOpen(true)}
       />
 
+      {/* Retro Desktop Widgets */}
+      <DesktopWidgets playSystemSound={playSystemSound} />
+
       {/* Desktop Icons */}
       <DesktopIcons onOpenApp={handleLaunchApp} onEmptyTrash={handleEmptyTrash} />
 
@@ -220,7 +224,7 @@ export default function App() {
           onClose={() => handleCloseApp('about')}
           onFocus={() => focusWindow('about')}
           zIndex={windowZIndices.about}
-          defaultPos={{ top: 40, left: 50 }}
+          defaultPos={{ top: 40, left: 300 }}
           defaultSize={{ width: 620, height: 430 }}
           icon=""
         >
@@ -236,7 +240,7 @@ export default function App() {
           onClose={() => handleCloseApp('macgit')}
           onFocus={() => focusWindow('macgit')}
           zIndex={windowZIndices.macgit}
-          defaultPos={{ top: 60, left: 140 }}
+          defaultPos={{ top: 60, left: 310 }}
           defaultSize={{ width: 740, height: 490 }}
           icon="🐙"
         >
@@ -252,7 +256,7 @@ export default function App() {
           onClose={() => handleCloseApp('notes')}
           onFocus={() => focusWindow('notes')}
           zIndex={windowZIndices.notes}
-          defaultPos={{ top: 75, left: 180 }}
+          defaultPos={{ top: 75, left: 320 }}
           defaultSize={{ width: 720, height: 470 }}
           icon="📝"
         >
