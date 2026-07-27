@@ -4,6 +4,11 @@ import DesktopIcons from './components/DesktopIcons';
 import MacWindow from './components/MacWindow';
 import MacControlStrip from './components/MacControlStrip';
 import AboutArjunApp from './components/AboutArjunApp';
+import AboutThisComputerApp from './components/AboutThisComputerApp';
+import TheChooserApp from './components/TheChooserApp';
+import ControlPanelsApp from './components/ControlPanelsApp';
+import ExtensionsManagerApp from './components/ExtensionsManagerApp';
+import SystemBombDialog from './components/SystemBombDialog';
 import ChronoLensApp from './components/ChronoLensApp';
 import MemoireApp from './components/MemoireApp';
 import NuvaultApp from './components/NuvaultApp';
@@ -19,6 +24,10 @@ export default function App() {
   const [openWindows, setOpenWindows] = useState({
     about: true,
     chronolens: true,
+    about_computer: false,
+    chooser: false,
+    control_panels: false,
+    extensions: false,
     memoire: false,
     nuvault: false,
     cfls: false,
@@ -33,6 +42,10 @@ export default function App() {
   const [windowZIndices, setWindowZIndices] = useState({
     about: 10,
     chronolens: 15,
+    about_computer: 12,
+    chooser: 14,
+    control_panels: 13,
+    extensions: 11,
     memoire: 12,
     nuvault: 14,
     cfls: 13,
@@ -44,8 +57,35 @@ export default function App() {
     puzzle: 20
   });
 
-  const [topZIndex, setTopZIndex] = useState(25);
+  const [topZIndex, setTopZIndex] = useState(30);
   const [soundMuted, setSoundMuted] = useState(false);
+  const [colorTheme, setColorTheme] = useState('cyberpop');
+  const [activeExtensions, setActiveExtensions] = useState([
+    'Python', 'OpenTelemetry', 'React', 'TypeScript', 'Go', 'WebCrypto', 'Docker'
+  ]);
+  const [bombOpen, setBombOpen] = useState(false);
+
+  // Web Audio Synthesizer (Clicks, Beeps, Trash Crinkles)
+  const playSystemSound = (freq = 800, duration = 0.08, type = 'square') => {
+    if (soundMuted) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) {
+      // Audio autoplay policy fallback
+    }
+  };
 
   const focusWindow = (id) => {
     setTopZIndex((prev) => prev + 1);
@@ -56,10 +96,15 @@ export default function App() {
   };
 
   const handleLaunchApp = (id) => {
+    playSystemSound(900, 0.08);
     if (id === 'closeAll') {
       setOpenWindows({
         about: false,
         chronolens: false,
+        about_computer: false,
+        chooser: false,
+        control_panels: false,
+        extensions: false,
         memoire: false,
         nuvault: false,
         cfls: false,
@@ -83,28 +128,136 @@ export default function App() {
   };
 
   const handleCloseApp = (id) => {
+    playSystemSound(600, 0.06);
     setOpenWindows((prev) => ({
       ...prev,
       [id]: false
     }));
   };
 
+  const toggleExtension = (extId) => {
+    playSystemSound(1000, 0.05);
+    setActiveExtensions((prev) =>
+      prev.includes(extId) ? prev.filter((item) => item !== extId) : [...prev, extId]
+    );
+  };
+
+  const resetExtensions = () => {
+    playSystemSound(1200, 0.1);
+    setActiveExtensions(['Python', 'OpenTelemetry', 'React', 'TypeScript', 'Go', 'WebCrypto', 'Docker']);
+  };
+
+  const handleEmptyTrash = () => {
+    playSystemSound(300, 0.25, 'sawtooth'); // Iconic paper crinkle sound simulation!
+    resetExtensions();
+    handleLaunchApp('closeAll');
+  };
+
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        overflow: 'hidden',
+        filter: colorTheme === 'monochrome' ? 'grayscale(100%) contrast(140%)' : 'none'
+      }}
+    >
       {/* Top System 7 Apple Menu Bar */}
       <MacMenuBar
         onOpenApp={handleLaunchApp}
         soundMuted={soundMuted}
         toggleSound={() => setSoundMuted(!soundMuted)}
+        onTriggerBomb={() => {
+          playSystemSound(200, 0.4, 'sawtooth');
+          setBombOpen(true);
+        }}
+        onEmptyTrash={handleEmptyTrash}
       />
 
       {/* Desktop Icons */}
-      <DesktopIcons onOpenApp={handleLaunchApp} />
+      <DesktopIcons onOpenApp={handleLaunchApp} onEmptyTrash={handleEmptyTrash} />
 
       {/* Desktop Workspace Viewport */}
       <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
 
-        {/* About Arjun Sabu System Info Window */}
+        {/* 1. About This Computer... App */}
+        <MacWindow
+          id="about_computer"
+          title=" About This Computer"
+          themeColor="var(--mac-purple)"
+          isOpen={openWindows.about_computer}
+          onClose={() => handleCloseApp('about_computer')}
+          onFocus={() => focusWindow('about_computer')}
+          zIndex={windowZIndices.about_computer}
+          defaultPos={{ top: 40, left: 60 }}
+          defaultSize={{ width: 620, height: 440 }}
+          icon=""
+        >
+          <AboutThisComputerApp />
+        </MacWindow>
+
+        {/* 2. The Chooser Network Hub App */}
+        <MacWindow
+          id="chooser"
+          title="📡 The Chooser — Network Hub"
+          themeColor="var(--mac-cyan)"
+          isOpen={openWindows.chooser}
+          onClose={() => handleCloseApp('chooser')}
+          onFocus={() => focusWindow('chooser')}
+          zIndex={windowZIndices.chooser}
+          defaultPos={{ top: 75, left: 120 }}
+          defaultSize={{ width: 640, height: 420 }}
+          icon="📡"
+        >
+          <TheChooserApp />
+        </MacWindow>
+
+        {/* 3. Control Panels Theme & Audio Switcher */}
+        <MacWindow
+          id="control_panels"
+          title="🎛️ Control Panel — Monitors & Audio"
+          themeColor="var(--mac-pink)"
+          isOpen={openWindows.control_panels}
+          onClose={() => handleCloseApp('control_panels')}
+          onFocus={() => focusWindow('control_panels')}
+          zIndex={windowZIndices.control_panels}
+          defaultPos={{ top: 90, left: 150 }}
+          defaultSize={{ width: 620, height: 430 }}
+          icon="🎛️"
+        >
+          <ControlPanelsApp
+            soundMuted={soundMuted}
+            toggleSound={() => setSoundMuted(!soundMuted)}
+            colorTheme={colorTheme}
+            changeTheme={setColorTheme}
+            playSystemSound={playSystemSound}
+          />
+        </MacWindow>
+
+        {/* 4. Extensions Manager Filter App */}
+        <MacWindow
+          id="extensions"
+          title="🧩 Extensions Manager — Tech Filters"
+          themeColor="var(--mac-lime)"
+          isOpen={openWindows.extensions}
+          onClose={() => handleCloseApp('extensions')}
+          onFocus={() => focusWindow('extensions')}
+          zIndex={windowZIndices.extensions}
+          defaultPos={{ top: 60, left: 100 }}
+          defaultSize={{ width: 640, height: 440 }}
+          icon="🧩"
+        >
+          <ExtensionsManagerApp
+            activeExtensions={activeExtensions}
+            toggleExtension={toggleExtension}
+            resetExtensions={resetExtensions}
+          />
+        </MacWindow>
+
+        {/* About Arjun Sabu Info Window */}
         <MacWindow
           id="about"
           title=" About Arjun Sabu (greninja-op)"
@@ -197,7 +350,7 @@ export default function App() {
           defaultSize={{ width: 700, height: 460 }}
           icon="📁"
         >
-          <ProjectsMacFinder />
+          <ProjectsMacFinder activeExtensions={activeExtensions} />
         </MacWindow>
 
         {/* Skills Control Panel Window */}
@@ -281,6 +434,15 @@ export default function App() {
         </MacWindow>
 
       </div>
+
+      {/* 5. System Error / Bomb Dialog Easter Egg */}
+      <SystemBombDialog
+        isOpen={bombOpen}
+        onRestart={() => {
+          playSystemSound(1000, 0.1);
+          setBombOpen(false);
+        }}
+      />
 
       {/* Bottom Macintosh Control Strip Taskbar */}
       <MacControlStrip

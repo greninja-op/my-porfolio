@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
 
-export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
+export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound, onTriggerBomb, onEmptyTrash }) {
   const [timeStr, setTimeStr] = useState('');
   const [activeMenu, setActiveMenu] = useState(null);
 
@@ -19,40 +19,45 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
     {
       name: '',
       items: [
-        { label: 'About Arjun Sabu', action: () => onOpenApp('hero') },
-        { label: 'System Properties', action: () => onOpenApp('skills') },
-        { label: 'Open Terminal.cli', action: () => onOpenApp('terminal') }
+        { label: 'About This Computer...', action: () => onOpenApp('about_computer') },
+        { label: 'About Arjun Sabu', action: () => onOpenApp('about') },
+        { label: 'The Chooser (Network Hub)', action: () => onOpenApp('chooser') },
+        { label: 'Control Panels (Themes)', action: () => onOpenApp('control_panels') },
+        { label: 'Desk Accessory: Calculator', action: () => onOpenApp('calculator') },
+        { label: 'Desk Accessory: Puzzle 15', action: () => onOpenApp('puzzle') }
       ]
     },
     {
       name: 'File',
       items: [
-        { label: 'New Project Window', action: () => onOpenApp('projects') },
-        { label: 'Open ChronoLens Lab', action: () => onOpenApp('sandbox') },
+        { label: 'Open Projects Finder', action: () => onOpenApp('projects') },
+        { label: 'Extensions Manager (Tech Filter)', action: () => onOpenApp('extensions') },
+        { label: 'Open Terminal.cli', action: () => onOpenApp('terminal') },
         { label: 'Close All Windows', action: () => onOpenApp('closeAll') }
+      ]
+    },
+    {
+      name: 'Edit',
+      items: [
+        { label: 'Copy Bio to Clipboard', action: () => { navigator.clipboard.writeText(personalInfo.bio); alert('Bio copied to clipboard!'); } },
+        { label: 'Open Mail Dialog', action: () => onOpenApp('contact') }
       ]
     },
     {
       name: 'Projects',
       items: [
-        { label: '1. ChronoLens (SigNoz Hackathon)', action: () => onOpenApp('chronolens') },
-        { label: '2. Memoire (AI Memory Graph)', action: () => onOpenApp('memoire') },
-        { label: '3. Nuvault (Cloud Vault)', action: () => onOpenApp('nuvault') },
-        { label: '4. CFLS (File Lock Sync)', action: () => onOpenApp('cfls') }
-      ]
-    },
-    {
-      name: 'Lab',
-      items: [
-        { label: 'Inject LLM Cost Spiral', action: () => onOpenApp('chaos_spiral') },
-        { label: 'Inject SLO Latency Spike', action: () => onOpenApp('chaos_slo') }
+        { label: '1. ChronoLens.app (SigNoz Winner)', action: () => onOpenApp('chronolens') },
+        { label: '2. Memoire.app (AI Memory Graph)', action: () => onOpenApp('memoire') },
+        { label: '3. Nuvault.app (Zero-Trust Vault)', action: () => onOpenApp('nuvault') },
+        { label: '4. CFLS.app (File Lock Sync)', action: () => onOpenApp('cfls') }
       ]
     },
     {
       name: 'Special',
       items: [
-        { label: 'Restart Macintosh', action: () => window.location.reload() },
-        { label: 'Empty Trash', action: () => alert('Trash emptied!') }
+        { label: 'Crash System 💣 (Easter Egg)', action: onTriggerBomb },
+        { label: 'Empty Trash 🗑️', action: onEmptyTrash },
+        { label: 'Restart Macintosh 🔄', action: () => window.location.reload() }
       ]
     }
   ];
@@ -66,9 +71,9 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 1rem',
+        padding: '0 0.8rem',
         fontFamily: 'var(--font-mac-title)',
-        fontSize: '1.25rem',
+        fontSize: '1.2rem',
         fontWeight: 'bold',
         position: 'fixed',
         top: 0,
@@ -89,10 +94,10 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
                 background: activeMenu === menu.name ? '#000000' : 'transparent',
                 color: activeMenu === menu.name ? '#ffffff' : '#000000',
                 border: 'none',
-                padding: '0.1rem 0.7rem',
+                padding: '0.1rem 0.6rem',
                 cursor: 'pointer',
                 fontFamily: 'var(--font-mac-title)',
-                fontSize: '1.25rem',
+                fontSize: '1.2rem',
                 fontWeight: 'bold',
                 borderRadius: '3px'
               }}
@@ -110,7 +115,7 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
                   background: '#ffffff',
                   border: '2px solid #000000',
                   boxShadow: '4px 4px 0px #000000',
-                  minWidth: '210px',
+                  minWidth: '240px',
                   display: 'flex',
                   flexDirection: 'column',
                   zIndex: 1001,
@@ -127,10 +132,10 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
                     style={{
                       background: 'transparent',
                       border: 'none',
-                      padding: '0.4rem 1rem',
+                      padding: '0.4rem 0.9rem',
                       textAlign: 'left',
                       fontFamily: 'var(--font-mac-title)',
-                      fontSize: '1.15rem',
+                      fontSize: '1.1rem',
                       color: '#000000',
                       cursor: 'pointer',
                       display: 'flex',
@@ -156,7 +161,7 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
       </div>
 
       {/* Right Apple OS Status Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: '#000000' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#000000' }}>
         <button
           onClick={toggleSound}
           title="Toggle System Sounds"
@@ -174,13 +179,12 @@ export default function MacMenuBar({ onOpenApp, soundMuted, toggleSound }) {
           style={{
             border: '1px solid #000',
             padding: '0 5px',
-            background: '#ffdb38',
+            background: 'var(--mac-yellow)',
             fontSize: '1rem'
           }}
         >
           {timeStr}
         </span>
-        <span style={{ fontSize: '1.2rem' }}>[?]</span>
       </div>
     </div>
   );
