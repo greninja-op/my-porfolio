@@ -90,7 +90,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
       {/* Top System 7 Apple Menu Bar */}
       <MacMenuBar
         onOpenApp={handleLaunchApp}
@@ -101,8 +101,8 @@ export default function App() {
       {/* Desktop Icons */}
       <DesktopIcons onOpenApp={handleLaunchApp} />
 
-      {/* Desktop Windows */}
-      <div style={{ position: 'relative', marginTop: '32px', width: '100%', height: 'calc(100vh - 66px)' }}>
+      {/* Desktop Workspace Viewport */}
+      <div style={{ position: 'relative', marginTop: '32px', width: '100vw', height: 'calc(100vh - 66px)', overflow: 'hidden' }}>
 
         {/* About Arjun Sabu System Info Window */}
         <MacWindow
@@ -113,8 +113,8 @@ export default function App() {
           onClose={() => handleCloseApp('about')}
           onFocus={() => focusWindow('about')}
           zIndex={windowZIndices.about}
-          defaultPos={{ top: 50, left: 60 }}
-          defaultSize={{ width: 680, height: 490 }}
+          defaultPos={{ top: 40, left: 50 }}
+          defaultSize={{ width: 620, height: 430 }}
           icon=""
         >
           <AboutArjunApp onOpenApp={handleLaunchApp} />
@@ -129,8 +129,8 @@ export default function App() {
           onClose={() => handleCloseApp('chronolens')}
           onFocus={() => focusWindow('chronolens')}
           zIndex={windowZIndices.chronolens}
-          defaultPos={{ top: 90, left: 160 }}
-          defaultSize={{ width: 760, height: 520 }}
+          defaultPos={{ top: 70, left: 140 }}
+          defaultSize={{ width: 660, height: 450 }}
           icon="⚡"
         >
           <ChronoLensApp />
@@ -145,8 +145,8 @@ export default function App() {
           onClose={() => handleCloseApp('memoire')}
           onFocus={() => focusWindow('memoire')}
           zIndex={windowZIndices.memoire}
-          defaultPos={{ top: 110, left: 180 }}
-          defaultSize={{ width: 740, height: 500 }}
+          defaultPos={{ top: 85, left: 160 }}
+          defaultSize={{ width: 660, height: 450 }}
           icon="🧠"
         >
           <MemoireApp />
@@ -161,8 +161,8 @@ export default function App() {
           onClose={() => handleCloseApp('nuvault')}
           onFocus={() => focusWindow('nuvault')}
           zIndex={windowZIndices.nuvault}
-          defaultPos={{ top: 130, left: 200 }}
-          defaultSize={{ width: 720, height: 480 }}
+          defaultPos={{ top: 100, left: 180 }}
+          defaultSize={{ width: 640, height: 430 }}
           icon="🔐"
         >
           <NuvaultApp />
@@ -177,8 +177,8 @@ export default function App() {
           onClose={() => handleCloseApp('cfls')}
           onFocus={() => focusWindow('cfls')}
           zIndex={windowZIndices.cfls}
-          defaultPos={{ top: 150, left: 220 }}
-          defaultSize={{ width: 740, height: 500 }}
+          defaultPos={{ top: 115, left: 200 }}
+          defaultSize={{ width: 660, height: 440 }}
           icon="🔒"
         >
           <CFLSApp />
@@ -193,8 +193,8 @@ export default function App() {
           onClose={() => handleCloseApp('projects')}
           onFocus={() => focusWindow('projects')}
           zIndex={windowZIndices.projects}
-          defaultPos={{ top: 80, left: 120 }}
-          defaultSize={{ width: 780, height: 510 }}
+          defaultPos={{ top: 60, left: 100 }}
+          defaultSize={{ width: 700, height: 460 }}
           icon="📁"
         >
           <ProjectsMacFinder />
@@ -209,8 +209,8 @@ export default function App() {
           onClose={() => handleCloseApp('skills')}
           onFocus={() => focusWindow('skills')}
           zIndex={windowZIndices.skills}
-          defaultPos={{ top: 120, left: 140 }}
-          defaultSize={{ width: 720, height: 480 }}
+          defaultPos={{ top: 95, left: 130 }}
+          defaultSize={{ width: 660, height: 440 }}
           icon="🎛️"
         >
           <SkillsMacControlPanel />
@@ -225,8 +225,8 @@ export default function App() {
           onClose={() => handleCloseApp('terminal')}
           onFocus={() => focusWindow('terminal')}
           zIndex={windowZIndices.terminal}
-          defaultPos={{ top: 140, left: 240 }}
-          defaultSize={{ width: 680, height: 450 }}
+          defaultPos={{ top: 110, left: 220 }}
+          defaultSize={{ width: 620, height: 420 }}
           icon="💻"
         >
           <TerminalMac />
@@ -241,8 +241,8 @@ export default function App() {
           onClose={() => handleCloseApp('contact')}
           onFocus={() => focusWindow('contact')}
           zIndex={windowZIndices.contact}
-          defaultPos={{ top: 100, left: 160 }}
-          defaultSize={{ width: 620, height: 460 }}
+          defaultPos={{ top: 80, left: 150 }}
+          defaultSize={{ width: 580, height: 420 }}
           icon="✉️"
         >
           <ContactMacDialog />
@@ -257,8 +257,8 @@ export default function App() {
           onClose={() => handleCloseApp('calculator')}
           onFocus={() => focusWindow('calculator')}
           zIndex={windowZIndices.calculator}
-          defaultPos={{ top: 160, left: 300 }}
-          defaultSize={{ width: 280, height: 380 }}
+          defaultPos={{ top: 130, left: 260 }}
+          defaultSize={{ width: 260, height: 360 }}
           icon="🧮"
         >
           <MacCalculatorApp />
@@ -273,8 +273,8 @@ export default function App() {
           onClose={() => handleCloseApp('puzzle')}
           onFocus={() => focusWindow('puzzle')}
           zIndex={windowZIndices.puzzle}
-          defaultPos={{ top: 180, left: 340 }}
-          defaultSize={{ width: 280, height: 360 }}
+          defaultPos={{ top: 145, left: 290 }}
+          defaultSize={{ width: 260, height: 340 }}
           icon="🧩"
         >
           <MacPuzzleApp />

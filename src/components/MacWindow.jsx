@@ -9,8 +9,8 @@ export default function MacWindow({
   onFocus,
   zIndex = 10,
   children,
-  defaultPos = { top: 70, left: 100 },
-  defaultSize = { width: 720, height: 480 },
+  defaultPos = { top: 60, left: 80 },
+  defaultSize = { width: 680, height: 460 },
   icon = '📁'
 }) {
   const [pos, setPos] = useState(defaultPos);
@@ -44,15 +44,15 @@ export default function MacWindow({
         const dx = e.clientX - dragStart.current.x;
         const dy = e.clientY - dragStart.current.y;
         setPos({
-          top: Math.max(32, dragStart.current.top + dy),
-          left: Math.max(10, dragStart.current.left + dx)
+          top: Math.max(32, Math.min(window.innerHeight - 100, dragStart.current.top + dy)),
+          left: Math.max(10, Math.min(window.innerWidth - 100, dragStart.current.left + dx))
         });
       } else if (isResizing) {
         const dw = e.clientX - resizeStart.current.x;
         const dh = e.clientY - resizeStart.current.y;
         setSize({
-          width: Math.max(380, resizeStart.current.width + dw),
-          height: Math.max(260, resizeStart.current.height + dh)
+          width: Math.max(340, resizeStart.current.width + dw),
+          height: Math.max(220, resizeStart.current.height + dh)
         });
       }
     };
@@ -98,14 +98,15 @@ export default function MacWindow({
         top: isMaximized ? '32px' : `${pos.top}px`,
         left: isMaximized ? '0px' : `${pos.left}px`,
         width: isMaximized ? '100vw' : `${size.width}px`,
-        height: isMaximized ? 'calc(100vh - 32px)' : `${size.height}px`,
+        height: isMaximized ? 'calc(100vh - 66px)' : `${size.height}px`,
+        maxHeight: 'calc(100vh - 66px)',
         zIndex: zIndex,
         userSelect: 'none',
         display: 'flex',
         flexDirection: 'column',
         boxShadow: 'var(--mac-shadow-lg)',
         transition: isDragging || isResizing ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), width 0.2s ease, height 0.2s ease',
-        animation: 'macWinOpen 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
+        animation: 'macWinOpen 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28)'
       }}
     >
       {/* System 7 Pinstripe Titlebar */}
@@ -149,16 +150,8 @@ export default function MacWindow({
         <div style={{ width: '32px' }} />
       </div>
 
-      {/* Window Body Container */}
-      <div
-        style={{
-          flex: 1,
-          padding: '1.25rem',
-          background: '#ffffff',
-          overflowY: 'auto',
-          position: 'relative'
-        }}
-      >
+      {/* Window Inner Body Container */}
+      <div className="mac-window-body">
         {children}
       </div>
 
@@ -189,7 +182,7 @@ export default function MacWindow({
 
       <style>{`
         @keyframes macWinOpen {
-          from { transform: scale(0.92); opacity: 0; }
+          from { transform: scale(0.94); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
       `}</style>
