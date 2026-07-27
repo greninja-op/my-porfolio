@@ -25,6 +25,13 @@ export default function MacWindow({
 
   const isMobile = window.innerWidth <= 768;
 
+  // Crucial Bug Fix: Whenever window receives focus or isOpen changes, un-minimize automatically!
+  useEffect(() => {
+    if (isOpen) {
+      setIsMinimized(false);
+    }
+  }, [isOpen, zIndex]);
+
   if (!isOpen || isMinimized) return null;
 
   // Drag Handlers
