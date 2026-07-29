@@ -49,18 +49,18 @@ export default function ContactFooterSection() {
         {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: 'var(--card-bg, #ffffff)',
-            border: '2px solid var(--border-subtle, #cbd5e1)',
+            background: '#0f172a',
+            border: '2px solid #1e293b',
             borderRadius: '16px',
             overflow: 'hidden',
-            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.08)'
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
           }}
         >
           {/* OS RETRO TITLE BAR HEADER */}
           <div
             style={{
-              background: 'var(--code-bg, #f1f5f9)',
-              borderBottom: '2px solid var(--border-subtle, #cbd5e1)',
+              background: '#1e293b',
+              borderBottom: '2px solid #334155',
               padding: '0.65rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
@@ -78,20 +78,20 @@ export default function ContactFooterSection() {
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: '0.82rem',
                 fontWeight: 800,
-                color: 'var(--text-primary, #0f172a)',
+                color: '#ffffff',
                 letterSpacing: '0.05em'
               }}
             >
               OUTREACH_TERMINAL.APP — System 7.5
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
               [PORT 443]
             </div>
           </div>
 
           {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2rem 1.75rem' }}>
+          <div style={{ padding: '2.25rem 2rem' }}>
             
             {/* Section Header */}
             <div style={{ marginBottom: '2rem' }}>
@@ -102,7 +102,7 @@ export default function ContactFooterSection() {
                   letterSpacing: '0.1em',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono, monospace)',
-                  color: 'var(--accent-primary, #06b6d4)',
+                  color: '#38bdf8',
                   marginBottom: '0.3rem'
                 }}
               >
@@ -114,14 +114,14 @@ export default function ContactFooterSection() {
                   fontFamily: 'var(--font-heading, system-ui, sans-serif)',
                   fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
                   fontWeight: 800,
-                  color: 'var(--text-primary, #0f172a)',
+                  color: '#ffffff',
                   letterSpacing: '-0.025em'
                 }}
               >
                 Direct Contact & Social Media Profiles
               </h2>
 
-              <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1rem', marginTop: '0.3rem' }}>
+              <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.3rem' }}>
                 Reach out directly via email, drop a note below, or connect across social channels.
               </p>
             </div>
@@ -135,15 +135,15 @@ export default function ContactFooterSection() {
                 flexWrap: 'wrap',
                 gap: '1rem',
                 padding: '1rem 1.25rem',
-                background: 'var(--code-bg, #f8fafc)',
-                border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                background: '#1e293b',
+                border: '1.5px solid #334155',
                 borderRadius: '12px',
                 marginBottom: '2rem'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <IconMail size={20} color="var(--accent-primary, #06b6d4)" />
-                <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary, #0f172a)' }}>
+                <IconMail size={20} color="#38bdf8" />
+                <span style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.95rem', fontWeight: 700, color: '#ffffff' }}>
                   {email}
                 </span>
               </div>
@@ -153,7 +153,7 @@ export default function ContactFooterSection() {
                 style={{
                   padding: '0.5rem 1rem',
                   borderRadius: '8px',
-                  background: copied ? '#22c55e' : 'var(--text-primary, #0f172a)',
+                  background: copied ? '#22c55e' : '#06b6d4',
                   color: '#ffffff',
                   fontWeight: 700,
                   fontSize: '0.82rem',
@@ -186,13 +186,13 @@ export default function ContactFooterSection() {
               {/* Contact Form Container */}
               <div
                 style={{
-                  background: 'var(--code-bg, #f8fafc)',
-                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  background: '#1e293b',
+                  border: '1.5px solid #334155',
                   borderRadius: '14px',
                   padding: '1.5rem'
                 }}
               >
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '1rem' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem' }}>
                   Send a Direct Message
                 </h3>
 
@@ -201,9 +201,9 @@ export default function ContactFooterSection() {
                     style={{
                       padding: '1.25rem',
                       borderRadius: '10px',
-                      background: 'rgba(34, 197, 94, 0.1)',
-                      border: '1px solid rgba(34, 197, 94, 0.3)',
-                      color: '#166534',
+                      background: 'rgba(34, 197, 94, 0.15)',
+                      border: '1px solid rgba(34, 197, 94, 0.35)',
+                      color: '#4ade80',
                       fontWeight: 700,
                       fontSize: '0.9rem',
                       textAlign: 'center'
@@ -214,7 +214,7 @@ export default function ContactFooterSection() {
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary, #64748b)', marginBottom: '0.25rem' }}>
+                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#94a3b8', marginBottom: '0.25rem' }}>
                         Your Name
                       </label>
                       <input
@@ -227,9 +227,9 @@ export default function ContactFooterSection() {
                           width: '100%',
                           padding: '0.65rem 0.85rem',
                           borderRadius: '8px',
-                          border: '1px solid var(--border-subtle, #cbd5e1)',
-                          background: 'var(--card-bg, #ffffff)',
-                          color: 'var(--text-primary, #0f172a)',
+                          border: '1px solid #334155',
+                          background: '#0f172a',
+                          color: '#ffffff',
                           fontSize: '0.88rem',
                           outline: 'none'
                         }}
@@ -237,7 +237,7 @@ export default function ContactFooterSection() {
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary, #64748b)', marginBottom: '0.25rem' }}>
+                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#94a3b8', marginBottom: '0.25rem' }}>
                         Email Address
                       </label>
                       <input
@@ -250,9 +250,9 @@ export default function ContactFooterSection() {
                           width: '100%',
                           padding: '0.65rem 0.85rem',
                           borderRadius: '8px',
-                          border: '1px solid var(--border-subtle, #cbd5e1)',
-                          background: 'var(--card-bg, #ffffff)',
-                          color: 'var(--text-primary, #0f172a)',
+                          border: '1px solid #334155',
+                          background: '#0f172a',
+                          color: '#ffffff',
                           fontSize: '0.88rem',
                           outline: 'none'
                         }}
@@ -260,7 +260,7 @@ export default function ContactFooterSection() {
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary, #64748b)', marginBottom: '0.25rem' }}>
+                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#94a3b8', marginBottom: '0.25rem' }}>
                         Message
                       </label>
                       <textarea
@@ -273,9 +273,9 @@ export default function ContactFooterSection() {
                           width: '100%',
                           padding: '0.65rem 0.85rem',
                           borderRadius: '8px',
-                          border: '1px solid var(--border-subtle, #cbd5e1)',
-                          background: 'var(--card-bg, #ffffff)',
-                          color: 'var(--text-primary, #0f172a)',
+                          border: '1px solid #334155',
+                          background: '#0f172a',
+                          color: '#ffffff',
                           fontSize: '0.88rem',
                           outline: 'none',
                           resize: 'vertical'
@@ -288,7 +288,7 @@ export default function ContactFooterSection() {
                       style={{
                         padding: '0.75rem',
                         borderRadius: '8px',
-                        background: 'var(--accent-primary, #06b6d4)',
+                        background: '#06b6d4',
                         color: '#ffffff',
                         fontWeight: 800,
                         fontSize: '0.88rem',
@@ -308,8 +308,8 @@ export default function ContactFooterSection() {
               {/* Social Media Links Container */}
               <div
                 style={{
-                  background: 'var(--code-bg, #f8fafc)',
-                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  background: '#1e293b',
+                  border: '1.5px solid #334155',
                   borderRadius: '14px',
                   padding: '1.5rem',
                   display: 'flex',
@@ -318,7 +318,7 @@ export default function ContactFooterSection() {
                 }}
               >
                 <div>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '1rem' }}>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem' }}>
                     Connect Across Channels
                   </h3>
 
@@ -337,27 +337,27 @@ export default function ContactFooterSection() {
                             justifyContent: 'space-between',
                             padding: '0.75rem 1rem',
                             borderRadius: '10px',
-                            background: 'var(--card-bg, #ffffff)',
-                            border: '1px solid var(--border-subtle, #e2e8f0)',
-                            color: 'var(--text-primary, #0f172a)',
+                            background: '#0f172a',
+                            border: '1px solid #334155',
+                            color: '#ffffff',
                             textDecoration: 'none',
                             transition: 'transform 0.15s ease, border-color 0.15s ease'
                           }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateX(4px)';
-                            e.currentTarget.style.borderColor = 'var(--accent-primary, #06b6d4)';
+                            e.currentTarget.style.borderColor = '#38bdf8';
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'translateX(0px)';
-                            e.currentTarget.style.borderColor = 'var(--border-subtle, #e2e8f0)';
+                            e.currentTarget.style.borderColor = '#334155';
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                            <Icon size={18} color="var(--accent-primary, #06b6d4)" />
+                            <Icon size={18} color="#38bdf8" />
                             <span style={{ fontWeight: 700, fontSize: '0.88rem' }}>{s.name}</span>
                           </div>
 
-                          <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)' }}>
+                          <span style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', color: '#94a3b8' }}>
                             {s.handle}
                           </span>
                         </a>
@@ -370,9 +370,9 @@ export default function ContactFooterSection() {
                   style={{
                     marginTop: '1.5rem',
                     paddingTop: '1rem',
-                    borderTop: '1px solid var(--border-subtle, #e2e8f0)',
+                    borderTop: '1px solid #334155',
                     fontSize: '0.78rem',
-                    color: 'var(--text-secondary, #64748b)',
+                    color: '#94a3b8',
                     fontFamily: 'var(--font-mono, monospace)',
                     display: 'flex',
                     justifyContent: 'space-between'

@@ -11,60 +11,47 @@ import { IconGithub, IconLinkedin, IconMail, IconArrowRight, IconSparkles } from
 export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
   const [showResumeModal, setShowResumeModal] = useState(false);
 
-  // Theme & Token State
-  const [theme, setTheme] = useState(() => localStorage.getItem('recruiter_theme') || 'dark');
-  const [accentColor, setAccentColor] = useState(() => localStorage.getItem('recruiter_accent') || 'cyan');
-  const [fontStyle, setFontStyle] = useState(() => localStorage.getItem('recruiter_font') || 'sans');
-  const [borderRadius, setBorderRadius] = useState(() => localStorage.getItem('recruiter_radius') || 'smooth');
+  // Default to Dark CyberPop OS Canvas
+  const [theme, setTheme] = useState('dark');
+  const [accentColor, setAccentColor] = useState('cyan');
+  const [fontStyle, setFontStyle] = useState('sans');
 
-  useEffect(() => {
-    localStorage.setItem('recruiter_theme', theme);
-    localStorage.setItem('recruiter_accent', accentColor);
-    localStorage.setItem('recruiter_font', fontStyle);
-    localStorage.setItem('recruiter_radius', borderRadius);
-  }, [theme, accentColor, fontStyle, borderRadius]);
-
-  // Compute CSS Variable Maps
-  const accentHex = accentColor === 'violet' ? '#8b5cf6' : accentColor === 'emerald' ? '#10b981' : accentColor === 'rose' ? '#f43f5e' : '#06b6d4';
-  const fontFamilyCss = fontStyle === 'mono' ? '"Fira Code", "Courier New", monospace' : fontStyle === 'geometric' ? '"Outfit", "Trebuchet MS", sans-serif' : 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-  const radiusCss = borderRadius === 'sharp' ? '4px' : borderRadius === 'pill' ? '24px' : '14px';
-
-  const isDark = theme === 'dark';
+  const accentHex = '#06b6d4';
+  const fontFamilyCss = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
 
   return (
     <div
       style={{
         minHeight: '100vh',
-        background: isDark ? '#0b0f19' : '#f8fafc',
-        color: isDark ? '#f8fafc' : '#0f172a',
+        background: '#0b0f19',
+        color: '#f8fafc',
         fontFamily: fontFamilyCss,
         lineHeight: 1.5,
-        transition: 'background 0.3s ease, color 0.3s ease',
         '--accent-primary': accentHex,
-        '--text-primary': isDark ? '#ffffff' : '#0f172a',
-        '--text-secondary': isDark ? '#94a3b8' : '#475569',
-        '--card-bg': isDark ? '#111827' : '#ffffff',
-        '--code-bg': isDark ? '#0f172a' : '#f1f5f9',
-        '--border-subtle': isDark ? '#1f2937' : '#e2e8f0',
-        '--pill-bg': isDark ? '#1e293b' : '#e2e8f0',
-        '--badge-bg': isDark ? 'rgba(6, 182, 212, 0.15)' : 'rgba(6, 182, 212, 0.15)',
-        '--badge-border': isDark ? 'rgba(6, 182, 212, 0.35)' : 'rgba(6, 182, 212, 0.4)',
+        '--text-primary': '#ffffff',
+        '--text-secondary': '#94a3b8',
+        '--card-bg': '#0f172a',
+        '--code-bg': '#1e293b',
+        '--border-subtle': '#334155',
+        '--pill-bg': '#1e293b',
+        '--badge-bg': 'rgba(6, 182, 212, 0.15)',
+        '--badge-border': 'rgba(6, 182, 212, 0.35)',
         '--btn-bg-primary': accentHex,
-        '--btn-bg-secondary': isDark ? '#1e293b' : '#e2e8f0',
-        '--ui-radius': radiusCss,
-        '--footer-bg': isDark ? '#0f172a' : '#f1f5f9'
+        '--btn-bg-secondary': '#1e293b',
+        '--ui-radius': '14px',
+        '--footer-bg': '#0f172a'
       }}
     >
-      {/* Explicit Top Header Bar with Desktop Navigation */}
+      {/* RETRO CYBERPOP OS TOP NAVIGATION BAR */}
       <header
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 500,
-          background: isDark ? '#0a0e17' : '#ffffff',
-          borderBottom: '1px solid var(--border-subtle)',
-          padding: '0.85rem 1.5rem',
-          transition: 'background 0.3s ease'
+          background: '#0f172a',
+          borderBottom: '2px solid #1e293b',
+          padding: '0.75rem 1.5rem',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)'
         }}
       >
         <div
@@ -85,7 +72,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
               alignItems: 'center',
               gap: '0.75rem',
               textDecoration: 'none',
-              color: 'var(--text-primary)'
+              color: '#ffffff'
             }}
           >
             <div
@@ -93,214 +80,113 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
                 width: '38px',
                 height: '38px',
                 borderRadius: '10px',
-                background: accentHex,
+                background: '#06b6d4',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
-                fontSize: '1.2rem',
-                fontWeight: 'bold',
-                boxShadow: `0 0 15px ${accentHex}55`
+                fontWeight: 900,
+                fontSize: '1.1rem',
+                boxShadow: '0 0 12px rgba(6, 186, 212, 0.4)'
               }}
             >
-              👔
+              ⚡
             </div>
+
             <div>
-              <div style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                {personalInfo.name}
-                <span
-                  style={{
-                    fontSize: '0.72rem',
-                    padding: '0.15rem 0.5rem',
-                    borderRadius: '9999px',
-                    background: 'var(--badge-bg)',
-                    border: '1px solid var(--badge-border)',
-                    color: accentHex,
-                    fontWeight: 700
-                  }}
-                >
-                  Recruiter Mode
-                </span>
+              <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#ffffff' }}>
+                Arjun Sabu
+              </div>
+              <div style={{ fontSize: '0.72rem', color: '#06b6d4', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                @greninja-op • SRE & AI Systems
               </div>
             </div>
           </a>
 
-          {/* Explicit Desktop Navigation Links */}
+          {/* Desktop Nav Links */}
           <nav
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '1.5rem'
+              gap: '1.5rem',
+              fontSize: '0.88rem',
+              fontWeight: 600
             }}
-            className="recruiter-nav-links"
           >
-            <a href="#github-profile" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <a href="#github" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
               GitHub Profile
             </a>
-            <a href="#tech-stack" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <a href="#tech-stack" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
               Languages & Tools
             </a>
-            <a href="#projects-showcase" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <a href="#projects" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
               Projects
             </a>
-            <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <a href="#contact" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
               Contact & Socials
             </a>
           </nav>
 
-          {/* Header Action Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            {/* Theme Toggle Button */}
-            <button
-              onClick={() => setTheme(isDark ? 'light' : 'dark')}
-              title="Toggle Light / Dark Mode"
-              style={{
-                padding: '0.45rem 0.75rem',
-                borderRadius: '8px',
-                background: 'var(--btn-bg-secondary)',
-                border: '1px solid var(--border-subtle)',
-                color: 'var(--text-primary)',
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                fontWeight: 600
-              }}
-            >
-              {isDark ? '☀️ Light' : '🌙 Dark'}
-            </button>
-
-            {/* View Resume CTA */}
+          {/* Action CTAs */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
               onClick={() => setShowResumeModal(true)}
               style={{
-                padding: '0.45rem 0.85rem',
+                padding: '0.5rem 1rem',
                 borderRadius: '8px',
-                background: 'var(--btn-bg-secondary)',
-                border: '1px solid var(--border-subtle)',
-                color: 'var(--text-primary)',
-                fontWeight: 600,
-                fontSize: '0.85rem',
+                background: '#1e293b',
+                border: '1px solid #334155',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: '0.82rem',
                 cursor: 'pointer'
               }}
             >
               📄 Resume
             </button>
 
-            {/* Launch OS Button */}
             <button
               onClick={onSwitchToOS}
               style={{
-                padding: '0.45rem 0.95rem',
+                padding: '0.5rem 1.1rem',
                 borderRadius: '8px',
-                background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
+                background: 'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)',
                 border: 'none',
                 color: '#ffffff',
-                fontWeight: 700,
-                fontSize: '0.85rem',
+                fontWeight: 800,
+                fontSize: '0.82rem',
                 cursor: 'pointer',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
-                boxShadow: '0 4px 12px rgba(139, 92, 246, 0.3)'
+                boxShadow: '0 4px 12px rgba(124, 58, 237, 0.4)'
               }}
             >
-              🖥️ OS Playground <IconArrowRight size={15} />
-            </button>
-
-            {/* Change Intent Mode */}
-            <button
-              onClick={onOpenGateway}
-              title="Change Experience Mode"
-              style={{
-                padding: '0.45rem 0.6rem',
-                borderRadius: '8px',
-                background: 'transparent',
-                border: '1px solid var(--border-subtle)',
-                color: 'var(--text-secondary)',
-                fontSize: '0.85rem',
-                cursor: 'pointer'
-              }}
-            >
-              🔄
+              🖥️ OS Playground ↗
             </button>
           </div>
         </div>
       </header>
 
-      {/* Recruiter Layout Core Showcase Sections */}
+      {/* RECRUITER PORTFOLIO CONTENT SECTIONS */}
       <main>
-        {/* Intro Hero Section */}
         <HeroRecruiter
           onSwitchToOS={onSwitchToOS}
           onOpenResume={() => setShowResumeModal(true)}
         />
 
-        {/* Section A: GitHub Profile Reference & 365-Day Contribution Heatmap Grid */}
         <GithubProfileSection />
 
-        {/* Section B: Languages Known & Tools Matrix */}
         <TechStackSection />
 
-        {/* Section C: Beautiful Project Showcase Layer (Structured Mockup Data) */}
         <ProjectsShowcaseSection />
 
-        {/* Section D: Direct Contact & Rich Social Media Footer (Instagram, GitHub, LinkedIn, Twitter, Discord) */}
         <ContactFooterSection />
       </main>
 
-      {/* Resume PDF Viewer Modal */}
+      {/* Resume Modal */}
       {showResumeModal && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 10000,
-            background: 'rgba(0,0,0,0.85)',
-            backdropFilter: 'blur(10px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '1.5rem'
-          }}
-        >
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '850px',
-              maxHeight: '90vh',
-              overflowY: 'auto',
-              background: '#ffffff',
-              color: '#111111',
-              borderRadius: '16px',
-              padding: '2rem',
-              position: 'relative',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-            }}
-          >
-            <button
-              onClick={() => setShowResumeModal(false)}
-              style={{
-                position: 'sticky',
-                top: 0,
-                float: 'right',
-                background: '#000000',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '50%',
-                width: '32px',
-                height: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                zIndex: 20
-              }}
-            >
-              ✕
-            </button>
-            <ResumeMacWindow />
-          </div>
-        </div>
+        <ResumeMacWindow onClose={() => setShowResumeModal(false)} />
       )}
     </div>
   );

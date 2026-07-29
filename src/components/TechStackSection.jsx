@@ -78,18 +78,18 @@ export default function TechStackSection() {
         {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: 'var(--card-bg, #ffffff)',
-            border: '2px solid var(--border-subtle, #cbd5e1)',
+            background: '#0f172a',
+            border: '2px solid #1e293b',
             borderRadius: '16px',
             overflow: 'hidden',
-            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.08)'
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
           }}
         >
           {/* OS RETRO TITLE BAR HEADER */}
           <div
             style={{
-              background: 'var(--code-bg, #f1f5f9)',
-              borderBottom: '2px solid var(--border-subtle, #cbd5e1)',
+              background: '#1e293b',
+              borderBottom: '2px solid #334155',
               padding: '0.65rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
@@ -107,20 +107,20 @@ export default function TechStackSection() {
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: '0.82rem',
                 fontWeight: 800,
-                color: 'var(--text-primary, #0f172a)',
+                color: '#ffffff',
                 letterSpacing: '0.05em'
               }}
             >
               TECH_STACK_TRAIN_MARQUEE.SYS — System 7.5
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
               [SPEED: CONSTANT]
             </div>
           </div>
 
           {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2rem 1.75rem' }}>
+          <div style={{ padding: '2.25rem 2rem' }}>
             
             {/* Section Header */}
             <div style={{ marginBottom: '2rem' }}>
@@ -131,7 +131,7 @@ export default function TechStackSection() {
                   letterSpacing: '0.1em',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono, monospace)',
-                  color: 'var(--accent-primary, #06b6d4)',
+                  color: '#38bdf8',
                   marginBottom: '0.3rem'
                 }}
               >
@@ -143,14 +143,14 @@ export default function TechStackSection() {
                   fontFamily: 'var(--font-heading, system-ui, sans-serif)',
                   fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
                   fontWeight: 800,
-                  color: 'var(--text-primary, #0f172a)',
+                  color: '#ffffff',
                   letterSpacing: '-0.025em'
                 }}
               >
                 Languages Known & Engineering Toolset
               </h2>
 
-              <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1rem', marginTop: '0.3rem' }}>
+              <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.3rem' }}>
                 Hover over any technology icon to pause scrolling and reveal its name tooltip!
               </p>
             </div>
@@ -180,8 +180,8 @@ export default function TechStackSection() {
                           width: '56px',
                           height: '56px',
                           borderRadius: '14px',
-                          background: 'var(--code-bg, #f8fafc)',
-                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid var(--border-subtle, #e2e8f0)',
+                          background: '#1e293b',
+                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid #334155',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
@@ -261,8 +261,8 @@ export default function TechStackSection() {
                           width: '56px',
                           height: '56px',
                           borderRadius: '14px',
-                          background: 'var(--code-bg, #f8fafc)',
-                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid var(--border-subtle, #e2e8f0)',
+                          background: '#1e293b',
+                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid #334155',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',

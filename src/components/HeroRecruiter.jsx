@@ -7,7 +7,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
     <section
       id="hero"
       style={{
-        padding: '3.5rem 0 2rem 0',
+        padding: '3rem 0 2rem 0',
         position: 'relative'
       }}
     >
@@ -16,18 +16,18 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
         {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: 'var(--card-bg, #ffffff)',
-            border: '2px solid var(--border-subtle, #cbd5e1)',
+            background: '#0f172a',
+            border: '2px solid #1e293b',
             borderRadius: '16px',
             overflow: 'hidden',
-            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.08)'
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
           }}
         >
           {/* OS RETRO TITLE BAR HEADER */}
           <div
             style={{
-              background: 'var(--code-bg, #f1f5f9)',
-              borderBottom: '2px solid var(--border-subtle, #cbd5e1)',
+              background: '#1e293b',
+              borderBottom: '2px solid #334155',
               padding: '0.65rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
@@ -45,20 +45,20 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: '0.82rem',
                 fontWeight: 800,
-                color: 'var(--text-primary, #0f172a)',
+                color: '#ffffff',
                 letterSpacing: '0.05em'
               }}
             >
               ARCHITECT_PORTFOLIO.SYS — System 7.5
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
               [RECRUITER_MODE]
             </div>
           </div>
 
           {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2rem 1.75rem' }}>
+          <div style={{ padding: '2.25rem 2rem' }}>
             
             {/* Status Badge */}
             <div
@@ -68,9 +68,9 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 gap: '0.5rem',
                 padding: '0.35rem 0.85rem',
                 borderRadius: '20px',
-                background: 'rgba(34, 197, 94, 0.1)',
-                border: '1px solid rgba(34, 197, 94, 0.25)',
-                color: '#166534',
+                background: 'rgba(34, 197, 94, 0.15)',
+                border: '1px solid rgba(34, 197, 94, 0.35)',
+                color: '#4ade80',
                 fontSize: '0.82rem',
                 fontWeight: 700,
                 fontFamily: 'var(--font-mono, monospace)',
@@ -83,7 +83,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                   height: '7px',
                   borderRadius: '50%',
                   background: '#22c55e',
-                  boxShadow: '0 0 6px #22c55e'
+                  boxShadow: '0 0 8px #22c55e'
                 }}
               />
               Agents of SigNoz Winner • Open for High-Impact Engineering Roles
@@ -95,14 +95,14 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 fontFamily: 'var(--font-heading, system-ui, sans-serif)',
                 fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
                 fontWeight: 800,
-                color: 'var(--text-primary, #0f172a)',
+                color: '#ffffff',
                 lineHeight: 1.15,
                 marginBottom: '1rem',
                 letterSpacing: '-0.025em'
               }}
             >
               Full-Stack Engineer Specializing in{' '}
-              <span style={{ color: '#0284c7' }}>
+              <span style={{ color: '#38bdf8' }}>
                 AI Systems, Telemetry & Distributed Infrastructure
               </span>
             </h1>
@@ -111,7 +111,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
             <p
               style={{
                 fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-                color: 'var(--text-secondary, #64748b)',
+                color: '#94a3b8',
                 lineHeight: 1.6,
                 maxWidth: '780px',
                 marginBottom: '2rem',
@@ -139,7 +139,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 style={{
                   padding: '0.7rem 1.3rem',
                   borderRadius: '10px',
-                  background: '#0284c7',
+                  background: '#06b6d4',
                   color: '#ffffff',
                   fontWeight: 700,
                   fontSize: '0.9rem',
@@ -147,7 +147,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.45rem',
-                  boxShadow: '0 4px 12px rgba(2, 132, 199, 0.2)',
+                  boxShadow: '0 4px 14px rgba(6, 186, 212, 0.3)',
                   transition: 'transform 0.15s ease'
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
@@ -162,9 +162,9 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 style={{
                   padding: '0.7rem 1.3rem',
                   borderRadius: '10px',
-                  background: 'var(--code-bg, #f8fafc)',
-                  border: '1px solid var(--border-subtle, #cbd5e1)',
-                  color: 'var(--text-primary, #0f172a)',
+                  background: '#1e293b',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
                   fontWeight: 600,
                   fontSize: '0.9rem',
                   cursor: 'pointer',
@@ -184,9 +184,9 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 style={{
                   padding: '0.7rem 1.3rem',
                   borderRadius: '10px',
-                  background: 'var(--code-bg, #f8fafc)',
-                  border: '1px solid var(--border-subtle, #cbd5e1)',
-                  color: 'var(--text-primary, #0f172a)',
+                  background: '#1e293b',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
                   fontWeight: 600,
                   fontSize: '0.9rem',
                   textDecoration: 'none',
@@ -204,9 +204,9 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 style={{
                   padding: '0.7rem 1.3rem',
                   borderRadius: '10px',
-                  background: 'var(--code-bg, #f8fafc)',
-                  border: '1px solid var(--border-subtle, #cbd5e1)',
-                  color: 'var(--text-primary, #0f172a)',
+                  background: '#1e293b',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
                   fontWeight: 600,
                   fontSize: '0.9rem',
                   textDecoration: 'none',
@@ -233,7 +233,7 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.45rem',
-                  boxShadow: '0 4px 14px rgba(124, 58, 237, 0.3)',
+                  boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
                   marginLeft: 'auto'
                 }}
               >
@@ -249,42 +249,42 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 gap: '1rem',
                 padding: '1.25rem',
                 borderRadius: '12px',
-                background: 'var(--code-bg, #f8fafc)',
-                border: '1px solid var(--border-subtle, #e2e8f0)'
+                background: '#1e293b',
+                border: '1px solid #334155'
               }}
             >
               <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0284c7' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#38bdf8' }}>
                   SigNoz Winner
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #64748b)', marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
                   Agents of SigNoz Hackathon
                 </div>
               </div>
 
               <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#166534' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#4ade80' }}>
                   4 Core Apps
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #64748b)', marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
                   Full-stack non-generic architectures
                 </div>
               </div>
 
               <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#7c3aed' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#c084fc' }}>
                   99.9% Uptime
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #64748b)', marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
                   Predictive closed-loop control
                 </div>
               </div>
 
               <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#e11d48' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fb7185' }}>
                   1,400+ Commits
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #64748b)', marginTop: '0.15rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
                   Active open-source contributions
                 </div>
               </div>
