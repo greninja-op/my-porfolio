@@ -5,9 +5,18 @@ import TechStackSection from './TechStackSection';
 import ProjectsShowcaseSection from './ProjectsShowcaseSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
+import MacDeskAccessories from './MacDeskAccessories';
+import { toggleSound, isSoundEnabled, playRetroClick } from '../utils/sound';
 
 export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [soundOn, setSoundOn] = useState(isSoundEnabled());
+
+  const handleSoundToggle = () => {
+    const newState = toggleSound();
+    setSoundOn(newState);
+    if (newState) playRetroClick();
+  };
 
   return (
     <div
@@ -39,7 +48,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
       >
         <div
           style={{
-            maxWidth: '1180px',
+            maxWidth: '1380px',
             width: '100%',
             margin: '0 auto',
             display: 'flex',
@@ -96,24 +105,46 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
               fontFamily: 'var(--font-mono, monospace)'
             }}
           >
-            <a href="#github" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a href="#github" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               GitHub Profile
             </a>
-            <a href="#tech-stack" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a href="#tech-stack" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Languages & Tools
             </a>
-            <a href="#projects" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a href="#projects" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Projects
             </a>
-            <a href="#contact" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a href="#contact" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Contact & Socials
             </a>
           </nav>
 
-          {/* Action CTAs */}
+          {/* Action CTAs & Sound Toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <button
-              onClick={() => setShowResumeModal(true)}
+              onClick={handleSoundToggle}
+              title={soundOn ? 'Sound FX On' : 'Sound FX Muted'}
+              style={{
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                background: soundOn ? '#4ade80' : '#e2e8f0',
+                border: '2px solid #000000',
+                boxShadow: '2px 2px 0 #000000',
+                color: '#000000',
+                fontWeight: 900,
+                fontSize: '0.82rem',
+                fontFamily: 'var(--font-mono, monospace)',
+                cursor: 'pointer'
+              }}
+            >
+              {soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF'}
+            </button>
+
+            <button
+              onClick={() => {
+                playRetroClick();
+                setShowResumeModal(true);
+              }}
               style={{
                 padding: '0.35rem 0.85rem',
                 borderRadius: '6px',
@@ -131,7 +162,10 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             </button>
 
             <button
-              onClick={onSwitchToOS}
+              onClick={() => {
+                playRetroClick();
+                onSwitchToOS();
+              }}
               style={{
                 padding: '0.35rem 0.95rem',
                 borderRadius: '6px',
@@ -154,26 +188,52 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         </div>
       </header>
 
-      {/* RECRUITER PORTFOLIO CONTENT SECTIONS */}
-      <main>
-        <HeroRecruiter
-          onSwitchToOS={onSwitchToOS}
-          onOpenResume={() => setShowResumeModal(true)}
-        />
+      {/* RECRUITER PORTFOLIO CONTENT & SIDEBAR LAYOUT */}
+      <div
+        style={{
+          maxWidth: '1380px',
+          margin: '2rem auto 0 auto',
+          padding: '0 1rem',
+          display: 'flex',
+          gap: '1.75rem',
+          alignItems: 'flex-start'
+        }}
+      >
+        {/* LEFT SIDEBAR: MACINTOSH DESK ACCESSORIES */}
+        <aside style={{ display: 'none', minWidth: '260px' }} className="mac-desk-sidebar">
+          <MacDeskAccessories />
+        </aside>
 
-        <GithubProfileSection />
+        {/* MAIN PORTFOLIO CONTENT */}
+        <main style={{ flex: 1, width: '100%', minWidth: 0 }}>
+          <HeroRecruiter
+            onSwitchToOS={onSwitchToOS}
+            onOpenResume={() => setShowResumeModal(true)}
+          />
 
-        <TechStackSection />
+          <GithubProfileSection />
 
-        <ProjectsShowcaseSection />
+          <TechStackSection />
 
-        <ContactFooterSection />
-      </main>
+          <ProjectsShowcaseSection />
+
+          <ContactFooterSection />
+        </main>
+      </div>
 
       {/* Resume Modal */}
       {showResumeModal && (
         <ResumeMacWindow onClose={() => setShowResumeModal(false)} />
       )}
+
+      {/* Responsive Media Query for Mac Desk Accessories */}
+      <style>{`
+        @media (min-width: 1200px) {
+          .mac-desk-sidebar {
+            display: block !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
