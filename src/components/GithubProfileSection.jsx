@@ -114,8 +114,8 @@ export default function GithubProfileSection() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.25rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '1rem'
           }}
         >
           {/* BENTO TILE 1: PROFILE HERO CARD (Yellow Box) */}
@@ -125,7 +125,7 @@ export default function GithubProfileSection() {
               background: '#fde047',
               border: '2px solid #000000',
               borderRadius: '8px',
-              padding: '1.25rem',
+              padding: '1.1rem',
               boxShadow: '3px 3px 0 #000000',
               display: 'flex',
               flexDirection: 'column',
@@ -133,36 +133,37 @@ export default function GithubProfileSection() {
               gap: '1rem'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
               <div
                 style={{
-                  width: '56px',
-                  height: '56px',
+                  width: '50px',
+                  height: '50px',
                   borderRadius: '50%',
                   background: '#ffffff',
                   border: '2px solid #000000',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '2rem',
-                  boxShadow: '2px 2px 0 #000000'
+                  fontSize: '1.75rem',
+                  boxShadow: '2px 2px 0 #000000',
+                  flexShrink: 0
                 }}
               >
                 🐸
               </div>
 
               <div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
                   Arjun Sabu
                 </h3>
-                <span style={{ fontSize: '0.85rem', color: '#000000', fontWeight: 800, fontFamily: 'var(--font-mono, monospace)' }}>
+                <span style={{ fontSize: '0.82rem', color: '#000000', fontWeight: 800, fontFamily: 'var(--font-mono, monospace)' }}>
                   @greninja-op
                 </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <div style={{ padding: '0.3rem 0.65rem', borderRadius: '4px', background: '#ffffff', border: '1.5px solid #000000', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+              <div style={{ padding: '0.25rem 0.55rem', borderRadius: '4px', background: '#ffffff', border: '1.5px solid #000000', fontSize: '0.75rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
                 ● Open to Hiring
               </div>
 
@@ -172,14 +173,14 @@ export default function GithubProfileSection() {
                 rel="noopener noreferrer"
                 onClick={() => playRetroClick()}
                 style={{
-                  padding: '0.45rem 0.95rem',
+                  padding: '0.4rem 0.85rem',
                   borderRadius: '6px',
                   background: '#38bdf8',
                   border: '2px solid #000000',
                   boxShadow: '2px 2px 0 #000000',
                   color: '#000000',
                   fontWeight: 900,
-                  fontSize: '0.82rem',
+                  fontSize: '0.8rem',
                   fontFamily: 'var(--font-mono, monospace)',
                   textDecoration: 'none'
                 }}
@@ -195,56 +196,56 @@ export default function GithubProfileSection() {
               gridColumn: 'span 1',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '0.85rem'
+              gap: '0.75rem'
             }}
           >
-            <div style={{ background: '#4ade80', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>1,420</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Commits</div>
+            <div style={{ background: '#4ade80', border: '2px solid #000000', borderRadius: '8px', padding: '0.65rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+              <div style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>1,420</div>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Commits</div>
             </div>
 
-            <div style={{ background: '#38bdf8', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>147</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Streak Days</div>
+            <div style={{ background: '#38bdf8', border: '2px solid #000000', borderRadius: '8px', padding: '0.65rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+              <div style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>147</div>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Streak Days</div>
             </div>
 
-            <div style={{ background: '#c084fc', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>236★</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Total Stars</div>
+            <div style={{ background: '#c084fc', border: '2px solid #000000', borderRadius: '8px', padding: '0.65rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+              <div style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>236★</div>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Total Stars</div>
             </div>
 
-            <div style={{ background: '#f472b6', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Top 1%</div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>PR Velocity</div>
+            <div style={{ background: '#f472b6', border: '2px solid #000000', borderRadius: '8px', padding: '0.65rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+              <div style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Top 1%</div>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>PR Velocity</div>
             </div>
           </div>
 
-          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX */}
+          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX (TOUCH SCROLL) */}
           <div
             style={{
               gridColumn: '1 / -1',
               background: '#ffffff',
               border: '2px solid #000000',
               borderRadius: '8px',
-              padding: '1.25rem',
+              padding: '1.1rem',
               boxShadow: '3px 3px 0 #000000'
             }}
           >
-            <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
+            <div style={{ fontSize: '0.88rem', fontWeight: 900, color: '#000000', marginBottom: '0.75rem', fontFamily: 'var(--font-mono, monospace)' }}>
               1,420 Contributions in the Last Year
             </div>
 
-            {/* Heatmap Grid */}
-            <div style={{ overflowX: 'auto', paddingBottom: '0.25rem' }}>
-              <div style={{ display: 'flex', gap: '4px', minWidth: '760px' }}>
+            {/* Heatmap Grid Touch Scroll */}
+            <div style={{ overflowX: 'auto', paddingBottom: '0.25rem', WebkitOverflowScrolling: 'touch' }}>
+              <div style={{ display: 'flex', gap: '4px', minWidth: '720px' }}>
                 {matrix.map((week, wIdx) => (
                   <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {week.map((day, dIdx) => (
                       <div
                         key={dIdx}
                         style={{
-                          width: '11px',
-                          height: '11px',
+                          width: '10px',
+                          height: '10px',
                           borderRadius: '2px',
                           background: getHeatmapColor(day.level),
                           border: '1px solid #000000'
@@ -265,21 +266,21 @@ export default function GithubProfileSection() {
               background: '#ffffff',
               border: '2px solid #000000',
               borderRadius: '8px',
-              padding: '1.25rem',
+              padding: '1.1rem',
               boxShadow: '3px 3px 0 #000000'
             }}
           >
-            <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
+            <div style={{ fontSize: '0.88rem', fontWeight: 900, color: '#000000', marginBottom: '0.75rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Most Used Languages Across Repositories
             </div>
 
             <div
               style={{
-                height: '12px',
-                borderRadius: '6px',
+                height: '10px',
+                borderRadius: '5px',
                 overflow: 'hidden',
                 display: 'flex',
-                marginBottom: '1rem',
+                marginBottom: '0.85rem',
                 border: '1.5px solid #000000',
                 background: '#e2e8f0'
               }}
@@ -297,10 +298,10 @@ export default function GithubProfileSection() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem' }}>
               {languages.map((l, idx) => (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: l.color, border: '1px solid #000000' }} />
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+                  <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: l.color, border: '1px solid #000000' }} />
                   <span>{l.name}</span>
                   <span style={{ opacity: 0.7 }}>{l.percent}%</span>
                 </div>
@@ -310,11 +311,11 @@ export default function GithubProfileSection() {
 
           {/* BENTO TILE 5: PINNED REPOSITORIES GRID */}
           <div style={{ gridColumn: '1 / -1' }}>
-            <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+            <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Featured Pinned Repositories
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.85rem' }}>
               {pinnedRepos.map((repo, idx) => (
                 <a
                   key={idx}
@@ -326,7 +327,7 @@ export default function GithubProfileSection() {
                     background: repo.badgeBg,
                     border: '2px solid #000000',
                     borderRadius: '8px',
-                    padding: '1.25rem',
+                    padding: '1.1rem',
                     textDecoration: 'none',
                     display: 'flex',
                     flexDirection: 'column',
@@ -335,15 +336,15 @@ export default function GithubProfileSection() {
                   }}
                 >
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                      <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.65rem', flexWrap: 'wrap', gap: '0.35rem' }}>
+                      <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
                         📁 {repo.name}
                       </div>
 
                       <span
                         style={{
-                          fontSize: '0.72rem',
-                          padding: '0.15rem 0.5rem',
+                          fontSize: '0.68rem',
+                          padding: '0.12rem 0.45rem',
                           borderRadius: '4px',
                           background: '#ffffff',
                           color: '#000000',
@@ -356,14 +357,14 @@ export default function GithubProfileSection() {
                       </span>
                     </div>
 
-                    <p style={{ fontSize: '0.88rem', color: '#000000', lineHeight: 1.45, marginBottom: '1rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                    <p style={{ fontSize: '0.82rem', color: '#000000', lineHeight: 1.4, marginBottom: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                       {repo.desc}
                     </p>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.82rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
                       {repo.lang}
                     </span>
 

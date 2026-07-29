@@ -27,10 +27,11 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         color: '#000000',
         fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         lineHeight: 1.5,
-        paddingBottom: '4rem'
+        paddingBottom: '4rem',
+        overflowX: 'hidden'
       }}
     >
-      {/* MACINTOSH SYSTEM 7 TOP MENU BAR */}
+      {/* MACINTOSH SYSTEM 7 TOP MENU BAR (MOBILE RESPONSIVE) */}
       <header
         style={{
           position: 'sticky',
@@ -38,11 +39,8 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
           zIndex: 500,
           background: '#ffffff',
           borderBottom: '2px solid #000000',
-          padding: '0.4rem 1.25rem',
-          boxShadow: '0 4px 0 #000000',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          padding: '0.4rem 0.85rem',
+          boxShadow: '0 4px 0 #000000'
         }}
       >
         <div
@@ -53,7 +51,8 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1rem'
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
           {/* Brand Logo & Title */}
@@ -62,15 +61,15 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.65rem',
+              gap: '0.5rem',
               textDecoration: 'none',
               color: '#000000'
             }}
           >
             <div
               style={{
-                width: '32px',
-                height: '32px',
+                width: '30px',
+                height: '30px',
                 borderRadius: '6px',
                 background: '#fde047',
                 border: '2px solid #000000',
@@ -80,63 +79,61 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
                 justifyContent: 'center',
                 color: '#000000',
                 fontWeight: 900,
-                fontSize: '1rem'
+                fontSize: '0.9rem'
               }}
             >
               🍎
             </div>
 
-            <div>
-              <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '-0.02em', color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
-                Arjun Sabu (greninja-op)
-              </div>
+            <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '-0.02em', color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+              Arjun Sabu
             </div>
           </a>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links (Hidden on small mobile screens via CSS) */}
           <nav
             style={{
-              display: 'flex',
               alignItems: 'center',
-              gap: '1.25rem',
-              fontSize: '0.85rem',
+              gap: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: 800,
               fontFamily: 'var(--font-mono, monospace)'
             }}
+            className="desktop-nav-links"
           >
-            <a href="#github" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
-              GitHub Profile
+            <a href="#github" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+              GitHub
             </a>
-            <a href="#tech-stack" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
-              Languages & Tools
+            <a href="#tech-stack" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+              Toolset
             </a>
-            <a href="#projects" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a href="#projects" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Projects
             </a>
-            <a href="#contact" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
-              Contact & Socials
+            <a href="#contact" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+              Contact
             </a>
           </nav>
 
           {/* Action CTAs & Sound Toggle */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
             <button
               onClick={handleSoundToggle}
               title={soundOn ? 'Sound FX On' : 'Sound FX Muted'}
               style={{
-                padding: '0.35rem 0.65rem',
+                padding: '0.3rem 0.55rem',
                 borderRadius: '6px',
                 background: soundOn ? '#4ade80' : '#e2e8f0',
                 border: '2px solid #000000',
                 boxShadow: '2px 2px 0 #000000',
                 color: '#000000',
                 fontWeight: 900,
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer'
               }}
             >
-              {soundOn ? '🔊 Sound: ON' : '🔇 Sound: OFF'}
+              {soundOn ? '🔊 Sound' : '🔇 Muted'}
             </button>
 
             <button
@@ -145,14 +142,14 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
                 setShowResumeModal(true);
               }}
               style={{
-                padding: '0.35rem 0.85rem',
+                padding: '0.3rem 0.75rem',
                 borderRadius: '6px',
                 background: '#38bdf8',
                 border: '2px solid #000000',
                 boxShadow: '2px 2px 0 #000000',
                 color: '#000000',
                 fontWeight: 900,
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer'
               }}
@@ -166,29 +163,29 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
                 onSwitchToOS();
               }}
               style={{
-                padding: '0.35rem 0.95rem',
+                padding: '0.3rem 0.85rem',
                 borderRadius: '6px',
                 background: '#c084fc',
                 border: '2px solid #000000',
                 boxShadow: '2px 2px 0 #000000',
                 color: '#000000',
                 fontWeight: 900,
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.35rem'
+                gap: '0.3rem'
               }}
             >
-              🎛️ OS Playground ↗
+              🎛️ OS Mode ↗
             </button>
           </div>
         </div>
       </header>
 
       {/* RECRUITER PORTFOLIO CONTENT */}
-      <main style={{ marginTop: '2rem' }}>
+      <main style={{ marginTop: '1.5rem', width: '100%', overflowX: 'hidden' }}>
         <HeroRecruiter
           onSwitchToOS={onSwitchToOS}
           onOpenResume={() => setShowResumeModal(true)}
@@ -207,6 +204,18 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
       {showResumeModal && (
         <ResumeMacWindow onClose={() => setShowResumeModal(false)} />
       )}
+
+      {/* Responsive Style Overrides */}
+      <style>{`
+        .desktop-nav-links {
+          display: flex;
+        }
+        @media (max-width: 768px) {
+          .desktop-nav-links {
+            display: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

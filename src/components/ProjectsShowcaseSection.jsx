@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconGithub, IconExternalLink } from './Icons';
 import MacWindowWrapper from './MacWindowWrapper';
 import { playRetroClick } from '../utils/sound';
@@ -7,6 +7,16 @@ export default function ProjectsShowcaseSection() {
   const [hovered, setHovered] = useState(false);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const projects = [
     {
@@ -133,22 +143,34 @@ export default function ProjectsShowcaseSection() {
       return `translate3d(0px, ${idx * 14}px, 0px) scale(${1 - idx * 0.025}) rotate(${idx * 1.8 - 2.5}deg)`;
     }
 
-    // Horizontal Arc Fan-Out Deck on Hover (Cards fan out with Card 0 at front)
-    const fanConfigs = [
+    // Adaptive Fan-Out Config: Desktop vs Mobile Viewport
+    if (isMobile) {
+      // Compact vertical-slant fan out for mobile touchscreens
+      const mobileConfigs = [
+        { x: -12, y: -20, rot: -4 },
+        { x: -4, y: 10, rot: -1 },
+        { x: 4, y: 40, rot: 1 },
+        { x: 12, y: 70, rot: 4 }
+      ];
+      const mCfg = mobileConfigs[idx] || { x: 0, y: 0, rot: 0 };
+      return `translate3d(${mCfg.x}px, ${mCfg.y}px, 0px) rotate(${mCfg.rot}deg) scale(0.98)`;
+    }
+
+    // Full horizontal arc fan-out on desktop
+    const desktopConfigs = [
       { x: -250, y: -12, rot: -9 },
       { x: -80, y: -4, rot: -3 },
       { x: 80, y: -4, rot: 3 },
       { x: 250, y: -12, rot: 9 }
     ];
-
-    const cfg = fanConfigs[idx] || { x: 0, y: 0, rot: 0 };
-    return `translate3d(${cfg.x}px, ${cfg.y}px, 0px) rotate(${cfg.rot}deg) scale(1)`;
+    const dCfg = desktopConfigs[idx] || { x: 0, y: 0, rot: 0 };
+    return `translate3d(${dCfg.x}px, ${dCfg.y}px, 0px) rotate(${dCfg.rot}deg) scale(1)`;
   };
 
   const getCardZIndex = (idx, isExpanded, isCardHovered) => {
     if (isExpanded) return 100;
     if (isCardHovered) return 90;
-    // CARD 0 (ChronoLens, yellow) is ALWAYS ON TOP at front (zIndex 40), then Card 1 (30), Card 2 (20), Card 3 (10)
+    // Card 0 (ChronoLens, yellow) is ALWAYS ON TOP at front (zIndex 40), then Card 1 (30), Card 2 (20), Card 3 (10)
     return (4 - idx) * 10;
   };
 
@@ -183,7 +205,7 @@ export default function ProjectsShowcaseSection() {
 
       <MacWindowWrapper
         title="Featured Open-Source Works Deck"
-        subtitle="True SVG geometric folder cards with top-right & bottom-left cutouts. Hover to fan out horizontally along an arc!"
+        subtitle="True SVG geometric folder cards with top-right & bottom-left cutouts. Hover or tap to fan out!"
         badgeText="DECK: 4 APPS"
         allowOverflow={true}
       >
@@ -193,15 +215,17 @@ export default function ProjectsShowcaseSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '1.5rem',
+            marginBottom: '1.25rem',
             color: '#000000',
-            fontSize: '0.82rem',
+            fontSize: '0.78rem',
             fontFamily: 'var(--font-mono, monospace)',
-            fontWeight: 900
+            fontWeight: 900,
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
           <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <div>2025.1 — 2026.12</div>
             <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#000000' }}>
               //////
@@ -216,12 +240,13 @@ export default function ProjectsShowcaseSection() {
             setHovered(false);
             setHoveredCardId(null);
           }}
+          onTouchStart={() => setHovered(true)}
           style={{
             position: 'relative',
-            minHeight: expandedId ? 'auto' : '460px',
+            minHeight: expandedId ? 'auto' : isMobile ? '380px' : '460px',
             display: 'flex',
             flexDirection: expandedId ? 'column' : 'row',
-            gap: expandedId ? '1.75rem' : '0',
+            gap: expandedId ? '1.5rem' : '0',
             alignItems: 'center',
             justifyContent: 'center',
             margin: '1rem 0',
@@ -233,7 +258,7 @@ export default function ProjectsShowcaseSection() {
             const isCardHovered = hoveredCardId === p.id;
 
             return (
-              /* Hardware-Accelerated 60fps Card Wrapper */
+              /* Hardware-Accelerated Responsive Card Wrapper */
               <div
                 key={p.id}
                 onMouseEnter={() => setHoveredCardId(p.id)}
@@ -257,7 +282,7 @@ export default function ProjectsShowcaseSection() {
                     clipPath: 'url(#folderCardShape)',
                     WebkitClipPath: 'url(#folderCardShape)',
                     border: '2px solid #000000',
-                    padding: '2.25rem 2rem 3rem 2rem',
+                    padding: isMobile ? '1.5rem 1.25rem 2.25rem 1.25rem' : '2.25rem 2rem 3rem 2rem',
                     color: '#000000',
                     cursor: 'pointer',
                     position: 'relative'
@@ -283,65 +308,65 @@ export default function ProjectsShowcaseSection() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      marginBottom: '1.25rem',
-                      paddingRight: '160px'
+                      marginBottom: '1rem',
+                      paddingRight: isMobile ? '80px' : '160px'
                     }}
                   >
-                    <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', textTransform: 'uppercase', fontFamily: 'var(--font-mono, monospace)' }}>
+                    <div style={{ fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.08em', color: '#000000', textTransform: 'uppercase', fontFamily: 'var(--font-mono, monospace)' }}>
                       DESIGN / {p.category}
                     </div>
 
-                    <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
+                    <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
                       {p.year}
                     </div>
                   </div>
 
                   {/* Card Main Body */}
-                  <div style={{ position: 'relative', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div style={{ position: 'relative', minHeight: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div
                       style={{
                         position: 'absolute',
                         top: '0px',
-                        right: '10px',
+                        right: '5px',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.65rem',
+                        gap: '0.4rem',
                         userSelect: 'none',
                         zIndex: 3
                       }}
                     >
-                      <span style={{ fontSize: '3.8rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
+                      <span style={{ fontSize: isMobile ? '2.5rem' : '3.8rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
                         {p.icon3d}
                       </span>
-                      <span style={{ fontSize: '3.2rem', display: 'inline-block' }}>
+                      <span style={{ fontSize: isMobile ? '2.2rem' : '3.2rem', display: 'inline-block' }}>
                         {p.characterArt}
                       </span>
                     </div>
 
-                    <div style={{ maxWidth: '450px', zIndex: 4 }}>
-                      <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#000000', marginBottom: '0.25rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                    <div style={{ maxWidth: isMobile ? '260px' : '450px', zIndex: 4 }}>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 900, color: '#000000', marginBottom: '0.2rem', fontFamily: 'var(--font-mono, monospace)' }}>
                         {p.year}
                       </div>
 
-                      <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#000000', lineHeight: 1.02, marginBottom: '0.4rem', letterSpacing: '-0.03em', fontFamily: 'var(--font-mono, monospace)' }}>
+                      <h3 style={{ fontSize: 'clamp(1.7rem, 5vw, 3rem)', fontWeight: 900, color: '#000000', lineHeight: 1.02, marginBottom: '0.3rem', letterSpacing: '-0.03em', fontFamily: 'var(--font-mono, monospace)' }}>
                         {p.title}
                       </h3>
 
                       <div
                         style={{
                           fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                          fontSize: '0.85rem',
+                          fontSize: '0.75rem',
                           fontWeight: 900,
-                          letterSpacing: '0.25em',
+                          letterSpacing: '0.2em',
                           textTransform: 'uppercase',
                           color: '#000000',
-                          marginBottom: '1rem'
+                          marginBottom: '0.85rem'
                         }}
                       >
-                        P O R T F O L I O  /  S Y S T E M S
+                        PORTFOLIO / SYSTEMS
                       </div>
 
-                      <p style={{ fontSize: '0.96rem', color: '#000000', lineHeight: 1.5, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                      <p style={{ fontSize: '0.88rem', color: '#000000', lineHeight: 1.45, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                         {p.tagline}
                       </p>
                     </div>
@@ -352,14 +377,16 @@ export default function ProjectsShowcaseSection() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        marginTop: '1.5rem',
-                        paddingLeft: '160px',
-                        zIndex: 4
+                        marginTop: '1.25rem',
+                        paddingLeft: isMobile ? '0px' : '160px',
+                        zIndex: 4,
+                        flexWrap: 'wrap',
+                        gap: '0.5rem'
                       }}
                     >
                       <div
                         style={{
-                          fontSize: '0.8rem',
+                          fontSize: '0.75rem',
                           fontWeight: 900,
                           fontFamily: 'var(--font-mono, monospace)',
                           color: '#000000',
@@ -368,15 +395,15 @@ export default function ProjectsShowcaseSection() {
                           gap: '0.35rem',
                           background: '#ffffff',
                           border: '2px solid #000000',
-                          padding: '0.4rem 0.85rem',
+                          padding: '0.35rem 0.75rem',
                           borderRadius: '6px',
                           boxShadow: '2px 2px 0 #000000'
                         }}
                       >
-                        <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
+                        <span>{isExpanded ? 'Collapse ▲' : 'Tap to Expand Inline ▼'}</span>
                       </div>
 
-                      <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
+                      <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
                         DESIGN / {p.id}
                       </div>
                     </div>
@@ -389,14 +416,14 @@ export default function ProjectsShowcaseSection() {
                       opacity: isExpanded ? 1 : 0,
                       overflow: 'hidden',
                       transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                      marginTop: isExpanded ? '1.5rem' : '0px',
-                      paddingTop: isExpanded ? '1.5rem' : '0px',
+                      marginTop: isExpanded ? '1.25rem' : '0px',
+                      paddingTop: isExpanded ? '1.25rem' : '0px',
                       borderTop: isExpanded ? '2px dashed #000000' : 'none',
                       position: 'relative',
                       zIndex: 10
                     }}
                   >
-                    <p style={{ fontSize: '0.98rem', color: '#000000', lineHeight: 1.6, marginBottom: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                    <p style={{ fontSize: '0.9rem', color: '#000000', lineHeight: 1.55, marginBottom: '1rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                       {p.description}
                     </p>
 
@@ -405,9 +432,9 @@ export default function ProjectsShowcaseSection() {
                       style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(3, 1fr)',
-                        gap: '0.75rem',
-                        marginBottom: '1.25rem',
-                        padding: '1rem',
+                        gap: '0.5rem',
+                        marginBottom: '1rem',
+                        padding: '0.75rem 0.5rem',
                         borderRadius: '8px',
                         background: '#ffffff',
                         border: '2px solid #000000',
@@ -416,10 +443,10 @@ export default function ProjectsShowcaseSection() {
                     >
                       {p.metrics.map((m, mIdx) => (
                         <div key={mIdx} style={{ textAlign: 'center' }}>
-                          <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
                             {m.value}
                           </div>
-                          <div style={{ fontSize: '0.75rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                          <div style={{ fontSize: '0.68rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
                             {m.label}
                           </div>
                         </div>
@@ -427,11 +454,11 @@ export default function ProjectsShowcaseSection() {
                     </div>
 
                     {/* Key Technical Accomplishments */}
-                    <div style={{ marginBottom: '1.25rem' }}>
-                      <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 900, color: '#000000', marginBottom: '0.5rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 900, color: '#000000', marginBottom: '0.4rem', fontFamily: 'var(--font-mono, monospace)' }}>
                         Key Technical Accomplishments:
                       </div>
-                      <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#000000', fontSize: '0.92rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.35rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                      <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#000000', fontSize: '0.85rem', lineHeight: 1.5, display: 'flex', flexDirection: 'column', gap: '0.3rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                         {p.highlights.map((h, hIdx) => (
                           <li key={hIdx}>{h}</li>
                         ))}
@@ -439,14 +466,14 @@ export default function ProjectsShowcaseSection() {
                     </div>
 
                     {/* Tech Stack Pills */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.25rem' }}>
                       {p.techStack.map((tech, tIdx) => (
                         <span
                           key={tIdx}
                           style={{
-                            fontSize: '0.78rem',
+                            fontSize: '0.72rem',
                             fontFamily: 'var(--font-mono, monospace)',
-                            padding: '0.3rem 0.65rem',
+                            padding: '0.25rem 0.55rem',
                             borderRadius: '5px',
                             background: '#ffffff',
                             border: '1.5px solid #000000',
@@ -460,7 +487,7 @@ export default function ProjectsShowcaseSection() {
                     </div>
 
                     {/* Action CTAs */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem' }}>
                       <a
                         href={p.github}
                         target="_blank"
@@ -470,22 +497,25 @@ export default function ProjectsShowcaseSection() {
                           playRetroClick();
                         }}
                         style={{
-                          padding: '0.75rem 1.35rem',
+                          padding: '0.65rem 1.1rem',
                           borderRadius: '6px',
                           background: '#ffffff',
                           border: '2px solid #000000',
                           boxShadow: '3px 3px 0 #000000',
                           color: '#000000',
                           fontWeight: 900,
-                          fontSize: '0.88rem',
+                          fontSize: '0.82rem',
                           fontFamily: 'var(--font-mono, monospace)',
                           textDecoration: 'none',
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '0.45rem'
+                          gap: '0.4rem',
+                          flex: '1 1 auto',
+                          justifyContent: 'center',
+                          minHeight: '40px'
                         }}
                       >
-                        <IconGithub size={17} /> View GitHub Repo
+                        <IconGithub size={16} /> GitHub Repo
                       </a>
 
                       <a
@@ -497,22 +527,25 @@ export default function ProjectsShowcaseSection() {
                           playRetroClick();
                         }}
                         style={{
-                          padding: '0.75rem 1.35rem',
+                          padding: '0.65rem 1.1rem',
                           borderRadius: '6px',
                           background: '#ffffff',
                           border: '2px solid #000000',
                           boxShadow: '3px 3px 0 #000000',
                           color: '#000000',
                           fontWeight: 900,
-                          fontSize: '0.88rem',
+                          fontSize: '0.82rem',
                           fontFamily: 'var(--font-mono, monospace)',
                           textDecoration: 'none',
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '0.45rem'
+                          gap: '0.4rem',
+                          flex: '1 1 auto',
+                          justifyContent: 'center',
+                          minHeight: '40px'
                         }}
                       >
-                        <IconExternalLink size={17} /> Architecture Specs
+                        <IconExternalLink size={16} /> Architecture Specs
                       </a>
                     </div>
                   </div>
@@ -528,14 +561,16 @@ export default function ProjectsShowcaseSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginTop: '1.75rem',
+            marginTop: '1.5rem',
             color: '#000000',
-            fontSize: '0.8rem',
+            fontSize: '0.75rem',
             fontFamily: 'var(--font-mono, monospace)',
-            fontWeight: 900
+            fontWeight: 900,
+            flexWrap: 'wrap',
+            gap: '0.5rem'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#000000' }}>
               //////
             </div>
