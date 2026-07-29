@@ -32,17 +32,17 @@ export default function GithubProfileSection() {
   const getHeatmapColor = (level) => {
     switch (level) {
       case 0:
-        return '#1e293b';
+        return '#e2e8f0';
       case 1:
-        return '#14532d';
+        return '#86efac';
       case 2:
-        return '#166534';
+        return '#4ade80';
       case 3:
-        return '#15803d';
-      case 4:
         return '#22c55e';
+      case 4:
+        return '#15803d';
       default:
-        return '#1e293b';
+        return '#e2e8f0';
     }
   };
 
@@ -50,7 +50,7 @@ export default function GithubProfileSection() {
     {
       name: "ChronoLens",
       badge: "⚡ SRE Control Plane",
-      badgeColor: "#38bdf8",
+      badgeBg: "#38bdf8",
       desc: "Closed-loop predictive SRE control plane built on OpenTelemetry feeds with sub-10ms trace interception.",
       lang: "Python",
       langColor: "#3572A5",
@@ -61,7 +61,7 @@ export default function GithubProfileSection() {
     {
       name: "Memoire",
       badge: "🧠 AI Context Graph",
-      badgeColor: "#c084fc",
+      badgeBg: "#c084fc",
       desc: "Vector similarity memory graph and long-term context retention engine for autonomous LLM agents.",
       lang: "Python",
       langColor: "#3572A5",
@@ -72,7 +72,7 @@ export default function GithubProfileSection() {
     {
       name: "Nuvault",
       badge: "🔐 Zero-Knowledge Vault",
-      badgeColor: "#34d399",
+      badgeBg: "#4ade80",
       desc: "Zero-trust cloud vault utilizing client-side WebCrypto AES-GCM 256-bit encryption and tenant key isolation.",
       lang: "TypeScript",
       langColor: "#3178C6",
@@ -83,7 +83,7 @@ export default function GithubProfileSection() {
     {
       name: "CFLS-Lock-Sync",
       badge: "🔒 Distributed Lock",
-      badgeColor: "#fb7185",
+      badgeBg: "#f472b6",
       desc: "Real-time distributed file locking protocol ensuring atomic multi-user synchronization across remote worktrees.",
       lang: "Go",
       langColor: "#00ADD8",
@@ -105,93 +105,85 @@ export default function GithubProfileSection() {
     <section
       id="github"
       style={{
-        padding: '4rem 0',
+        padding: '3rem 0 2rem 0',
         position: 'relative'
       }}
     >
-      <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '0 1rem' }}>
         
-        {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
+        {/* MACINTOSH SYSTEM 7 WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: '#0f172a',
-            border: '2px solid #1e293b',
-            borderRadius: '16px',
+            background: '#ffffff',
+            border: '2px solid #000000',
+            borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
+            boxShadow: '6px 6px 0px #000000'
           }}
         >
-          {/* OS RETRO TITLE BAR HEADER */}
+          {/* MAC RETRO PINSTRIPE TITLE BAR HEADER */}
           <div
             style={{
-              background: '#1e293b',
-              borderBottom: '2px solid #334155',
-              padding: '0.65rem 1.25rem',
+              background: 'linear-gradient(90deg, #d946ef 0%, #c084fc 50%, #e879f9 100%)',
+              borderBottom: '2px solid #000000',
+              padding: '0.6rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#ef4444', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#f59e0b', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#22c55e', border: '1px solid #000000', display: 'inline-block' }} />
             </div>
 
             <div
               style={{
+                background: '#ffffff',
+                border: '2px solid #000000',
+                borderRadius: '4px',
+                padding: '0.2rem 1rem',
                 fontFamily: 'var(--font-mono, monospace)',
-                fontSize: '0.82rem',
-                fontWeight: 800,
-                color: '#ffffff',
-                letterSpacing: '0.05em'
+                fontSize: '0.85rem',
+                fontWeight: 900,
+                color: '#000000',
+                boxShadow: '2px 2px 0 #000000'
               }}
             >
-              GITHUB_FOOTPRINT_MONITOR.APP — System 7.5
+              GitHub Engineering Footprint & Dashboard
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
               [STATUS: ONLINE]
             </div>
           </div>
 
-          {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2.25rem 2rem' }}>
+          {/* WINDOW INNER CONTENT BODY */}
+          <div style={{ padding: '2rem 1.75rem', background: '#fafafa' }}>
             
-            {/* Section Title */}
-            <div style={{ marginBottom: '2rem' }}>
+            {/* Section Subtext */}
+            <div style={{ marginBottom: '1.75rem' }}>
               <div
                 style={{
                   fontSize: '0.78rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  fontWeight: 800,
+                  fontWeight: 900,
                   fontFamily: 'var(--font-mono, monospace)',
-                  color: '#38bdf8',
-                  marginBottom: '0.3rem'
+                  color: '#000000',
+                  marginBottom: '0.25rem'
                 }}
               >
                 Section A • Authentic Proof of Work
               </div>
 
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-                  fontWeight: 800,
-                  color: '#ffffff',
-                  letterSpacing: '-0.025em'
-                }}
-              >
-                GitHub Engineering Footprint & Dashboard
-              </h2>
-
-              <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.3rem' }}>
+              <p style={{ color: '#000000', fontSize: '1.02rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', margin: 0 }}>
                 Live replica of active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories.
               </p>
             </div>
 
-            {/* RESPONSIVE DARK BENTO GRID DASHBOARD */}
+            {/* RESPONSIVE RETRO BENTO GRID DASHBOARD */}
             <div
               style={{
                 display: 'grid',
@@ -199,80 +191,52 @@ export default function GithubProfileSection() {
                 gap: '1.25rem'
               }}
             >
-              {/* BENTO TILE 1: PROFILE HERO CARD */}
+              {/* BENTO TILE 1: PROFILE HERO CARD (Yellow Box) */}
               <div
                 style={{
                   gridColumn: 'span 1',
-                  background: '#1e293b',
-                  border: '1.5px solid #334155',
-                  borderRadius: '14px',
-                  padding: '1.5rem',
+                  background: '#fde047',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  boxShadow: '3px 3px 0 #000000',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  gap: '1.25rem'
+                  gap: '1rem'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                  {/* Avatar */}
-                  <div style={{ position: 'relative' }}>
-                    <div
-                      style={{
-                        width: '64px',
-                        height: '64px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #38bdf8, #818cf8)',
-                        padding: '2px',
-                        boxShadow: '0 0 15px rgba(56, 189, 248, 0.3)'
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          borderRadius: '50%',
-                          background: '#0f172a',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '2.2rem'
-                        }}
-                      >
-                        🐸
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        position: 'absolute',
-                        bottom: '2px',
-                        right: '2px',
-                        width: '12px',
-                        height: '12px',
-                        borderRadius: '50%',
-                        background: '#22c55e',
-                        border: '2px solid #0f172a',
-                        boxShadow: '0 0 8px #22c55e'
-                      }}
-                    />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div
+                    style={{
+                      width: '56px',
+                      height: '56px',
+                      borderRadius: '50%',
+                      background: '#ffffff',
+                      border: '2px solid #000000',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '2rem',
+                      boxShadow: '2px 2px 0 #000000'
+                    }}
+                  >
+                    🐸
                   </div>
 
                   <div>
-                    <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
+                    <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
                       Arjun Sabu
                     </h3>
-                    <span style={{ fontSize: '0.85rem', color: '#38bdf8', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                    <span style={{ fontSize: '0.85rem', color: '#000000', fontWeight: 800, fontFamily: 'var(--font-mono, monospace)' }}>
                       @greninja-op
                     </span>
-                    <div style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '0.2rem' }}>
-                      AI Systems & SRE Reliability Engineer
-                    </div>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.65rem', borderRadius: '12px', background: 'rgba(34, 197, 94, 0.15)', border: '1px solid rgba(34, 197, 94, 0.35)', fontSize: '0.75rem', color: '#4ade80', fontWeight: 700 }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e' }} />
-                    Open to Roles
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div style={{ padding: '0.3rem 0.65rem', borderRadius: '4px', background: '#ffffff', border: '1.5px solid #000000', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+                    ● Open to Hiring
                   </div>
 
                   <a
@@ -280,59 +244,50 @@ export default function GithubProfileSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      padding: '0.55rem 1.1rem',
-                      borderRadius: '10px',
-                      background: '#06b6d4',
-                      color: '#ffffff',
-                      fontWeight: 800,
-                      fontSize: '0.85rem',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      boxShadow: '0 3px 10px rgba(6, 186, 212, 0.3)',
-                      transition: 'transform 0.15s ease'
+                      padding: '0.45rem 0.95rem',
+                      borderRadius: '6px',
+                      background: '#38bdf8',
+                      border: '2px solid #000000',
+                      boxShadow: '2px 2px 0 #000000',
+                      color: '#000000',
+                      fontWeight: 900,
+                      fontSize: '0.82rem',
+                      fontFamily: 'var(--font-mono, monospace)',
+                      textDecoration: 'none'
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                   >
-                    <IconGithub size={18} /> Follow ↗
+                    Follow ↗
                   </a>
                 </div>
               </div>
 
-              {/* BENTO TILE 2: ENGINEERING STATS SUMMARY */}
+              {/* BENTO TILE 2: ENGINEERING STATS SUMMARY (Cyan & Purple Tiles) */}
               <div
                 style={{
                   gridColumn: 'span 1',
-                  background: '#1e293b',
-                  border: '1.5px solid #334155',
-                  borderRadius: '14px',
-                  padding: '1.25rem',
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
-                  gap: '0.85rem',
-                  alignContent: 'center'
+                  gap: '0.85rem'
                 }}
               >
-                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: '#0f172a', border: '1px solid #334155' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#4ade80', lineHeight: 1 }}>1,420</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.2rem' }}>Contributions</div>
+                <div style={{ background: '#4ade80', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>1,420</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Commits</div>
                 </div>
 
-                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: '#0f172a', border: '1px solid #334155' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#38bdf8', lineHeight: 1 }}>147</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.2rem' }}>Streak Days</div>
+                <div style={{ background: '#38bdf8', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>147</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Streak Days</div>
                 </div>
 
-                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: '#0f172a', border: '1px solid #334155' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#c084fc', lineHeight: 1 }}>236★</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.2rem' }}>Total Stars</div>
+                <div style={{ background: '#c084fc', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>236★</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Total Stars</div>
                 </div>
 
-                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: '#0f172a', border: '1px solid #334155' }}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fb7185', lineHeight: 1 }}>Top 1%</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.2rem' }}>PR Velocity</div>
+                <div style={{ background: '#f472b6', border: '2px solid #000000', borderRadius: '8px', padding: '0.75rem', textAlign: 'center', boxShadow: '3px 3px 0 #000000' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>Top 1%</div>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>PR Velocity</div>
                 </div>
               </div>
 
@@ -340,27 +295,15 @@ export default function GithubProfileSection() {
               <div
                 style={{
                   gridColumn: '1 / -1',
-                  background: '#1e293b',
-                  border: '1.5px solid #334155',
-                  borderRadius: '14px',
-                  padding: '1.5rem',
-                  position: 'relative'
+                  background: '#ffffff',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  boxShadow: '3px 3px 0 #000000'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                  <div style={{ fontSize: '0.98rem', fontWeight: 800, color: '#ffffff' }}>
-                    1,420 Contributions in the Last Year
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#94a3b8' }}>
-                    <span>Less</span>
-                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#0f172a' }} />
-                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#14532d' }} />
-                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#166534' }} />
-                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#15803d' }} />
-                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#22c55e' }} />
-                    <span>More</span>
-                  </div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                  1,420 Contributions in the Last Year
                 </div>
 
                 {/* Heatmap Grid */}
@@ -376,11 +319,8 @@ export default function GithubProfileSection() {
                               height: '11px',
                               borderRadius: '2px',
                               background: getHeatmapColor(day.level),
-                              transition: 'transform 0.15s ease',
-                              cursor: 'pointer'
+                              border: '1px solid #000000'
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.3)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                             title={`${day.count} contributions`}
                           />
                         ))}
@@ -394,24 +334,26 @@ export default function GithubProfileSection() {
               <div
                 style={{
                   gridColumn: '1 / -1',
-                  background: '#1e293b',
-                  border: '1.5px solid #334155',
-                  borderRadius: '14px',
-                  padding: '1.35rem 1.5rem'
+                  background: '#ffffff',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  boxShadow: '3px 3px 0 #000000'
                 }}
               >
-                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.85rem' }}>
+                <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
                   Most Used Languages Across Repositories
                 </div>
 
                 <div
                   style={{
-                    height: '10px',
-                    borderRadius: '5px',
+                    height: '12px',
+                    borderRadius: '6px',
                     overflow: 'hidden',
                     display: 'flex',
                     marginBottom: '1rem',
-                    background: '#0f172a'
+                    border: '1.5px solid #000000',
+                    background: '#e2e8f0'
                   }}
                 >
                   {languages.map((l, idx) => (
@@ -429,10 +371,10 @@ export default function GithubProfileSection() {
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
                   {languages.map((l, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: '#cbd5e1', fontWeight: 600 }}>
-                      <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: l.color }} />
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: l.color, border: '1px solid #000000' }} />
                       <span>{l.name}</span>
-                      <span style={{ color: '#64748b', fontSize: '0.78rem' }}>{l.percent}%</span>
+                      <span style={{ opacity: 0.7 }}>{l.percent}%</span>
                     </div>
                   ))}
                 </div>
@@ -440,11 +382,11 @@ export default function GithubProfileSection() {
 
               {/* BENTO TILE 5: PINNED REPOSITORIES GRID */}
               <div style={{ gridColumn: '1 / -1' }}>
-                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem' }}>
+                <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
                   Featured Pinned Repositories
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: '1rem' }}>
                   {pinnedRepos.map((repo, idx) => (
                     <a
                       key={idx}
@@ -452,54 +394,47 @@ export default function GithubProfileSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        background: '#1e293b',
-                        border: '1.5px solid #334155',
-                        borderRadius: '14px',
+                        background: repo.badgeBg,
+                        border: '2px solid #000000',
+                        borderRadius: '8px',
                         padding: '1.25rem',
                         textDecoration: 'none',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        transition: 'transform 0.15s ease, border-color 0.15s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-3px)';
-                        e.currentTarget.style.borderColor = repo.badgeColor;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                        e.currentTarget.style.borderColor = '#334155';
+                        boxShadow: '3px 3px 0 #000000'
                       }}
                     >
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
                             📁 {repo.name}
                           </div>
 
                           <span
                             style={{
-                              fontSize: '0.7rem',
-                              padding: '0.18rem 0.5rem',
-                              borderRadius: '5px',
-                              background: `${repo.badgeColor}22`,
-                              color: repo.badgeColor,
-                              fontWeight: 700,
-                              border: `1px solid ${repo.badgeColor}44`
+                              fontSize: '0.72rem',
+                              padding: '0.15rem 0.5rem',
+                              borderRadius: '4px',
+                              background: '#ffffff',
+                              color: '#000000',
+                              fontWeight: 900,
+                              border: '1.5px solid #000000',
+                              fontFamily: 'var(--font-mono, monospace)'
                             }}
                           >
                             {repo.badge}
                           </span>
                         </div>
 
-                        <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.45, marginBottom: '1rem', fontWeight: 500 }}>
+                        <p style={{ fontSize: '0.88rem', color: '#000000', lineHeight: 1.45, marginBottom: '1rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                           {repo.desc}
                         </p>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#cbd5e1' }}>
-                          <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: repo.langColor }} />
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.82rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                          <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
                           {repo.lang}
                         </span>
 

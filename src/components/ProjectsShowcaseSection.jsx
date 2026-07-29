@@ -13,8 +13,8 @@ export default function ProjectsShowcaseSection() {
       category: "AI & OBSERVABILITY / SRE / TELEMETRY",
       year: "2025-2026",
       badge: "⚡ Agents of SigNoz Winner",
-      accentColor: "#38bdf8",
-      gradient: "linear-gradient(125deg, #0f172a 0%, #1e293b 35%, #0284c7 70%, #0369a1 100%)",
+      accentColor: "#000000",
+      gradient: "linear-gradient(125deg, #fde047 0%, #facc15 100%)",
       icon3d: "🪐",
       characterArt: "👨‍💻",
       description: "ChronoLens monitors live SigNoz OpenTelemetry trace feeds, predicts SLO breaches and AI agent cost spirals before outages happen, executes reversible circuit-breaker mitigations, and logs verifiable digital audit receipts.",
@@ -40,8 +40,8 @@ export default function ProjectsShowcaseSection() {
       category: "AI INFRASTRUCTURE / VECTOR GRAPH / LLM",
       year: "2025-2026",
       badge: "🧠 AI Context Graph",
-      accentColor: "#c084fc",
-      gradient: "linear-gradient(125deg, #0f172a 0%, #1e293b 35%, #7c3aed 70%, #5b21b6 100%)",
+      accentColor: "#000000",
+      gradient: "linear-gradient(125deg, #c084fc 0%, #a855f7 100%)",
       icon3d: "🔮",
       characterArt: "🤖",
       description: "Memoire indexes multi-step conversation trajectories into a vector similarity memory graph, solving LLM context window overflow and memory decay across extended autonomous agent tasks.",
@@ -67,8 +67,8 @@ export default function ProjectsShowcaseSection() {
       category: "SECURITY & CLOUD / WEBCRYPTO / VAULT",
       year: "2025-2026",
       badge: "🔐 Zero-Knowledge Vault",
-      accentColor: "#34d399",
-      gradient: "linear-gradient(125deg, #0f172a 0%, #1e293b 35%, #059669 70%, #047857 100%)",
+      accentColor: "#000000",
+      gradient: "linear-gradient(125deg, #4ade80 0%, #22c55e 100%)",
       icon3d: "💎",
       characterArt: "🛡️",
       description: "Enterprise cloud storage vault engineered for zero-trust asset protection. Assets are encrypted client-side using WebCrypto AES-GCM 256-bit keys before transmission, ensuring servers hold zero unencrypted bytes.",
@@ -94,8 +94,8 @@ export default function ProjectsShowcaseSection() {
       category: "DISTRIBUTED SYSTEMS / gRPC / WEBSOCKETS",
       year: "2025-2026",
       badge: "🔒 Lock Consensus Engine",
-      accentColor: "#fb7185",
-      gradient: "linear-gradient(125deg, #0f172a 0%, #1e293b 35%, #e11d48 70%, #9f1239 100%)",
+      accentColor: "#000000",
+      gradient: "linear-gradient(125deg, #f472b6 0%, #e11d48 100%)",
       icon3d: "⚡",
       characterArt: "⚡",
       description: "Real-time distributed file locking protocol designed for multi-user developer worktrees and AI agent code coordination. Prevents atomic edit collisions across remote workspaces.",
@@ -145,7 +145,7 @@ export default function ProjectsShowcaseSection() {
     <section
       id="projects"
       style={{
-        padding: '4rem 0',
+        padding: '3rem 0 2rem 0',
         position: 'relative'
       }}
     >
@@ -176,84 +176,76 @@ export default function ProjectsShowcaseSection() {
         </defs>
       </svg>
 
-      <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '0 1rem' }}>
         
-        {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
+        {/* MACINTOSH SYSTEM 7 WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: '#0f172a',
-            border: '2px solid #1e293b',
-            borderRadius: '16px',
+            background: '#ffffff',
+            border: '2px solid #000000',
+            borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
+            boxShadow: '6px 6px 0px #000000'
           }}
         >
-          {/* OS RETRO TITLE BAR HEADER */}
+          {/* MAC RETRO PINSTRIPE TITLE BAR HEADER */}
           <div
             style={{
-              background: '#1e293b',
-              borderBottom: '2px solid #334155',
-              padding: '0.65rem 1.25rem',
+              background: 'linear-gradient(90deg, #d946ef 0%, #c084fc 50%, #e879f9 100%)',
+              borderBottom: '2px solid #000000',
+              padding: '0.6rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#ef4444', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#f59e0b', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#22c55e', border: '1px solid #000000', display: 'inline-block' }} />
             </div>
 
             <div
               style={{
+                background: '#ffffff',
+                border: '2px solid #000000',
+                borderRadius: '4px',
+                padding: '0.2rem 1rem',
                 fontFamily: 'var(--font-mono, monospace)',
-                fontSize: '0.82rem',
-                fontWeight: 800,
-                color: '#ffffff',
-                letterSpacing: '0.05em'
+                fontSize: '0.85rem',
+                fontWeight: 900,
+                color: '#000000',
+                boxShadow: '2px 2px 0 #000000'
               }}
             >
-              FEATURED_PROJECTS_ALBUM.APP — System 7.5
+              Featured Open-Source Works Deck
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
+            <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
               [DECK: 4 APPS]
             </div>
           </div>
 
-          {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2.25rem 2rem' }}>
+          {/* WINDOW INNER CONTENT BODY */}
+          <div style={{ padding: '2rem 1.75rem', background: '#fafafa' }}>
             
             {/* Section Header */}
-            <div style={{ marginBottom: '2rem' }}>
+            <div style={{ marginBottom: '1.75rem' }}>
               <div
                 style={{
                   fontSize: '0.78rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  fontWeight: 800,
+                  fontWeight: 900,
                   fontFamily: 'var(--font-mono, monospace)',
-                  color: '#38bdf8',
-                  marginBottom: '0.3rem'
+                  color: '#000000',
+                  marginBottom: '0.25rem'
                 }}
               >
                 Section C • Interactive Portfolio Album Deck
               </div>
 
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-                  fontWeight: 800,
-                  color: '#ffffff',
-                  letterSpacing: '-0.025em'
-                }}
-              >
-                Featured Open-Source Works
-              </h2>
-
-              <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '0.3rem' }}>
+              <p style={{ color: '#000000', fontSize: '1.02rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', margin: 0 }}>
                 True SVG geometric folder cards with top-right & bottom-left cutouts. Hover to fan out horizontally along an arc!
               </p>
             </div>
@@ -265,16 +257,16 @@ export default function ProjectsShowcaseSection() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 marginBottom: '1.5rem',
-                color: '#94a3b8',
+                color: '#000000',
                 fontSize: '0.82rem',
                 fontFamily: 'var(--font-mono, monospace)',
-                fontWeight: 600
+                fontWeight: 900
               }}
             >
               <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <div>2025.1 — 2026.12</div>
-                <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#ffffff' }}>
+                <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#000000' }}>
                   //////
                 </div>
               </div>
@@ -304,20 +296,21 @@ export default function ProjectsShowcaseSection() {
                     style={{
                       position: expandedId ? 'relative' : 'absolute',
                       width: '100%',
-                      maxWidth: '780px',
+                      maxWidth: '760px',
                       background: p.gradient,
                       clipPath: 'url(#folderCardShape)',
                       WebkitClipPath: 'url(#folderCardShape)',
+                      border: '2px solid #000000',
                       boxShadow: isExpanded
-                        ? `0 25px 50px -10px rgba(0,0,0,0.6), 0 0 35px ${p.accentColor}55`
+                        ? `6px 6px 0 #000000`
                         : hovered
-                        ? `0 20px 40px rgba(0, 0, 0, 0.4)`
-                        : `0 12px 28px rgba(0, 0, 0, 0.35)`,
+                        ? `5px 5px 0 #000000`
+                        : `4px 4px 0 #000000`,
                       transform: getCardTransform(idx, isExpanded),
                       zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
                       transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
                       padding: '2.25rem 2rem 3rem 2rem',
-                      color: '#ffffff',
+                      color: '#000000',
                       cursor: 'pointer'
                     }}
                     className="true-svg-folder-card"
@@ -330,7 +323,7 @@ export default function ProjectsShowcaseSection() {
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 55%)',
+                        background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%)',
                         pointerEvents: 'none'
                       }}
                     />
@@ -345,11 +338,11 @@ export default function ProjectsShowcaseSection() {
                         paddingRight: '160px'
                       }}
                     >
-                      <div style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', color: '#cbd5e1', textTransform: 'uppercase' }}>
+                      <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', textTransform: 'uppercase', fontFamily: 'var(--font-mono, monospace)' }}>
                         DESIGN / {p.category}
                       </div>
 
-                      <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#cbd5e1' }}>
+                      <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
                         {p.year}
                       </div>
                     </div>
@@ -364,7 +357,6 @@ export default function ProjectsShowcaseSection() {
                           display: 'flex',
                           alignItems: 'center',
                           gap: '0.65rem',
-                          filter: 'drop-shadow(0 12px 20px rgba(0,0,0,0.4))',
                           userSelect: 'none',
                           zIndex: 3
                         }}
@@ -378,11 +370,11 @@ export default function ProjectsShowcaseSection() {
                       </div>
 
                       <div style={{ maxWidth: '450px', zIndex: 4 }}>
-                        <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#94a3b8', marginBottom: '0.25rem' }}>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#000000', marginBottom: '0.25rem', fontFamily: 'var(--font-mono, monospace)' }}>
                           {p.year}
                         </div>
 
-                        <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.02, marginBottom: '0.4rem', letterSpacing: '-0.03em' }}>
+                        <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#000000', lineHeight: 1.02, marginBottom: '0.4rem', letterSpacing: '-0.03em', fontFamily: 'var(--font-mono, monospace)' }}>
                           {p.title}
                         </h3>
 
@@ -393,14 +385,14 @@ export default function ProjectsShowcaseSection() {
                             fontWeight: 900,
                             letterSpacing: '0.25em',
                             textTransform: 'uppercase',
-                            color: '#38bdf8',
+                            color: '#000000',
                             marginBottom: '1rem'
                           }}
                         >
                           P O R T F O L I O  /  S Y S T E M S
                         </div>
 
-                        <p style={{ fontSize: '0.96rem', color: '#e2e8f0', lineHeight: 1.5, fontWeight: 500 }}>
+                        <p style={{ fontSize: '0.96rem', color: '#000000', lineHeight: 1.5, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                           {p.tagline}
                         </p>
                       </div>
@@ -419,22 +411,23 @@ export default function ProjectsShowcaseSection() {
                         <div
                           style={{
                             fontSize: '0.8rem',
-                            fontWeight: 800,
-                            color: p.accentColor,
+                            fontWeight: 900,
+                            fontFamily: 'var(--font-mono, monospace)',
+                            color: '#000000',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.35rem',
-                            background: 'rgba(15, 23, 42, 0.85)',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            background: '#ffffff',
+                            border: '2px solid #000000',
                             padding: '0.4rem 0.85rem',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                            borderRadius: '6px',
+                            boxShadow: '2px 2px 0 #000000'
                           }}
                         >
                           <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
                         </div>
 
-                        <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#cbd5e1' }}>
+                        <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
                           DESIGN / {p.id}
                         </div>
                       </div>
@@ -449,12 +442,12 @@ export default function ProjectsShowcaseSection() {
                         transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
                         marginTop: isExpanded ? '1.5rem' : '0px',
                         paddingTop: isExpanded ? '1.5rem' : '0px',
-                        borderTop: isExpanded ? '1px dashed rgba(255, 255, 255, 0.2)' : 'none',
+                        borderTop: isExpanded ? '2px dashed #000000' : 'none',
                         position: 'relative',
                         zIndex: 10
                       }}
                     >
-                      <p style={{ fontSize: '0.98rem', color: '#e2e8f0', lineHeight: 1.6, marginBottom: '1.25rem', fontWeight: 500 }}>
+                      <p style={{ fontSize: '0.98rem', color: '#000000', lineHeight: 1.6, marginBottom: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                         {p.description}
                       </p>
 
@@ -466,17 +459,18 @@ export default function ProjectsShowcaseSection() {
                           gap: '0.75rem',
                           marginBottom: '1.25rem',
                           padding: '1rem',
-                          borderRadius: '12px',
-                          background: 'rgba(15, 23, 42, 0.85)',
-                          border: '1px solid rgba(255, 255, 255, 0.15)'
+                          borderRadius: '8px',
+                          background: '#ffffff',
+                          border: '2px solid #000000',
+                          boxShadow: '3px 3px 0 #000000'
                         }}
                       >
                         {p.metrics.map((m, mIdx) => (
                           <div key={mIdx} style={{ textAlign: 'center' }}>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 900, color: p.accentColor }}>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
                               {m.value}
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.1rem' }}>
+                            <div style={{ fontSize: '0.75rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
                               {m.label}
                             </div>
                           </div>
@@ -485,10 +479,10 @@ export default function ProjectsShowcaseSection() {
 
                       {/* Key Technical Accomplishments */}
                       <div style={{ marginBottom: '1.25rem' }}>
-                        <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, color: '#cbd5e1', marginBottom: '0.5rem' }}>
+                        <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 900, color: '#000000', marginBottom: '0.5rem', fontFamily: 'var(--font-mono, monospace)' }}>
                           Key Technical Accomplishments:
                         </div>
-                        <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#e2e8f0', fontSize: '0.92rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.35rem', fontWeight: 500 }}>
+                        <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#000000', fontSize: '0.92rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.35rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                           {p.highlights.map((h, hIdx) => (
                             <li key={hIdx}>{h}</li>
                           ))}
@@ -505,10 +499,10 @@ export default function ProjectsShowcaseSection() {
                               fontFamily: 'var(--font-mono, monospace)',
                               padding: '0.3rem 0.65rem',
                               borderRadius: '5px',
-                              background: '#1e293b',
-                              border: '1px solid #334155',
-                              color: '#ffffff',
-                              fontWeight: 700
+                              background: '#ffffff',
+                              border: '1.5px solid #000000',
+                              color: '#000000',
+                              fontWeight: 900
                             }}
                           >
                             {tech}
@@ -525,16 +519,18 @@ export default function ProjectsShowcaseSection() {
                           onClick={(e) => e.stopPropagation()}
                           style={{
                             padding: '0.75rem 1.35rem',
-                            borderRadius: '9px',
-                            background: '#06b6d4',
-                            color: '#ffffff',
-                            fontWeight: 700,
+                            borderRadius: '6px',
+                            background: '#ffffff',
+                            border: '2px solid #000000',
+                            boxShadow: '3px 3px 0 #000000',
+                            color: '#000000',
+                            fontWeight: 900,
                             fontSize: '0.88rem',
+                            fontFamily: 'var(--font-mono, monospace)',
                             textDecoration: 'none',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.45rem',
-                            boxShadow: '0 4px 12px rgba(6, 186, 212, 0.3)'
+                            gap: '0.45rem'
                           }}
                         >
                           <IconGithub size={17} /> View GitHub Repo
@@ -547,12 +543,14 @@ export default function ProjectsShowcaseSection() {
                           onClick={(e) => e.stopPropagation()}
                           style={{
                             padding: '0.75rem 1.35rem',
-                            borderRadius: '9px',
-                            background: '#1e293b',
-                            border: '1px solid #334155',
-                            color: '#ffffff',
-                            fontWeight: 700,
+                            borderRadius: '6px',
+                            background: '#ffffff',
+                            border: '2px solid #000000',
+                            boxShadow: '3px 3px 0 #000000',
+                            color: '#000000',
+                            fontWeight: 900,
                             fontSize: '0.88rem',
+                            fontFamily: 'var(--font-mono, monospace)',
                             textDecoration: 'none',
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -575,13 +573,14 @@ export default function ProjectsShowcaseSection() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 marginTop: '1.75rem',
-                color: '#94a3b8',
+                color: '#000000',
                 fontSize: '0.8rem',
-                fontFamily: 'var(--font-mono, monospace)'
+                fontFamily: 'var(--font-mono, monospace)',
+                fontWeight: 900
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#ffffff' }}>
+                <div style={{ fontWeight: 900, fontSize: '0.95rem', letterSpacing: '0.15em', color: '#000000' }}>
                   //////
                 </div>
                 <div>DESIGN / SHANSHAN & ARJUN SABU</div>

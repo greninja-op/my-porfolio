@@ -11,184 +11,298 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
         position: 'relative'
       }}
     >
-      <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '0 1rem' }}>
         
-        {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
+        {/* MACINTOSH SYSTEM 7 WINDOW FRAME CONTAINER */}
         <div
           style={{
-            background: '#0f172a',
-            border: '2px solid #1e293b',
-            borderRadius: '16px',
+            background: '#ffffff',
+            border: '2px solid #000000',
+            borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.5)'
+            boxShadow: '6px 6px 0px #000000'
           }}
         >
-          {/* OS RETRO TITLE BAR HEADER */}
+          {/* MAC RETRO PINSTRIPE TITLE BAR HEADER */}
           <div
             style={{
-              background: '#1e293b',
-              borderBottom: '2px solid #334155',
-              padding: '0.65rem 1.25rem',
+              background: 'linear-gradient(90deg, #d946ef 0%, #c084fc 50%, #e879f9 100%)',
+              borderBottom: '2px solid #000000',
+              padding: '0.6rem 1.25rem',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              position: 'relative'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+            {/* Control Dots */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', zIndex: 2 }}>
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#ef4444', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#f59e0b', border: '1px solid #000000', display: 'inline-block' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#22c55e', border: '1px solid #000000', display: 'inline-block' }} />
             </div>
 
+            {/* Window Title Badge */}
             <div
               style={{
+                background: '#ffffff',
+                border: '2px solid #000000',
+                borderRadius: '4px',
+                padding: '0.2rem 1rem',
                 fontFamily: 'var(--font-mono, monospace)',
-                fontSize: '0.82rem',
-                fontWeight: 800,
-                color: '#ffffff',
-                letterSpacing: '0.05em'
+                fontSize: '0.85rem',
+                fontWeight: 900,
+                color: '#000000',
+                boxShadow: '2px 2px 0 #000000',
+                zIndex: 2
               }}
             >
-              ARCHITECT_PORTFOLIO.SYS — System 7.5
+              About Arjun Sabu (greninja-op)
             </div>
 
-            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#38bdf8', fontWeight: 700 }}>
-              [RECRUITER_MODE]
+            <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000', zIndex: 2 }}>
+              System 7.5 OS
             </div>
           </div>
 
-          {/* WINDOW INNER BODY */}
-          <div style={{ padding: '2.25rem 2rem' }}>
+          {/* WINDOW INNER CONTENT BODY */}
+          <div style={{ padding: '2rem 1.75rem', background: '#fafafa' }}>
             
-            {/* Status Badge */}
+            {/* YELLOW HEADER BOX: System Macintosh Info */}
             <div
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.35rem 0.85rem',
-                borderRadius: '20px',
-                background: 'rgba(34, 197, 94, 0.15)',
-                border: '1px solid rgba(34, 197, 94, 0.35)',
-                color: '#4ade80',
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                fontFamily: 'var(--font-mono, monospace)',
-                marginBottom: '1.25rem'
+                background: '#fde047',
+                border: '2px solid #000000',
+                borderRadius: '8px',
+                padding: '1.25rem 1.5rem',
+                boxShadow: '3px 3px 0 #000000',
+                marginBottom: '1.5rem',
+                position: 'relative'
               }}
             >
-              <span
+              <div
                 style={{
-                  width: '7px',
-                  height: '7px',
-                  borderRadius: '50%',
-                  background: '#22c55e',
-                  boxShadow: '0 0 8px #22c55e'
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '16px',
+                  background: '#ffffff',
+                  border: '1.5px solid #000000',
+                  borderRadius: '4px',
+                  padding: '0.1rem 0.5rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 900,
+                  fontFamily: 'var(--font-mono, monospace)',
+                  color: '#000000'
                 }}
-              />
-              Agents of SigNoz Winner • Open for High-Impact Engineering Roles
+              >
+                System Macintosh Info
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginTop: '0.25rem' }}>
+                <div>
+                  <h1 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)', letterSpacing: '-0.02em' }}>
+                    Arjun Sabu <span style={{ fontSize: '1rem', color: '#000000', opacity: 0.85 }}>@greninja-op</span>
+                  </h1>
+                  <div style={{ fontSize: '1.02rem', fontWeight: 800, color: '#000000', marginTop: '0.25rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                    AI Systems & Full-Stack Reliability Engineer
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: '#c084fc',
+                    border: '2px solid #000000',
+                    borderRadius: '6px',
+                    padding: '0.4rem 0.85rem',
+                    fontWeight: 900,
+                    fontSize: '0.82rem',
+                    fontFamily: 'var(--font-mono, monospace)',
+                    boxShadow: '2px 2px 0 #000000'
+                  }}
+                >
+                  Built on System 7 OS
+                </div>
+              </div>
             </div>
 
-            {/* Headline */}
-            <h1
-              style={{
-                fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
-                fontWeight: 800,
-                color: '#ffffff',
-                lineHeight: 1.15,
-                marginBottom: '1rem',
-                letterSpacing: '-0.025em'
-              }}
-            >
-              Full-Stack Engineer Specializing in{' '}
-              <span style={{ color: '#38bdf8' }}>
-                AI Systems, Telemetry & Distributed Infrastructure
-              </span>
-            </h1>
-
-            {/* Elevator Pitch */}
-            <p
-              style={{
-                fontSize: 'clamp(1rem, 2vw, 1.15rem)',
-                color: '#94a3b8',
-                lineHeight: 1.6,
-                maxWidth: '780px',
-                marginBottom: '2rem',
-                fontWeight: 400
-              }}
-            >
-              I build self-preventing SRE reliability control planes, long-term LLM vector context graphs, and zero-knowledge cloud security vaults. Focused on clean system design, sub-millisecond protocol performance, and engineering software that scales with zero downtime.
-            </p>
-
-            {/* CTA Buttons */}
+            {/* WHITE BIO BOX: Engineering Bio & Principles */}
             <div
               style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.85rem',
-                alignItems: 'center',
-                marginBottom: '2.25rem'
+                background: '#ffffff',
+                border: '2px solid #000000',
+                borderRadius: '8px',
+                padding: '1.25rem 1.5rem',
+                boxShadow: '3px 3px 0 #000000',
+                marginBottom: '1.5rem',
+                position: 'relative'
               }}
             >
-              {/* GitHub */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '16px',
+                  background: '#ffffff',
+                  border: '1.5px solid #000000',
+                  borderRadius: '4px',
+                  padding: '0.1rem 0.5rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 900,
+                  fontFamily: 'var(--font-mono, monospace)',
+                  color: '#000000'
+                }}
+              >
+                Engineering Bio & Principles
+              </div>
+
+              <p style={{ fontSize: '1.02rem', color: '#000000', lineHeight: 1.6, fontWeight: 700, margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
+                Passionate AI systems engineer focused on autonomous agent reliability, telemetry-driven self-healing, high-throughput distributed protocols, and zero-trust cloud vaults. Creator of ChronoLens, Nuvault, Memoire, and CFLS.
+              </p>
+            </div>
+
+            {/* 4 RETRO COLORED STATS CARDS */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '1.25rem',
+                marginBottom: '1.5rem'
+              }}
+            >
+              {/* Card 1: Purple */}
+              <div
+                style={{
+                  background: '#c084fc',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  textAlign: 'center',
+                  boxShadow: '3px 3px 0 #000000'
+                }}
+              >
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                  4 Apps
+                </div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#000000', marginTop: '0.2rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                  Proud Core Projects
+                </div>
+              </div>
+
+              {/* Card 2: Cyan */}
+              <div
+                style={{
+                  background: '#38bdf8',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  textAlign: 'center',
+                  boxShadow: '3px 3px 0 #000000'
+                }}
+              >
+                <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)', lineHeight: 1.1 }}>
+                  Agents of SigNoz Winner
+                </div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#000000', marginTop: '0.3rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                  Hackathons
+                </div>
+              </div>
+
+              {/* Card 3: Light Pink / Purple */}
+              <div
+                style={{
+                  background: '#e879f9',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  textAlign: 'center',
+                  boxShadow: '3px 3px 0 #000000'
+                }}
+              >
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                  99.9%
+                </div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#000000', marginTop: '0.2rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                  Reliability Uptime
+                </div>
+              </div>
+
+              {/* Card 4: Light Cyan */}
+              <div
+                style={{
+                  background: '#7dd3fc',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '1.25rem',
+                  textAlign: 'center',
+                  boxShadow: '3px 3px 0 #000000'
+                }}
+              >
+                <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                  1,400+
+                </div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#000000', marginTop: '0.2rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                  GitHub Commits
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons Row */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }}>
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  padding: '0.7rem 1.3rem',
-                  borderRadius: '10px',
-                  background: '#06b6d4',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
+                  padding: '0.65rem 1.25rem',
+                  borderRadius: '6px',
+                  background: '#38bdf8',
+                  border: '2px solid #000000',
+                  boxShadow: '3px 3px 0 #000000',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '0.88rem',
+                  fontFamily: 'var(--font-mono, monospace)',
                   textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
-                  boxShadow: '0 4px 14px rgba(6, 186, 212, 0.3)',
-                  transition: 'transform 0.15s ease'
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              >
-                <IconGithub size={18} /> GitHub Profile
-              </a>
-
-              {/* Resume PDF */}
-              <button
-                onClick={onOpenResume}
-                style={{
-                  padding: '0.7rem 1.3rem',
-                  borderRadius: '10px',
-                  background: '#1e293b',
-                  border: '1px solid #334155',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.45rem'
                 }}
               >
+                <IconGithub size={18} /> GitHub Profile
+              </a>
+
+              <button
+                onClick={onOpenResume}
+                style={{
+                  padding: '0.65rem 1.25rem',
+                  borderRadius: '6px',
+                  background: '#fde047',
+                  border: '2px solid #000000',
+                  boxShadow: '3px 3px 0 #000000',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '0.88rem',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  cursor: 'pointer'
+                }}
+              >
                 📄 View Resume (PDF)
               </button>
 
-              {/* LinkedIn */}
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  padding: '0.7rem 1.3rem',
-                  borderRadius: '10px',
-                  background: '#1e293b',
-                  border: '1px solid #334155',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
+                  padding: '0.65rem 1.25rem',
+                  borderRadius: '6px',
+                  background: '#c084fc',
+                  border: '2px solid #000000',
+                  boxShadow: '3px 3px 0 #000000',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '0.88rem',
+                  fontFamily: 'var(--font-mono, monospace)',
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -198,17 +312,18 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
                 <IconLinkedin size={18} /> LinkedIn
               </a>
 
-              {/* Email */}
               <a
                 href={`mailto:${personalInfo.email}`}
                 style={{
-                  padding: '0.7rem 1.3rem',
-                  borderRadius: '10px',
-                  background: '#1e293b',
-                  border: '1px solid #334155',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
+                  padding: '0.65rem 1.25rem',
+                  borderRadius: '6px',
+                  background: '#4ade80',
+                  border: '2px solid #000000',
+                  boxShadow: '3px 3px 0 #000000',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: '0.88rem',
+                  fontFamily: 'var(--font-mono, monospace)',
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -217,77 +332,6 @@ export default function HeroRecruiter({ onSwitchToOS, onOpenResume }) {
               >
                 <IconMail size={18} /> Direct Email
               </a>
-
-              {/* Switch to OS Playground */}
-              <button
-                onClick={onSwitchToOS}
-                style={{
-                  padding: '0.7rem 1.3rem',
-                  borderRadius: '10px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)',
-                  border: 'none',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.45rem',
-                  boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
-                  marginLeft: 'auto'
-                }}
-              >
-                🖥️ Launch OS Playground <IconArrowRight size={16} />
-              </button>
-            </div>
-
-            {/* Verified Metrics Cards */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: '1rem',
-                padding: '1.25rem',
-                borderRadius: '12px',
-                background: '#1e293b',
-                border: '1px solid #334155'
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#38bdf8' }}>
-                  SigNoz Winner
-                </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-                  Agents of SigNoz Hackathon
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#4ade80' }}>
-                  4 Core Apps
-                </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-                  Full-stack non-generic architectures
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#c084fc' }}>
-                  99.9% Uptime
-                </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-                  Predictive closed-loop control
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fb7185' }}>
-                  1,400+ Commits
-                </div>
-                <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-                  Active open-source contributions
-                </div>
-              </div>
             </div>
 
           </div>

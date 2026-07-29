@@ -1,62 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import HeroRecruiter from './HeroRecruiter';
 import GithubProfileSection from './GithubProfileSection';
 import TechStackSection from './TechStackSection';
 import ProjectsShowcaseSection from './ProjectsShowcaseSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
-import { personalInfo } from '../data/portfolioData';
-import { IconGithub, IconLinkedin, IconMail, IconArrowRight, IconSparkles } from './Icons';
 
 export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
   const [showResumeModal, setShowResumeModal] = useState(false);
-
-  // Default to Dark CyberPop OS Canvas
-  const [theme, setTheme] = useState('dark');
-  const [accentColor, setAccentColor] = useState('cyan');
-  const [fontStyle, setFontStyle] = useState('sans');
-
-  const accentHex = '#06b6d4';
-  const fontFamilyCss = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
 
   return (
     <div
       style={{
         minHeight: '100vh',
-        background: '#0b0f19',
-        color: '#f8fafc',
-        fontFamily: fontFamilyCss,
+        background: '#6366f1',
+        backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.45) 2.5px, transparent 2.5px)',
+        backgroundSize: '20px 20px',
+        color: '#000000',
+        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
         lineHeight: 1.5,
-        '--accent-primary': accentHex,
-        '--text-primary': '#ffffff',
-        '--text-secondary': '#94a3b8',
-        '--card-bg': '#0f172a',
-        '--code-bg': '#1e293b',
-        '--border-subtle': '#334155',
-        '--pill-bg': '#1e293b',
-        '--badge-bg': 'rgba(6, 182, 212, 0.15)',
-        '--badge-border': 'rgba(6, 182, 212, 0.35)',
-        '--btn-bg-primary': accentHex,
-        '--btn-bg-secondary': '#1e293b',
-        '--ui-radius': '14px',
-        '--footer-bg': '#0f172a'
+        paddingBottom: '4rem'
       }}
     >
-      {/* RETRO CYBERPOP OS TOP NAVIGATION BAR */}
+      {/* MACINTOSH SYSTEM 7 TOP MENU BAR */}
       <header
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 500,
-          background: '#0f172a',
-          borderBottom: '2px solid #1e293b',
-          padding: '0.75rem 1.5rem',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)'
+          background: '#ffffff',
+          borderBottom: '2px solid #000000',
+          padding: '0.4rem 1.25rem',
+          boxShadow: '0 4px 0 #000000',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
         }}
       >
         <div
           style={{
             maxWidth: '1180px',
+            width: '100%',
             margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
@@ -64,41 +48,39 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             gap: '1rem'
           }}
         >
-          {/* Brand Logo & Recruiter Pill */}
+          {/* Brand Logo & Title */}
           <a
             href="#hero"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.75rem',
+              gap: '0.65rem',
               textDecoration: 'none',
-              color: '#ffffff'
+              color: '#000000'
             }}
           >
             <div
               style={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '10px',
-                background: '#06b6d4',
+                width: '32px',
+                height: '32px',
+                borderRadius: '6px',
+                background: '#fde047',
+                border: '2px solid #000000',
+                boxShadow: '2px 2px 0 #000000',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fff',
+                color: '#000000',
                 fontWeight: 900,
-                fontSize: '1.1rem',
-                boxShadow: '0 0 12px rgba(6, 186, 212, 0.4)'
+                fontSize: '1rem'
               }}
             >
-              ⚡
+              🍎
             </div>
 
             <div>
-              <div style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                Arjun Sabu
-              </div>
-              <div style={{ fontSize: '0.72rem', color: '#06b6d4', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                @greninja-op • SRE & AI Systems
+              <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '-0.02em', color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                Arjun Sabu (greninja-op)
               </div>
             </div>
           </a>
@@ -108,37 +90,40 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '1.5rem',
-              fontSize: '0.88rem',
-              fontWeight: 600
+              gap: '1.25rem',
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              fontFamily: 'var(--font-mono, monospace)'
             }}
           >
-            <a href="#github" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
+            <a href="#github" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               GitHub Profile
             </a>
-            <a href="#tech-stack" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
+            <a href="#tech-stack" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Languages & Tools
             </a>
-            <a href="#projects" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
+            <a href="#projects" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Projects
             </a>
-            <a href="#contact" style={{ color: '#cbd5e1', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={(e) => (e.currentTarget.style.color = '#38bdf8')} onMouseLeave={(e) => (e.currentTarget.style.color = '#cbd5e1')}>
+            <a href="#contact" style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.5rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Contact & Socials
             </a>
           </nav>
 
           {/* Action CTAs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <button
               onClick={() => setShowResumeModal(true)}
               style={{
-                padding: '0.5rem 1rem',
-                borderRadius: '8px',
-                background: '#1e293b',
-                border: '1px solid #334155',
-                color: '#ffffff',
-                fontWeight: 700,
+                padding: '0.35rem 0.85rem',
+                borderRadius: '6px',
+                background: '#38bdf8',
+                border: '2px solid #000000',
+                boxShadow: '2px 2px 0 #000000',
+                color: '#000000',
+                fontWeight: 900,
                 fontSize: '0.82rem',
+                fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer'
               }}
             >
@@ -148,21 +133,22 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             <button
               onClick={onSwitchToOS}
               style={{
-                padding: '0.5rem 1.1rem',
-                borderRadius: '8px',
-                background: 'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)',
-                border: 'none',
-                color: '#ffffff',
-                fontWeight: 800,
+                padding: '0.35rem 0.95rem',
+                borderRadius: '6px',
+                background: '#c084fc',
+                border: '2px solid #000000',
+                boxShadow: '2px 2px 0 #000000',
+                color: '#000000',
+                fontWeight: 900,
                 fontSize: '0.82rem',
+                fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.4rem',
-                boxShadow: '0 4px 12px rgba(124, 58, 237, 0.4)'
+                gap: '0.35rem'
               }}
             >
-              🖥️ OS Playground ↗
+              🎛️ OS Playground ↗
             </button>
           </div>
         </div>
