@@ -80,16 +80,8 @@ export default function ContactFooterSection() {
             marginBottom: '3.5rem'
           }}
         >
-          {/* Left: Written-Out Email Copy Card */}
-          <div
-            style={{
-              background: 'var(--card-bg, #111827)',
-              border: '1px solid var(--border-subtle, #1f2937)',
-              borderRadius: 'var(--ui-radius, 18px)',
-              padding: '2rem',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
-            }}
-          >
+          {/* Left: Written-Out Email Copy */}
+          <div>
             <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary, #fff)', marginBottom: '0.4rem' }}>
               Direct Written Email Address
             </h3>
@@ -181,14 +173,9 @@ export default function ContactFooterSection() {
           <form
             onSubmit={handleSubmit}
             style={{
-              background: 'var(--card-bg, #111827)',
-              border: '1px solid var(--border-subtle, #1f2937)',
-              borderRadius: 'var(--ui-radius, 18px)',
-              padding: '2rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.25rem',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
+              gap: '1.25rem'
             }}
           >
             <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary, #fff)', margin: 0 }}>

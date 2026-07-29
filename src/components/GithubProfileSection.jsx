@@ -120,17 +120,7 @@ export default function GithubProfileSection() {
         </p>
       </div>
 
-      {/* Main GitHub Profile Container */}
-      <div
-        style={{
-          background: 'var(--card-bg, #111827)',
-          border: '1px solid var(--border-subtle, #1f2937)',
-          borderRadius: 'var(--ui-radius, 18px)',
-          padding: '2rem',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
-        }}
-      >
-        {/* Profile Header Row */}
+      {/* Profile Header Row (Directly on canvas) */}
         <div
           style={{
             display: 'flex',
@@ -371,7 +361,6 @@ export default function GithubProfileSection() {
             ))}
           </div>
         </div>
-      </div>
     </section>
   );
 }
