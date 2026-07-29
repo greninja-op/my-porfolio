@@ -5,7 +5,6 @@ import TechStackSection from './TechStackSection';
 import ProjectsShowcaseSection from './ProjectsShowcaseSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
-import UIConfigurator from './UIConfigurator';
 import { personalInfo } from '../data/portfolioData';
 import { IconGithub, IconLinkedin, IconMail, IconArrowRight, IconSparkles } from './Icons';
 
@@ -247,18 +246,6 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         {/* Section D: Direct Contact & Rich Social Media Footer (Instagram, GitHub, LinkedIn, Twitter, Discord) */}
         <ContactFooterSection />
       </main>
-
-      {/* Live UI Configurator Floating Widget */}
-      <UIConfigurator
-        theme={theme}
-        setTheme={setTheme}
-        accentColor={accentColor}
-        setAccentColor={setAccentColor}
-        fontStyle={fontStyle}
-        setFontStyle={setFontStyle}
-        borderRadius={borderRadius}
-        setBorderRadius={setBorderRadius}
-      />
 
       {/* Resume PDF Viewer Modal */}
       {showResumeModal && (
