@@ -160,3 +160,17 @@ export const IconSend = ({ size = 20, color = "currentColor" }) => (
     <polygon points="22 2 15 22 11 13 2 9 22 2" />
   </svg>
 );
+
+export const IconInstagram = ({ size = 20, color = "currentColor" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+export const IconDiscord = ({ size = 20, color = "currentColor" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 6h0a14 14 0 0 0-4-1.2A.1.1 0 0 0 13.9 5a10 10 0 0 0-.8 1.6 13 13 0 0 0-4.2 0A10 10 0 0 0 8.1 5a.1.1 0 0 0-.1-.2A14 14 0 0 0 4 6a.1.1 0 0 0 0 .1C2 9.4 1.4 12.7 1.8 16a.1.1 0 0 0 0 .1 14 14 0 0 0 4.2 2.1.1.1 0 0 0 .1 0c.3-.5.6-1 1-1.5a.1.1 0 0 0-.1-.1 9 9 0 0 1-1.4-.7.1.1 0 0 1 0-.2c.1 0 .2-.1.3-.2a10 10 0 0 0 8.4 0c.1.1.2.1.3.2a.1.1 0 0 1 0 .2 9 9 0 0 1-1.4.7.1.1 0 0 0 0 .1c.3.5.7 1 1 1.5a.1.1 0 0 0 .1 0 14 14 0 0 0 4.2-2.1.1.1 0 0 0 0-.1c.5-3.8-.1-7.1-2.2-9.9zM8.5 13.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm7 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5z" />
+  </svg>
+);

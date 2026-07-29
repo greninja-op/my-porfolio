@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import HeroRecruiter from './HeroRecruiter';
-import ProjectsRecruiter from './ProjectsRecruiter';
-import SkillsRecruiter from './SkillsRecruiter';
-import GithubHighlights from './GithubHighlights';
-import ExperienceTimeline from './ExperienceTimeline';
-import ContactFooter from './ContactFooter';
+import GithubProfileSection from './GithubProfileSection';
+import TechStackSection from './TechStackSection';
+import ProjectsShowcaseSection from './ProjectsShowcaseSection';
+import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
 import UIConfigurator from './UIConfigurator';
 import { personalInfo } from '../data/portfolioData';
@@ -71,7 +70,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
       >
         <div
           style={{
-            maxWidth: '1150px',
+            maxWidth: '1180px',
             margin: '0 auto',
             display: 'flex',
             alignItems: 'center',
@@ -127,7 +126,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             </div>
           </a>
 
-          {/* Explicit Desktop Navigation Links (Visible immediately, NO hamburger on desktop!) */}
+          {/* Explicit Desktop Navigation Links */}
           <nav
             style={{
               display: 'flex',
@@ -136,20 +135,17 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             }}
             className="recruiter-nav-links"
           >
-            <a href="#projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+            <a href="#github-profile" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+              GitHub Profile
+            </a>
+            <a href="#tech-stack" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
+              Languages & Tools
+            </a>
+            <a href="#projects-showcase" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
               Projects
             </a>
-            <a href="#skills" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
-              Skills
-            </a>
-            <a href="#github" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
-              Proof of Work
-            </a>
-            <a href="#timeline" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
-              Experience
-            </a>
             <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem' }}>
-              Contact
+              Contact & Socials
             </a>
           </nav>
 
@@ -231,28 +227,25 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         </div>
       </header>
 
-      {/* Main 6-Section Recruiter Layout */}
+      {/* Recruiter Layout Core Showcase Sections */}
       <main>
-        {/* Section 1: Above-the-Fold Hero */}
+        {/* Intro Hero Section */}
         <HeroRecruiter
           onSwitchToOS={onSwitchToOS}
           onOpenResume={() => setShowResumeModal(true)}
         />
 
-        {/* Section 2: Featured Projects (Center Stage) */}
-        <ProjectsRecruiter />
+        {/* Section A: GitHub Profile Reference & 365-Day Contribution Heatmap Grid */}
+        <GithubProfileSection />
 
-        {/* Section 3: Technical Skills Matrix (Categorized, NO skill bars) */}
-        <SkillsRecruiter />
+        {/* Section B: Languages Known & Tools Matrix */}
+        <TechStackSection />
 
-        {/* Section 4: GitHub & Open Source Highlights */}
-        <GithubHighlights />
+        {/* Section C: Beautiful Project Showcase Layer (Structured Mockup Data) */}
+        <ProjectsShowcaseSection />
 
-        {/* Section 5: Work Experience / Journey */}
-        <ExperienceTimeline />
-
-        {/* Section 6: Friction-Free Contact & Footer */}
-        <ContactFooter />
+        {/* Section D: Direct Contact & Rich Social Media Footer (Instagram, GitHub, LinkedIn, Twitter, Discord) */}
+        <ContactFooterSection />
       </main>
 
       {/* Live UI Configurator Floating Widget */}
