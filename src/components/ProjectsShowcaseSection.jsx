@@ -220,281 +220,284 @@ export default function ProjectsShowcaseSection() {
           {projects.map((p, idx) => {
             const isExpanded = expandedId === p.id;
             return (
+              /* Outer Wrapper Element applying drop-shadow contour filter around exact SVG clipPath shape */
               <div
                 key={p.id}
-                onClick={() => toggleExpand(p.id)}
                 style={{
                   position: expandedId ? 'relative' : 'absolute',
                   width: '100%',
                   maxWidth: '760px',
-                  background: p.gradient,
-                  clipPath: 'url(#folderCardShape)',
-                  WebkitClipPath: 'url(#folderCardShape)',
-                  border: '2px solid #000000',
-                  boxShadow: isExpanded
-                    ? `6px 6px 0 #000000`
-                    : hovered
-                    ? `5px 5px 0 #000000`
-                    : `4px 4px 0 #000000`,
                   transform: getCardTransform(idx, isExpanded),
                   zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
                   transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                  padding: '2.25rem 2rem 3rem 2rem',
-                  color: '#000000',
-                  cursor: 'pointer'
+                  filter: 'drop-shadow(2px 0 0 #000000) drop-shadow(-2px 0 0 #000000) drop-shadow(0 2px 0 #000000) drop-shadow(0 -2px 0 #000000) drop-shadow(4px 4px 0 #000000)'
                 }}
-                className="true-svg-folder-card"
               >
-                {/* High-Gloss Liquid Sheen Overlay */}
                 <div
+                  onClick={() => toggleExpand(p.id)}
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%)',
-                    pointerEvents: 'none'
+                    width: '100%',
+                    background: p.gradient,
+                    clipPath: 'url(#folderCardShape)',
+                    WebkitClipPath: 'url(#folderCardShape)',
+                    padding: '2.25rem 2rem 3rem 2rem',
+                    color: '#000000',
+                    cursor: 'pointer',
+                    position: 'relative'
                   }}
-                />
-
-                {/* Card Top Category Tag Header */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '1.25rem',
-                    paddingRight: '160px'
-                  }}
+                  className="true-svg-folder-card"
                 >
-                  <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', textTransform: 'uppercase', fontFamily: 'var(--font-mono, monospace)' }}>
-                    DESIGN / {p.category}
-                  </div>
-
-                  <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
-                    {p.year}
-                  </div>
-                </div>
-
-                {/* Card Main Body */}
-                <div style={{ position: 'relative', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  {/* High-Gloss Liquid Sheen Overlay */}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '0px',
-                      right: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.65rem',
-                      userSelect: 'none',
-                      zIndex: 3
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%)',
+                      pointerEvents: 'none'
                     }}
-                  >
-                    <span style={{ fontSize: '3.8rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
-                      {p.icon3d}
-                    </span>
-                    <span style={{ fontSize: '3.2rem', display: 'inline-block' }}>
-                      {p.characterArt}
-                    </span>
-                  </div>
+                  />
 
-                  <div style={{ maxWidth: '450px', zIndex: 4 }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#000000', marginBottom: '0.25rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                      {p.year}
-                    </div>
-
-                    <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#000000', lineHeight: 1.02, marginBottom: '0.4rem', letterSpacing: '-0.03em', fontFamily: 'var(--font-mono, monospace)' }}>
-                      {p.title}
-                    </h3>
-
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                        fontSize: '0.85rem',
-                        fontWeight: 900,
-                        letterSpacing: '0.25em',
-                        textTransform: 'uppercase',
-                        color: '#000000',
-                        marginBottom: '1rem'
-                      }}
-                    >
-                      P O R T F O L I O  /  S Y S T E M S
-                    </div>
-
-                    <p style={{ fontSize: '0.96rem', color: '#000000', lineHeight: 1.5, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                      {p.tagline}
-                    </p>
-                  </div>
-
-                  {/* Card Bottom Trigger Bar */}
+                  {/* Card Top Category Tag Header */}
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      marginTop: '1.5rem',
-                      paddingLeft: '160px',
-                      zIndex: 4
+                      marginBottom: '1.25rem',
+                      paddingRight: '160px'
                     }}
                   >
+                    <div style={{ fontSize: '0.75rem', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', textTransform: 'uppercase', fontFamily: 'var(--font-mono, monospace)' }}>
+                      DESIGN / {p.category}
+                    </div>
+
+                    <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
+                      {p.year}
+                    </div>
+                  </div>
+
+                  {/* Card Main Body */}
+                  <div style={{ position: 'relative', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div
                       style={{
-                        fontSize: '0.8rem',
-                        fontWeight: 900,
-                        fontFamily: 'var(--font-mono, monospace)',
-                        color: '#000000',
+                        position: 'absolute',
+                        top: '0px',
+                        right: '10px',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.35rem',
-                        background: '#ffffff',
-                        border: '2px solid #000000',
-                        padding: '0.4rem 0.85rem',
-                        borderRadius: '6px',
-                        boxShadow: '2px 2px 0 #000000'
+                        gap: '0.65rem',
+                        userSelect: 'none',
+                        zIndex: 3
                       }}
                     >
-                      <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
+                      <span style={{ fontSize: '3.8rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
+                        {p.icon3d}
+                      </span>
+                      <span style={{ fontSize: '3.2rem', display: 'inline-block' }}>
+                        {p.characterArt}
+                      </span>
                     </div>
 
-                    <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
-                      DESIGN / {p.id}
-                    </div>
-                  </div>
-                </div>
-
-                {/* IN-PLACE ANIMATED EXPANSION PANEL */}
-                <div
-                  style={{
-                    maxHeight: isExpanded ? '900px' : '0px',
-                    opacity: isExpanded ? 1 : 0,
-                    overflow: 'hidden',
-                    transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                    marginTop: isExpanded ? '1.5rem' : '0px',
-                    paddingTop: isExpanded ? '1.5rem' : '0px',
-                    borderTop: isExpanded ? '2px dashed #000000' : 'none',
-                    position: 'relative',
-                    zIndex: 10
-                  }}
-                >
-                  <p style={{ fontSize: '0.98rem', color: '#000000', lineHeight: 1.6, marginBottom: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                    {p.description}
-                  </p>
-
-                  {/* 3-Column Metrics Counters */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(3, 1fr)',
-                      gap: '0.75rem',
-                      marginBottom: '1.25rem',
-                      padding: '1rem',
-                      borderRadius: '8px',
-                      background: '#ffffff',
-                      border: '2px solid #000000',
-                      boxShadow: '3px 3px 0 #000000'
-                    }}
-                  >
-                    {p.metrics.map((m, mIdx) => (
-                      <div key={mIdx} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
-                          {m.value}
-                        </div>
-                        <div style={{ fontSize: '0.75rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                          {m.label}
-                        </div>
+                    <div style={{ maxWidth: '450px', zIndex: 4 }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 900, color: '#000000', marginBottom: '0.25rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                        {p.year}
                       </div>
-                    ))}
-                  </div>
 
-                  {/* Key Technical Accomplishments */}
-                  <div style={{ marginBottom: '1.25rem' }}>
-                    <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 900, color: '#000000', marginBottom: '0.5rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                      Key Technical Accomplishments:
-                    </div>
-                    <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#000000', fontSize: '0.92rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.35rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                      {p.highlights.map((h, hIdx) => (
-                        <li key={hIdx}>{h}</li>
-                      ))}
-                    </ul>
-                  </div>
+                      <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#000000', lineHeight: 1.02, marginBottom: '0.4rem', letterSpacing: '-0.03em', fontFamily: 'var(--font-mono, monospace)' }}>
+                        {p.title}
+                      </h3>
 
-                  {/* Tech Stack Pills */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.5rem' }}>
-                    {p.techStack.map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
+                      <div
                         style={{
-                          fontSize: '0.78rem',
-                          fontFamily: 'var(--font-mono, monospace)',
-                          padding: '0.3rem 0.65rem',
-                          borderRadius: '5px',
-                          background: '#ffffff',
-                          border: '1.5px solid #000000',
+                          fontFamily: 'var(--font-heading, system-ui, sans-serif)',
+                          fontSize: '0.85rem',
+                          fontWeight: 900,
+                          letterSpacing: '0.25em',
+                          textTransform: 'uppercase',
                           color: '#000000',
-                          fontWeight: 900
+                          marginBottom: '1rem'
                         }}
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        P O R T F O L I O  /  S Y S T E M S
+                      </div>
+
+                      <p style={{ fontSize: '0.96rem', color: '#000000', lineHeight: 1.5, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                        {p.tagline}
+                      </p>
+                    </div>
+
+                    {/* Card Bottom Trigger Bar */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginTop: '1.5rem',
+                        paddingLeft: '160px',
+                        zIndex: 4
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '0.8rem',
+                          fontWeight: 900,
+                          fontFamily: 'var(--font-mono, monospace)',
+                          color: '#000000',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          background: '#ffffff',
+                          border: '2px solid #000000',
+                          padding: '0.4rem 0.85rem',
+                          borderRadius: '6px',
+                          boxShadow: '2px 2px 0 #000000'
+                        }}
+                      >
+                        <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
+                      </div>
+
+                      <div style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 900, color: '#000000' }}>
+                        DESIGN / {p.id}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Action CTAs */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playRetroClick();
-                      }}
-                      style={{
-                        padding: '0.75rem 1.35rem',
-                        borderRadius: '6px',
-                        background: '#ffffff',
-                        border: '2px solid #000000',
-                        boxShadow: '3px 3px 0 #000000',
-                        color: '#000000',
-                        fontWeight: 900,
-                        fontSize: '0.88rem',
-                        fontFamily: 'var(--font-mono, monospace)',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.45rem'
-                      }}
-                    >
-                      <IconGithub size={17} /> View GitHub Repo
-                    </a>
+                  {/* IN-PLACE ANIMATED EXPANSION PANEL */}
+                  <div
+                    style={{
+                      maxHeight: isExpanded ? '900px' : '0px',
+                      opacity: isExpanded ? 1 : 0,
+                      overflow: 'hidden',
+                      transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+                      marginTop: isExpanded ? '1.5rem' : '0px',
+                      paddingTop: isExpanded ? '1.5rem' : '0px',
+                      borderTop: isExpanded ? '2px dashed #000000' : 'none',
+                      position: 'relative',
+                      zIndex: 10
+                    }}
+                  >
+                    <p style={{ fontSize: '0.98rem', color: '#000000', lineHeight: 1.6, marginBottom: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                      {p.description}
+                    </p>
 
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playRetroClick();
-                      }}
+                    {/* 3-Column Metrics Counters */}
+                    <div
                       style={{
-                        padding: '0.75rem 1.35rem',
-                        borderRadius: '6px',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(3, 1fr)',
+                        gap: '0.75rem',
+                        marginBottom: '1.25rem',
+                        padding: '1rem',
+                        borderRadius: '8px',
                         background: '#ffffff',
                         border: '2px solid #000000',
-                        boxShadow: '3px 3px 0 #000000',
-                        color: '#000000',
-                        fontWeight: 900,
-                        fontSize: '0.88rem',
-                        fontFamily: 'var(--font-mono, monospace)',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.45rem'
+                        boxShadow: '3px 3px 0 #000000'
                       }}
                     >
-                      <IconExternalLink size={17} /> Architecture Specs
-                    </a>
+                      {p.metrics.map((m, mIdx) => (
+                        <div key={mIdx} style={{ textAlign: 'center' }}>
+                          <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                            {m.value}
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                            {m.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Key Technical Accomplishments */}
+                    <div style={{ marginBottom: '1.25rem' }}>
+                      <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 900, color: '#000000', marginBottom: '0.5rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                        Key Technical Accomplishments:
+                      </div>
+                      <ul style={{ paddingLeft: '1.1rem', margin: 0, color: '#000000', fontSize: '0.92rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.35rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                        {p.highlights.map((h, hIdx) => (
+                          <li key={hIdx}>{h}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Tech Stack Pills */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.5rem' }}>
+                      {p.techStack.map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          style={{
+                            fontSize: '0.78rem',
+                            fontFamily: 'var(--font-mono, monospace)',
+                            padding: '0.3rem 0.65rem',
+                            borderRadius: '5px',
+                            background: '#ffffff',
+                            border: '1.5px solid #000000',
+                            color: '#000000',
+                            fontWeight: 900
+                          }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Action CTAs */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playRetroClick();
+                        }}
+                        style={{
+                          padding: '0.75rem 1.35rem',
+                          borderRadius: '6px',
+                          background: '#ffffff',
+                          border: '2px solid #000000',
+                          boxShadow: '3px 3px 0 #000000',
+                          color: '#000000',
+                          fontWeight: 900,
+                          fontSize: '0.88rem',
+                          fontFamily: 'var(--font-mono, monospace)',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.45rem'
+                        }}
+                      >
+                        <IconGithub size={17} /> View GitHub Repo
+                      </a>
+
+                      <a
+                        href={p.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playRetroClick();
+                        }}
+                        style={{
+                          padding: '0.75rem 1.35rem',
+                          borderRadius: '6px',
+                          background: '#ffffff',
+                          border: '2px solid #000000',
+                          boxShadow: '3px 3px 0 #000000',
+                          color: '#000000',
+                          fontWeight: 900,
+                          fontSize: '0.88rem',
+                          fontFamily: 'var(--font-mono, monospace)',
+                          textDecoration: 'none',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.45rem'
+                        }}
+                      >
+                        <IconExternalLink size={17} /> Architecture Specs
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
