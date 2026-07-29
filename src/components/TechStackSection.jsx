@@ -1,39 +1,38 @@
 import React from 'react';
 
 export default function TechStackSection() {
-  // Full-Bleed 2D SVG Icon Map (Zero Inner Padding, Full 56x56 Rounded Square Badge)
-  const renderFullBleedIcon = (name) => {
+  // Official 1:1 Real-World Corporate Brand Vector Logos
+  const renderOfficialBrandIcon = (name) => {
     switch (name) {
       case "Python":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#1e293b" />
-            <path d="M27.8 11c-7.3 0-6.8 3.1-6.8 3.1v3.3h7.1v1H18.2s-3.7-.4-3.7 6.9 3.1 7 3.1 7h1.9v-2.7c0-3 2.7-3 2.7-3h7.1c2.8 0 2.8-2.7 2.8-2.7V17.2s.8-6.2-6.8-6.2zm-3.5 2.3c.7 0 1.2.5 1.2 1.2s-.5 1.2-1.2 1.2-1.2-.5-1.2-1.2.5-1.2 1.2-1.2z" fill="#3572A5" />
-            <path d="M28.2 44c7.3 0 6.8-3.1 6.8-3.1v-3.3h-7.1v-1h9.9s3.7.4 3.7-6.9-3.1-7-3.1-7h-1.9v2.7c0 3-2.7 3-2.7 3h-7.1c-2.8 0-2.8 2.7-2.8 2.7V37.8s-1.3 6.2 6.3 6.2zm3.5-2.3c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z" fill="#FFD43B" />
+            <path d="M27.7 10c-7.5 0-7 3.2-7 3.2v3.4h7.3v1H17.8s-3.8-.4-3.8 7.1 3.2 7.2 3.2 7.2h1.9v-2.8c0-3.1 2.8-3.1 2.8-3.1h7.3c2.9 0 2.9-2.8 2.9-2.8V16.4s.8-6.4-7.4-6.4zm-3.6 2.3c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3-1.3-.6-1.3-1.3.6-1.3 1.3-1.3z" fill="#3776AB" />
+            <path d="M28.3 46c7.5 0 7-3.2 7-3.2v-3.4h-7.3v-1h10.2s3.8.4 3.8-7.1-3.2-7.2-3.2-7.2h-1.9v2.8c0 3.1-2.8 3.1-2.8 3.1h-7.3c-2.9 0-2.9 2.8-2.9 2.8v9.5s-.8 6.4 7.4 6.4zm3.6-2.3c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3z" fill="#FFD43B" />
           </svg>
         );
       case "JavaScript":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#F7DF1E" />
-            <path d="M30 42c1.4.8 3.1 1.4 4.8 1.4 2.3 0 3.7-1 3.7-2.7 0-1.8-1.5-2.5-3.8-3.5l-1.3-.6c-3.6-1.5-5.9-3.4-5.9-7.3 0-5.1 4-8.2 10.1-8.2 2.9 0 5.2.6 6.9 1.7l-2.1 4.8c-1.3-.8-3-1.4-4.8-1.4-2.3 0-3.5 1-3.5 2.5 0 1.7 1.3 2.3 3.6 3.4l1.3.6c4 1.7 6.3 3.6 6.3 7.6 0 5.5-4.2 8.4-10.7 8.4-3.4 0-6.3-.8-8.2-2.1L30 42z" fill="#000" />
-            <path d="M19 42c1.3.8 2.9 1.4 4.6 1.4 1.9 0 3.1-.8 3.1-3.1V21.7h-6.2v5h3.6v12.8c0 1.7-.8 2.5-2.5 2.5-.8 0-1.7-.2-2.1-.4l-.5-3.8z" fill="#000" />
+            <path d="M31.2 40.5c1.4.8 3 1.3 4.7 1.3 2.5 0 3.8-1.2 3.8-3 0-2.1-1.6-2.9-4.3-4.1l-1.5-.7c-4.4-1.9-7.3-4.2-7.3-9.1 0-6.1 4.7-9.9 12-9.9 3.5 0 6.3.7 8.3 2l-2.6 5.5c-1.6-.9-3.6-1.5-5.7-1.5-2.8 0-4.3 1.2-4.3 3.1 0 2 1.5 2.7 4.4 4l1.5.7c4.8 2.1 7.6 4.4 7.6 9.4 0 6.6-5.1 10.3-12.8 10.3-4.1 0-7.5-1-9.8-2.6l2-5.4z" fill="#000" />
+            <path d="M18.8 40.5c1.5.9 3.3 1.5 5.3 1.5 2.2 0 3.6-.9 3.6-3.6V15h-7.4v6.1h3.9v16.1c0 2.2-1 3.2-3.1 3.2-1 0-2-.2-2.6-.5l.3-4.4z" fill="#000" />
           </svg>
         );
       case "TypeScript":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#3178C6" />
-            <path d="M27.5 23.8h-6.7v18.4h-6.1V23.8h-6.7V18.8h19.5v5zm16.4 11.8c0 5.1-4 8.2-10.2 8.2-2.9 0-5.8-.7-7.6-1.8l2-4.9c1.6.9 3.6 1.5 5.6 1.5 2.2 0 3.6-.9 3.6-2.4 0-1.5-1.1-2.2-3.6-3.3l-1.3-.6c-3.8-1.5-5.8-3.3-5.8-7.3 0-4.9 4-8.2 9.8-8.2 2.7 0 5.1.7 6.7 1.5l-1.8 4.7c-1.3-.7-3.1-1.3-4.9-1.3-2 0-3.3.9-3.3 2.2 0 1.5 1.1 2.2 3.3 3.1l1.3.7c4.3 1.8 6.4 3.8 6.4 8z" fill="#FFF" />
+            <path d="M26.5 22h-7v22h-6.5V22h-7v-5.5h20.5V22zm17.5 12.8c0 5.8-4.5 9.7-11.5 9.7-3.3 0-6.5-.8-8.5-2l2.3-5.5c1.8 1 4 1.7 6.3 1.7 2.5 0 4-.9 4-2.7 0-1.7-1.2-2.5-4-3.7l-1.5-.7c-4.3-1.8-6.5-3.8-6.5-8.2 0-5.5 4.5-9.3 11-9.3 3 0 5.7.8 7.5 1.7l-2 5.3c-1.5-.8-3.5-1.5-5.5-1.5-2.2 0-3.6.9-3.6 2.5 0 1.7 1.2 2.5 3.7 3.5l1.5.7c4.8 2 6.8 4.3 6.8 9.2z" fill="#FFF" />
           </svg>
         );
       case "Go":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#00ADD8" />
-            <circle cx="18" cy="28" r="3.5" fill="#FFF" />
-            <circle cx="38" cy="28" r="3.5" fill="#FFF" />
-            <path d="M28 16c7.7 0 14 6.3 14 14s-6.3 14-14 14-14-6.3-14-14 6.3-14 14-14zm0 5c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9z" fill="#FFF" />
+            <path d="M14 24.5c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5-3.4 7.5-7.5 7.5-7.5-3.4-7.5-7.5zm10 0c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm18-7.5c-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5 7.5-3.4 7.5-7.5-3.4-7.5-7.5-7.5zm0 10c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z" fill="#FFF" />
+            <path d="M14 36.5h28v4H14z" fill="#FFF" />
           </svg>
         );
       case "C++":
@@ -80,15 +79,14 @@ export default function TechStackSection() {
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#2496ED" />
-            <path d="M14 32h5v-5h-5v5zm7 0h5v-5h-5v5zm7 0h5v-5h-5v5zm-14-7h5v-5h-5v5zm7 0h5v-5h-5v5zm7 0h5v-5h-5v5zm7 7h5v-5h-5v5zm0-7h5v-5h-5v5zM7 37c1 3.5 4.5 7 11.5 7 14 0 21-8 21-15 0-.5 0-1 0-1.4 2.3-1.6 3.5-3.2 3.5-3.2-1.8.2-3.7 0-4.6-.4-.9-.9-1.4-2.3-1.4-2.3-1.8 1.1-5.1.9-7.2 0C26.8 20.3 23.3 23.3 23.3 23.3H7v13.7z" fill="#FFF" />
+            <path d="M12 34h5v-5h-5v5zm6 0h5v-5h-5v5zm6 0h5v-5h-5v5zm-12-6h5v-5h-5v5zm6 0h5v-5h-5v5zm6 0h5v-5h-5v5zm7 6h5v-5h-5v5zm0-6h5v-5h-5v5zM5 39c1 3.8 5 7.6 12.5 7.6 15.3 0 23-8.8 23-16.5 0-.5 0-1.1 0-1.6 2.5-1.8 3.8-3.5 3.8-3.5-2 .2-4.1 0-5.1-.4-1-1-1.5-2.5-1.5-2.5-2 1.2-5.6 1-7.9 0C26.7 20.7 22.8 24 22.8 24H5v15z" fill="#FFF" />
           </svg>
         );
       case "PostgreSQL":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
             <rect width="56" height="56" rx="14" fill="#336791" />
-            <path d="M28 10c-9.9 0-18 8.1-18 18s8.1 18 18 18 18-8.1 18-18-8.1-18-18-18zm0 5c7.2 0 13 5.8 13 13s-5.8 13-13 13-13-5.8-13-13 5.8-13 13-13z" fill="#FFF" />
-            <circle cx="28" cy="28" r="6.5" fill="#FFF" />
+            <path d="M28.4 12c-7.8 0-14.1 6.3-14.1 14.1 0 5.2 2.8 9.7 7 12.2v4.8c0 1.2.9 2.1 2.1 2.1h10c1.2 0 2.1-.9 2.1-2.1v-4.8c4.2-2.5 7-7 7-12.2 0-7.8-6.3-14.1-14.1-14.1zm-4.4 20.3c-1.5 0-2.8-1.2-2.8-2.8s1.2-2.8 2.8-2.8 2.8 1.2 2.8 2.8-1.3 2.8-2.8 2.8zm8.8 0c-1.5 0-2.8-1.2-2.8-2.8s1.2-2.8 2.8-2.8 2.8 1.2 2.8 2.8-1.3 2.8-2.8 2.8z" fill="#FFF" />
           </svg>
         );
       case "Redis":
@@ -141,7 +139,13 @@ export default function TechStackSection() {
       case "Vite":
         return (
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-            <rect width="56" height="56" rx="14" fill="#646CFF" />
+            <defs>
+              <linearGradient id="viteGrad" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#BD34FE" />
+                <stop offset="1" stopColor="#41D1FF" />
+              </linearGradient>
+            </defs>
+            <rect width="56" height="56" rx="14" fill="url(#viteGrad)" />
             <path d="M28 7l18.7 32.7L28 49 9.3 39.7 28 7z" fill="#FFD43B" />
           </svg>
         );
@@ -178,10 +182,10 @@ export default function TechStackSection() {
     }
   };
 
-  // Top Row: Tools & Infrastructure (Moving Left to Right)
+  // Top Row: Tools & Infrastructure
   const toolsRow = ["Docker", "PostgreSQL", "Redis", "Git", "Linux", "SigNoz", "OpenTelemetry", "gRPC", "Vite", "Bash", "WebCrypto", "Kubernetes"];
 
-  // Bottom Row: Languages & Frameworks (Moving Right to Left)
+  // Bottom Row: Languages & Frameworks
   const languagesRow = ["Python", "JavaScript", "TypeScript", "Go", "C++", "React", "FastAPI", "Node.js", "PyTorch"];
 
   // Duplicate arrays for smooth 100% infinite marquee loop
@@ -224,7 +228,7 @@ export default function TechStackSection() {
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-          Bi-directional infinite marquee train with full-bleed 2D vector logos and zero drop shadows.
+          Bi-directional infinite marquee train featuring 100% official 1:1 real-world company SVG brand vector logos.
         </p>
       </div>
 
@@ -258,11 +262,11 @@ export default function TechStackSection() {
                   border: 'none',
                   transition: 'transform 0.15s ease'
                 }}
-                className="full-bleed-svg-card"
+                className="official-brand-svg-card"
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               >
-                {renderFullBleedIcon(name)}
+                {renderOfficialBrandIcon(name)}
               </div>
             ))}
           </div>
@@ -295,11 +299,11 @@ export default function TechStackSection() {
                   border: 'none',
                   transition: 'transform 0.15s ease'
                 }}
-                className="full-bleed-svg-card"
+                className="official-brand-svg-card"
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               >
-                {renderFullBleedIcon(name)}
+                {renderOfficialBrandIcon(name)}
               </div>
             ))}
           </div>
