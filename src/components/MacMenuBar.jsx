@@ -10,6 +10,8 @@ export default function MacMenuBar({
   onEmptyTrash,
   onOpenSpotlight,
   onOpenLaunchpad,
+  onSwitchToRecruiter,
+  onOpenGateway,
   // Control Centre quick props
   volume,
   setVolume,
@@ -37,8 +39,10 @@ export default function MacMenuBar({
 
   const menus = [
     {
-      name: '',
+      name: '',
       items: [
+        { label: '👔 Switch to Recruiter Mode', action: onSwitchToRecruiter },
+        { label: '🔄 Change Experience Mode', action: onOpenGateway },
         { label: 'About This Computer...', action: () => onOpenApp('about_computer') },
         { label: 'About Arjun Sabu', action: () => onOpenApp('about') },
         { label: 'Launchpad Grid (All Apps)', action: onOpenLaunchpad },
@@ -194,6 +198,30 @@ export default function MacMenuBar({
 
         {/* Right Status Bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#000000' }}>
+          {/* Recruiter Mode Button */}
+          {onSwitchToRecruiter && (
+            <button
+              onClick={onSwitchToRecruiter}
+              title="Switch to Recruiter Portfolio Mode"
+              style={{
+                background: 'var(--mac-cyan, #06b6d4)',
+                color: '#000000',
+                border: '1px solid #000',
+                padding: '0 8px',
+                fontFamily: 'var(--font-mac-title)',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                boxShadow: '1px 1px 0px #000',
+                borderRadius: '2px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem'
+              }}
+            >
+              👔 Recruiter Mode
+            </button>
+          )}
 
           {/* 🎛️ Control Centre Popover Toggle */}
           <button

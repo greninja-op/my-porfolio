@@ -26,8 +26,29 @@ import ContactMacDialog from './components/ContactMacDialog';
 import TerminalMac from './components/TerminalMac';
 import MacCalculatorApp from './components/MacCalculatorApp';
 import MacPuzzleApp from './components/MacPuzzleApp';
+import VisitorGatewayModal from './components/VisitorGatewayModal';
+import RecruiterView from './components/RecruiterView';
 
 export default function App() {
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem('arjun_portfolio_view_mode') || 'gateway';
+  });
+
+  const [showGatewayModal, setShowGatewayModal] = useState(() => {
+    const saved = localStorage.getItem('arjun_portfolio_view_mode');
+    return !saved || saved === 'gateway';
+  });
+
+  const handleSelectMode = (mode) => {
+    setViewMode(mode);
+    localStorage.setItem('arjun_portfolio_view_mode', mode);
+    setShowGatewayModal(false);
+  };
+
+  const handleOpenGateway = () => {
+    setShowGatewayModal(true);
+  };
+
   const [openWindows, setOpenWindows] = useState({
     about: true,
     chronolens: false,
@@ -296,19 +317,36 @@ export default function App() {
     };
   };
 
+  if (viewMode === 'recruiter' && !showGatewayModal) {
+    return (
+      <RecruiterView
+        onSwitchToOS={() => handleSelectMode('os')}
+        onOpenGateway={handleOpenGateway}
+      />
+    );
+  }
+
   return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        overflow: 'hidden',
-        ...getDesktopBgStyle(),
-        filter: colorTheme === 'monochrome' ? 'grayscale(100%) contrast(160%)' : 'none'
-      }}
-    >
+    <>
+      {showGatewayModal && (
+        <VisitorGatewayModal
+          onSelectMode={handleSelectMode}
+          onCloseGateway={() => setShowGatewayModal(false)}
+          currentMode={viewMode}
+        />
+      )}
+      <div
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          overflow: 'hidden',
+          ...getDesktopBgStyle(),
+          filter: colorTheme === 'monochrome' ? 'grayscale(100%) contrast(160%)' : 'none'
+        }}
+      >
       {/* CRT Scanline & Phosphor Shader Overlay */}
       {crtShader && (
         <div
@@ -341,6 +379,8 @@ export default function App() {
         onEmptyTrash={handleEmptyTrash}
         onOpenSpotlight={() => setSpotlightOpen(true)}
         onOpenLaunchpad={() => setLaunchpadOpen(true)}
+        onSwitchToRecruiter={() => handleSelectMode('recruiter')}
+        onOpenGateway={handleOpenGateway}
         volume={volume}
         setVolume={setVolume}
         monochromeMode={colorTheme === 'monochrome'}
@@ -706,5 +746,6 @@ export default function App() {
       {/* System 7 Bottom Control Strip / Dock */}
       <MacControlStrip openWindows={openWindows} onFocusApp={focusWindow} onLaunchApp={handleLaunchApp} />
     </div>
+    </>
   );
 }
