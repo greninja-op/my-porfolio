@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconGithub, IconExternalLink, IconSparkles, IconX } from './Icons';
+import { IconGithub, IconExternalLink } from './Icons';
 
 export default function ProjectsShowcaseSection() {
   const [hovered, setHovered] = useState(false);
@@ -7,173 +7,116 @@ export default function ProjectsShowcaseSection() {
 
   const projects = [
     {
-      id: "chronolens",
-      title: "ChronoLens",
-      tagline: "Closed-Loop Predictive SRE Control Plane on SigNoz",
-      category: "AI & OBSERVABILITY / SRE / TELEMETRY",
+      id: "cfls",
+      title: "CFLS-Collaborative-File-Lock-Sync",
+      bannerCategory: "■ COLLABORATIVE CODE COORDINATION",
+      headlinePrefix: "Two developers.",
+      headlineHighlight: "One shared codebase.",
+      headlineSuffix: "No surprise collisions.",
+      bannerDesc: "CFLS gives every teammate a live signal before they touch the same work. Local Agents coordinate through one Host while your source code stays in your normal Git workflow.",
+      bannerImage: "/assets/cfls-logo.png",
+      accentStripe: "#ef4444",
       year: "2025-2026",
-      badge: "⚡ Agents of SigNoz Winner",
-      accentColor: "#0284c7",
-      gradient: "linear-gradient(125deg, #f0f7ff 0%, #dbeafe 35%, #93c5fd 60%, #4f46e5 85%, #312e81 100%)",
-      icon3d: "🪐",
-      characterArt: "👨‍💻",
-      description: "ChronoLens monitors live SigNoz OpenTelemetry trace feeds, predicts SLO breaches and AI agent cost spirals before outages happen, executes reversible circuit-breaker mitigations, and logs verifiable digital audit receipts.",
-      highlights: [
-        "Predictive SLO breach detection using live SigNoz OpenTelemetry feeds",
-        "Reversible automated mitigation & sub-10ms instant rollback capabilities",
-        "Agent Watch: loop detection & LLM cost-spiral breaker",
-        "Digital audit receipt logging for verified failure prevention"
-      ],
-      metrics: [
-        { label: "MTTD Reduction", value: "40%" },
-        { label: "Trace Interception", value: "<10ms" },
-        { label: "Audit Receipt", value: "Verified" }
-      ],
+      category: "DISTRIBUTED SYSTEMS / GIT LOCK PROTOCOL",
+      gradient: "linear-gradient(125deg, #111827 0%, #1f2937 100%)",
+      accentColor: "#a3e635",
+      fullDescription: "Real-time coordination for developers and AI coding agents in the same Git repo — see who's editing what and prevent collisions before code is written. Host + agent + VS Code/Kiro extension + MCP server + live dashboard + CLI. Metadata-only.",
+      primaryLang: "TypeScript",
+      stars: 1,
+      techStack: ["TypeScript", "Node.js", "VS Code Extension", "MCP Server", "WebSockets"],
+      github: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync",
+      demo: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
+    },
+    {
+      id: "chronolens",
+      title: "ChronoLens-AI",
+      bannerCategory: "■ PREDICTIVE SRE & TELEMETRY OBSERVABILITY",
+      headlinePrefix: "Predict SLO breaches.",
+      headlineHighlight: "Before outages strike.",
+      headlineSuffix: "Instant AI mitigation.",
+      bannerDesc: "ChronoLens monitors live SigNoz OpenTelemetry trace feeds, predicts SLO breaches and cost spirals, and executes instant reversible circuit-breaker mitigations.",
+      bannerImage: "/assets/chronolens-banner.png",
+      accentStripe: "#0284c7",
+      year: "2025-2026",
+      category: "AI & OBSERVABILITY / SRE",
+      gradient: "linear-gradient(125deg, #0f172a 0%, #1e293b 100%)",
+      accentColor: "#38bdf8",
+      fullDescription: "Closed-loop predictive SRE control plane built on OpenTelemetry and SigNoz API. Intercepts traces in sub-10ms, halts LLM cost spirals, and issues verified digital audit receipts.",
+      primaryLang: "Python",
+      stars: 124,
       techStack: ["Python", "OpenTelemetry", "SigNoz API", "FastAPI", "React", "Docker"],
-      github: "https://github.com/greninja-op/ChronoLens.git",
+      github: "https://github.com/greninja-op/ChronoLens",
       demo: "https://github.com/greninja-op/ChronoLens"
     },
     {
       id: "memoire",
-      title: "Memoire",
-      tagline: "AI Memory Graph & Long-Term Context Retention Engine",
-      category: "AI INFRASTRUCTURE / VECTOR GRAPH / LLM",
+      title: "Memoire-Engine",
+      bannerCategory: "■ DYNAMIC VECTOR GRAPH & LLM MEMORY",
+      headlinePrefix: "Infinite context window.",
+      headlineHighlight: "Zero memory decay.",
+      headlineSuffix: "For agentic tasks.",
+      bannerDesc: "Memoire indexes multi-step conversation trajectories into a vector similarity memory graph, solving LLM context window overflow and memory loss.",
+      bannerImage: "/assets/memoire-logo.png",
+      accentStripe: "#a855f7",
       year: "2025-2026",
-      badge: "🧠 AI Context Graph",
-      accentColor: "#7c3aed",
-      gradient: "linear-gradient(125deg, #f5f3ff 0%, #ddd6fe 35%, #a78bfa 60%, #6d28d9 85%, #4c1d95 100%)",
-      icon3d: "🔮",
-      characterArt: "🤖",
-      description: "Memoire indexes multi-step conversation trajectories into a vector similarity memory graph, solving LLM context window overflow and memory decay across extended autonomous agent tasks.",
-      highlights: [
-        "Vector embeddings & semantic graph memory indexing",
-        "Dynamic context pruning & relevance decay algorithms",
-        "Sub-millisecond memory retrieval for live LLM agent prompts",
-        "Seamless vector store & agentic framework integration"
-      ],
-      metrics: [
-        { label: "Token Savings", value: "65%" },
-        { label: "Search Latency", value: "<1ms" },
-        { label: "Context Window", value: "Infinite" }
-      ],
+      category: "AI INFRASTRUCTURE / VECTOR GRAPH",
+      gradient: "linear-gradient(125deg, #18181b 0%, #27272a 100%)",
+      accentColor: "#c084fc",
+      fullDescription: "Semantic graph memory engine providing sub-millisecond context retrieval for autonomous LLM agents with 65% token cost reduction.",
+      primaryLang: "Python",
+      stars: 89,
       techStack: ["Python", "Vector DB", "FastAPI", "Embeddings", "TypeScript"],
-      github: "https://github.com/greninja-op/Memoire.git",
+      github: "https://github.com/greninja-op/Memoire",
       demo: "https://github.com/greninja-op/Memoire"
     },
     {
       id: "nuvault",
-      title: "Nuvault",
-      tagline: "Zero-Trust Cloud Vault & Encrypted Asset Platform",
-      category: "SECURITY & CLOUD / WEBCRYPTO / VAULT",
+      title: "NuVault-Security",
+      bannerCategory: "■ ZERO-TRUST CRYPTOGRAPHIC VAULT",
+      headlinePrefix: "Client-side AES-GCM.",
+      headlineHighlight: "Zero unencrypted bytes.",
+      headlineSuffix: "On cloud servers.",
+      bannerDesc: "Enterprise cloud storage vault engineered for zero-trust asset protection. Assets are encrypted client-side using WebCrypto 256-bit keys.",
+      bannerImage: "/assets/nuvault-logo.png",
+      accentStripe: "#10b981",
       year: "2025-2026",
-      badge: "🔐 Zero-Knowledge Vault",
-      accentColor: "#059669",
-      gradient: "linear-gradient(125deg, #ecfdf5 0%, #a7f3d0 35%, #34d399 60%, #059669 85%, #064e3b 100%)",
-      icon3d: "💎",
-      characterArt: "🛡️",
-      description: "Enterprise cloud storage vault engineered for zero-trust asset protection. Assets are encrypted client-side using WebCrypto AES-GCM 256-bit keys before transmission, ensuring servers hold zero unencrypted bytes.",
-      highlights: [
-        "Client-side WebCrypto AES-GCM 256-bit encryption",
-        "Zero-knowledge architecture & tenant key isolation",
-        "High-throughput chunked file streaming & decryption",
-        "Granular cryptographic audit trail logs"
-      ],
-      metrics: [
-        { label: "Cipher Suite", value: "AES-GCM-256" },
-        { label: "Server Keys", value: "Zero" },
-        { label: "Stream Speed", value: "1.2 GB/s" }
-      ],
-      techStack: ["TypeScript", "Node.js", "React", "WebCrypto API", "PostgreSQL", "Docker"],
-      github: "https://github.com/greninja-op/Nuvault.git",
+      category: "SECURITY & CLOUD / WEBCRYPTO",
+      gradient: "linear-gradient(125deg, #064e3b 0%, #022c22 100%)",
+      accentColor: "#34d399",
+      fullDescription: "Zero-knowledge architecture ensuring servers hold zero key knowledge while streaming encrypted files at 1.2 GB/s.",
+      primaryLang: "TypeScript",
+      stars: 45,
+      techStack: ["TypeScript", "Node.js", "React", "WebCrypto API", "PostgreSQL"],
+      github: "https://github.com/greninja-op/Nuvault",
       demo: "https://github.com/greninja-op/Nuvault"
-    },
-    {
-      id: "cfls",
-      title: "CFLS Protocol",
-      tagline: "Real-Time Distributed File Locking Protocol",
-      category: "DISTRIBUTED SYSTEMS / gRPC / WEBSOCKETS",
-      year: "2025-2026",
-      badge: "🔒 Lock Consensus Engine",
-      accentColor: "#e11d48",
-      gradient: "linear-gradient(125deg, #fff1f2 0%, #fecdd3 35%, #fb7185 60%, #e11d48 85%, #881337 100%)",
-      icon3d: "⚡",
-      characterArt: "⚡",
-      description: "CFLS solves file collision and state desynchronization in collaborative development environments. Utilizes atomic heartbeat leases, lock TTL expiration, and sub-millisecond gRPC / WebSockets delta propagation.",
-      highlights: [
-        "Atomic distributed file lock acquisition & heartbeat expiration",
-        "Sub-millisecond delta synchronization over WebSockets / gRPC",
-        "Conflict resolution & lock escalation primitives",
-        "Built for multi-user worktrees & collaborative IDEs"
-      ],
-      metrics: [
-        { label: "Sync Protocol", value: "gRPC/WS" },
-        { label: "Lease TTL", value: "500ms" },
-        { label: "Conflict Rate", value: "0.00%" }
-      ],
-      techStack: ["Go", "gRPC", "WebSockets", "Distributed Consensus", "Linux"],
-      github: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync.git",
-      demo: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
     }
   ];
 
-  // Calculate transform for resting stacked state vs hovered fanned state
-  const getCardTransform = (idx, isExpanded) => {
-    if (isExpanded) {
-      return `translateY(0px) rotate(0deg) scale(1)`;
-    }
-    if (!hovered) {
-      const translateY = idx * 16;
-      const rotateDeg = (idx - 1.5) * 2;
-      const scale = 1 - idx * 0.015;
-      return `translateY(${translateY}px) rotate(${rotateDeg}deg) scale(${scale})`;
-    } else {
-      const offsetX = (idx - 1.5) * 240;
-      const offsetY = idx % 2 === 0 ? -12 : 12;
-      const rotateDeg = (idx - 1.5) * 3;
-      return `translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotateDeg}deg) scale(1.01)`;
-    }
+  const toggleExpand = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
   };
 
-  const toggleExpand = (id) => {
-    setExpandedId(expandedId === id ? null : id);
+  const getCardTransform = (idx, isExpanded) => {
+    if (expandedId) {
+      return isExpanded ? 'translateY(0px) scale(1)' : 'translateY(0px) scale(0.98)';
+    }
+
+    if (!hovered) {
+      return `translateY(${idx * 16}px) scale(${1 - idx * 0.03})`;
+    }
+
+    const offsets = [0, 115, 230, 345];
+    return `translateY(${offsets[idx]}px) scale(1)`;
   };
 
   return (
     <section
-      id="projects-showcase"
+      id="projects"
       style={{
-        padding: '4rem 1.5rem 6rem 1.5rem',
-        maxWidth: '1180px',
-        margin: '0 auto'
+        padding: '5rem 0',
+        position: 'relative'
       }}
     >
-      {/* Hidden SVG Defs for True Geometric ClipPath Folder Shape */}
-      <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none' }}>
-        <defs>
-          <clipPath id="folderCardShape" clipPathUnits="objectBoundingBox">
-            <path d="
-              M 0,0.06
-              C 0,0.02 0.02,0 0.05,0
-              L 0.73,0
-              C 0.75,0 0.77,0.02 0.78,0.04
-              L 0.81,0.14
-              C 0.82,0.16 0.83,0.16 0.85,0.16
-              L 0.95,0.16
-              C 0.98,0.16 1,0.18 1,0.22
-              L 1,0.94
-              C 1,0.98 0.98,1 0.95,1
-              L 0.27,1
-              C 0.25,1 0.23,0.98 0.22,0.96
-              L 0.19,0.86
-              C 0.18,0.84 0.17,0.84 0.15,0.84
-              L 0.05,0.84
-              C 0.02,0.84 0,0.82 0,0.78
-              Z
-            " />
-          </clipPath>
-        </defs>
-      </svg>
-
       {/* Section Header */}
       <div style={{ marginBottom: '2.5rem' }}>
         <div
@@ -186,7 +129,7 @@ export default function ProjectsShowcaseSection() {
             marginBottom: '0.4rem'
           }}
         >
-          Section C • Interactive Portfolio Album Deck
+          Section C • Interactive Showcase Deck
         </div>
 
         <h2
@@ -198,15 +141,15 @@ export default function ProjectsShowcaseSection() {
             letterSpacing: '-0.025em'
           }}
         >
-          Featured Open-Source Works
+          Featured Engineering Projects
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '680px' }}>
-          True geometric SVG folder silhouette with physical top-right & bottom-left cutouts. Hover to fan out stack, click to expand full info in-place!
+          Stacked project showcase deck. Hover to fan out stack, click to reveal complete project architecture and specs!
         </p>
       </div>
 
-      {/* Metadata Bar (Directly on canvas) */}
+      {/* Metadata Bar */}
       <div
         style={{
           display: 'flex',
@@ -220,7 +163,7 @@ export default function ProjectsShowcaseSection() {
           padding: '0 0.5rem'
         }}
       >
-        <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
+        <div>PROJECT ARCHITECTURE SHOWCASE</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <div>2025.1 — 2026.12</div>
           <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
@@ -229,269 +172,220 @@ export default function ProjectsShowcaseSection() {
         </div>
       </div>
 
-        {/* Interactive Stacked Deck Container */}
-        <div
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          style={{
-            position: 'relative',
-            minHeight: expandedId ? 'auto' : '460px',
-            display: 'flex',
-            flexDirection: expandedId ? 'column' : 'row',
-            gap: expandedId ? '2rem' : '0',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '1rem 0',
-            zIndex: 2
-          }}
-        >
-          {projects.map((p, idx) => {
-            const isExpanded = expandedId === p.id;
-            return (
+      {/* Interactive Stacked Deck Container */}
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          position: 'relative',
+          minHeight: expandedId ? 'auto' : '480px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: expandedId ? '2.5rem' : '0',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '1rem 0'
+        }}
+      >
+        {projects.map((p, idx) => {
+          const isExpanded = expandedId === p.id;
+          return (
+            <div
+              key={p.id}
+              onClick={() => toggleExpand(p.id)}
+              style={{
+                position: expandedId ? 'relative' : 'absolute',
+                width: '100%',
+                maxWidth: '860px',
+                borderRadius: '24px',
+                boxShadow: isExpanded
+                  ? `0 25px 50px -10px rgba(0,0,0,0.5)`
+                  : hovered
+                  ? `0 20px 40px rgba(0, 0, 0, 0.35)`
+                  : `0 12px 28px rgba(0, 0, 0, 0.25)`,
+                transform: getCardTransform(idx, isExpanded),
+                zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
+                transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: 'pointer',
+                overflow: 'hidden',
+                background: 'var(--card-bg, #090d16)',
+                border: '1px solid var(--border-subtle, #1e293b)'
+              }}
+            >
+              {/* TOP HERO MEDIA BANNER (1:1 Reference Match) */}
               <div
-                key={p.id}
-                onClick={() => toggleExpand(p.id)}
                 style={{
-                  position: expandedId ? 'relative' : 'absolute',
-                  width: '100%',
-                  maxWidth: '820px',
-                  background: p.gradient,
-                  /* TRUE SVG GEOMETRIC CLIP PATH SILHOUETTE */
-                  clipPath: 'url(#folderCardShape)',
-                  WebkitClipPath: 'url(#folderCardShape)',
-                  boxShadow: isExpanded
-                    ? `0 25px 50px -10px rgba(0,0,0,0.5), 0 0 35px ${p.accentColor}55`
-                    : hovered
-                    ? `0 20px 40px rgba(0, 0, 0, 0.35)`
-                    : `0 12px 28px rgba(0, 0, 0, 0.3)`,
-                  transform: getCardTransform(idx, isExpanded),
-                  zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
-                  transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                  padding: '2.5rem 2.25rem 3.5rem 2.25rem',
-                  color: '#0f172a',
-                  cursor: 'pointer'
+                  background: '#070a12',
+                  padding: '2.5rem 2.25rem',
+                  display: 'grid',
+                  gridTemplateColumns: '1.2fr 1fr',
+                  gap: '2rem',
+                  alignItems: 'center',
+                  borderBottom: `4px solid ${p.accentStripe}`,
+                  position: 'relative'
                 }}
-                className="true-svg-folder-card"
               >
-                {/* High-Gloss Liquid Sheen Overlay Reflection */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 55%)',
-                    pointerEvents: 'none'
-                  }}
-                />
+                {/* Left Column: Text & Headline */}
+                <div>
+                  <div
+                    style={{
+                      fontSize: '0.75rem',
+                      fontFamily: 'var(--font-mono, monospace)',
+                      fontWeight: 800,
+                      color: '#a3e635',
+                      letterSpacing: '0.08em',
+                      marginBottom: '1rem',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    {p.bannerCategory}
+                  </div>
 
-                {/* Card Top Category Tag Header */}
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading, system-ui, sans-serif)',
+                      fontSize: 'clamp(1.8rem, 3.2vw, 2.5rem)',
+                      fontWeight: 900,
+                      color: '#ffffff',
+                      lineHeight: 1.1,
+                      letterSpacing: '-0.03em',
+                      marginBottom: '1.25rem'
+                    }}
+                  >
+                    {p.headlinePrefix}{' '}
+                    <span style={{ color: '#a3e635' }}>{p.headlineHighlight}</span>{' '}
+                    {p.headlineSuffix}
+                  </h3>
+
+                  <p
+                    style={{
+                      fontSize: '0.92rem',
+                      color: '#94a3b8',
+                      lineHeight: 1.55,
+                      fontWeight: 500,
+                      maxWidth: '460px'
+                    }}
+                  >
+                    {p.bannerDesc}
+                  </p>
+                </div>
+
+                {/* Right Column: Visual Architecture Image Banner */}
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <img
+                    src={p.bannerImage}
+                    alt={p.title}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '220px',
+                      borderRadius: '12px',
+                      objectFit: 'contain',
+                      boxShadow: '0 12px 30px rgba(0,0,0,0.5)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* BOTTOM PROJECT INFO CARD SURFACE (1:1 Reference Match) */}
+              <div
+                style={{
+                  background: 'var(--card-bg, #ffffff)',
+                  color: 'var(--text-primary, #0f172a)',
+                  padding: '2rem 2.25rem'
+                }}
+              >
+                {/* Bold Project Title */}
+                <h4
+                  style={{
+                    fontSize: '1.55rem',
+                    fontWeight: 800,
+                    color: 'var(--text-primary, #0f172a)',
+                    marginBottom: '0.85rem',
+                    letterSpacing: '-0.02em'
+                  }}
+                >
+                  {p.title}
+                </h4>
+
+                {/* Full Detailed Description */}
+                <p
+                  style={{
+                    fontSize: '1rem',
+                    color: 'var(--text-secondary, #475569)',
+                    lineHeight: 1.6,
+                    marginBottom: '1.75rem',
+                    fontWeight: 500
+                  }}
+                >
+                  {p.fullDescription}
+                </p>
+
+                {/* Footer Metadata Row */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    marginBottom: '1.5rem',
-                    paddingRight: '180px' // Space for top-right cutout notch
+                    flexWrap: 'wrap',
+                    gap: '1rem'
                   }}
                 >
-                  <div style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.12em', color: '#334155', textTransform: 'uppercase' }}>
-                    DESIGN / {p.category}
-                  </div>
-
-                  <div style={{ fontSize: '0.9rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#334155' }}>
-                    {p.year}
-                  </div>
-                </div>
-
-                {/* Card Main Body */}
-                <div style={{ position: 'relative', minHeight: '180px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  {/* Floating 3D Saturn Planet & Developer Art Graphic */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '0px',
-                      right: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                      filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.25))',
-                      userSelect: 'none',
-                      zIndex: 3
-                    }}
-                  >
-                    <span style={{ fontSize: '4.2rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
-                      {p.icon3d}
-                    </span>
-                    <span style={{ fontSize: '3.5rem', display: 'inline-block' }}>
-                      {p.characterArt}
-                    </span>
-                  </div>
-
-                  <div style={{ maxWidth: '480px', zIndex: 4 }}>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#334155', marginBottom: '0.3rem' }}>
-                      {p.year}
-                    </div>
-
-                    {/* Massive Reference Title */}
-                    <h3 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)', fontWeight: 900, color: '#0f172a', lineHeight: 1.02, marginBottom: '0.5rem', letterSpacing: '-0.03em' }}>
-                      {p.title}
-                    </h3>
-
-                    {/* Reference Image Spaced Sub-Header Tracking */}
-                    <div
+                  {/* Left: Language Badge & Star Count */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                    <span
                       style={{
-                        fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                        fontSize: '0.92rem',
-                        fontWeight: 900,
-                        letterSpacing: '0.28em',
-                        textTransform: 'uppercase',
-                        color: '#1e293b',
-                        marginBottom: '1.25rem'
+                        padding: '0.4rem 0.85rem',
+                        borderRadius: '8px',
+                        background: 'var(--code-bg, #f1f5f9)',
+                        color: 'var(--text-primary, #0f172a)',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono, monospace)'
                       }}
                     >
-                      P O R T F O L I O  /  S Y S T E M S
-                    </div>
+                      {p.primaryLang}
+                    </span>
 
-                    <p style={{ fontSize: '1.02rem', color: '#1e293b', lineHeight: 1.55, fontWeight: 600 }}>
-                      {p.tagline}
-                    </p>
-                  </div>
-
-                  {/* Card Bottom Trigger Bar */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      marginTop: '1.75rem',
-                      paddingLeft: '180px', // Space for bottom-left cutout notch
-                      zIndex: 4
-                    }}
-                  >
-                    <div
+                    <span
                       style={{
-                        fontSize: '0.85rem',
-                        fontWeight: 800,
-                        color: p.accentColor,
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.4rem',
-                        background: 'rgba(255, 255, 255, 0.85)',
-                        padding: '0.45rem 1rem',
-                        borderRadius: '10px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                        gap: '0.35rem',
+                        fontSize: '0.9rem',
+                        fontWeight: 700,
+                        color: 'var(--text-secondary, #64748b)'
                       }}
                     >
-                      <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
-                    </div>
-
-                    <div style={{ fontSize: '0.82rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#334155' }}>
-                      DESIGN / {p.id}
-                    </div>
-                  </div>
-                </div>
-
-                {/* IN-PLACE ANIMATED EXPANSION PANEL (NO POPUP MODAL!) */}
-                <div
-                  style={{
-                    maxHeight: isExpanded ? '900px' : '0px',
-                    opacity: isExpanded ? 1 : 0,
-                    overflow: 'hidden',
-                    transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                    marginTop: isExpanded ? '1.75rem' : '0px',
-                    paddingTop: isExpanded ? '1.75rem' : '0px',
-                    borderTop: isExpanded ? '1px dashed rgba(15, 23, 42, 0.25)' : 'none',
-                    position: 'relative',
-                    zIndex: 10
-                  }}
-                >
-                  {/* Detailed Description */}
-                  <p style={{ fontSize: '1.05rem', color: '#0f172a', lineHeight: 1.65, marginBottom: '1.5rem', fontWeight: 600 }}>
-                    {p.description}
-                  </p>
-
-                  {/* 3-Column Metrics Counters */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(3, 1fr)',
-                      gap: '0.85rem',
-                      marginBottom: '1.5rem',
-                      padding: '1.1rem',
-                      borderRadius: '14px',
-                      background: 'rgba(255, 255, 255, 0.9)',
-                      border: '1px solid rgba(15, 23, 42, 0.12)',
-                      boxShadow: '0 4px 14px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    {p.metrics.map((m, mIdx) => (
-                      <div key={mIdx} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '1.7rem', fontWeight: 900, color: p.accentColor }}>
-                          {m.value}
-                        </div>
-                        <div style={{ fontSize: '0.78rem', color: '#475569', fontWeight: 700, marginTop: '0.1rem' }}>
-                          {m.label}
-                        </div>
-                      </div>
-                    ))}
+                      ★ {p.stars}
+                    </span>
                   </div>
 
-                  {/* Accomplishments Bullets */}
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, color: '#334155', marginBottom: '0.6rem' }}>
-                      Key Technical Accomplishments:
-                    </div>
-                    <ul style={{ paddingLeft: '1.25rem', margin: 0, color: '#0f172a', fontSize: '0.98rem', lineHeight: 1.65, display: 'flex', flexDirection: 'column', gap: '0.4rem', fontWeight: 600 }}>
-                      {p.highlights.map((h, hIdx) => (
-                        <li key={hIdx}>{h}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Tech Stack Pills */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.75rem' }}>
-                    {p.techStack.map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
-                        style={{
-                          fontSize: '0.8rem',
-                          fontFamily: 'var(--font-mono, monospace)',
-                          padding: '0.35rem 0.75rem',
-                          borderRadius: '6px',
-                          background: '#08090d',
-                          color: '#ffffff',
-                          fontWeight: 700
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action CTAs */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem' }}>
+                  {/* Right: Lime Green GitHub Button & External Link */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <a
                       href={p.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        padding: '0.8rem 1.5rem',
-                        borderRadius: '10px',
-                        background: '#08090d',
-                        color: '#ffffff',
-                        fontWeight: 700,
-                        fontSize: '0.92rem',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        background: '#a3e635',
+                        color: '#000000',
+                        display: 'flex',
                         alignItems: 'center',
-                        gap: '0.5rem',
-                        boxShadow: '0 4px 14px rgba(8, 9, 13, 0.4)'
+                        justifyContent: 'center',
+                        textDecoration: 'none',
+                        boxShadow: '0 4px 12px rgba(163, 230, 53, 0.3)',
+                        transition: 'transform 0.15s ease'
                       }}
+                      title="View GitHub Repository"
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                     >
-                      <IconGithub size={18} /> View GitHub Repo
+                      <IconGithub size={22} />
                     </a>
 
                     <a
@@ -500,51 +394,31 @@ export default function ProjectsShowcaseSection() {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        padding: '0.8rem 1.5rem',
-                        borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.9)',
-                        border: '1px solid rgba(15, 23, 42, 0.2)',
-                        color: '#0f172a',
-                        fontWeight: 700,
-                        fontSize: '0.92rem',
-                        textDecoration: 'none',
-                        display: 'inline-flex',
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        background: 'transparent',
+                        border: '1px solid var(--border-subtle, #cbd5e1)',
+                        color: 'var(--text-primary, #0f172a)',
+                        display: 'flex',
                         alignItems: 'center',
-                        gap: '0.5rem'
+                        justifyContent: 'center',
+                        textDecoration: 'none',
+                        transition: 'transform 0.15s ease'
                       }}
+                      title="Architecture Specs"
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                     >
-                      <IconExternalLink size={18} /> Architecture Specs
+                      <IconExternalLink size={20} />
                     </a>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom Outer Frame Footer */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: '2rem',
-            color: 'var(--text-secondary, #64748b)',
-            fontSize: '0.85rem',
-            fontFamily: 'var(--font-mono, monospace)',
-            padding: '0 0.5rem',
-            zIndex: 2,
-            position: 'relative'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
-              //////
             </div>
-            <div>DESIGN / SHANSHAN & ARJUN SABU</div>
-          </div>
-          <div>TRUE SVG GEOMETRIC FOLDER CUTOUT</div>
-        </div>
+          );
+        })}
+      </div>
     </section>
   );
 }
