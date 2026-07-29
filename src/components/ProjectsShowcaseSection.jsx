@@ -14,7 +14,6 @@ export default function ProjectsShowcaseSection() {
       year: "2025-2026",
       badge: "⚡ Agents of SigNoz Winner",
       accentColor: "#0284c7",
-      // Exact palette from reference image: Pearlescent ice-blue on left, rich 3D royal blue to purple on right
       gradient: "linear-gradient(125deg, #f0f7ff 0%, #dbeafe 35%, #93c5fd 60%, #4f46e5 85%, #312e81 100%)",
       icon3d: "🪐",
       characterArt: "👨‍💻",
@@ -148,6 +147,33 @@ export default function ProjectsShowcaseSection() {
         margin: '0 auto'
       }}
     >
+      {/* Hidden SVG Defs for True Geometric ClipPath Folder Shape */}
+      <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none' }}>
+        <defs>
+          <clipPath id="folderCardShape" clipPathUnits="objectBoundingBox">
+            <path d="
+              M 0,0.06
+              C 0,0.02 0.02,0 0.05,0
+              L 0.73,0
+              C 0.75,0 0.77,0.02 0.78,0.04
+              L 0.81,0.14
+              C 0.82,0.16 0.83,0.16 0.85,0.16
+              L 0.95,0.16
+              C 0.98,0.16 1,0.18 1,0.22
+              L 1,0.94
+              C 1,0.98 0.98,1 0.95,1
+              L 0.27,1
+              C 0.25,1 0.23,0.98 0.22,0.96
+              L 0.19,0.86
+              C 0.18,0.84 0.17,0.84 0.15,0.84
+              L 0.05,0.84
+              C 0.02,0.84 0,0.82 0,0.78
+              Z
+            " />
+          </clipPath>
+        </defs>
+      </svg>
+
       {/* Section Header */}
       <div style={{ marginBottom: '2.5rem' }}>
         <div
@@ -176,7 +202,7 @@ export default function ProjectsShowcaseSection() {
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '680px' }}>
-          Exact reference portfolio card silhouette with liquid metallic sheen. Hover to fan out stack, click to expand full info in-place!
+          True geometric SVG folder silhouette with physical top-right & bottom-left cutouts. Hover to fan out stack, click to expand full info in-place!
         </p>
       </div>
 
@@ -191,6 +217,41 @@ export default function ProjectsShowcaseSection() {
           boxShadow: '0 30px 60px rgba(0, 0, 0, 0.7)'
         }}
       >
+        {/* White Diagonal Slashes rendered on outer frame background behind the cutout notches */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '2.5rem',
+            right: '2.5rem',
+            color: '#ffffff',
+            fontWeight: 900,
+            fontSize: '1.25rem',
+            letterSpacing: '0.2em',
+            zIndex: 1,
+            pointerEvents: 'none',
+            userSelect: 'none'
+          }}
+        >
+          //////
+        </div>
+
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '2.5rem',
+            left: '2.5rem',
+            color: '#ffffff',
+            fontWeight: 900,
+            fontSize: '1.25rem',
+            letterSpacing: '0.2em',
+            zIndex: 1,
+            pointerEvents: 'none',
+            userSelect: 'none'
+          }}
+        >
+          //////
+        </div>
+
         {/* Top Outer Frame Header */}
         <div
           style={{
@@ -202,7 +263,9 @@ export default function ProjectsShowcaseSection() {
             fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
             fontWeight: 600,
-            padding: '0 0.5rem'
+            padding: '0 0.5rem',
+            zIndex: 2,
+            position: 'relative'
           }}
         >
           <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
@@ -221,7 +284,8 @@ export default function ProjectsShowcaseSection() {
             gap: expandedId ? '2rem' : '0',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '1rem 0'
+            margin: '1rem 0',
+            zIndex: 2
           }}
         >
           {projects.map((p, idx) => {
@@ -234,9 +298,10 @@ export default function ProjectsShowcaseSection() {
                   position: expandedId ? 'relative' : 'absolute',
                   width: '100%',
                   maxWidth: '820px',
-                  borderRadius: '40px',
                   background: p.gradient,
-                  border: `2px solid ${isExpanded ? p.accentColor : 'rgba(255, 255, 255, 0.8)'}`,
+                  /* TRUE SVG GEOMETRIC CLIP PATH SILHOUETTE */
+                  clipPath: 'url(#folderCardShape)',
+                  WebkitClipPath: 'url(#folderCardShape)',
                   boxShadow: isExpanded
                     ? `0 25px 50px -10px rgba(0,0,0,0.5), 0 0 35px ${p.accentColor}55`
                     : hovered
@@ -245,12 +310,11 @@ export default function ProjectsShowcaseSection() {
                   transform: getCardTransform(idx, isExpanded),
                   zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
                   transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                  padding: '2.5rem 2.25rem',
+                  padding: '2.5rem 2.25rem 3.5rem 2.25rem',
                   color: '#0f172a',
-                  cursor: 'pointer',
-                  overflow: 'hidden'
+                  cursor: 'pointer'
                 }}
-                className="reference-shape-card"
+                className="true-svg-folder-card"
               >
                 {/* High-Gloss Liquid Sheen Overlay Reflection */}
                 <div
@@ -261,53 +325,9 @@ export default function ProjectsShowcaseSection() {
                     right: 0,
                     bottom: 0,
                     background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 55%)',
-                    pointerEvents: 'none',
-                    borderRadius: '40px'
+                    pointerEvents: 'none'
                   }}
                 />
-
-                {/* EXACT REFERENCE CARD CORNER CUTOUT NOTCHES */}
-                {/* Top-Right Dark Corner Cutout Notch with White Slanted Slashes */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    background: '#08090d',
-                    padding: '0.65rem 1.25rem 0.65rem 1.5rem',
-                    borderBottomLeftRadius: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    boxShadow: '-4px 4px 12px rgba(0,0,0,0.3)',
-                    zIndex: 5
-                  }}
-                >
-                  <span style={{ color: '#ffffff', fontWeight: 900, fontSize: '1.1rem', letterSpacing: '0.18em' }}>
-                    //////
-                  </span>
-                </div>
-
-                {/* Bottom-Left Dark Corner Cutout Notch with White Slanted Slashes */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    background: '#08090d',
-                    padding: '0.65rem 1.5rem 0.65rem 1.25rem',
-                    borderTopRightRadius: '24px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    boxShadow: '4px -4px 12px rgba(0,0,0,0.3)',
-                    zIndex: 5
-                  }}
-                >
-                  <span style={{ color: '#ffffff', fontWeight: 900, fontSize: '1.1rem', letterSpacing: '0.18em' }}>
-                    //////
-                  </span>
-                </div>
 
                 {/* Card Top Category Tag Header */}
                 <div
@@ -316,7 +336,7 @@ export default function ProjectsShowcaseSection() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     marginBottom: '1.5rem',
-                    paddingRight: '120px' // Space for top-right notch
+                    paddingRight: '180px' // Space for top-right cutout notch
                   }}
                 >
                   <div style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.12em', color: '#334155', textTransform: 'uppercase' }}>
@@ -330,7 +350,7 @@ export default function ProjectsShowcaseSection() {
 
                 {/* Card Main Body */}
                 <div style={{ position: 'relative', minHeight: '180px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  {/* Floating 3D Saturn Planet & Developer Art Graphic (Matching Reference Image Right Side) */}
+                  {/* Floating 3D Saturn Planet & Developer Art Graphic */}
                   <div
                     style={{
                       position: 'absolute',
@@ -389,7 +409,7 @@ export default function ProjectsShowcaseSection() {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       marginTop: '1.75rem',
-                      paddingLeft: '130px', // Space for bottom-left notch
+                      paddingLeft: '180px', // Space for bottom-left cutout notch
                       zIndex: 4
                     }}
                   >
@@ -555,11 +575,13 @@ export default function ProjectsShowcaseSection() {
             color: '#64748b',
             fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
-            padding: '0 0.5rem'
+            padding: '0 0.5rem',
+            zIndex: 2,
+            position: 'relative'
           }}
         >
           <div>DESIGN / SHANSHAN & ARJUN SABU</div>
-          <div>IN-PLACE CARD EXPANSION</div>
+          <div>TRUE SVG GEOMETRIC FOLDER CUTOUT</div>
         </div>
       </div>
     </section>
