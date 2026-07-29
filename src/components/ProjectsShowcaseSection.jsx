@@ -122,15 +122,23 @@ export default function ProjectsShowcaseSection() {
 
   const getCardTransform = (idx, isExpanded) => {
     if (expandedId) {
-      return isExpanded ? 'translateY(0px) scale(1)' : 'translateY(0px) scale(0.98)';
+      return isExpanded ? 'translateY(0px) scale(1) rotate(0deg)' : 'translateY(0px) scale(0.96) rotate(0deg)';
     }
 
     if (!hovered) {
-      return `translateY(${idx * 20}px) scale(${1 - idx * 0.03})`;
+      return `translateY(${idx * 14}px) scale(${1 - idx * 0.025}) rotate(${idx * 1.8 - 2.5}deg)`;
     }
 
-    const offsets = [0, 125, 250, 375];
-    return `translateY(${offsets[idx]}px) scale(1)`;
+    // Horizontal Arc Fan-Out Deck on Hover
+    const fanConfigs = [
+      { x: -220, y: -12, rot: -9 },
+      { x: -70, y: -4, rot: -3 },
+      { x: 70, y: -4, rot: 3 },
+      { x: 220, y: -12, rot: 9 }
+    ];
+
+    const cfg = fanConfigs[idx] || { x: 0, y: 0, rot: 0 };
+    return `translateX(${cfg.x}px) translateY(${cfg.y}px) rotate(${cfg.rot}deg) scale(1)`;
   };
 
   return (

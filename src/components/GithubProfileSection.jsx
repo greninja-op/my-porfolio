@@ -142,13 +142,14 @@ export default function GithubProfileSection() {
       </div>
 
       {/* LIGHT-MODE THEME-AWARE BENTO GRID DASHBOARD */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          gap: '1.5rem'
-        }}
-      >
+      <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(12, 1fr)',
+            gap: '1.5rem'
+          }}
+        >
         {/* BENTO TILE 1: PROFILE HERO CARD (Spans 8 columns) */}
         <div
           style={{
@@ -464,22 +465,12 @@ export default function GithubProfileSection() {
                     {repo.desc}
                   </p>
                 </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontSize: '0.82rem', color: 'var(--text-secondary, #64748b)', fontWeight: 600 }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--text-primary, #0f172a)' }}>
-                    <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: repo.langColor }} />
-                    {repo.lang}
-                  </span>
-
-                  <span>★ {repo.stars}</span>
-                  <span>⌥ {repo.forks}</span>
-                </div>
               </a>
             ))}
           </div>
         </div>
-
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
