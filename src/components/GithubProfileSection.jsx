@@ -1,95 +1,116 @@
-import React from 'react';
-import { personalInfo } from '../data/portfolioData';
-import { IconGithub, IconExternalLink, IconSparkles } from './Icons';
+import React, { useState } from 'react';
+import { IconGithub, IconExternalLink } from './Icons';
 
 export default function GithubProfileSection() {
-  // Generate 52 weeks x 7 days = 364 tiles with realistic activity levels (0 to 4)
+  const [hoveredCell, setHoveredCell] = useState(null);
+
+  // Generate 52 weeks (364 days) of realistic contribution activity
   const generateContributionMatrix = () => {
     const weeks = [];
-    // Seeded pseudo-activity distribution for realistic github commit streak graph
+    const seedLevels = [
+      [0, 1, 2, 4, 3, 2, 1],
+      [2, 3, 4, 4, 3, 2, 0],
+      [1, 2, 3, 4, 4, 3, 2],
+      [3, 4, 4, 3, 2, 1, 0],
+      [4, 4, 3, 2, 1, 2, 3],
+      [0, 1, 3, 4, 4, 2, 1]
+    ];
+
     for (let w = 0; w < 52; w++) {
-      const days = [];
-      for (let d = 0; d < 7; d++) {
-        // High density on weekdays, occasional on weekends
-        const seed = (w * 7 + d * 3 + (w % 5)) % 17;
-        let level = 0;
-        if (seed > 4 && seed <= 8) level = 1;
-        else if (seed > 8 && seed <= 12) level = 2;
-        else if (seed > 12 && seed <= 15) level = 3;
-        else if (seed > 15) level = 4;
-        days.push(level);
-      }
+      const weekPattern = seedLevels[w % seedLevels.length];
+      const days = weekPattern.map((level) => {
+        const count = level === 0 ? 0 : level === 1 ? Math.floor(Math.random() * 3) + 1 : level === 2 ? Math.floor(Math.random() * 4) + 4 : level === 3 ? Math.floor(Math.random() * 5) + 8 : Math.floor(Math.random() * 7) + 13;
+        return { level, count };
+      });
       weeks.push(days);
     }
     return weeks;
   };
 
-  const contributionWeeks = generateContributionMatrix();
+  const matrix = generateContributionMatrix();
 
   const getHeatmapColor = (level) => {
     switch (level) {
-      case 1: return '#0e4429';
-      case 2: return '#006d32';
-      case 3: return '#26a641';
-      case 4: return '#39d353';
-      default: return 'var(--border-subtle, #1e293b)';
+      case 0:
+        return '#161e2e';
+      case 1:
+        return '#14532d';
+      case 2:
+        return '#166534';
+      case 3:
+        return '#15803d';
+      case 4:
+        return '#22c55e';
+      default:
+        return '#161e2e';
     }
   };
 
   const pinnedRepos = [
     {
       name: "ChronoLens",
-      desc: "Closed-loop predictive SRE control plane built for AI-native stacks on SigNoz OpenTelemetry feeds.",
-      stars: 48,
-      forks: 12,
+      badge: "⚡ SRE Control Plane",
+      badgeColor: "#0284c7",
+      desc: "Closed-loop predictive SRE control plane built on OpenTelemetry feeds with sub-10ms trace interception.",
       lang: "Python",
       langColor: "#3572A5",
-      badge: "★ SigNoz Winner",
+      stars: 48,
+      forks: 12,
       url: "https://github.com/greninja-op/ChronoLens"
     },
     {
       name: "Memoire",
+      badge: "🧠 AI Context Graph",
+      badgeColor: "#7c3aed",
       desc: "Vector similarity memory graph and long-term context retention engine for autonomous LLM agents.",
-      stars: 34,
-      forks: 7,
       lang: "Python",
       langColor: "#3572A5",
-      badge: "★ AI Infra",
+      stars: 34,
+      forks: 7,
       url: "https://github.com/greninja-op/Memoire"
     },
     {
       name: "Nuvault",
+      badge: "🔐 Zero-Knowledge Vault",
+      badgeColor: "#059669",
       desc: "Zero-trust cloud vault utilizing client-side WebCrypto AES-GCM 256-bit encryption and tenant key isolation.",
+      lang: "TypeScript",
+      langColor: "#3178C6",
       stars: 29,
       forks: 5,
-      lang: "TypeScript",
-      langColor: "#3178c6",
-      badge: "★ Security",
       url: "https://github.com/greninja-op/Nuvault"
     },
     {
-      name: "CFLS-Collaborative-File-Lock-Sync",
+      name: "CFLS-Lock-Sync",
+      badge: "🔒 Distributed Lock",
+      badgeColor: "#e11d48",
       desc: "Real-time distributed file locking protocol ensuring atomic multi-user synchronization across remote worktrees.",
-      stars: 22,
-      forks: 4,
       lang: "Go",
       langColor: "#00ADD8",
-      badge: "★ Distributed",
+      stars: 22,
+      forks: 4,
       url: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
     }
   ];
 
+  const languages = [
+    { name: "Python", percent: 38, color: "#3572A5" },
+    { name: "TypeScript", percent: 28, color: "#3178C6" },
+    { name: "Go", percent: 20, color: "#00ADD8" },
+    { name: "C++", percent: 8, color: "#00599C" },
+    { name: "Shell", percent: 6, color: "#4E5A65" }
+  ];
+
   return (
     <section
-      id="github-profile"
+      id="github"
       style={{
-        padding: '3.5rem 1.5rem',
-        maxWidth: '1180px',
-        margin: '0 auto'
+        padding: '5rem 0',
+        position: 'relative'
       }}
     >
       {/* Section Header */}
-      <div style={{ marginBottom: '2rem' }}>
+      <div style={{ marginBottom: '2.5rem' }}>
         <div
           style={{
             fontSize: '0.8rem',
@@ -112,7 +133,7 @@ export default function GithubProfileSection() {
             letterSpacing: '-0.025em'
           }}
         >
-          GitHub Profile & Contribution Heatmap
+          GitHub Engineering Footprint & Dashboard
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
@@ -120,146 +141,227 @@ export default function GithubProfileSection() {
         </p>
       </div>
 
-      {/* Profile Header Row (Directly on canvas) */}
+      {/* BENTO GRID DASHBOARD CONTAINER */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(12, 1fr)',
+          gap: '1.5rem'
+        }}
+      >
+        {/* BENTO TILE 1: PROFILE HERO CARD (Spans 8 columns) */}
         <div
           style={{
+            gridColumn: 'span 8',
+            background: '#090d16',
+            border: '1px solid #1e293b',
+            borderRadius: '24px',
+            padding: '2rem 2.25rem',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.4)',
             display: 'flex',
-            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1.5rem',
-            paddingBottom: '1.5rem',
-            borderBottom: '1px solid var(--border-subtle, #1f2937)',
-            marginBottom: '1.75rem'
+            gap: '2rem',
+            position: 'relative',
+            overflow: 'hidden'
           }}
         >
-          {/* Avatar & Info */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-            <div
-              style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.8rem',
-                color: '#fff',
-                boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)',
-                border: '2px solid var(--accent-primary, #06b6d4)'
-              }}
-            >
-              🐸
+          {/* Subtle Ambient Background Highlight */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '-40px',
+              left: '-40px',
+              width: '180px',
+              height: '180px',
+              background: 'radial-gradient(circle, rgba(6, 186, 212, 0.18) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }}
+          />
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', zIndex: 2 }}>
+            {/* Avatar with Glow Ring */}
+            <div style={{ position: 'relative' }}>
+              <div
+                style={{
+                  width: '76px',
+                  height: '76px',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
+                  padding: '3px',
+                  boxShadow: '0 0 25px rgba(6, 186, 212, 0.35)'
+                }}
+              >
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '50%',
+                    background: '#090d16',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2.5rem'
+                  }}
+                >
+                  🐸
+                </div>
+              </div>
+              {/* Online Pulse Dot */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '4px',
+                  right: '4px',
+                  width: '14px',
+                  height: '14px',
+                  borderRadius: '50%',
+                  background: '#22c55e',
+                  border: '2px solid #090d16',
+                  boxShadow: '0 0 10px #22c55e'
+                }}
+              />
             </div>
 
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary, #ffffff)', margin: 0 }}>
-                  {personalInfo.name}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.2rem' }}>
+                <h3 style={{ fontSize: '1.55rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
+                  Arjun Sabu
                 </h3>
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary, #94a3b8)', fontWeight: 500 }}>
-                  @{personalInfo.handle}
+                <span style={{ fontSize: '0.9rem', color: '#38bdf8', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                  @greninja-op
                 </span>
               </div>
-              <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary, #cbd5e1)', marginTop: '0.2rem', marginBottom: '0.5rem' }}>
-                {personalInfo.title} • Open Source Contributor
-              </p>
-              <div style={{ display: 'flex', gap: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary, #94a3b8)' }}>
-                <span><strong>140</strong> followers</span>
-                <span>•</span>
-                <span><strong>98</strong> following</span>
-                <span>•</span>
-                <span><strong>14</strong> public repos</span>
+
+              <div style={{ fontSize: '0.92rem', color: '#94a3b8', fontWeight: 500, marginBottom: '0.75rem' }}>
+                AI Systems & Full-Stack Reliability Engineer • Open Source Contributor
+              </div>
+
+              {/* Status Pill */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.3rem 0.75rem', borderRadius: '20px', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.25)', fontSize: '0.78rem', color: '#4ade80', fontWeight: 700 }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e' }} />
+                Open to SRE & Full-Stack Architect roles
               </div>
             </div>
           </div>
 
-          {/* GitHub CTA */}
+          {/* Follow Button */}
           <a
-            href={personalInfo.github}
+            href="https://github.com/greninja-op"
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              padding: '0.65rem 1.25rem',
-              borderRadius: '8px',
-              background: 'var(--btn-bg-primary, #06b6d4)',
+              padding: '0.75rem 1.4rem',
+              borderRadius: '12px',
+              background: '#06b6d4',
               color: '#ffffff',
-              fontWeight: 700,
+              fontWeight: 800,
               fontSize: '0.9rem',
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              boxShadow: '0 4px 14px rgba(6, 182, 212, 0.25)'
+              boxShadow: '0 6px 20px rgba(6, 186, 212, 0.3)',
+              transition: 'transform 0.15s ease, background 0.15s ease',
+              flexShrink: 0,
+              zIndex: 2
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           >
-            <IconGithub size={18} /> Follow on GitHub ↗
+            <IconGithub size={20} /> Follow on GitHub ↗
           </a>
         </div>
 
-        {/* 52-Week 365-Day Contribution Heatmap Grid */}
-        <div style={{ marginBottom: '2rem' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '0.8rem'
-            }}
-          >
-            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary, #ffffff)' }}>
-              1,420 contributions in the last year
+        {/* BENTO TILE 2: ENGINEERING STATS SUMMARY (Spans 4 columns) */}
+        <div
+          style={{
+            gridColumn: 'span 4',
+            background: '#090d16',
+            border: '1px solid #1e293b',
+            borderRadius: '24px',
+            padding: '1.75rem 1.75rem',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.4)',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '1.25rem',
+            alignContent: 'center'
+          }}
+        >
+          <div style={{ textAlign: 'center', padding: '0.85rem', borderRadius: '14px', background: '#0f172a', border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#22c55e', lineHeight: 1 }}>1,420</div>
+            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.25rem' }}>Contributions / Year</div>
+          </div>
+
+          <div style={{ textAlign: 'center', padding: '0.85rem', borderRadius: '14px', background: '#0f172a', border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#06b6d4', lineHeight: 1 }}>147</div>
+            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.25rem' }}>Day Commit Streak</div>
+          </div>
+
+          <div style={{ textAlign: 'center', padding: '0.85rem', borderRadius: '14px', background: '#0f172a', border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#a855f7', lineHeight: 1 }}>236★</div>
+            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.25rem' }}>Total Stars Earned</div>
+          </div>
+
+          <div style={{ textAlign: 'center', padding: '0.85rem', borderRadius: '14px', background: '#0f172a', border: '1px solid #1e293b' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#f59e0b', lineHeight: 1 }}>Top 1%</div>
+            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginTop: '0.25rem' }}>PR Merging Velocity</div>
+          </div>
+        </div>
+
+        {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX (Spans 12 columns) */}
+        <div
+          style={{
+            gridColumn: 'span 12',
+            background: '#090d16',
+            border: '1px solid #1e293b',
+            borderRadius: '24px',
+            padding: '2rem 2.25rem',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.4)',
+            position: 'relative'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff' }}>
+              1,420 Contributions in the Last Year
             </div>
-            {/* Legend */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-secondary, #94a3b8)' }}>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: '#94a3b8' }}>
               <span>Less</span>
-              {[0, 1, 2, 3, 4].map((lvl) => (
-                <span
-                  key={lvl}
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '2px',
-                    background: getHeatmapColor(lvl),
-                    display: 'inline-block'
-                  }}
-                />
-              ))}
+              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#161e2e' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#14532d' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#166534' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#15803d' }} />
+              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#22c55e' }} />
               <span>More</span>
             </div>
           </div>
 
-          {/* Heatmap Grid Frame */}
-          <div
-            style={{
-              background: 'var(--code-bg, #0f172a)',
-              border: '1px solid var(--border-subtle, #1f2937)',
-              borderRadius: '12px',
-              padding: '1.25rem',
-              overflowX: 'auto'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                gap: '3px',
-                minWidth: '720px'
-              }}
-            >
-              {contributionWeeks.map((week, wIdx) => (
-                <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                  {week.map((lvl, dIdx) => (
+          {/* Heatmap Grid */}
+          <div style={{ overflowX: 'auto', paddingBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '4px', minWidth: '780px' }}>
+              {matrix.map((week, wIdx) => (
+                <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  {week.map((day, dIdx) => (
                     <div
                       key={dIdx}
-                      title={`Activity level ${lvl}`}
                       style={{
-                        width: '11px',
-                        height: '11px',
-                        borderRadius: '2px',
-                        background: getHeatmapColor(lvl),
-                        transition: 'transform 0.1s ease'
+                        width: '12px',
+                        height: '12px',
+                        borderRadius: '3px',
+                        background: getHeatmapColor(day.level),
+                        transition: 'transform 0.15s ease, filter 0.15s ease',
+                        cursor: 'pointer'
                       }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.4)';
+                        e.currentTarget.style.filter = 'brightness(1.4)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.filter = 'brightness(1)';
+                      }}
+                      title={`${day.count} contributions`}
                     />
                   ))}
                 </div>
@@ -268,52 +370,65 @@ export default function GithubProfileSection() {
           </div>
         </div>
 
-        {/* Language Breakdown Distribution Bar */}
-        <div style={{ marginBottom: '2.25rem' }}>
-          <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary, #ffffff)', marginBottom: '0.6rem' }}>
-            Most Used Languages Across Repositories
+        {/* BENTO TILE 4: LANGUAGE DISTRIBUTION METER (Spans 12 columns) */}
+        <div
+          style={{
+            gridColumn: 'span 12',
+            background: '#090d16',
+            border: '1px solid #1e293b',
+            borderRadius: '24px',
+            padding: '1.75rem 2.25rem',
+            boxShadow: '0 15px 35px rgba(0,0,0,0.4)'
+          }}
+        >
+          <div style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem' }}>
+            Most Used Languages Across Public Repositories
           </div>
 
-          <div style={{ height: '10px', borderRadius: '5px', overflow: 'hidden', display: 'flex', marginBottom: '0.75rem' }}>
-            <div style={{ width: '38%', background: '#3572A5' }} title="Python 38%" />
-            <div style={{ width: '28%', background: '#3178c6' }} title="TypeScript 28%" />
-            <div style={{ width: '20%', background: '#00ADD8' }} title="Go 20%" />
-            <div style={{ width: '8%', background: '#f34b7d' }} title="C++ 8%" />
-            <div style={{ width: '6%', background: '#89e051' }} title="Shell 6%" />
+          {/* Multi-segment Progress Bar */}
+          <div
+            style={{
+              height: '12px',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              display: 'flex',
+              marginBottom: '1.25rem',
+              background: '#161e2e'
+            }}
+          >
+            {languages.map((l, idx) => (
+              <div
+                key={idx}
+                style={{
+                  width: `${l.percent}%`,
+                  height: '100%',
+                  background: l.color,
+                  transition: 'width 0.5s ease'
+                }}
+                title={`${l.name}: ${l.percent}%`}
+              />
+            ))}
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', fontSize: '0.8rem', color: 'var(--text-secondary, #94a3b8)' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3572A5' }} /> Python 38%
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3178c6' }} /> TypeScript 28%
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00ADD8' }} /> Go 20%
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f34b7d' }} /> C++ 8%
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#89e051' }} /> Shell 6%
-            </span>
+          {/* Language Legend Row */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+            {languages.map((l, idx) => (
+              <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: '#cbd5e1', fontWeight: 600 }}>
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: l.color }} />
+                <span>{l.name}</span>
+                <span style={{ color: '#64748b', fontSize: '0.8rem' }}>{l.percent}%</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Pinned Repositories Grid (GitHub Official Style) */}
-        <div>
-          <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary, #ffffff)', marginBottom: '1rem' }}>
-            Pinned Repositories
+        {/* BENTO TILE 5: PINNED REPOSITORIES GRID (Spans 12 columns) */}
+        <div style={{ gridColumn: 'span 12' }}>
+          <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', marginBottom: '1.25rem' }}>
+            Featured Pinned Repositories
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1.25rem'
-            }}
-          >
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
             {pinnedRepos.map((repo, idx) => (
               <a
                 key={idx}
@@ -321,39 +436,60 @@ export default function GithubProfileSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  background: 'var(--code-bg, #0f172a)',
-                  border: '1px solid var(--border-subtle, #1f2937)',
-                  borderRadius: '12px',
-                  padding: '1.25rem',
+                  background: '#090d16',
+                  border: '1px solid #1e293b',
+                  borderRadius: '20px',
+                  padding: '1.5rem',
                   textDecoration: 'none',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  transition: 'border-color 0.15s ease'
+                  transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--accent-primary, #06b6d4)')}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border-subtle, #1f2937)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.borderColor = repo.badgeColor;
+                  e.currentTarget.style.boxShadow = `0 15px 35px rgba(0,0,0,0.4), 0 0 20px ${repo.badgeColor}33`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0px)';
+                  e.currentTarget.style.borderColor = '#1e293b';
+                  e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+                }}
               >
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--accent-primary, #38bdf8)', fontWeight: 700, fontSize: '0.98rem' }}>
-                      <span>📁</span> {repo.name}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      📁 {repo.name}
                     </div>
-                    <span style={{ fontSize: '0.72rem', padding: '0.15rem 0.45rem', borderRadius: '4px', background: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', fontWeight: 600 }}>
+
+                    <span
+                      style={{
+                        fontSize: '0.72rem',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        background: `${repo.badgeColor}22`,
+                        color: repo.badgeColor,
+                        fontWeight: 700,
+                        border: `1px solid ${repo.badgeColor}44`
+                      }}
+                    >
                       {repo.badge}
                     </span>
                   </div>
 
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary, #94a3b8)', lineHeight: 1.45, marginBottom: '1.25rem' }}>
+                  <p style={{ fontSize: '0.88rem', color: '#94a3b8', lineHeight: 1.5, marginBottom: '1.25rem', fontWeight: 500 }}>
                     {repo.desc}
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.78rem', color: 'var(--text-secondary, #94a3b8)' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontSize: '0.82rem', color: '#64748b', fontWeight: 600 }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#cbd5e1' }}>
                     <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: repo.langColor }} />
                     {repo.lang}
                   </span>
+
                   <span>★ {repo.stars}</span>
                   <span>⌥ {repo.forks}</span>
                 </div>
@@ -361,6 +497,8 @@ export default function GithubProfileSection() {
             ))}
           </div>
         </div>
+
+      </div>
     </section>
   );
 }
