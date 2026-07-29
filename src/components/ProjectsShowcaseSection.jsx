@@ -206,52 +206,18 @@ export default function ProjectsShowcaseSection() {
         </p>
       </div>
 
-      {/* Outer Dark Frame (Exact Reference Frame) */}
+      {/* Outer Theme-Aware Showcase Frame (Blends seamlessly in Light & Dark Mode) */}
       <div
         style={{
-          background: '#08090d',
-          border: '2px solid #1a1d26',
+          background: 'var(--card-bg, #08090d)',
+          border: '1px solid var(--border-subtle, #1a1d26)',
           borderRadius: '32px',
           padding: '2.5rem 1.75rem',
           position: 'relative',
-          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.7)'
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+          transition: 'background 0.3s ease, border-color 0.3s ease'
         }}
       >
-        {/* White Diagonal Slashes rendered on outer frame background behind the cutout notches */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '2.5rem',
-            right: '2.5rem',
-            color: '#ffffff',
-            fontWeight: 900,
-            fontSize: '1.25rem',
-            letterSpacing: '0.2em',
-            zIndex: 1,
-            pointerEvents: 'none',
-            userSelect: 'none'
-          }}
-        >
-          //////
-        </div>
-
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '2.5rem',
-            left: '2.5rem',
-            color: '#ffffff',
-            fontWeight: 900,
-            fontSize: '1.25rem',
-            letterSpacing: '0.2em',
-            zIndex: 1,
-            pointerEvents: 'none',
-            userSelect: 'none'
-          }}
-        >
-          //////
-        </div>
-
         {/* Top Outer Frame Header */}
         <div
           style={{
@@ -259,7 +225,7 @@ export default function ProjectsShowcaseSection() {
             alignItems: 'center',
             justifyContent: 'space-between',
             marginBottom: '2rem',
-            color: '#94a3b8',
+            color: 'var(--text-secondary, #94a3b8)',
             fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
             fontWeight: 600,
@@ -269,7 +235,12 @@ export default function ProjectsShowcaseSection() {
           }}
         >
           <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
-          <div>2025.1 — 2026.12</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <div>2025.1 — 2026.12</div>
+            <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
+              //////
+            </div>
+          </div>
         </div>
 
         {/* Interactive Stacked Deck Container */}
@@ -572,7 +543,7 @@ export default function ProjectsShowcaseSection() {
             alignItems: 'center',
             justifyContent: 'space-between',
             marginTop: '2rem',
-            color: '#64748b',
+            color: 'var(--text-secondary, #64748b)',
             fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
             padding: '0 0.5rem',
@@ -580,7 +551,12 @@ export default function ProjectsShowcaseSection() {
             position: 'relative'
           }}
         >
-          <div>DESIGN / SHANSHAN & ARJUN SABU</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
+              //////
+            </div>
+            <div>DESIGN / SHANSHAN & ARJUN SABU</div>
+          </div>
           <div>TRUE SVG GEOMETRIC FOLDER CUTOUT</div>
         </div>
       </div>
