@@ -66,10 +66,8 @@ export default function UIConfigurator({
         <div
           style={{
             width: '320px',
-            background: 'var(--card-bg, rgba(26, 31, 55, 0.95))',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.2))',
+            background: 'var(--card-bg, #111827)',
+            border: '1px solid var(--border-subtle, #1f2937)',
             borderRadius: '16px',
             padding: '1.25rem',
             boxShadow: '0 20px 40px rgba(0,0,0,0.5)',

@@ -45,16 +45,16 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         '--accent-primary': accentHex,
         '--text-primary': isDark ? '#ffffff' : '#0f172a',
         '--text-secondary': isDark ? '#94a3b8' : '#475569',
-        '--card-bg': isDark ? 'rgba(255, 255, 255, 0.03)' : '#ffffff',
-        '--code-bg': isDark ? 'rgba(15, 23, 42, 0.8)' : '#f1f5f9',
-        '--border-subtle': isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.12)',
-        '--pill-bg': isDark ? 'rgba(255, 255, 255, 0.06)' : '#e2e8f0',
-        '--badge-bg': isDark ? 'rgba(6, 182, 212, 0.12)' : 'rgba(6, 182, 212, 0.15)',
-        '--badge-border': isDark ? 'rgba(6, 182, 212, 0.3)' : 'rgba(6, 182, 212, 0.4)',
+        '--card-bg': isDark ? '#111827' : '#ffffff',
+        '--code-bg': isDark ? '#0f172a' : '#f1f5f9',
+        '--border-subtle': isDark ? '#1f2937' : '#e2e8f0',
+        '--pill-bg': isDark ? '#1e293b' : '#e2e8f0',
+        '--badge-bg': isDark ? 'rgba(6, 182, 212, 0.15)' : 'rgba(6, 182, 212, 0.15)',
+        '--badge-border': isDark ? 'rgba(6, 182, 212, 0.35)' : 'rgba(6, 182, 212, 0.4)',
         '--btn-bg-primary': accentHex,
-        '--btn-bg-secondary': isDark ? 'rgba(255, 255, 255, 0.08)' : '#e2e8f0',
+        '--btn-bg-secondary': isDark ? '#1e293b' : '#e2e8f0',
         '--ui-radius': radiusCss,
-        '--footer-bg': isDark ? 'rgba(15, 23, 42, 0.95)' : '#e2e8f0'
+        '--footer-bg': isDark ? '#0f172a' : '#f1f5f9'
       }}
     >
       {/* Explicit Top Header Bar with Desktop Navigation */}
@@ -63,9 +63,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
           position: 'sticky',
           top: 0,
           zIndex: 500,
-          background: isDark ? 'rgba(11, 15, 25, 0.9)' : 'rgba(248, 250, 252, 0.9)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
+          background: isDark ? '#0a0e17' : '#ffffff',
           borderBottom: '1px solid var(--border-subtle)',
           padding: '0.85rem 1.5rem',
           transition: 'background 0.3s ease'

@@ -8,9 +8,7 @@ export default function VisitorGatewayModal({ onSelectMode, onCloseGateway, curr
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'rgba(9, 11, 20, 0.85)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        background: 'rgba(10, 14, 23, 0.92)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -22,10 +20,10 @@ export default function VisitorGatewayModal({ onSelectMode, onCloseGateway, curr
         style={{
           width: '100%',
           maxWidth: '920px',
-          background: 'linear-gradient(145deg, rgba(26, 31, 55, 0.95) 0%, rgba(15, 18, 35, 0.98) 100%)',
+          background: '#0f172a',
           borderRadius: '24px',
-          border: '1px solid rgba(139, 92, 246, 0.3)',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(139, 92, 246, 0.25)',
+          border: '1px solid #1e293b',
+          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8)',
           overflow: 'hidden',
           position: 'relative'
         }}
