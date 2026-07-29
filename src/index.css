@@ -33,46 +33,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* OS Mode Specific Scoped Rules */
+body.mac-os-mode {
   cursor: var(--cursor-mac-arrow);
   font-family: var(--font-mac-title);
-}
-
-/* Custom Pop Macintosh Vibrant Colored Scrollbars */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-left: 2px solid #000000;
-  border-top: 2px solid #000000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--mac-purple);
-  border: 2px solid #000000;
-  border-radius: 4px;
-  box-shadow: 1px 1px 0px #000000;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--mac-pink);
-}
-
-::-webkit-scrollbar-corner {
-  background: #000000;
-}
-
-a, button, input[type="button"], select, .mac-desktop-icon, .mac-traffic-btn {
-  cursor: var(--cursor-mac-pointer) !important;
-}
-
-.mac-wait-cursor, button:disabled, .connecting-state {
-  cursor: var(--cursor-mac-wait) !important;
-}
-
-body {
   background-color: var(--mac-bg);
   background-image:
     radial-gradient(#ffffff 15%, transparent 16%),
@@ -80,15 +51,67 @@ body {
   background-size: 24px 24px;
   background-position: 0 0, 12px 12px;
   color: #000000;
-  font-family: var(--font-mac-title);
   font-size: 1.15rem;
   overflow: hidden;
   height: 100vh;
   width: 100vw;
 }
 
-p, span, div, label, input, textarea, select {
-  font-family: var(--font-mac-title) !important;
+body.mac-os-mode p,
+body.mac-os-mode span,
+body.mac-os-mode div,
+body.mac-os-mode label,
+body.mac-os-mode input,
+body.mac-os-mode textarea,
+body.mac-os-mode select {
+  font-family: var(--font-mac-title);
+}
+
+body.mac-os-mode a,
+body.mac-os-mode button,
+body.mac-os-mode input[type="button"],
+body.mac-os-mode select,
+body.mac-os-mode .mac-desktop-icon,
+body.mac-os-mode .mac-traffic-btn {
+  cursor: var(--cursor-mac-pointer) !important;
+}
+
+body.mac-os-mode .mac-wait-cursor,
+body.mac-os-mode button:disabled,
+body.mac-os-mode .connecting-state {
+  cursor: var(--cursor-mac-wait) !important;
+}
+
+/* Recruiter Mode Specific Scoped Rules (Full Page Natural Scrolling & Modern Typography) */
+body.recruiter-mode {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh;
+  cursor: auto;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body.recruiter-mode ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.recruiter-mode ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border: none;
+}
+
+body.recruiter-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  border: none;
+  box-shadow: none;
+}
+
+body.recruiter-mode ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* System 7 Macintosh Window Styles */

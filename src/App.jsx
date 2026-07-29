@@ -112,6 +112,14 @@ export default function App() {
   const [launchpadOpen, setLaunchpadOpen] = useState(false);
 
   useEffect(() => {
+    if (viewMode === 'recruiter' && !showGatewayModal) {
+      document.body.className = 'recruiter-mode';
+    } else {
+      document.body.className = 'mac-os-mode';
+    }
+  }, [viewMode, showGatewayModal]);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.code === 'Space') {
         e.preventDefault();
