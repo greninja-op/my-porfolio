@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { IconGithub, IconExternalLink, IconSparkles } from './Icons';
+import { IconGithub, IconExternalLink, IconSparkles, IconX } from './Icons';
 
 export default function ProjectsShowcaseSection() {
-  // Structured Mockup Data Layer (Easy to swap with actual live API data or CMS)
-  const mockupProjects = [
+  const [hovered, setHovered] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const projects = [
     {
       id: "chronolens",
       title: "ChronoLens",
       tagline: "Closed-Loop Predictive SRE Control Plane on SigNoz",
-      category: "AI & Observability",
+      category: "AI & OBSERVABILITY",
+      year: "2025–2026",
       badge: "⚡ Agents of SigNoz Winner",
-      badgeColor: "#06b6d4",
+      accent: "#06b6d4",
+      gradient: "linear-gradient(135deg, #0f2b46 0%, #1e3c72 100%)",
+      border: "rgba(6, 182, 212, 0.4)",
       description: "ChronoLens monitors live SigNoz OpenTelemetry trace feeds, predicts SLO breaches and AI agent cost spirals before outages happen, executes reversible circuit-breaker mitigations, and logs verifiable digital audit receipts.",
       highlights: [
         "Predictive SLO breach detection using live SigNoz OpenTelemetry feeds",
@@ -25,24 +30,18 @@ export default function ProjectsShowcaseSection() {
       ],
       techStack: ["Python", "OpenTelemetry", "SigNoz API", "FastAPI", "React", "Docker"],
       github: "https://github.com/greninja-op/ChronoLens.git",
-      demo: "https://github.com/greninja-op/ChronoLens",
-      mockupFrame: {
-        type: "terminal",
-        title: "chronolens-daemon --mode=closed-loop",
-        content: `[00:01:04] INFO  Connected to SigNoz OTel Collector (grpc://127.0.0.1:4317)
-[00:01:05] TRACE Span ID 8f9a2b0c: agent_loop_detected count=14 rate=450ms
-[00:01:05] WARN  Predicted SLO Breach: LLM Cost Spiral > $45/hr (Confidence 98.4%)
-[00:01:05] ACT   Executing Circuit Breaker: Triggering Reversible Fallback Route
-[00:01:05] AUDIT Receipt 0x9f83...a2b1 logged to digital ledger. Outage Prevented.`
-      }
+      demo: "https://github.com/greninja-op/ChronoLens"
     },
     {
       id: "memoire",
       title: "Memoire",
-      tagline: "AI Memory Graph & Context Retention Engine",
-      category: "AI Infrastructure",
+      tagline: "AI Memory Graph & Long-Term Context Retention Engine",
+      category: "AI INFRASTRUCTURE",
+      year: "2025–2026",
       badge: "🧠 AI Context Graph",
-      badgeColor: "#8b5cf6",
+      accent: "#8b5cf6",
+      gradient: "linear-gradient(135deg, #2e0854 0%, #4c1d95 100%)",
+      border: "rgba(139, 92, 246, 0.4)",
       description: "Memoire indexes multi-step conversation trajectories into a vector similarity memory graph, solving LLM context window overflow and memory decay across extended autonomous agent tasks.",
       highlights: [
         "Vector embeddings & semantic graph memory indexing",
@@ -57,25 +56,18 @@ export default function ProjectsShowcaseSection() {
       ],
       techStack: ["Python", "Vector DB", "FastAPI", "Embeddings", "TypeScript"],
       github: "https://github.com/greninja-op/Memoire.git",
-      demo: "https://github.com/greninja-op/Memoire",
-      mockupFrame: {
-        type: "code",
-        title: "memoire/engine.py — Vector Similarity Indexer",
-        content: `class MemoireContextGraph:
-    async def index_trajectory(self, trajectory: AgentStep) -> str:
-        vector = await self.embedder.encode(trajectory.prompt)
-        graph_node = self.vector_db.upsert(vector, meta=trajectory.dict())
-        await self.prune_redundant_nodes(threshold=0.88)
-        return graph_node.id`
-      }
+      demo: "https://github.com/greninja-op/Memoire"
     },
     {
       id: "nuvault",
       title: "Nuvault",
       tagline: "Zero-Trust Cloud Vault & Encrypted Asset Platform",
-      category: "Security & Cloud",
+      category: "SECURITY & CLOUD",
+      year: "2025–2026",
       badge: "🔐 Zero-Knowledge Vault",
-      badgeColor: "#10b981",
+      accent: "#10b981",
+      gradient: "linear-gradient(135deg, #064e3b 0%, #047857 100%)",
+      border: "rgba(16, 185, 129, 0.4)",
       description: "Enterprise cloud storage vault engineered for zero-trust asset protection. Assets are encrypted client-side using WebCrypto AES-GCM 256-bit keys before transmission, ensuring servers hold zero unencrypted bytes.",
       highlights: [
         "Client-side WebCrypto AES-GCM 256-bit encryption",
@@ -90,28 +82,18 @@ export default function ProjectsShowcaseSection() {
       ],
       techStack: ["TypeScript", "Node.js", "React", "WebCrypto API", "PostgreSQL", "Docker"],
       github: "https://github.com/greninja-op/Nuvault.git",
-      demo: "https://github.com/greninja-op/Nuvault",
-      mockupFrame: {
-        type: "security",
-        title: "nuvault-crypto --client-side-vault",
-        content: `const key = await window.crypto.subtle.generateKey(
-  { name: "AES-GCM", length: 256 },
-  true,
-  ["encrypt", "decrypt"]
-);
-const encryptedBlob = await window.crypto.subtle.encrypt(
-  { name: "AES-GCM", iv }, key, rawData
-);
-// Server receives 0 unencrypted bytes.`
-      }
+      demo: "https://github.com/greninja-op/Nuvault"
     },
     {
       id: "cfls",
       title: "CFLS Protocol",
       tagline: "Real-Time Distributed File Locking Protocol",
-      category: "Distributed Systems",
+      category: "DISTRIBUTED SYSTEMS",
+      year: "2025–2026",
       badge: "🔒 Lock Consensus Engine",
-      badgeColor: "#f43f5e",
+      accent: "#f43f5e",
+      gradient: "linear-gradient(135deg, #881337 0%, #be123c 100%)",
+      border: "rgba(244, 63, 94, 0.4)",
       description: "CFLS solves file collision and state desynchronization in collaborative development environments. Utilizes atomic heartbeat leases, lock TTL expiration, and sub-millisecond gRPC / WebSockets delta propagation.",
       highlights: [
         "Atomic distributed file lock acquisition & heartbeat expiration",
@@ -126,29 +108,32 @@ const encryptedBlob = await window.crypto.subtle.encrypt(
       ],
       techStack: ["Go", "gRPC", "WebSockets", "Distributed Consensus", "Linux"],
       github: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync.git",
-      demo: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync",
-      mockupFrame: {
-        type: "network",
-        title: "cfls-node-daemon (Go v1.22 gRPC stream)",
-        content: `func (s *LockServer) AcquireLock(ctx context.Context, req *LockRequest) (*LockResponse, error) {
-    if s.mutex.TryAcquire(req.FileId, req.LeaseDuration) {
-        s.broadcastDeltaStream(&pb.SyncDelta{FileId: req.FileId, Status: LOCKED})
-        return &LockResponse{Granted: true}, nil
-    }
-    return &LockResponse{Granted: false}, ErrLockConflict
-}`
-      }
+      demo: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
     }
   ];
 
-  const [activeTab, setActiveTab] = useState('chronolens');
-  const activeProject = mockupProjects.find((p) => p.id === activeTab) || mockupProjects[0];
+  // Calculate transform for each card when stacked vs when hovered (fanned out)
+  const getCardTransform = (idx) => {
+    if (!hovered) {
+      // Stacked resting state: layered on top of each other with slight offset & subtle rotation
+      const translateY = idx * 14;
+      const rotateDeg = (idx - 1.5) * 2.5;
+      const scale = 1 - idx * 0.02;
+      return `translateY(${translateY}px) rotate(${rotateDeg}deg) scale(${scale})`;
+    } else {
+      // Hovered state: Cards fan out staggered side-by-side/cascading
+      const offsetX = (idx - 1.5) * 240;
+      const offsetY = idx % 2 === 0 ? -15 : 15;
+      const rotateDeg = (idx - 1.5) * 4;
+      return `translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotateDeg}deg) scale(1.02)`;
+    }
+  };
 
   return (
     <section
       id="projects-showcase"
       style={{
-        padding: '3.5rem 1.5rem',
+        padding: '4rem 1.5rem 6rem 1.5rem',
         maxWidth: '1180px',
         margin: '0 auto'
       }}
@@ -165,7 +150,7 @@ const encryptedBlob = await window.crypto.subtle.encrypt(
             marginBottom: '0.4rem'
           }}
         >
-          Section C • Beautiful Project Showcase Layer
+          Section C • Interactive Stacked Showcase Deck
         </div>
 
         <h2
@@ -177,244 +162,327 @@ const encryptedBlob = await window.crypto.subtle.encrypt(
             letterSpacing: '-0.025em'
           }}
         >
-          Featured Non-Generic Open-Source Systems
+          Featured Works — Stacked Card Gallery
         </h2>
 
-        <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-          Interactive showcase layer configured with structured mockup data (ready to swap with live API feeds). Select a project tab to inspect architecture.
+        <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '680px' }}>
+          Hover over the stack below to fan out the colored project cards. Click any card to expand full info & technical details.
         </p>
       </div>
 
-      {/* Project Selector Tabs */}
+      {/* Interactive Stacked Deck Container */}
       <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
+          position: 'relative',
+          minHeight: '440px',
           display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0.75rem',
-          marginBottom: '2rem',
-          paddingBottom: '1rem',
-          borderBottom: '1px solid var(--border-subtle, #1f2937)'
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '2rem 0',
+          cursor: 'pointer'
         }}
       >
-        {mockupProjects.map((p) => (
-          <button
+        {/* Stack Cards */}
+        {projects.map((p, idx) => (
+          <div
             key={p.id}
-            onClick={() => setActiveTab(p.id)}
+            onClick={() => setSelectedProject(p)}
             style={{
-              padding: '0.65rem 1.2rem',
-              borderRadius: '10px',
-              border: activeTab === p.id ? `2px solid ${p.badgeColor}` : '1px solid var(--border-subtle, #1f2937)',
-              background: activeTab === p.id ? `${p.badgeColor}22` : 'var(--card-bg, #111827)',
-              color: activeTab === p.id ? p.badgeColor : 'var(--text-secondary, #94a3b8)',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              cursor: 'pointer',
+              position: 'absolute',
+              width: '100%',
+              maxWidth: '680px',
+              height: '360px',
+              borderRadius: '24px',
+              background: p.gradient,
+              border: `1.5px solid ${p.border}`,
+              boxShadow: hovered
+                ? `0 25px 50px -12px ${p.accent}44, 0 10px 20px rgba(0,0,0,0.6)`
+                : `0 15px 35px rgba(0,0,0,0.5)`,
+              transform: getCardTransform(idx),
+              zIndex: hovered ? 10 + idx : 10 - idx,
+              transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+              padding: '2rem',
+              color: '#ffffff',
               display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              transition: 'all 0.15s ease'
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              overflow: 'hidden'
             }}
+            className="stacked-project-card"
           >
-            <span>{p.badge.split(' ')[0]}</span>
-            <span>{p.title}</span>
-          </button>
+            {/* Reference Image Aesthetic Accents: Top Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: '0.75rem' }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>
+                DESIGN / {p.category}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>
+                  {p.year}
+                </span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, letterSpacing: '0.15em', color: p.accent }}>
+                  //////
+                </span>
+              </div>
+            </div>
+
+            {/* Card Main Body */}
+            <div>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.3rem 0.75rem',
+                  borderRadius: '6px',
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  border: `1px solid ${p.accent}`,
+                  color: '#ffffff',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  marginBottom: '0.75rem'
+                }}
+              >
+                {p.badge}
+              </div>
+
+              <h3 style={{ fontSize: '2.2rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>
+                {p.title}
+              </h3>
+
+              <div style={{ fontSize: '1rem', fontWeight: 600, color: 'rgba(255, 255, 255, 0.85)', marginBottom: '1rem' }}>
+                {p.tagline}
+              </div>
+
+              <p style={{ fontSize: '0.92rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                {p.description}
+              </p>
+            </div>
+
+            {/* Reference Image Aesthetic Accents: Bottom Bar */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
+              <div style={{ display: 'flex', gap: '0.4rem' }}>
+                {p.techStack.slice(0, 3).map((t, tIdx) => (
+                  <span key={tIdx} style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', padding: '0.2rem 0.5rem', borderRadius: '4px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span>Click to Expand Info</span> ↗
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
-      {/* Selected Project Showcase Display Card */}
-      <div
-        style={{
-          background: 'var(--card-bg, #111827)',
-          border: '1px solid var(--border-subtle, #1f2937)',
-          borderRadius: 'var(--ui-radius, 20px)',
-          padding: '2.25rem',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2.25rem',
-          alignItems: 'start'
-        }}
-      >
-        {/* Left Column: Details, Metrics & CTAs */}
-        <div>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.35rem 0.85rem',
-              borderRadius: '8px',
-              background: `${activeProject.badgeColor}22`,
-              border: `1px solid ${activeProject.badgeColor}44`,
-              color: activeProject.badgeColor,
-              fontSize: '0.82rem',
-              fontWeight: 700,
-              marginBottom: '1.25rem'
-            }}
-          >
-            {activeProject.badge}
-          </div>
-
-          <h3 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary, #ffffff)', marginBottom: '0.3rem' }}>
-            {activeProject.title}
-          </h3>
-
-          <div style={{ fontSize: '1.05rem', color: activeProject.badgeColor, fontWeight: 600, marginBottom: '1.25rem' }}>
-            {activeProject.tagline}
-          </div>
-
-          <p style={{ color: 'var(--text-secondary, #cbd5e1)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.75rem' }}>
-            {activeProject.description}
-          </p>
-
-          {/* Metrics Grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '0.75rem',
-              marginBottom: '1.75rem',
-              padding: '1rem',
-              borderRadius: '10px',
-              background: 'var(--code-bg, #0f172a)',
-              border: '1px solid var(--border-subtle, #1f2937)'
-            }}
-          >
-            {activeProject.metrics.map((m, mIdx) => (
-              <div key={mIdx} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: activeProject.badgeColor }}>
-                  {m.value}
-                </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #94a3b8)', marginTop: '0.1rem' }}>
-                  {m.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Accomplishments Bullets */}
-          <div style={{ marginBottom: '1.75rem' }}>
-            <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700, color: 'var(--text-secondary, #94a3b8)', marginBottom: '0.6rem' }}>
-              Key Technical Accomplishments:
-            </div>
-            <ul style={{ paddingLeft: '1.2rem', margin: 0, color: 'var(--text-secondary, #cbd5e1)', fontSize: '0.95rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {activeProject.highlights.map((h, hIdx) => (
-                <li key={hIdx}>{h}</li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Tech Stack Pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '2rem' }}>
-            {activeProject.techStack.map((tech, tIdx) => (
-              <span
-                key={tIdx}
-                style={{
-                  fontSize: '0.78rem',
-                  fontFamily: 'var(--font-mono, monospace)',
-                  padding: '0.3rem 0.7rem',
-                  borderRadius: '6px',
-                  background: 'var(--pill-bg, #1e293b)',
-                  color: 'var(--text-primary, #e2e8f0)',
-                  border: '1px solid var(--border-subtle, #1f2937)',
-                  fontWeight: 600
-                }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {/* Action CTAs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem' }}>
-            <a
-              href={activeProject.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '0.7rem 1.35rem',
-                borderRadius: '8px',
-                background: 'var(--btn-bg-primary, #06b6d4)',
-                color: '#ffffff',
-                fontWeight: 700,
-                fontSize: '0.9rem',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                boxShadow: '0 4px 14px rgba(6, 182, 212, 0.25)'
-              }}
-            >
-              <IconGithub size={18} /> View GitHub Repository
-            </a>
-
-            <a
-              href={activeProject.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '0.7rem 1.35rem',
-                borderRadius: '8px',
-                background: 'var(--btn-bg-secondary, #1e293b)',
-                border: '1px solid var(--border-subtle, #1f2937)',
-                color: 'var(--text-primary, #ffffff)',
-                fontWeight: 600,
-                fontSize: '0.9rem',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem'
-              }}
-            >
-              <IconExternalLink size={18} /> Technical Readme
-            </a>
-          </div>
-        </div>
-
-        {/* Right Column: Interactive Mockup Visual Frame */}
+      {/* Full Info Modal Reveal when a Card is Clicked */}
+      {selectedProject && (
         <div
           style={{
-            background: 'var(--code-bg, #0f172a)',
-            border: '1px solid var(--border-subtle, #1f2937)',
-            borderRadius: '14px',
-            overflow: 'hidden',
-            boxShadow: '0 15px 30px rgba(0, 0, 0, 0.5)'
+            position: 'fixed',
+            inset: 0,
+            zIndex: 10000,
+            background: 'rgba(10, 14, 23, 0.92)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem',
+            animation: 'fadeIn 0.2s ease'
           }}
         >
-          {/* Mock Window Header Bar */}
           <div
             style={{
-              padding: '0.75rem 1rem',
-              background: '#090d16',
-              borderBottom: '1px solid #1f2937',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
+              width: '100%',
+              maxWidth: '850px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              background: '#0f172a',
+              border: `1.5px solid ${selectedProject.border}`,
+              borderRadius: '24px',
+              padding: '2.5rem',
+              position: 'relative',
+              boxShadow: `0 25px 60px rgba(0,0,0,0.8), 0 0 40px ${selectedProject.accent}33`,
+              color: '#ffffff'
             }}
           >
-            <div style={{ display: 'flex', gap: '0.4rem' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }} />
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              style={{
+                position: 'sticky',
+                top: 0,
+                float: 'right',
+                background: '#1e293b',
+                color: '#ffffff',
+                border: '1px solid #334155',
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                zIndex: 20
+              }}
+            >
+              <IconX size={18} />
+            </button>
+
+            {/* Reference Header Banner */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #1f2937', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.12em', color: selectedProject.accent, textTransform: 'uppercase' }}>
+                DESIGN / {selectedProject.category}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ fontSize: '0.9rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 600, color: '#94a3b8' }}>
+                  {selectedProject.year}
+                </span>
+                <span style={{ fontSize: '1rem', fontWeight: 800, letterSpacing: '0.15em', color: selectedProject.accent }}>
+                  //////
+                </span>
+              </div>
             </div>
 
-            <div style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '0.78rem', color: '#94a3b8' }}>
-              {activeProject.mockupFrame.title}
+            {/* Title & Badge */}
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.35rem 0.85rem',
+                borderRadius: '8px',
+                background: `${selectedProject.accent}22`,
+                border: `1px solid ${selectedProject.accent}44`,
+                color: selectedProject.accent,
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                marginBottom: '1rem'
+              }}
+            >
+              {selectedProject.badge}
             </div>
 
-            <div style={{ fontSize: '0.75rem', color: activeProject.badgeColor, fontWeight: 700 }}>
-              ● Live Mockup
-            </div>
-          </div>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '0.4rem', color: '#ffffff' }}>
+              {selectedProject.title}
+            </h2>
 
-          {/* Mock Code / Execution Console Content */}
-          <div style={{ padding: '1.25rem', fontFamily: 'var(--font-mono, monospace)', fontSize: '0.85rem', lineHeight: 1.6, color: '#e2e8f0' }}>
-            <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-              {activeProject.mockupFrame.content}
-            </pre>
+            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: selectedProject.accent, marginBottom: '1.5rem' }}>
+              {selectedProject.tagline}
+            </div>
+
+            <p style={{ color: '#cbd5e1', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+              {selectedProject.description}
+            </p>
+
+            {/* Key Metrics */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '1rem',
+                marginBottom: '2rem',
+                padding: '1.25rem',
+                borderRadius: '12px',
+                background: '#1e293b',
+                border: '1px solid #334155'
+              }}
+            >
+              {selectedProject.metrics.map((m, mIdx) => (
+                <div key={mIdx} style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: selectedProject.accent }}>
+                    {m.value}
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+                    {m.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Accomplishments */}
+            <div style={{ marginBottom: '2rem' }}>
+              <div style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700, color: '#94a3b8', marginBottom: '0.75rem' }}>
+                Key Technical Accomplishments:
+              </div>
+              <ul style={{ paddingLeft: '1.25rem', margin: 0, color: '#e2e8f0', fontSize: '1rem', lineHeight: 1.65, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {selectedProject.highlights.map((h, hIdx) => (
+                  <li key={hIdx}>{h}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '2.25rem' }}>
+              {selectedProject.techStack.map((tech, tIdx) => (
+                <span
+                  key={tIdx}
+                  style={{
+                    fontSize: '0.82rem',
+                    fontFamily: 'var(--font-mono, monospace)',
+                    padding: '0.35rem 0.8rem',
+                    borderRadius: '6px',
+                    background: '#1e293b',
+                    color: '#f8fafc',
+                    border: '1px solid #334155',
+                    fontWeight: 600
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+              <a
+                href={selectedProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '0.85rem 1.5rem',
+                  borderRadius: '10px',
+                  background: selectedProject.accent,
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  fontSize: '0.95rem',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  boxShadow: `0 4px 15px ${selectedProject.accent}44`
+                }}
+              >
+                <IconGithub size={18} /> View GitHub Repository
+              </a>
+
+              <a
+                href={selectedProject.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '0.85rem 1.5rem',
+                  borderRadius: '10px',
+                  background: '#1e293b',
+                  border: '1px solid #334155',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  fontSize: '0.95rem',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+              >
+                <IconExternalLink size={18} /> Technical Readme
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
