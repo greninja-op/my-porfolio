@@ -109,40 +109,41 @@ export default function GithubProfileSection() {
         position: 'relative'
       }}
     >
-      {/* Section Header */}
-      <div style={{ marginBottom: '2.5rem' }}>
-        <div
-          style={{
-            fontSize: '0.8rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 700,
-            color: 'var(--accent-primary, #06b6d4)',
-            marginBottom: '0.4rem'
-          }}
-        >
-          Section A • Authentic Proof of Work
+      {/* CENTERED CONTAINER */}
+      <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
+        {/* Section Header */}
+        <div style={{ marginBottom: '2.5rem' }}>
+          <div
+            style={{
+              fontSize: '0.8rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              fontWeight: 700,
+              color: 'var(--accent-primary, #06b6d4)',
+              marginBottom: '0.4rem'
+            }}
+          >
+            Section A • Authentic Proof of Work
+          </div>
+
+          <h2
+            style={{
+              fontFamily: 'var(--font-heading, system-ui, sans-serif)',
+              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
+              fontWeight: 800,
+              color: 'var(--text-primary, #0f172a)',
+              letterSpacing: '-0.025em'
+            }}
+          >
+            GitHub Engineering Footprint & Dashboard
+          </h2>
+
+          <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
+            Live replica of my active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories.
+          </p>
         </div>
 
-        <h2
-          style={{
-            fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-            fontWeight: 800,
-            color: 'var(--text-primary, #0f172a)',
-            letterSpacing: '-0.025em'
-          }}
-        >
-          GitHub Engineering Footprint & Dashboard
-        </h2>
-
-        <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-          Live replica of my active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories.
-        </p>
-      </div>
-
-      {/* LIGHT-MODE THEME-AWARE BENTO GRID DASHBOARD */}
-      <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
+        {/* LIGHT-MODE THEME-AWARE BENTO GRID DASHBOARD */}
         <div
           style={{
             display: 'grid',

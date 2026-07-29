@@ -176,8 +176,10 @@ export default function ProjectsShowcaseSection() {
         </defs>
       </svg>
 
-      {/* Section Header */}
-      <div style={{ marginBottom: '2.5rem' }}>
+      {/* CENTERED CONTAINER */}
+      <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
+        {/* Section Header */}
+        <div style={{ marginBottom: '2.5rem' }}>
         <div
           style={{
             fontSize: '0.8rem',
@@ -538,6 +540,7 @@ export default function ProjectsShowcaseSection() {
           <div>DESIGN / SHANSHAN & ARJUN SABU</div>
         </div>
         <div>TRUE SVG GEOMETRIC FOLDER CUTOUT</div>
+        </div>
       </div>
     </section>
   );
