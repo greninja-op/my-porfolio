@@ -4,7 +4,7 @@ import { IconGithub } from './Icons';
 export default function GithubProfileSection() {
   const [hoveredCell, setHoveredCell] = useState(null);
 
-  // Generate 52 weeks (364 days) of realistic contribution activity
+  // Generate 52 weeks of realistic contribution activity
   const generateContributionMatrix = () => {
     const weeks = [];
     const seedLevels = [
@@ -32,7 +32,7 @@ export default function GithubProfileSection() {
   const getHeatmapColor = (level) => {
     switch (level) {
       case 0:
-        return 'var(--code-bg, #e2e8f0)';
+        return 'var(--code-bg, #f1f5f9)';
       case 1:
         return '#86efac';
       case 2:
@@ -42,7 +42,7 @@ export default function GithubProfileSection() {
       case 4:
         return '#15803d';
       default:
-        return 'var(--code-bg, #e2e8f0)';
+        return 'var(--code-bg, #f1f5f9)';
     }
   };
 
@@ -109,369 +109,412 @@ export default function GithubProfileSection() {
         position: 'relative'
       }}
     >
-      {/* CENTERED CONTAINER */}
-      <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
-        {/* Section Header */}
-        <div style={{ marginBottom: '2.5rem' }}>
+      <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 1rem' }}>
+        
+        {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
+        <div
+          style={{
+            background: 'var(--card-bg, #ffffff)',
+            border: '2px solid var(--border-subtle, #cbd5e1)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.08)'
+          }}
+        >
+          {/* OS RETRO TITLE BAR HEADER */}
           <div
             style={{
-              fontSize: '0.8rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              fontWeight: 700,
-              color: 'var(--accent-primary, #06b6d4)',
-              marginBottom: '0.4rem'
+              background: 'var(--code-bg, #f1f5f9)',
+              borderBottom: '2px solid var(--border-subtle, #cbd5e1)',
+              padding: '0.65rem 1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
             }}
           >
-            Section A • Authentic Proof of Work
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+            </div>
+
+            <div
+              style={{
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                color: 'var(--text-primary, #0f172a)',
+                letterSpacing: '0.05em'
+              }}
+            >
+              GITHUB_FOOTPRINT_MONITOR.APP — System 7.5
+            </div>
+
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)', fontWeight: 700 }}>
+              [STATUS: ONLINE]
+            </div>
           </div>
 
-          <h2
-            style={{
-              fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-              fontWeight: 800,
-              color: 'var(--text-primary, #0f172a)',
-              letterSpacing: '-0.025em'
-            }}
-          >
-            GitHub Engineering Footprint & Dashboard
-          </h2>
-
-          <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-            Live replica of my active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories.
-          </p>
-        </div>
-
-        {/* LIGHT-MODE THEME-AWARE BENTO GRID DASHBOARD */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.5rem'
-          }}
-        >
-        {/* BENTO TILE 1: PROFILE HERO CARD (Spans 8 columns) */}
-        <div
-          style={{
-            gridColumn: 'span 8',
-            background: 'var(--card-bg, #ffffff)',
-            border: '1px solid var(--border-subtle, #e2e8f0)',
-            borderRadius: '24px',
-            padding: '2rem 2.25rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2rem',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', zIndex: 2 }}>
-            {/* Avatar with Glow Ring */}
-            <div style={{ position: 'relative' }}>
+          {/* WINDOW INNER BODY */}
+          <div style={{ padding: '2rem 1.75rem' }}>
+            
+            {/* Section Title inside Window */}
+            <div style={{ marginBottom: '2rem' }}>
               <div
                 style={{
-                  width: '76px',
-                  height: '76px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
-                  padding: '3px',
-                  boxShadow: '0 4px 20px rgba(6, 186, 212, 0.25)'
+                  fontSize: '0.78rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono, monospace)',
+                  color: 'var(--accent-primary, #06b6d4)',
+                  marginBottom: '0.3rem'
                 }}
               >
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    background: 'var(--card-bg, #ffffff)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2.5rem'
-                  }}
-                >
-                  🐸
-                </div>
+                Section A • Authentic Proof of Work
               </div>
-              {/* Online Pulse Dot */}
+
+              <h2
+                style={{
+                  fontFamily: 'var(--font-heading, system-ui, sans-serif)',
+                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                  fontWeight: 800,
+                  color: 'var(--text-primary, #0f172a)',
+                  letterSpacing: '-0.025em'
+                }}
+              >
+                GitHub Engineering Footprint & Dashboard
+              </h2>
+
+              <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1rem', marginTop: '0.3rem' }}>
+                Live replica of active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories.
+              </p>
+            </div>
+
+            {/* RESPONSIVE BENTO GRID DASHBOARD */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.25rem'
+              }}
+            >
+              {/* BENTO TILE 1: PROFILE HERO CARD */}
               <div
                 style={{
-                  position: 'absolute',
-                  bottom: '4px',
-                  right: '4px',
-                  width: '14px',
-                  height: '14px',
-                  borderRadius: '50%',
-                  background: '#22c55e',
-                  border: '2px solid var(--card-bg, #ffffff)',
-                  boxShadow: '0 0 8px #22c55e'
-                }}
-              />
-            </div>
-
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.2rem' }}>
-                <h3 style={{ fontSize: '1.55rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', letterSpacing: '-0.02em' }}>
-                  Arjun Sabu
-                </h3>
-                <span style={{ fontSize: '0.9rem', color: '#0284c7', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                  @greninja-op
-                </span>
-              </div>
-
-              <div style={{ fontSize: '0.92rem', color: 'var(--text-secondary, #64748b)', fontWeight: 500, marginBottom: '0.75rem' }}>
-                AI Systems & Full-Stack Reliability Engineer • Open Source Contributor
-              </div>
-
-              {/* Status Pill */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', padding: '0.3rem 0.75rem', borderRadius: '20px', background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.25)', fontSize: '0.78rem', color: '#166534', fontWeight: 700 }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e' }} />
-                Open to SRE & Full-Stack Architect roles
-              </div>
-            </div>
-          </div>
-
-          {/* Follow Button */}
-          <a
-            href="https://github.com/greninja-op"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '0.75rem 1.4rem',
-              borderRadius: '12px',
-              background: '#0284c7',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontSize: '0.9rem',
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              boxShadow: '0 4px 14px rgba(2, 132, 199, 0.25)',
-              transition: 'transform 0.15s ease',
-              flexShrink: 0,
-              zIndex: 2
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          >
-            <IconGithub size={20} /> Follow on GitHub ↗
-          </a>
-        </div>
-
-        {/* BENTO TILE 2: ENGINEERING STATS SUMMARY (Spans 4 columns) */}
-        <div
-          style={{
-            gridColumn: 'span 4',
-            background: 'var(--card-bg, #ffffff)',
-            border: '1px solid var(--border-subtle, #e2e8f0)',
-            borderRadius: '24px',
-            padding: '1.5rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '1rem',
-            alignContent: 'center'
-          }}
-        >
-          <div style={{ textAlign: 'center', padding: '0.75rem', borderRadius: '14px', background: 'var(--code-bg, #f8fafc)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
-            <div style={{ fontSize: '1.7rem', fontWeight: 900, color: '#166534', lineHeight: 1 }}>1,420</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.25rem' }}>Contributions / Year</div>
-          </div>
-
-          <div style={{ textAlign: 'center', padding: '0.75rem', borderRadius: '14px', background: 'var(--code-bg, #f8fafc)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
-            <div style={{ fontSize: '1.7rem', fontWeight: 900, color: '#0284c7', lineHeight: 1 }}>147</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.25rem' }}>Day Commit Streak</div>
-          </div>
-
-          <div style={{ textAlign: 'center', padding: '0.75rem', borderRadius: '14px', background: 'var(--code-bg, #f8fafc)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
-            <div style={{ fontSize: '1.7rem', fontWeight: 900, color: '#7c3aed', lineHeight: 1 }}>236★</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.25rem' }}>Total Stars Earned</div>
-          </div>
-
-          <div style={{ textAlign: 'center', padding: '0.75rem', borderRadius: '14px', background: 'var(--code-bg, #f8fafc)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
-            <div style={{ fontSize: '1.7rem', fontWeight: 900, color: '#d97706', lineHeight: 1 }}>Top 1%</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.25rem' }}>PR Merging Velocity</div>
-          </div>
-        </div>
-
-        {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX (Spans 12 columns) */}
-        <div
-          style={{
-            gridColumn: 'span 12',
-            background: 'var(--card-bg, #ffffff)',
-            border: '1px solid var(--border-subtle, #e2e8f0)',
-            borderRadius: '24px',
-            padding: '2rem 2.25rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-            position: 'relative'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)' }}>
-              1,420 Contributions in the Last Year
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem', color: 'var(--text-secondary, #64748b)' }}>
-              <span>Less</span>
-              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: 'var(--code-bg, #e2e8f0)' }} />
-              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#86efac' }} />
-              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#4ade80' }} />
-              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#22c55e' }} />
-              <span style={{ width: '11px', height: '11px', borderRadius: '3px', background: '#15803d' }} />
-              <span>More</span>
-            </div>
-          </div>
-
-          {/* Heatmap Grid */}
-          <div style={{ overflowX: 'auto', paddingBottom: '0.5rem' }}>
-            <div style={{ display: 'flex', gap: '4px', minWidth: '780px' }}>
-              {matrix.map((week, wIdx) => (
-                <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  {week.map((day, dIdx) => (
-                    <div
-                      key={dIdx}
-                      style={{
-                        width: '12px',
-                        height: '12px',
-                        borderRadius: '3px',
-                        background: getHeatmapColor(day.level),
-                        transition: 'transform 0.15s ease',
-                        cursor: 'pointer'
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.4)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                      title={`${day.count} contributions`}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* BENTO TILE 4: LANGUAGE DISTRIBUTION METER (Spans 12 columns) */}
-        <div
-          style={{
-            gridColumn: 'span 12',
-            background: 'var(--card-bg, #ffffff)',
-            border: '1px solid var(--border-subtle, #e2e8f0)',
-            borderRadius: '24px',
-            padding: '1.75rem 2.25rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
-          }}
-        >
-          <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '1rem' }}>
-            Most Used Languages Across Public Repositories
-          </div>
-
-          {/* Multi-segment Progress Bar */}
-          <div
-            style={{
-              height: '12px',
-              borderRadius: '6px',
-              overflow: 'hidden',
-              display: 'flex',
-              marginBottom: '1.25rem',
-              background: 'var(--code-bg, #e2e8f0)'
-            }}
-          >
-            {languages.map((l, idx) => (
-              <div
-                key={idx}
-                style={{
-                  width: `${l.percent}%`,
-                  height: '100%',
-                  background: l.color,
-                  transition: 'width 0.5s ease'
-                }}
-                title={`${l.name}: ${l.percent}%`}
-              />
-            ))}
-          </div>
-
-          {/* Language Legend Row */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
-            {languages.map((l, idx) => (
-              <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: 'var(--text-primary, #0f172a)', fontWeight: 600 }}>
-                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: l.color }} />
-                <span>{l.name}</span>
-                <span style={{ color: 'var(--text-secondary, #64748b)', fontSize: '0.8rem' }}>{l.percent}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* BENTO TILE 5: PINNED REPOSITORIES GRID (Spans 12 columns) */}
-        <div style={{ gridColumn: 'span 12' }}>
-          <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '1.25rem' }}>
-            Featured Pinned Repositories
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
-            {pinnedRepos.map((repo, idx) => (
-              <a
-                key={idx}
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  background: 'var(--card-bg, #ffffff)',
-                  border: '1px solid var(--border-subtle, #e2e8f0)',
-                  borderRadius: '20px',
+                  gridColumn: 'span 1',
+                  background: 'var(--code-bg, #f8fafc)',
+                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  borderRadius: '14px',
                   padding: '1.5rem',
-                  textDecoration: 'none',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.04)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.borderColor = repo.badgeColor;
-                  e.currentTarget.style.boxShadow = `0 14px 30px rgba(0,0,0,0.08)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0px)';
-                  e.currentTarget.style.borderColor = 'var(--border-subtle, #e2e8f0)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.04)';
+                  gap: '1.25rem'
                 }}
               >
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
-                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      📁 {repo.name}
-                    </div>
-
-                    <span
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+                  {/* Avatar */}
+                  <div style={{ position: 'relative' }}>
+                    <div
                       style={{
-                        fontSize: '0.72rem',
-                        padding: '0.2rem 0.55rem',
-                        borderRadius: '6px',
-                        background: `${repo.badgeColor}15`,
-                        color: repo.badgeColor,
-                        fontWeight: 700,
-                        border: `1px solid ${repo.badgeColor}33`
+                        width: '64px',
+                        height: '64px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
+                        padding: '2px'
                       }}
                     >
-                      {repo.badge}
-                    </span>
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          borderRadius: '50%',
+                          background: 'var(--card-bg, #ffffff)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '2.2rem'
+                        }}
+                      >
+                        🐸
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: '2px',
+                        right: '2px',
+                        width: '12px',
+                        height: '12px',
+                        borderRadius: '50%',
+                        background: '#22c55e',
+                        border: '2px solid var(--card-bg, #ffffff)'
+                      }}
+                    />
                   </div>
 
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary, #475569)', lineHeight: 1.5, marginBottom: '1.25rem', fontWeight: 500 }}>
-                    {repo.desc}
-                  </p>
+                  <div>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', letterSpacing: '-0.02em', margin: 0 }}>
+                      Arjun Sabu
+                    </h3>
+                    <span style={{ fontSize: '0.85rem', color: '#0284c7', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                      @greninja-op
+                    </span>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary, #64748b)', marginTop: '0.2rem' }}>
+                      AI Systems & SRE Reliability Engineer
+                    </div>
+                  </div>
                 </div>
-              </a>
-            ))}
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.65rem', borderRadius: '12px', background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.25)', fontSize: '0.75rem', color: '#166534', fontWeight: 700 }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e' }} />
+                    Open to Roles
+                  </div>
+
+                  <a
+                    href="https://github.com/greninja-op"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      padding: '0.55rem 1.1rem',
+                      borderRadius: '10px',
+                      background: '#0284c7',
+                      color: '#ffffff',
+                      fontWeight: 800,
+                      fontSize: '0.85rem',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      boxShadow: '0 3px 10px rgba(2, 132, 199, 0.2)',
+                      transition: 'transform 0.15s ease'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <IconGithub size={18} /> Follow ↗
+                  </a>
+                </div>
+              </div>
+
+              {/* BENTO TILE 2: ENGINEERING STATS SUMMARY */}
+              <div
+                style={{
+                  gridColumn: 'span 1',
+                  background: 'var(--code-bg, #f8fafc)',
+                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  borderRadius: '14px',
+                  padding: '1.25rem',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '0.85rem',
+                  alignContent: 'center'
+                }}
+              >
+                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: 'var(--card-bg, #ffffff)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#166534', lineHeight: 1 }}>1,420</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.2rem' }}>Contributions</div>
+                </div>
+
+                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: 'var(--card-bg, #ffffff)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#0284c7', lineHeight: 1 }}>147</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.2rem' }}>Streak Days</div>
+                </div>
+
+                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: 'var(--card-bg, #ffffff)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#7c3aed', lineHeight: 1 }}>236★</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.2rem' }}>Total Stars</div>
+                </div>
+
+                <div style={{ textAlign: 'center', padding: '0.65rem', borderRadius: '10px', background: 'var(--card-bg, #ffffff)', border: '1px solid var(--border-subtle, #e2e8f0)' }}>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#d97706', lineHeight: 1 }}>Top 1%</div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary, #64748b)', fontWeight: 700, marginTop: '0.2rem' }}>PR Velocity</div>
+                </div>
+              </div>
+
+              {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX */}
+              <div
+                style={{
+                  gridColumn: '1 / -1',
+                  background: 'var(--code-bg, #f8fafc)',
+                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  borderRadius: '14px',
+                  padding: '1.5rem',
+                  position: 'relative'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                  <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)' }}>
+                    1,420 Contributions in the Last Year
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-secondary, #64748b)' }}>
+                    <span>Less</span>
+                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: 'var(--code-bg, #e2e8f0)' }} />
+                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#86efac' }} />
+                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#4ade80' }} />
+                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#22c55e' }} />
+                    <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#15803d' }} />
+                    <span>More</span>
+                  </div>
+                </div>
+
+                {/* Heatmap Grid */}
+                <div style={{ overflowX: 'auto', paddingBottom: '0.25rem' }}>
+                  <div style={{ display: 'flex', gap: '4px', minWidth: '760px' }}>
+                    {matrix.map((week, wIdx) => (
+                      <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {week.map((day, dIdx) => (
+                          <div
+                            key={dIdx}
+                            style={{
+                              width: '11px',
+                              height: '11px',
+                              borderRadius: '2px',
+                              background: getHeatmapColor(day.level),
+                              transition: 'transform 0.15s ease',
+                              cursor: 'pointer'
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.3)')}
+                            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                            title={`${day.count} contributions`}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* BENTO TILE 4: LANGUAGE DISTRIBUTION METER */}
+              <div
+                style={{
+                  gridColumn: '1 / -1',
+                  background: 'var(--code-bg, #f8fafc)',
+                  border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                  borderRadius: '14px',
+                  padding: '1.35rem 1.5rem'
+                }}
+              >
+                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '0.85rem' }}>
+                  Most Used Languages Across Repositories
+                </div>
+
+                <div
+                  style={{
+                    height: '10px',
+                    borderRadius: '5px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    marginBottom: '1rem',
+                    background: 'var(--border-subtle, #e2e8f0)'
+                  }}
+                >
+                  {languages.map((l, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        width: `${l.percent}%`,
+                        height: '100%',
+                        background: l.color
+                      }}
+                      title={`${l.name}: ${l.percent}%`}
+                    />
+                  ))}
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
+                  {languages.map((l, idx) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', color: 'var(--text-primary, #0f172a)', fontWeight: 600 }}>
+                      <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: l.color }} />
+                      <span>{l.name}</span>
+                      <span style={{ color: 'var(--text-secondary, #64748b)', fontSize: '0.78rem' }}>{l.percent}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* BENTO TILE 5: PINNED REPOSITORIES GRID */}
+              <div style={{ gridColumn: '1 / -1' }}>
+                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', marginBottom: '1rem' }}>
+                  Featured Pinned Repositories
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                  {pinnedRepos.map((repo, idx) => (
+                    <a
+                      key={idx}
+                      href={repo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        background: 'var(--code-bg, #f8fafc)',
+                        border: '1.5px solid var(--border-subtle, #e2e8f0)',
+                        borderRadius: '14px',
+                        padding: '1.25rem',
+                        textDecoration: 'none',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        transition: 'transform 0.15s ease, border-color 0.15s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-3px)';
+                        e.currentTarget.style.borderColor = repo.badgeColor;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                        e.currentTarget.style.borderColor = 'var(--border-subtle, #e2e8f0)';
+                      }}
+                    >
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                          <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary, #0f172a)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                            📁 {repo.name}
+                          </div>
+
+                          <span
+                            style={{
+                              fontSize: '0.7rem',
+                              padding: '0.18rem 0.5rem',
+                              borderRadius: '5px',
+                              background: `${repo.badgeColor}15`,
+                              color: repo.badgeColor,
+                              fontWeight: 700,
+                              border: `1px solid ${repo.badgeColor}33`
+                            }}
+                          >
+                            {repo.badge}
+                          </span>
+                        </div>
+
+                        <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary, #475569)', lineHeight: 1.45, marginBottom: '1rem', fontWeight: 500 }}>
+                          {repo.desc}
+                        </p>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-secondary, #64748b)', fontWeight: 600 }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--text-primary, #0f172a)' }}>
+                          <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: repo.langColor }} />
+                          {repo.lang}
+                        </span>
+
+                        <span>★ {repo.stars}</span>
+                        <span>⌥ {repo.forks}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
+
       </div>
-    </div>
-  </section>
+    </section>
   );
 }

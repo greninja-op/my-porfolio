@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function TechStackSection() {
-  const [hoveredTool, setHoveredTool] = useState(null); // { row: 'top'|'bottom', index: number, name: string }
+  const [hoveredTool, setHoveredTool] = useState(null);
 
   // Official devicons/devicon repository SVG path map
   const deviconMap = {
@@ -59,13 +59,9 @@ export default function TechStackSection() {
     );
   };
 
-  // Top Row: Tools & Infrastructure
   const toolsRow = ["Docker", "PostgreSQL", "Redis", "Git", "Linux", "SigNoz", "OpenTelemetry", "gRPC", "Vite", "Bash", "Kubernetes"];
-
-  // Bottom Row: Languages & Frameworks
   const languagesRow = ["Python", "JavaScript", "TypeScript", "Go", "C++", "React", "FastAPI", "Node.js", "PyTorch"];
 
-  // Duplicate arrays for smooth 100% infinite marquee loop
   const topMarqueeItems = [...toolsRow, ...toolsRow, ...toolsRow, ...toolsRow];
   const bottomMarqueeItems = [...languagesRow, ...languagesRow, ...languagesRow, ...languagesRow];
 
@@ -77,204 +73,255 @@ export default function TechStackSection() {
         overflow: 'hidden'
       }}
     >
-      {/* Section Header */}
-      <div style={{ maxWidth: '1180px', margin: '0 auto 2.5rem auto', padding: '0 1.5rem' }}>
+      <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 1rem' }}>
+        
+        {/* OS PLAYGROUND WINDOW FRAME CONTAINER */}
         <div
           style={{
-            fontSize: '0.8rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            fontWeight: 700,
-            color: 'var(--accent-primary, #06b6d4)',
-            marginBottom: '0.4rem'
+            background: 'var(--card-bg, #ffffff)',
+            border: '2px solid var(--border-subtle, #cbd5e1)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 12px 35px rgba(0, 0, 0, 0.08)'
           }}
         >
-          Section B • Live Infinite Marquee Tickers
-        </div>
-
-        <h2
-          style={{
-            fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-            fontWeight: 800,
-            color: 'var(--text-primary, #ffffff)',
-            letterSpacing: '-0.025em'
-          }}
-        >
-          Languages Known & Engineering Toolset
-        </h2>
-
-        <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-          Hover over any technology icon to pause scrolling and reveal its name tooltip!
-        </p>
-      </div>
-
-      {/* Marquee Train Container */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        
-        {/* TOP ROW: Tools & Infrastructure (Moving Left to Right) */}
-        <div style={{ width: '100%', position: 'relative' }}>
+          {/* OS RETRO TITLE BAR HEADER */}
           <div
             style={{
+              background: 'var(--code-bg, #f1f5f9)',
+              borderBottom: '2px solid var(--border-subtle, #cbd5e1)',
+              padding: '0.65rem 1.25rem',
               display: 'flex',
-              gap: '1rem',
-              width: 'max-content',
-              animation: 'marqueeLeftToRight 28s linear infinite',
-              animationPlayState: hoveredTool?.row === 'top' ? 'paused' : 'running',
-              willChange: 'transform'
+              alignItems: 'center',
+              justifyContent: 'space-between'
             }}
           >
-            {topMarqueeItems.map((name, idx) => {
-              const isHovered = hoveredTool?.row === 'top' && hoveredTool?.index === idx;
-              return (
-                <div
-                  key={idx}
-                  style={{
-                    position: 'relative',
-                    width: '56px',
-                    height: '56px',
-                    borderRadius: '14px',
-                    background: 'var(--card-bg, #111827)',
-                    border: isHovered ? '1px solid #38bdf8' : '1px solid var(--border-subtle, #1f2937)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    cursor: 'pointer',
-                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
-                    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
-                    zIndex: isHovered ? 100 : 1
-                  }}
-                  onMouseEnter={() => setHoveredTool({ row: 'top', index: idx, name })}
-                  onMouseLeave={() => setHoveredTool(null)}
-                >
-                  {/* Popup Tooltip Bubble */}
-                  {isHovered && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '-46px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        background: '#0f172a',
-                        border: '1px solid #38bdf8',
-                        color: '#ffffff',
-                        fontSize: '0.78rem',
-                        fontWeight: 800,
-                        fontFamily: 'var(--font-mono, monospace)',
-                        padding: '0.35rem 0.75rem',
-                        borderRadius: '8px',
-                        whiteSpace: 'nowrap',
-                        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2)',
-                        pointerEvents: 'none',
-                        animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
-                      }}
-                    >
-                      {name}
-                      {/* Arrow Notch */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          bottom: '-5px',
-                          left: '50%',
-                          transform: 'translateX(-50%) rotate(45deg)',
-                          width: '8px',
-                          height: '8px',
-                          background: '#0f172a',
-                          borderRight: '1px solid #38bdf8',
-                          borderBottom: '1px solid #38bdf8'
-                        }}
-                      />
-                    </div>
-                  )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444', display: 'inline-block' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+            </div>
 
-                  {renderIcon(name)}
-                </div>
-              );
-            })}
+            <div
+              style={{
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                color: 'var(--text-primary, #0f172a)',
+                letterSpacing: '0.05em'
+              }}
+            >
+              TECH_STACK_TRAIN_MARQUEE.SYS — System 7.5
+            </div>
+
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: 'var(--text-secondary, #64748b)', fontWeight: 700 }}>
+              [SPEED: CONSTANT]
+            </div>
           </div>
-        </div>
 
-        {/* BOTTOM ROW: Languages & Frameworks (Moving Right to Left) */}
-        <div style={{ width: '100%', position: 'relative' }}>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              width: 'max-content',
-              animation: 'marqueeRightToLeft 24s linear infinite',
-              animationPlayState: hoveredTool?.row === 'bottom' ? 'paused' : 'running',
-              willChange: 'transform'
-            }}
-          >
-            {bottomMarqueeItems.map((name, idx) => {
-              const isHovered = hoveredTool?.row === 'bottom' && hoveredTool?.index === idx;
-              return (
+          {/* WINDOW INNER BODY */}
+          <div style={{ padding: '2rem 1.75rem' }}>
+            
+            {/* Section Header */}
+            <div style={{ marginBottom: '2rem' }}>
+              <div
+                style={{
+                  fontSize: '0.78rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono, monospace)',
+                  color: 'var(--accent-primary, #06b6d4)',
+                  marginBottom: '0.3rem'
+                }}
+              >
+                Section B • Live Infinite Marquee Tickers
+              </div>
+
+              <h2
+                style={{
+                  fontFamily: 'var(--font-heading, system-ui, sans-serif)',
+                  fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
+                  fontWeight: 800,
+                  color: 'var(--text-primary, #0f172a)',
+                  letterSpacing: '-0.025em'
+                }}
+              >
+                Languages Known & Engineering Toolset
+              </h2>
+
+              <p style={{ color: 'var(--text-secondary, #64748b)', fontSize: '1rem', marginTop: '0.3rem' }}>
+                Hover over any technology icon to pause scrolling and reveal its name tooltip!
+              </p>
+            </div>
+
+            {/* MARQUEE TRAIN CONTAINER */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+              
+              {/* TOP ROW: Tools & Infrastructure */}
+              <div style={{ width: '100%', position: 'relative' }}>
                 <div
-                  key={idx}
                   style={{
-                    position: 'relative',
-                    width: '56px',
-                    height: '56px',
-                    borderRadius: '14px',
-                    background: 'var(--card-bg, #111827)',
-                    border: isHovered ? '1px solid #38bdf8' : '1px solid var(--border-subtle, #1f2937)',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    cursor: 'pointer',
-                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
-                    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
-                    zIndex: isHovered ? 100 : 1
+                    gap: '1rem',
+                    width: 'max-content',
+                    animation: 'marqueeLeftToRight 28s linear infinite',
+                    animationPlayState: hoveredTool?.row === 'top' ? 'paused' : 'running',
+                    willChange: 'transform'
                   }}
-                  onMouseEnter={() => setHoveredTool({ row: 'bottom', index: idx, name })}
-                  onMouseLeave={() => setHoveredTool(null)}
                 >
-                  {/* Popup Tooltip Bubble */}
-                  {isHovered && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '-46px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        background: '#0f172a',
-                        border: '1px solid #38bdf8',
-                        color: '#ffffff',
-                        fontSize: '0.78rem',
-                        fontWeight: 800,
-                        fontFamily: 'var(--font-mono, monospace)',
-                        padding: '0.35rem 0.75rem',
-                        borderRadius: '8px',
-                        whiteSpace: 'nowrap',
-                        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2)',
-                        pointerEvents: 'none',
-                        animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
-                      }}
-                    >
-                      {name}
-                      {/* Arrow Notch */}
+                  {topMarqueeItems.map((name, idx) => {
+                    const isHovered = hoveredTool?.row === 'top' && hoveredTool?.index === idx;
+                    return (
                       <div
+                        key={idx}
                         style={{
-                          position: 'absolute',
-                          bottom: '-5px',
-                          left: '50%',
-                          transform: 'translateX(-50%) rotate(45deg)',
-                          width: '8px',
-                          height: '8px',
-                          background: '#0f172a',
-                          borderRight: '1px solid #38bdf8',
-                          borderBottom: '1px solid #38bdf8'
+                          position: 'relative',
+                          width: '56px',
+                          height: '56px',
+                          borderRadius: '14px',
+                          background: 'var(--code-bg, #f8fafc)',
+                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid var(--border-subtle, #e2e8f0)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          cursor: 'pointer',
+                          transform: isHovered ? 'scale(1.18)' : 'scale(1)',
+                          transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
+                          zIndex: isHovered ? 100 : 1
                         }}
-                      />
-                    </div>
-                  )}
+                        onMouseEnter={() => setHoveredTool({ row: 'top', index: idx, name })}
+                        onMouseLeave={() => setHoveredTool(null)}
+                      >
+                        {isHovered && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '-46px',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              background: '#0f172a',
+                              border: '1px solid #38bdf8',
+                              color: '#ffffff',
+                              fontSize: '0.78rem',
+                              fontWeight: 800,
+                              fontFamily: 'var(--font-mono, monospace)',
+                              padding: '0.35rem 0.75rem',
+                              borderRadius: '8px',
+                              whiteSpace: 'nowrap',
+                              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
+                              pointerEvents: 'none',
+                              animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                            }}
+                          >
+                            {name}
+                            <div
+                              style={{
+                                position: 'absolute',
+                                bottom: '-5px',
+                                left: '50%',
+                                transform: 'translateX(-50%) rotate(45deg)',
+                                width: '8px',
+                                height: '8px',
+                                background: '#0f172a',
+                                borderRight: '1px solid #38bdf8',
+                                borderBottom: '1px solid #38bdf8'
+                              }}
+                            />
+                          </div>
+                        )}
 
-                  {renderIcon(name)}
+                        {renderIcon(name)}
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              </div>
+
+              {/* BOTTOM ROW: Languages & Frameworks */}
+              <div style={{ width: '100%', position: 'relative' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '1rem',
+                    width: 'max-content',
+                    animation: 'marqueeRightToLeft 24s linear infinite',
+                    animationPlayState: hoveredTool?.row === 'bottom' ? 'paused' : 'running',
+                    willChange: 'transform'
+                  }}
+                >
+                  {bottomMarqueeItems.map((name, idx) => {
+                    const isHovered = hoveredTool?.row === 'bottom' && hoveredTool?.index === idx;
+                    return (
+                      <div
+                        key={idx}
+                        style={{
+                          position: 'relative',
+                          width: '56px',
+                          height: '56px',
+                          borderRadius: '14px',
+                          background: 'var(--code-bg, #f8fafc)',
+                          border: isHovered ? '1.5px solid #38bdf8' : '1.5px solid var(--border-subtle, #e2e8f0)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          cursor: 'pointer',
+                          transform: isHovered ? 'scale(1.18)' : 'scale(1)',
+                          transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
+                          zIndex: isHovered ? 100 : 1
+                        }}
+                        onMouseEnter={() => setHoveredTool({ row: 'bottom', index: idx, name })}
+                        onMouseLeave={() => setHoveredTool(null)}
+                      >
+                        {isHovered && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '-46px',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              background: '#0f172a',
+                              border: '1px solid #38bdf8',
+                              color: '#ffffff',
+                              fontSize: '0.78rem',
+                              fontWeight: 800,
+                              fontFamily: 'var(--font-mono, monospace)',
+                              padding: '0.35rem 0.75rem',
+                              borderRadius: '8px',
+                              whiteSpace: 'nowrap',
+                              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
+                              pointerEvents: 'none',
+                              animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                            }}
+                          >
+                            {name}
+                            <div
+                              style={{
+                                position: 'absolute',
+                                bottom: '-5px',
+                                left: '50%',
+                                transform: 'translateX(-50%) rotate(45deg)',
+                                width: '8px',
+                                height: '8px',
+                                background: '#0f172a',
+                                borderRight: '1px solid #38bdf8',
+                                borderBottom: '1px solid #38bdf8'
+                              }}
+                            />
+                          </div>
+                        )}
+
+                        {renderIcon(name)}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
 
