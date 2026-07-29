@@ -5,7 +5,6 @@ import TechStackSection from './TechStackSection';
 import ProjectsShowcaseSection from './ProjectsShowcaseSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
-import MacDeskAccessories from './MacDeskAccessories';
 import { toggleSound, isSoundEnabled, playRetroClick } from '../utils/sound';
 
 export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
@@ -48,7 +47,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
       >
         <div
           style={{
-            maxWidth: '1380px',
+            maxWidth: '1080px',
             width: '100%',
             margin: '0 auto',
             display: 'flex',
@@ -188,52 +187,26 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         </div>
       </header>
 
-      {/* RECRUITER PORTFOLIO CONTENT & SIDEBAR LAYOUT */}
-      <div
-        style={{
-          maxWidth: '1380px',
-          margin: '2rem auto 0 auto',
-          padding: '0 1rem',
-          display: 'flex',
-          gap: '1.75rem',
-          alignItems: 'flex-start'
-        }}
-      >
-        {/* LEFT SIDEBAR: MACINTOSH DESK ACCESSORIES */}
-        <aside style={{ display: 'none', minWidth: '260px' }} className="mac-desk-sidebar">
-          <MacDeskAccessories />
-        </aside>
+      {/* RECRUITER PORTFOLIO CONTENT */}
+      <main style={{ marginTop: '2rem' }}>
+        <HeroRecruiter
+          onSwitchToOS={onSwitchToOS}
+          onOpenResume={() => setShowResumeModal(true)}
+        />
 
-        {/* MAIN PORTFOLIO CONTENT */}
-        <main style={{ flex: 1, width: '100%', minWidth: 0 }}>
-          <HeroRecruiter
-            onSwitchToOS={onSwitchToOS}
-            onOpenResume={() => setShowResumeModal(true)}
-          />
+        <GithubProfileSection />
 
-          <GithubProfileSection />
+        <TechStackSection />
 
-          <TechStackSection />
+        <ProjectsShowcaseSection />
 
-          <ProjectsShowcaseSection />
-
-          <ContactFooterSection />
-        </main>
-      </div>
+        <ContactFooterSection />
+      </main>
 
       {/* Resume Modal */}
       {showResumeModal && (
         <ResumeMacWindow onClose={() => setShowResumeModal(false)} />
       )}
-
-      {/* Responsive Media Query for Mac Desk Accessories */}
-      <style>{`
-        @media (min-width: 1200px) {
-          .mac-desk-sidebar {
-            display: block !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
