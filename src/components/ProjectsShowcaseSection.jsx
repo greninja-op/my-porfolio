@@ -5,6 +5,7 @@ import { playRetroClick } from '../utils/sound';
 
 export default function ProjectsShowcaseSection() {
   const [hovered, setHovered] = useState(false);
+  const [hoveredCardId, setHoveredCardId] = useState(null);
   const [expandedId, setExpandedId] = useState(null);
 
   const projects = [
@@ -125,14 +126,14 @@ export default function ProjectsShowcaseSection() {
 
   const getCardTransform = (idx, isExpanded) => {
     if (expandedId) {
-      return isExpanded ? 'translateY(0px) scale(1) rotate(0deg)' : 'translateY(0px) scale(0.96) rotate(0deg)';
+      return isExpanded ? 'translate3d(0px, 0px, 0px) scale(1) rotate(0deg)' : 'translate3d(0px, 0px, 0px) scale(0.96) rotate(0deg)';
     }
 
     if (!hovered) {
-      return `translateY(${idx * 14}px) scale(${1 - idx * 0.025}) rotate(${idx * 1.8 - 2.5}deg)`;
+      return `translate3d(0px, ${idx * 14}px, 0px) scale(${1 - idx * 0.025}) rotate(${idx * 1.8 - 2.5}deg)`;
     }
 
-    // Horizontal Arc Fan-Out Deck on Hover (Expands outside window boundaries)
+    // Horizontal Arc Fan-Out Deck on Hover (Cards fan out with Card 0 at front)
     const fanConfigs = [
       { x: -250, y: -12, rot: -9 },
       { x: -80, y: -4, rot: -3 },
@@ -141,7 +142,14 @@ export default function ProjectsShowcaseSection() {
     ];
 
     const cfg = fanConfigs[idx] || { x: 0, y: 0, rot: 0 };
-    return `translateX(${cfg.x}px) translateY(${cfg.y}px) rotate(${cfg.rot}deg) scale(1)`;
+    return `translate3d(${cfg.x}px, ${cfg.y}px, 0px) rotate(${cfg.rot}deg) scale(1)`;
+  };
+
+  const getCardZIndex = (idx, isExpanded, isCardHovered) => {
+    if (isExpanded) return 100;
+    if (isCardHovered) return 90;
+    // CARD 0 (ChronoLens, yellow) is ALWAYS ON TOP at front (zIndex 40), then Card 1 (30), Card 2 (20), Card 3 (10)
+    return (4 - idx) * 10;
   };
 
   return (
@@ -204,7 +212,10 @@ export default function ProjectsShowcaseSection() {
         {/* Interactive Stacked Deck Container */}
         <div
           onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
+          onMouseLeave={() => {
+            setHovered(false);
+            setHoveredCardId(null);
+          }}
           style={{
             position: 'relative',
             minHeight: expandedId ? 'auto' : '460px',
@@ -219,18 +230,23 @@ export default function ProjectsShowcaseSection() {
         >
           {projects.map((p, idx) => {
             const isExpanded = expandedId === p.id;
+            const isCardHovered = hoveredCardId === p.id;
+
             return (
-              /* Outer Wrapper Element applying drop-shadow contour filter around exact SVG clipPath shape */
+              /* Hardware-Accelerated 60fps Card Wrapper */
               <div
                 key={p.id}
+                onMouseEnter={() => setHoveredCardId(p.id)}
+                onMouseLeave={() => setHoveredCardId(null)}
                 style={{
                   position: expandedId ? 'relative' : 'absolute',
                   width: '100%',
                   maxWidth: '760px',
                   transform: getCardTransform(idx, isExpanded),
-                  zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
-                  transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                  filter: 'drop-shadow(2px 0 0 #000000) drop-shadow(-2px 0 0 #000000) drop-shadow(0 2px 0 #000000) drop-shadow(0 -2px 0 #000000) drop-shadow(4px 4px 0 #000000)'
+                  zIndex: getCardZIndex(idx, isExpanded, isCardHovered),
+                  transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.2s ease',
+                  willChange: 'transform',
+                  filter: 'drop-shadow(0 0 1px #000000) drop-shadow(4px 4px 0 #000000)'
                 }}
               >
                 <div
@@ -240,6 +256,7 @@ export default function ProjectsShowcaseSection() {
                     background: p.gradient,
                     clipPath: 'url(#folderCardShape)',
                     WebkitClipPath: 'url(#folderCardShape)',
+                    border: '2px solid #000000',
                     padding: '2.25rem 2rem 3rem 2rem',
                     color: '#000000',
                     cursor: 'pointer',
