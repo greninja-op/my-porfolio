@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function TechStackSection() {
+  const [hoveredTool, setHoveredTool] = useState(null); // { row: 'top'|'bottom', index: number, name: string }
+
   // Official devicons/devicon repository SVG path map
   const deviconMap = {
     Python: "python/python-original.svg",
@@ -32,7 +34,6 @@ export default function TechStackSection() {
     return null;
   };
 
-  // Render official Devicon SVG or fallback
   const renderIcon = (name) => {
     const url = getDeviconUrl(name);
     if (url) {
@@ -50,7 +51,6 @@ export default function TechStackSection() {
       );
     }
 
-    // Fallback for custom tools like SigNoz
     return (
       <svg width="38" height="38" viewBox="0 0 56 56" fill="none">
         <rect width="56" height="56" rx="14" fill="#06B6D4" />
@@ -105,92 +105,182 @@ export default function TechStackSection() {
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '650px' }}>
-          Bi-directional infinite marquee train powered by official <b>devicons/devicon</b> repository vector SVGs.
+          Hover over any technology icon to pause scrolling and reveal its name tooltip!
         </p>
       </div>
 
       {/* Marquee Train Container */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         
-        {/* TOP ROW: Tools & Infrastructure (Moving Left to Right at steady constant speed) */}
-        <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
+        {/* TOP ROW: Tools & Infrastructure (Moving Left to Right) */}
+        <div style={{ width: '100%', position: 'relative' }}>
           <div
             style={{
               display: 'flex',
               gap: '1rem',
               width: 'max-content',
               animation: 'marqueeLeftToRight 28s linear infinite',
+              animationPlayState: hoveredTool?.row === 'top' ? 'paused' : 'running',
               willChange: 'transform'
             }}
           >
-            {topMarqueeItems.map((name, idx) => (
-              <div
-                key={idx}
-                title={name}
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '14px',
-                  background: 'var(--card-bg, #111827)',
-                  border: '1px solid var(--border-subtle, #1f2937)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  boxShadow: 'none',
-                  transition: 'transform 0.15s ease'
-                }}
-                className="devicon-svg-card"
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              >
-                {renderIcon(name)}
-              </div>
-            ))}
+            {topMarqueeItems.map((name, idx) => {
+              const isHovered = hoveredTool?.row === 'top' && hoveredTool?.index === idx;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    position: 'relative',
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '14px',
+                    background: 'var(--card-bg, #111827)',
+                    border: isHovered ? '1px solid #38bdf8' : '1px solid var(--border-subtle, #1f2937)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
+                    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
+                    zIndex: isHovered ? 100 : 1
+                  }}
+                  onMouseEnter={() => setHoveredTool({ row: 'top', index: idx, name })}
+                  onMouseLeave={() => setHoveredTool(null)}
+                >
+                  {/* Popup Tooltip Bubble */}
+                  {isHovered && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '-46px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: '#0f172a',
+                        border: '1px solid #38bdf8',
+                        color: '#ffffff',
+                        fontSize: '0.78rem',
+                        fontWeight: 800,
+                        fontFamily: 'var(--font-mono, monospace)',
+                        padding: '0.35rem 0.75rem',
+                        borderRadius: '8px',
+                        whiteSpace: 'nowrap',
+                        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2)',
+                        pointerEvents: 'none',
+                        animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                      }}
+                    >
+                      {name}
+                      {/* Arrow Notch */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: '-5px',
+                          left: '50%',
+                          transform: 'translateX(-50%) rotate(45deg)',
+                          width: '8px',
+                          height: '8px',
+                          background: '#0f172a',
+                          borderRight: '1px solid #38bdf8',
+                          borderBottom: '1px solid #38bdf8'
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {renderIcon(name)}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* BOTTOM ROW: Languages & Frameworks (Moving Right to Left at steady constant speed) */}
-        <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
+        {/* BOTTOM ROW: Languages & Frameworks (Moving Right to Left) */}
+        <div style={{ width: '100%', position: 'relative' }}>
           <div
             style={{
               display: 'flex',
               gap: '1rem',
               width: 'max-content',
               animation: 'marqueeRightToLeft 24s linear infinite',
+              animationPlayState: hoveredTool?.row === 'bottom' ? 'paused' : 'running',
               willChange: 'transform'
             }}
           >
-            {bottomMarqueeItems.map((name, idx) => (
-              <div
-                key={idx}
-                title={name}
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '14px',
-                  background: 'var(--card-bg, #111827)',
-                  border: '1px solid var(--border-subtle, #1f2937)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  boxShadow: 'none',
-                  transition: 'transform 0.15s ease'
-                }}
-                className="devicon-svg-card"
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              >
-                {renderIcon(name)}
-              </div>
-            ))}
+            {bottomMarqueeItems.map((name, idx) => {
+              const isHovered = hoveredTool?.row === 'bottom' && hoveredTool?.index === idx;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    position: 'relative',
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '14px',
+                    background: 'var(--card-bg, #111827)',
+                    border: isHovered ? '1px solid #38bdf8' : '1px solid var(--border-subtle, #1f2937)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
+                    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease',
+                    zIndex: isHovered ? 100 : 1
+                  }}
+                  onMouseEnter={() => setHoveredTool({ row: 'bottom', index: idx, name })}
+                  onMouseLeave={() => setHoveredTool(null)}
+                >
+                  {/* Popup Tooltip Bubble */}
+                  {isHovered && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '-46px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: '#0f172a',
+                        border: '1px solid #38bdf8',
+                        color: '#ffffff',
+                        fontSize: '0.78rem',
+                        fontWeight: 800,
+                        fontFamily: 'var(--font-mono, monospace)',
+                        padding: '0.35rem 0.75rem',
+                        borderRadius: '8px',
+                        whiteSpace: 'nowrap',
+                        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2)',
+                        pointerEvents: 'none',
+                        animation: 'tooltipPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                      }}
+                    >
+                      {name}
+                      {/* Arrow Notch */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: '-5px',
+                          left: '50%',
+                          transform: 'translateX(-50%) rotate(45deg)',
+                          width: '8px',
+                          height: '8px',
+                          background: '#0f172a',
+                          borderRight: '1px solid #38bdf8',
+                          borderBottom: '1px solid #38bdf8'
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {renderIcon(name)}
+                </div>
+              );
+            })}
           </div>
         </div>
 
       </div>
 
-      {/* Marquee Keyframe Animations */}
+      {/* Animations */}
       <style>{`
         @keyframes marqueeRightToLeft {
           0% { transform: translateX(0%); }
@@ -199,6 +289,10 @@ export default function TechStackSection() {
         @keyframes marqueeLeftToRight {
           0% { transform: translateX(-50%); }
           100% { transform: translateX(0%); }
+        }
+        @keyframes tooltipPop {
+          0% { opacity: 0; transform: translateX(-50%) translateY(6px) scale(0.92); }
+          100% { opacity: 1; transform: translateX(-50%) translateY(0px) scale(1); }
         }
       `}</style>
     </section>
