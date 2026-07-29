@@ -10,12 +10,14 @@ export default function ProjectsShowcaseSection() {
       id: "chronolens",
       title: "ChronoLens",
       tagline: "Closed-Loop Predictive SRE Control Plane on SigNoz",
-      category: "AI & OBSERVABILITY",
+      category: "AI & OBSERVABILITY / SRE / TELEMETRY",
       year: "2025-2026",
       badge: "⚡ Agents of SigNoz Winner",
       accentColor: "#0284c7",
-      gradient: "linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 35%, #dbeafe 70%, #ede9fe 100%)",
+      // Exact palette from reference image: Pearlescent ice-blue on left, rich 3D royal blue to purple on right
+      gradient: "linear-gradient(125deg, #f0f7ff 0%, #dbeafe 35%, #93c5fd 60%, #4f46e5 85%, #312e81 100%)",
       icon3d: "🪐",
+      characterArt: "👨‍💻",
       description: "ChronoLens monitors live SigNoz OpenTelemetry trace feeds, predicts SLO breaches and AI agent cost spirals before outages happen, executes reversible circuit-breaker mitigations, and logs verifiable digital audit receipts.",
       highlights: [
         "Predictive SLO breach detection using live SigNoz OpenTelemetry feeds",
@@ -36,12 +38,13 @@ export default function ProjectsShowcaseSection() {
       id: "memoire",
       title: "Memoire",
       tagline: "AI Memory Graph & Long-Term Context Retention Engine",
-      category: "AI INFRASTRUCTURE",
+      category: "AI INFRASTRUCTURE / VECTOR GRAPH / LLM",
       year: "2025-2026",
       badge: "🧠 AI Context Graph",
       accentColor: "#7c3aed",
-      gradient: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 35%, #ddd6fe 70%, #e0e7ff 100%)",
+      gradient: "linear-gradient(125deg, #f5f3ff 0%, #ddd6fe 35%, #a78bfa 60%, #6d28d9 85%, #4c1d95 100%)",
       icon3d: "🔮",
+      characterArt: "🤖",
       description: "Memoire indexes multi-step conversation trajectories into a vector similarity memory graph, solving LLM context window overflow and memory decay across extended autonomous agent tasks.",
       highlights: [
         "Vector embeddings & semantic graph memory indexing",
@@ -62,12 +65,13 @@ export default function ProjectsShowcaseSection() {
       id: "nuvault",
       title: "Nuvault",
       tagline: "Zero-Trust Cloud Vault & Encrypted Asset Platform",
-      category: "SECURITY & CLOUD",
+      category: "SECURITY & CLOUD / WEBCRYPTO / VAULT",
       year: "2025-2026",
       badge: "🔐 Zero-Knowledge Vault",
       accentColor: "#059669",
-      gradient: "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 35%, #a7f3d0 70%, #e0e7ff 100%)",
+      gradient: "linear-gradient(125deg, #ecfdf5 0%, #a7f3d0 35%, #34d399 60%, #059669 85%, #064e3b 100%)",
       icon3d: "💎",
+      characterArt: "🛡️",
       description: "Enterprise cloud storage vault engineered for zero-trust asset protection. Assets are encrypted client-side using WebCrypto AES-GCM 256-bit keys before transmission, ensuring servers hold zero unencrypted bytes.",
       highlights: [
         "Client-side WebCrypto AES-GCM 256-bit encryption",
@@ -88,12 +92,13 @@ export default function ProjectsShowcaseSection() {
       id: "cfls",
       title: "CFLS Protocol",
       tagline: "Real-Time Distributed File Locking Protocol",
-      category: "DISTRIBUTED SYSTEMS",
+      category: "DISTRIBUTED SYSTEMS / gRPC / WEBSOCKETS",
       year: "2025-2026",
       badge: "🔒 Lock Consensus Engine",
       accentColor: "#e11d48",
-      gradient: "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 35%, #fecdd3 70%, #e0e7ff 100%)",
+      gradient: "linear-gradient(125deg, #fff1f2 0%, #fecdd3 35%, #fb7185 60%, #e11d48 85%, #881337 100%)",
       icon3d: "⚡",
+      characterArt: "⚡",
       description: "CFLS solves file collision and state desynchronization in collaborative development environments. Utilizes atomic heartbeat leases, lock TTL expiration, and sub-millisecond gRPC / WebSockets delta propagation.",
       highlights: [
         "Atomic distributed file lock acquisition & heartbeat expiration",
@@ -123,7 +128,7 @@ export default function ProjectsShowcaseSection() {
       const scale = 1 - idx * 0.015;
       return `translateY(${translateY}px) rotate(${rotateDeg}deg) scale(${scale})`;
     } else {
-      const offsetX = (idx - 1.5) * 230;
+      const offsetX = (idx - 1.5) * 240;
       const offsetY = idx % 2 === 0 ? -12 : 12;
       const rotateDeg = (idx - 1.5) * 3;
       return `translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotateDeg}deg) scale(1.01)`;
@@ -131,11 +136,7 @@ export default function ProjectsShowcaseSection() {
   };
 
   const toggleExpand = (id) => {
-    if (expandedId === id) {
-      setExpandedId(null);
-    } else {
-      setExpandedId(id);
-    }
+    setExpandedId(expandedId === id ? null : id);
   };
 
   return (
@@ -159,7 +160,7 @@ export default function ProjectsShowcaseSection() {
             marginBottom: '0.4rem'
           }}
         >
-          Section C • Interactive Showcase Deck
+          Section C • Interactive Portfolio Album Deck
         </div>
 
         <h2
@@ -171,26 +172,26 @@ export default function ProjectsShowcaseSection() {
             letterSpacing: '-0.025em'
           }}
         >
-          Featured Engineering Works
+          Featured Open-Source Works
         </h2>
 
         <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '1.05rem', marginTop: '0.4rem', maxWidth: '680px' }}>
-          Hover over the stack to fan out the cards. Click any card to expand full info and technical details in-place!
+          Exact reference portfolio card silhouette with liquid metallic sheen. Hover to fan out stack, click to expand full info in-place!
         </p>
       </div>
 
-      {/* Outer Dark Frame (Matching Reference Image Frame) */}
+      {/* Outer Dark Frame (Exact Reference Frame) */}
       <div
         style={{
-          background: '#080c15',
-          border: '1.5px solid #1e2738',
+          background: '#08090d',
+          border: '2px solid #1a1d26',
           borderRadius: '32px',
           padding: '2.5rem 1.75rem',
           position: 'relative',
-          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.6)'
+          boxShadow: '0 30px 60px rgba(0, 0, 0, 0.7)'
         }}
       >
-        {/* Top Outer Metadata Bar */}
+        {/* Top Outer Frame Header */}
         <div
           style={{
             display: 'flex',
@@ -198,13 +199,13 @@ export default function ProjectsShowcaseSection() {
             justifyContent: 'space-between',
             marginBottom: '2rem',
             color: '#94a3b8',
-            fontSize: '0.82rem',
+            fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
             fontWeight: 600,
             padding: '0 0.5rem'
           }}
         >
-          <div>DESIGN BY ARJUN SABU</div>
+          <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
           <div>2025.1 — 2026.12</div>
         </div>
 
@@ -214,7 +215,7 @@ export default function ProjectsShowcaseSection() {
           onMouseLeave={() => setHovered(false)}
           style={{
             position: 'relative',
-            minHeight: expandedId ? 'auto' : '440px',
+            minHeight: expandedId ? 'auto' : '460px',
             display: 'flex',
             flexDirection: expandedId ? 'column' : 'row',
             gap: expandedId ? '2rem' : '0',
@@ -232,111 +233,166 @@ export default function ProjectsShowcaseSection() {
                 style={{
                   position: expandedId ? 'relative' : 'absolute',
                   width: '100%',
-                  maxWidth: '780px',
-                  borderRadius: '28px',
+                  maxWidth: '820px',
+                  borderRadius: '40px',
                   background: p.gradient,
-                  border: `2px solid ${isExpanded ? p.accentColor : 'rgba(255, 255, 255, 0.6)'}`,
+                  border: `2px solid ${isExpanded ? p.accentColor : 'rgba(255, 255, 255, 0.8)'}`,
                   boxShadow: isExpanded
-                    ? `0 25px 50px -10px rgba(0,0,0,0.4), 0 0 30px ${p.accentColor}44`
+                    ? `0 25px 50px -10px rgba(0,0,0,0.5), 0 0 35px ${p.accentColor}55`
                     : hovered
-                    ? `0 20px 40px rgba(0, 0, 0, 0.3)`
-                    : `0 12px 28px rgba(0, 0, 0, 0.25)`,
+                    ? `0 20px 40px rgba(0, 0, 0, 0.35)`
+                    : `0 12px 28px rgba(0, 0, 0, 0.3)`,
                   transform: getCardTransform(idx, isExpanded),
                   zIndex: isExpanded ? 50 : hovered ? 10 + idx : 10 - idx,
                   transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                  padding: '2.25rem',
+                  padding: '2.5rem 2.25rem',
                   color: '#0f172a',
                   cursor: 'pointer',
                   overflow: 'hidden'
                 }}
-                className="reference-project-card"
+                className="reference-shape-card"
               >
-                {/* Reference Card Header Bar */}
+                {/* High-Gloss Liquid Sheen Overlay Reflection */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 55%)',
+                    pointerEvents: 'none',
+                    borderRadius: '40px'
+                  }}
+                />
+
+                {/* EXACT REFERENCE CARD CORNER CUTOUT NOTCHES */}
+                {/* Top-Right Dark Corner Cutout Notch with White Slanted Slashes */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    background: '#08090d',
+                    padding: '0.65rem 1.25rem 0.65rem 1.5rem',
+                    borderBottomLeftRadius: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    boxShadow: '-4px 4px 12px rgba(0,0,0,0.3)',
+                    zIndex: 5
+                  }}
+                >
+                  <span style={{ color: '#ffffff', fontWeight: 900, fontSize: '1.1rem', letterSpacing: '0.18em' }}>
+                    //////
+                  </span>
+                </div>
+
+                {/* Bottom-Left Dark Corner Cutout Notch with White Slanted Slashes */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    background: '#08090d',
+                    padding: '0.65rem 1.5rem 0.65rem 1.25rem',
+                    borderTopRightRadius: '24px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    boxShadow: '4px -4px 12px rgba(0,0,0,0.3)',
+                    zIndex: 5
+                  }}
+                >
+                  <span style={{ color: '#ffffff', fontWeight: 900, fontSize: '1.1rem', letterSpacing: '0.18em' }}>
+                    //////
+                  </span>
+                </div>
+
+                {/* Card Top Category Tag Header */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    borderBottom: '1px solid rgba(15, 23, 42, 0.12)',
-                    paddingBottom: '0.85rem',
-                    marginBottom: '1.25rem'
+                    marginBottom: '1.5rem',
+                    paddingRight: '120px' // Space for top-right notch
                   }}
                 >
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.12em', color: '#475569', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 800, letterSpacing: '0.12em', color: '#334155', textTransform: 'uppercase' }}>
                     DESIGN / {p.category}
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                    <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#334155' }}>
-                      {p.year}
-                    </span>
-                    {/* Corner Diagonal Slash Accent */}
-                    <span style={{ fontSize: '1rem', fontWeight: 900, letterSpacing: '0.15em', color: '#0f172a' }}>
-                      //////
-                    </span>
+                  <div style={{ fontSize: '0.9rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#334155' }}>
+                    {p.year}
                   </div>
                 </div>
 
-                {/* Main Card Body */}
-                <div style={{ position: 'relative', minHeight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  {/* Floating 3D / Vector Planet Graphic (Matching Reference Image) */}
+                {/* Card Main Body */}
+                <div style={{ position: 'relative', minHeight: '180px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  {/* Floating 3D Saturn Planet & Developer Art Graphic (Matching Reference Image Right Side) */}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '-10px',
-                      right: '0px',
-                      fontSize: '3.5rem',
-                      filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.15))',
+                      top: '0px',
+                      right: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.25))',
                       userSelect: 'none',
-                      transition: 'transform 0.3s ease'
+                      zIndex: 3
                     }}
                   >
-                    {p.icon3d}
+                    <span style={{ fontSize: '4.2rem', transform: 'rotate(-15deg)', display: 'inline-block' }}>
+                      {p.icon3d}
+                    </span>
+                    <span style={{ fontSize: '3.5rem', display: 'inline-block' }}>
+                      {p.characterArt}
+                    </span>
                   </div>
 
-                  <div>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#475569', marginBottom: '0.4rem' }}>
+                  <div style={{ maxWidth: '480px', zIndex: 4 }}>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#334155', marginBottom: '0.3rem' }}>
                       {p.year}
                     </div>
 
-                    <h3 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 900, color: '#0f172a', lineHeight: 1.05, marginBottom: '0.5rem', letterSpacing: '-0.025em' }}>
+                    {/* Massive Reference Title */}
+                    <h3 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)', fontWeight: 900, color: '#0f172a', lineHeight: 1.02, marginBottom: '0.5rem', letterSpacing: '-0.03em' }}>
                       {p.title}
                     </h3>
 
+                    {/* Reference Image Spaced Sub-Header Tracking */}
                     <div
                       style={{
                         fontFamily: 'var(--font-heading, system-ui, sans-serif)',
-                        fontSize: '0.9rem',
-                        fontWeight: 800,
-                        letterSpacing: '0.25em',
+                        fontSize: '0.92rem',
+                        fontWeight: 900,
+                        letterSpacing: '0.28em',
                         textTransform: 'uppercase',
-                        color: '#334155',
+                        color: '#1e293b',
                         marginBottom: '1.25rem'
                       }}
                     >
                       P O R T F O L I O  /  S Y S T E M S
                     </div>
 
-                    <p style={{ fontSize: '1rem', color: '#334155', lineHeight: 1.6, maxWidth: '540px', fontWeight: 500 }}>
+                    <p style={{ fontSize: '1.02rem', color: '#1e293b', lineHeight: 1.55, fontWeight: 600 }}>
                       {p.tagline}
                     </p>
                   </div>
 
-                  {/* Reference Image Slits & Expand Trigger Bar */}
+                  {/* Card Bottom Trigger Bar */}
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      marginTop: '1.5rem',
-                      paddingTop: '0.85rem',
-                      borderTop: '1px solid rgba(15, 23, 42, 0.12)'
+                      marginTop: '1.75rem',
+                      paddingLeft: '130px', // Space for bottom-left notch
+                      zIndex: 4
                     }}
                   >
-                    <div style={{ fontSize: '1rem', fontWeight: 900, letterSpacing: '0.15em', color: '#0f172a' }}>
-                      //////
-                    </div>
-
                     <div
                       style={{
                         fontSize: '0.85rem',
@@ -345,13 +401,17 @@ export default function ProjectsShowcaseSection() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.4rem',
-                        background: 'rgba(255, 255, 255, 0.7)',
-                        padding: '0.4rem 0.9rem',
-                        borderRadius: '8px',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                        background: 'rgba(255, 255, 255, 0.85)',
+                        padding: '0.45rem 1rem',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
                       }}
                     >
                       <span>{isExpanded ? 'Click to Collapse ▲' : 'Click to Expand Info Inline ▼'}</span>
+                    </div>
+
+                    <div style={{ fontSize: '0.82rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 700, color: '#334155' }}>
+                      DESIGN / {p.id}
                     </div>
                   </div>
                 </div>
@@ -359,17 +419,19 @@ export default function ProjectsShowcaseSection() {
                 {/* IN-PLACE ANIMATED EXPANSION PANEL (NO POPUP MODAL!) */}
                 <div
                   style={{
-                    maxHeight: isExpanded ? '800px' : '0px',
+                    maxHeight: isExpanded ? '900px' : '0px',
                     opacity: isExpanded ? 1 : 0,
                     overflow: 'hidden',
                     transition: 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-                    marginTop: isExpanded ? '1.5rem' : '0px',
-                    paddingTop: isExpanded ? '1.5rem' : '0px',
-                    borderTop: isExpanded ? '1px dashed rgba(15, 23, 42, 0.2)' : 'none'
+                    marginTop: isExpanded ? '1.75rem' : '0px',
+                    paddingTop: isExpanded ? '1.75rem' : '0px',
+                    borderTop: isExpanded ? '1px dashed rgba(15, 23, 42, 0.25)' : 'none',
+                    position: 'relative',
+                    zIndex: 10
                   }}
                 >
                   {/* Detailed Description */}
-                  <p style={{ fontSize: '1.05rem', color: '#1e293b', lineHeight: 1.65, marginBottom: '1.5rem', fontWeight: 500 }}>
+                  <p style={{ fontSize: '1.05rem', color: '#0f172a', lineHeight: 1.65, marginBottom: '1.5rem', fontWeight: 600 }}>
                     {p.description}
                   </p>
 
@@ -381,18 +443,18 @@ export default function ProjectsShowcaseSection() {
                       gap: '0.85rem',
                       marginBottom: '1.5rem',
                       padding: '1.1rem',
-                      borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.8)',
-                      border: '1px solid rgba(15, 23, 42, 0.1)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.04)'
+                      borderRadius: '14px',
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      border: '1px solid rgba(15, 23, 42, 0.12)',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.05)'
                     }}
                   >
                     {p.metrics.map((m, mIdx) => (
                       <div key={mIdx} style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '1.6rem', fontWeight: 900, color: p.accentColor }}>
+                        <div style={{ fontSize: '1.7rem', fontWeight: 900, color: p.accentColor }}>
                           {m.value}
                         </div>
-                        <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 600, marginTop: '0.1rem' }}>
+                        <div style={{ fontSize: '0.78rem', color: '#475569', fontWeight: 700, marginTop: '0.1rem' }}>
                           {m.label}
                         </div>
                       </div>
@@ -401,10 +463,10 @@ export default function ProjectsShowcaseSection() {
 
                   {/* Accomplishments Bullets */}
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, color: '#475569', marginBottom: '0.6rem' }}>
+                    <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800, color: '#334155', marginBottom: '0.6rem' }}>
                       Key Technical Accomplishments:
                     </div>
-                    <ul style={{ paddingLeft: '1.25rem', margin: 0, color: '#1e293b', fontSize: '0.98rem', lineHeight: 1.65, display: 'flex', flexDirection: 'column', gap: '0.4rem', fontWeight: 500 }}>
+                    <ul style={{ paddingLeft: '1.25rem', margin: 0, color: '#0f172a', fontSize: '0.98rem', lineHeight: 1.65, display: 'flex', flexDirection: 'column', gap: '0.4rem', fontWeight: 600 }}>
                       {p.highlights.map((h, hIdx) => (
                         <li key={hIdx}>{h}</li>
                       ))}
@@ -421,9 +483,9 @@ export default function ProjectsShowcaseSection() {
                           fontFamily: 'var(--font-mono, monospace)',
                           padding: '0.35rem 0.75rem',
                           borderRadius: '6px',
-                          background: '#0f172a',
+                          background: '#08090d',
                           color: '#ffffff',
-                          fontWeight: 600
+                          fontWeight: 700
                         }}
                       >
                         {tech}
@@ -439,9 +501,9 @@ export default function ProjectsShowcaseSection() {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        padding: '0.75rem 1.4rem',
+                        padding: '0.8rem 1.5rem',
                         borderRadius: '10px',
-                        background: '#0f172a',
+                        background: '#08090d',
                         color: '#ffffff',
                         fontWeight: 700,
                         fontSize: '0.92rem',
@@ -449,7 +511,7 @@ export default function ProjectsShowcaseSection() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        boxShadow: '0 4px 12px rgba(15, 23, 42, 0.3)'
+                        boxShadow: '0 4px 14px rgba(8, 9, 13, 0.4)'
                       }}
                     >
                       <IconGithub size={18} /> View GitHub Repo
@@ -461,9 +523,9 @@ export default function ProjectsShowcaseSection() {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       style={{
-                        padding: '0.75rem 1.4rem',
+                        padding: '0.8rem 1.5rem',
                         borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.8)',
+                        background: 'rgba(255, 255, 255, 0.9)',
                         border: '1px solid rgba(15, 23, 42, 0.2)',
                         color: '#0f172a',
                         fontWeight: 700,
@@ -483,7 +545,7 @@ export default function ProjectsShowcaseSection() {
           })}
         </div>
 
-        {/* Bottom Outer Metadata Bar */}
+        {/* Bottom Outer Frame Footer */}
         <div
           style={{
             display: 'flex',
@@ -491,12 +553,12 @@ export default function ProjectsShowcaseSection() {
             justifyContent: 'space-between',
             marginTop: '2rem',
             color: '#64748b',
-            fontSize: '0.82rem',
+            fontSize: '0.85rem',
             fontFamily: 'var(--font-mono, monospace)',
             padding: '0 0.5rem'
           }}
         >
-          <div>DESIGN / SHANSHAN & ARJUN</div>
+          <div>DESIGN / SHANSHAN & ARJUN SABU</div>
           <div>IN-PLACE CARD EXPANSION</div>
         </div>
       </div>
