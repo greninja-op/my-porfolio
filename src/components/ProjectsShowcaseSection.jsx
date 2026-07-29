@@ -206,42 +206,28 @@ export default function ProjectsShowcaseSection() {
         </p>
       </div>
 
-      {/* Outer Theme-Aware Showcase Frame (Blends seamlessly in Light & Dark Mode) */}
+      {/* Metadata Bar (Directly on canvas) */}
       <div
         style={{
-          background: 'var(--card-bg, #08090d)',
-          border: '1px solid var(--border-subtle, #1a1d26)',
-          borderRadius: '32px',
-          padding: '2.5rem 1.75rem',
-          position: 'relative',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
-          transition: 'background 0.3s ease, border-color 0.3s ease'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '1.5rem',
+          color: 'var(--text-secondary, #94a3b8)',
+          fontSize: '0.85rem',
+          fontFamily: 'var(--font-mono, monospace)',
+          fontWeight: 600,
+          padding: '0 0.5rem'
         }}
       >
-        {/* Top Outer Frame Header */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '2rem',
-            color: 'var(--text-secondary, #94a3b8)',
-            fontSize: '0.85rem',
-            fontFamily: 'var(--font-mono, monospace)',
-            fontWeight: 600,
-            padding: '0 0.5rem',
-            zIndex: 2,
-            position: 'relative'
-          }}
-        >
-          <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-            <div>2025.1 — 2026.12</div>
-            <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
-              //////
-            </div>
+        <div>DESIGN BY LIANGSHANSHAN & ARJUN SABU</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div>2025.1 — 2026.12</div>
+          <div style={{ fontWeight: 900, fontSize: '1rem', letterSpacing: '0.15em', color: 'var(--text-primary, #ffffff)' }}>
+            //////
           </div>
         </div>
+      </div>
 
         {/* Interactive Stacked Deck Container */}
         <div
@@ -559,7 +545,6 @@ export default function ProjectsShowcaseSection() {
           </div>
           <div>TRUE SVG GEOMETRIC FOLDER CUTOUT</div>
         </div>
-      </div>
     </section>
   );
 }
