@@ -173,38 +173,8 @@ export default function GithubProfileSection() {
     { name: "Shell", percent: 6, color: "#4E5A65" }
   ];
 
-  // Scaled SVG Path string for 1000x600 viewBox matching objectBoundingBox clipPath 1:1
-  const folderSvgPath = "M 0 36 C 0 12 20 0 50 0 L 730 0 C 750 0 770 12 780 24 L 810 84 C 820 96 830 96 850 96 L 950 96 C 980 96 1000 108 1000 132 L 1000 564 C 1000 588 980 600 950 600 L 270 600 C 250 600 230 588 220 576 L 190 516 C 180 504 170 504 150 504 L 50 504 C 20 504 0 492 0 468 Z";
-
   return (
     <section id="github">
-      {/* TRUE SVG GEOMETRIC FOLDER SILHOUETTE CLIPPATH MASK */}
-      <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
-        <defs>
-          <clipPath id="folderCardShapeGithub" clipPathUnits="objectBoundingBox">
-            <path d="
-              M 0,0.06
-              C 0,0.02 0.02,0 0.05,0
-              L 0.73,0
-              C 0.75,0 0.77,0.02 0.78,0.04
-              L 0.81,0.14
-              C 0.82,0.16 0.83,0.16 0.85,0.16
-              L 0.95,0.16
-              C 0.98,0.16 1,0.18 1,0.22
-              L 1,0.94
-              C 1,0.98 0.98,1 0.95,1
-              L 0.27,1
-              C 0.25,1 0.23,0.98 0.22,0.96
-              L 0.19,0.86
-              C 0.18,0.84 0.17,0.84 0.15,0.84
-              L 0.05,0.84
-              C 0.02,0.84 0,0.82 0,0.78
-              Z
-            " />
-          </clipPath>
-        </defs>
-      </svg>
-
       <MacWindowWrapper
         title="GitHub Engineering Footprint & Featured Repositories"
         subtitle="Live replica of active GitHub engineering footprint, commit streaks, open-source work, and expanding pinned repo cards."
@@ -409,17 +379,17 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — FLAT SOLID COLOR SVG FOLDER CARDS */}
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — MACINTOSH FILE MANAGER FOLDER CARDS */}
           <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Featured Open-Source Pinned Repositories (Click Any Folder Card to Expand)
             </div>
 
-            {/* 4 SIDE-BY-SIDE INDIVIDUAL FLAT SVG FOLDER CARDS */}
+            {/* 4 SIDE-BY-SIDE MACINTOSH FILE MANAGER FOLDER CARDS */}
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
                 gap: '1.25rem',
                 alignItems: 'start'
               }}
@@ -429,48 +399,55 @@ export default function GithubProfileSection() {
 
                 return (
                   <div key={repo.id} style={{ position: 'relative', width: '100%' }}>
-                    {/* Hard Retro Black Drop Shadow SVG Layer */}
-                    <svg
-                      viewBox="0 0 1000 600"
-                      preserveAspectRatio="none"
+                    {/* TOP FOLDER TAB */}
+                    <div
                       style={{
-                        position: 'absolute',
-                        top: '5px',
-                        left: '5px',
-                        width: '100%',
-                        height: '100%',
-                        pointerEvents: 'none',
-                        zIndex: 1
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        background: repo.bg,
+                        border: '2.5px solid #000000',
+                        borderBottom: 'none',
+                        borderRadius: '8px 12px 0 0',
+                        padding: '0.35rem 0.85rem',
+                        fontWeight: 900,
+                        fontSize: '0.8rem',
+                        fontFamily: 'var(--font-mono, monospace)',
+                        color: '#000000',
+                        boxShadow: '2px 0 0 #000000',
+                        position: 'relative',
+                        zIndex: 3,
+                        marginBottom: '-2.5px'
                       }}
                     >
-                      <path d={folderSvgPath} fill="#000000" stroke="none" />
-                    </svg>
+                      <span>📁</span>
+                      <span>{repo.name}</span>
+                    </div>
 
-                    {/* Main SVG Folder Card Container with FLAT SOLID COLOR */}
+                    {/* MAIN FOLDER BODY */}
                     <div
                       onClick={() => toggleExpand(repo.id)}
                       style={{
                         width: '100%',
                         background: repo.bg,
-                        clipPath: 'url(#folderCardShapeGithub)',
-                        WebkitClipPath: 'url(#folderCardShapeGithub)',
-                        padding: '1.4rem 1.1rem 1.8rem 1.1rem',
+                        border: '2.5px solid #000000',
+                        borderRadius: '0 10px 10px 10px',
+                        padding: '1.25rem 1.1rem',
+                        boxShadow: '4px 4px 0 #000000',
                         color: '#000000',
                         cursor: 'pointer',
                         position: 'relative',
-                        zIndex: 2
+                        zIndex: 2,
+                        boxSizing: 'border-box'
                       }}
                     >
-                      {/* Header Badge & Icon */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem', paddingRight: '40px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                          <span style={{ fontSize: '1.2rem' }}>📁</span>
-                          <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
-                            {repo.name}
-                          </h4>
-                        </div>
+                      {/* Title Bar & 3D Graphic */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', gap: '0.5rem' }}>
+                        <h4 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)', wordBreak: 'break-word' }}>
+                          {repo.name}
+                        </h4>
 
-                        <span style={{ fontSize: '1.5rem', userSelect: 'none' }}>
+                        <span style={{ fontSize: '1.4rem', userSelect: 'none', flexShrink: 0 }}>
                           {repo.icon3d}
                         </span>
                       </div>
@@ -487,19 +464,20 @@ export default function GithubProfileSection() {
                             fontWeight: 900,
                             border: '1.5px solid #000000',
                             fontFamily: 'var(--font-mono, monospace)',
-                            boxShadow: '1.5px 1.5px 0 #000000'
+                            boxShadow: '1.5px 1.5px 0 #000000',
+                            display: 'inline-block'
                           }}
                         >
                           {repo.badge}
                         </span>
                       </div>
 
-                      {/* Short Description */}
+                      {/* Description */}
                       <p style={{ fontSize: '0.85rem', color: '#000000', lineHeight: 1.45, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', marginBottom: '1rem' }}>
                         {repo.desc}
                       </p>
 
-                      {/* Card Footer Bar */}
+                      {/* Card Stats Footer Bar */}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', borderTop: '1.5px solid #000000', paddingTop: '0.65rem' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                           <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
@@ -510,9 +488,9 @@ export default function GithubProfileSection() {
                         <span>⌥ {repo.forks}</span>
                       </div>
 
-                      {/* Click Expand Trigger */}
-                      <div style={{ marginTop: '0.75rem', textAlign: 'center' }}>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', background: '#ffffff', border: '1.5px solid #000000', padding: '0.25rem 0.6rem', borderRadius: '4px', boxShadow: '1.5px 1.5px 0 #000000', display: 'inline-block' }}>
+                      {/* Click to Expand Trigger */}
+                      <div style={{ marginTop: '0.85rem', textAlign: 'center' }}>
+                        <span style={{ fontSize: '0.74rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', background: '#ffffff', border: '1.5px solid #000000', padding: '0.3rem 0.7rem', borderRadius: '5px', boxShadow: '2px 2px 0 #000000', display: 'inline-block', color: '#000000' }}>
                           {isExpanded ? 'Collapse ▲' : 'Click to Expand Inline ▼'}
                         </span>
                       </div>
@@ -650,29 +628,6 @@ export default function GithubProfileSection() {
                         </div>
                       </div>
                     </div>
-
-                    {/* 100% Razor-Sharp Solid Black Vector Stroke Outline Overlay */}
-                    <svg
-                      viewBox="0 0 1000 600"
-                      preserveAspectRatio="none"
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        pointerEvents: 'none',
-                        zIndex: 3
-                      }}
-                    >
-                      <path
-                        d={folderSvgPath}
-                        fill="none"
-                        stroke="#000000"
-                        strokeWidth="5"
-                        vectorEffect="non-scaling-stroke"
-                      />
-                    </svg>
                   </div>
                 );
               })}
