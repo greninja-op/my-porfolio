@@ -386,7 +386,7 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — SEAMLESS TAB FOLDER CARDS WITH TECH STACK MARQUEE TICKER */}
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — SEAMLESS TAB FOLDER CARDS WITH LIVE TICKER TRAIN */}
           <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Featured Open-Source Pinned Repositories (Hover Any Folder Card to Expand)
@@ -494,9 +494,50 @@ export default function GithubProfileSection() {
                       </div>
 
                       {/* Description */}
-                      <p style={{ fontSize: '0.85rem', color: '#000000', lineHeight: 1.45, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', marginBottom: '1rem' }}>
+                      <p style={{ fontSize: '0.85rem', color: '#000000', lineHeight: 1.45, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', marginBottom: '0.85rem' }}>
                         {repo.desc}
                       </p>
+
+                      {/* CONTINUOUSLY ANIMATED TECH STACK MARQUEE TICKER TRAIN (ALWAYS VISIBLE ON CARD FACE) */}
+                      <div
+                        style={{
+                          marginBottom: '0.85rem',
+                          overflow: 'hidden',
+                          background: '#ffffff',
+                          border: '1.5px solid #000000',
+                          borderRadius: '6px',
+                          padding: '0.25rem 0.2rem',
+                          boxShadow: '1.5px 1.5px 0 #000000',
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'inline-flex',
+                            gap: '0.4rem',
+                            animation: 'cardMiniMarquee 10s linear infinite',
+                            willChange: 'transform'
+                          }}
+                        >
+                          {marqueeTechStack.map((tech, tIdx) => (
+                            <span
+                              key={tIdx}
+                              style={{
+                                fontSize: '0.72rem',
+                                fontFamily: 'var(--font-mono, monospace)',
+                                padding: '0.15rem 0.45rem',
+                                borderRadius: '4px',
+                                background: '#f1f5f9',
+                                border: '1px solid #000000',
+                                color: '#000000',
+                                fontWeight: 900
+                              }}
+                            >
+                              ⚡ {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
 
                       {/* Card Stats Footer Bar */}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', borderTop: '1.5px solid #000000', paddingTop: '0.65rem' }}>
@@ -557,59 +598,13 @@ export default function GithubProfileSection() {
                             {/* Key Technical Highlights */}
                             <div style={{ marginBottom: '0.85rem' }}>
                               <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                                Highlights:
+                                Key Accomplishments:
                               </div>
                               <ul style={{ paddingLeft: '1rem', margin: 0, color: '#000000', fontSize: '0.78rem', lineHeight: 1.45, display: 'flex', flexDirection: 'column', gap: '0.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
                                 {repo.highlights.map((h, hIdx) => (
                                   <li key={hIdx}>{h}</li>
                                 ))}
                               </ul>
-                            </div>
-
-                            {/* MINI ANIMATED TECH STACK MARQUEE TICKER (LEFT-TO-RIGHT MOVEMENT) */}
-                            <div style={{ marginBottom: '1rem' }}>
-                              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                                Toolset Ticker:
-                              </div>
-
-                              <div
-                                style={{
-                                  overflow: 'hidden',
-                                  background: '#ffffff',
-                                  border: '1.5px solid #000000',
-                                  borderRadius: '6px',
-                                  padding: '0.35rem 0.2rem',
-                                  boxShadow: '2px 2px 0 #000000',
-                                  whiteSpace: 'nowrap'
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    display: 'inline-flex',
-                                    gap: '0.4rem',
-                                    animation: 'cardMiniMarquee 10s linear infinite',
-                                    willChange: 'transform'
-                                  }}
-                                >
-                                  {marqueeTechStack.map((tech, tIdx) => (
-                                    <span
-                                      key={tIdx}
-                                      style={{
-                                        fontSize: '0.68rem',
-                                        fontFamily: 'var(--font-mono, monospace)',
-                                        padding: '0.15rem 0.45rem',
-                                        borderRadius: '4px',
-                                        background: '#f1f5f9',
-                                        border: '1px solid #000000',
-                                        color: '#000000',
-                                        fontWeight: 900
-                                      }}
-                                    >
-                                      ⚡ {tech}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
                             </div>
 
                             {/* Action CTAs */}
