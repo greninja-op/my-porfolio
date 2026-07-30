@@ -386,7 +386,7 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — 60FPS HOVER-TO-EXPAND FOLDER CARDS */}
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — SEAMLESS TAB FOLDER CARDS WITH TECH STACK MARQUEE TICKER */}
           <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Featured Open-Source Pinned Repositories (Hover Any Folder Card to Expand)
@@ -403,6 +403,8 @@ export default function GithubProfileSection() {
             >
               {pinnedRepos.map((repo) => {
                 const isExpanded = activeFolderId === repo.id;
+                // Duplicate tech stack list for smooth 100% infinite marquee loop
+                const marqueeTechStack = [...repo.techStack, ...repo.techStack, ...repo.techStack];
 
                 return (
                   <div
@@ -414,14 +416,16 @@ export default function GithubProfileSection() {
                     onMouseLeave={() => setHoveredFolderId(null)}
                     style={{ position: 'relative', width: '100%' }}
                   >
-                    {/* TOP FOLDER TAB */}
+                    {/* SEAMLESS FOLDER TAB (Unified 100% Left Alignment) */}
                     <div
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.4rem',
                         background: repo.bg,
-                        border: '2.5px solid #000000',
+                        borderLeft: '2.5px solid #000000',
+                        borderTop: '2.5px solid #000000',
+                        borderRight: '2.5px solid #000000',
                         borderBottom: 'none',
                         borderRadius: '8px 12px 0 0',
                         padding: '0.35rem 0.85rem',
@@ -429,7 +433,6 @@ export default function GithubProfileSection() {
                         fontSize: '0.8rem',
                         fontFamily: 'var(--font-mono, monospace)',
                         color: '#000000',
-                        boxShadow: '2px 0 0 #000000',
                         position: 'relative',
                         zIndex: 3,
                         marginBottom: '-2.5px'
@@ -439,7 +442,7 @@ export default function GithubProfileSection() {
                       <span>{repo.name}</span>
                     </div>
 
-                    {/* MAIN FOLDER BODY */}
+                    {/* MAIN FOLDER BODY CONTAINER */}
                     <div
                       onClick={() => toggleExpand(repo.id)}
                       style={{
@@ -563,25 +566,50 @@ export default function GithubProfileSection() {
                               </ul>
                             </div>
 
-                            {/* Tech Stack Pills */}
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
-                              {repo.techStack.map((tech, tIdx) => (
-                                <span
-                                  key={tIdx}
+                            {/* MINI ANIMATED TECH STACK MARQUEE TICKER (LEFT-TO-RIGHT MOVEMENT) */}
+                            <div style={{ marginBottom: '1rem' }}>
+                              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                                Toolset Ticker:
+                              </div>
+
+                              <div
+                                style={{
+                                  overflow: 'hidden',
+                                  background: '#ffffff',
+                                  border: '1.5px solid #000000',
+                                  borderRadius: '6px',
+                                  padding: '0.35rem 0.2rem',
+                                  boxShadow: '2px 2px 0 #000000',
+                                  whiteSpace: 'nowrap'
+                                }}
+                              >
+                                <div
                                   style={{
-                                    fontSize: '0.68rem',
-                                    fontFamily: 'var(--font-mono, monospace)',
-                                    padding: '0.2rem 0.45rem',
-                                    borderRadius: '4px',
-                                    background: '#ffffff',
-                                    border: '1px solid #000000',
-                                    color: '#000000',
-                                    fontWeight: 900
+                                    display: 'inline-flex',
+                                    gap: '0.4rem',
+                                    animation: 'cardMiniMarquee 10s linear infinite',
+                                    willChange: 'transform'
                                   }}
                                 >
-                                  {tech}
-                                </span>
-                              ))}
+                                  {marqueeTechStack.map((tech, tIdx) => (
+                                    <span
+                                      key={tIdx}
+                                      style={{
+                                        fontSize: '0.68rem',
+                                        fontFamily: 'var(--font-mono, monospace)',
+                                        padding: '0.15rem 0.45rem',
+                                        borderRadius: '4px',
+                                        background: '#f1f5f9',
+                                        border: '1px solid #000000',
+                                        color: '#000000',
+                                        fontWeight: 900
+                                      }}
+                                    >
+                                      ⚡ {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
 
                             {/* Action CTAs */}
@@ -656,6 +684,18 @@ export default function GithubProfileSection() {
 
         </div>
       </MacWindowWrapper>
+
+      {/* Mini Marquee Keyframe Animation */}
+      <style>{`
+        @keyframes cardMiniMarquee {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-33.33%, 0, 0);
+          }
+        }
+      `}</style>
     </section>
   );
 }
