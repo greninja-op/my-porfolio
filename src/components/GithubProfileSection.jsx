@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { IconGithub } from './Icons';
+import { IconGithub, IconExternalLink } from './Icons';
 import MacWindowWrapper from './MacWindowWrapper';
 import { playRetroClick } from '../utils/sound';
 
 export default function GithubProfileSection() {
   const [hoveredCell, setHoveredCell] = useState(null);
+  const [expandedId, setExpandedId] = useState(null);
+
+  const toggleExpand = (id) => {
+    playRetroClick();
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
 
   // Generate 52 weeks of realistic contribution activity
   const generateContributionMatrix = () => {
@@ -50,48 +56,116 @@ export default function GithubProfileSection() {
 
   const pinnedRepos = [
     {
+      id: "chronolens",
       name: "ChronoLens",
       badge: "⚡ SRE Control Plane",
-      badgeBg: "#38bdf8",
-      desc: "Closed-loop predictive SRE control plane built on OpenTelemetry feeds with sub-10ms trace interception.",
+      badgeBg: "#ffffff",
+      accentBg: "#fde047",
+      gradient: "linear-gradient(135deg, #fde047 0%, #facc15 100%)",
+      icon3d: "🪐",
+      desc: "Closed-loop predictive SRE control plane built on SigNoz OpenTelemetry feeds with sub-10ms trace interception.",
+      highlights: [
+        "Predictive SLO breach detection using live SigNoz OpenTelemetry feeds",
+        "Reversible automated mitigation & sub-10ms instant rollback capabilities",
+        "Agent Watch: loop detection & LLM cost-spiral breaker",
+        "Digital audit receipt logging for verified failure prevention"
+      ],
+      metrics: [
+        { label: "MTTD Reduction", value: "40%" },
+        { label: "Trace Interception", value: "<10ms" },
+        { label: "Audit Receipt", value: "Verified" }
+      ],
+      techStack: ["Python", "OpenTelemetry", "SigNoz API", "FastAPI", "React", "Docker"],
       lang: "Python",
       langColor: "#3572A5",
       stars: 48,
       forks: 12,
-      url: "https://github.com/greninja-op/ChronoLens"
+      url: "https://github.com/greninja-op/ChronoLens.git",
+      demo: "https://github.com/greninja-op/ChronoLens"
     },
     {
+      id: "memoire",
       name: "Memoire",
       badge: "🧠 AI Context Graph",
-      badgeBg: "#c084fc",
+      badgeBg: "#ffffff",
+      accentBg: "#c084fc",
+      gradient: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+      icon3d: "🔮",
       desc: "Vector similarity memory graph and long-term context retention engine for autonomous LLM agents.",
+      highlights: [
+        "Vector embeddings & semantic graph memory indexing",
+        "Dynamic context pruning & relevance decay algorithms",
+        "Sub-millisecond memory retrieval for live LLM agent prompts",
+        "Seamless vector store & agentic framework integration"
+      ],
+      metrics: [
+        { label: "Token Savings", value: "65%" },
+        { label: "Search Latency", value: "<1ms" },
+        { label: "Context Window", value: "Infinite" }
+      ],
+      techStack: ["Python", "Vector DB", "FastAPI", "Embeddings", "TypeScript"],
       lang: "Python",
       langColor: "#3572A5",
       stars: 34,
       forks: 7,
-      url: "https://github.com/greninja-op/Memoire"
+      url: "https://github.com/greninja-op/Memoire.git",
+      demo: "https://github.com/greninja-op/Memoire"
     },
     {
+      id: "nuvault",
       name: "Nuvault",
       badge: "🔐 Zero-Knowledge Vault",
-      badgeBg: "#4ade80",
+      badgeBg: "#ffffff",
+      accentBg: "#4ade80",
+      gradient: "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)",
+      icon3d: "💎",
       desc: "Zero-trust cloud vault utilizing client-side WebCrypto AES-GCM 256-bit encryption and tenant key isolation.",
+      highlights: [
+        "Client-side WebCrypto AES-GCM 256-bit encryption",
+        "Zero-knowledge architecture & tenant key isolation",
+        "High-throughput chunked file streaming & decryption",
+        "Granular cryptographic audit trail logs"
+      ],
+      metrics: [
+        { label: "Cipher Suite", value: "AES-GCM-256" },
+        { label: "Server Keys", value: "Zero" },
+        { label: "Stream Speed", value: "1.2 GB/s" }
+      ],
+      techStack: ["TypeScript", "Node.js", "React", "WebCrypto API", "PostgreSQL", "Docker"],
       lang: "TypeScript",
       langColor: "#3178C6",
       stars: 29,
       forks: 5,
-      url: "https://github.com/greninja-op/Nuvault"
+      url: "https://github.com/greninja-op/Nuvault.git",
+      demo: "https://github.com/greninja-op/Nuvault"
     },
     {
+      id: "cfls",
       name: "CFLS-Lock-Sync",
       badge: "🔒 Distributed Lock",
-      badgeBg: "#f472b6",
+      badgeBg: "#ffffff",
+      accentBg: "#f472b6",
+      gradient: "linear-gradient(135deg, #f472b6 0%, #e11d48 100%)",
+      icon3d: "⚡",
       desc: "Real-time distributed file locking protocol ensuring atomic multi-user synchronization across remote worktrees.",
+      highlights: [
+        "gRPC & WebSocket bidirectional lock consensus",
+        "Sub-millisecond lock acquisition & atomic lease renewal",
+        "Conflict detection for concurrent multi-agent file modifications",
+        "Zero-dependency lightweight CLI & daemon"
+      ],
+      metrics: [
+        { label: "Lock Latency", value: "<1ms" },
+        { label: "Concurrency", value: "10k req/s" },
+        { label: "Collisions", value: "0%" }
+      ],
+      techStack: ["Go", "gRPC", "WebSockets", "TypeScript", "React"],
       lang: "Go",
       langColor: "#00ADD8",
       stars: 22,
       forks: 4,
-      url: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
+      url: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync.git",
+      demo: "https://github.com/greninja-op/CFLS-Collaborative-File-Lock-Sync"
     }
   ];
 
@@ -103,11 +177,41 @@ export default function GithubProfileSection() {
     { name: "Shell", percent: 6, color: "#4E5A65" }
   ];
 
+  // Scaled SVG Path string for 1000x600 viewBox matching objectBoundingBox clipPath 1:1
+  const folderSvgPath = "M 0 36 C 0 12 20 0 50 0 L 730 0 C 750 0 770 12 780 24 L 810 84 C 820 96 830 96 850 96 L 950 96 C 980 96 1000 108 1000 132 L 1000 564 C 1000 588 980 600 950 600 L 270 600 C 250 600 230 588 220 576 L 190 516 C 180 504 170 504 150 504 L 50 504 C 20 504 0 492 0 468 Z";
+
   return (
     <section id="github">
+      {/* TRUE SVG GEOMETRIC FOLDER SILHOUETTE CLIPPATH MASK */}
+      <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+        <defs>
+          <clipPath id="folderCardShapeGithub" clipPathUnits="objectBoundingBox">
+            <path d="
+              M 0,0.06
+              C 0,0.02 0.02,0 0.05,0
+              L 0.73,0
+              C 0.75,0 0.77,0.02 0.78,0.04
+              L 0.81,0.14
+              C 0.82,0.16 0.83,0.16 0.85,0.16
+              L 0.95,0.16
+              C 0.98,0.16 1,0.18 1,0.22
+              L 1,0.94
+              C 1,0.98 0.98,1 0.95,1
+              L 0.27,1
+              C 0.25,1 0.23,0.98 0.22,0.96
+              L 0.19,0.86
+              C 0.18,0.84 0.17,0.84 0.15,0.84
+              L 0.05,0.84
+              C 0.02,0.84 0,0.82 0,0.78
+              Z
+            " />
+          </clipPath>
+        </defs>
+      </svg>
+
       <MacWindowWrapper
-        title="GitHub Engineering Footprint & Dashboard"
-        subtitle="Live replica of active GitHub engineering footprint, commit streaks, open-source work, and pinned repositories."
+        title="GitHub Engineering Footprint & Featured Repositories"
+        subtitle="Live replica of active GitHub engineering footprint, commit streaks, open-source work, and expanding pinned repo cards."
         badgeText="STATUS: ONLINE"
       >
         {/* RESPONSIVE RETRO BENTO GRID DASHBOARD */}
@@ -220,7 +324,7 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX (TOUCH SCROLL) */}
+          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX */}
           <div
             style={{
               gridColumn: '1 / -1',
@@ -309,70 +413,286 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: PINNED REPOSITORIES GRID */}
-          <div style={{ gridColumn: '1 / -1' }}>
-            <div style={{ fontSize: '0.95rem', fontWeight: 900, color: '#000000', marginBottom: '0.85rem', fontFamily: 'var(--font-mono, monospace)' }}>
-              Featured Pinned Repositories
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — SIDE-BY-SIDE EXPANDING SVG FOLDER CARDS */}
+          <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
+            <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+              Featured Open-Source Pinned Repositories (Click Any Folder Card to Expand)
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.85rem' }}>
-              {pinnedRepos.map((repo, idx) => (
-                <a
-                  key={idx}
-                  href={repo.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => playRetroClick()}
-                  style={{
-                    background: repo.badgeBg,
-                    border: '2px solid #000000',
-                    borderRadius: '8px',
-                    padding: '1.1rem',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    boxShadow: '3px 3px 0 #000000'
-                  }}
-                >
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.65rem', flexWrap: 'wrap', gap: '0.35rem' }}>
-                      <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
-                        📁 {repo.name}
+            {/* 4 SIDE-BY-SIDE INDIVIDUAL SVG FOLDER CARDS */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+                gap: '1.25rem',
+                alignItems: 'start'
+              }}
+            >
+              {pinnedRepos.map((repo) => {
+                const isExpanded = expandedId === repo.id;
+
+                return (
+                  <div key={repo.id} style={{ position: 'relative', width: '100%' }}>
+                    {/* Hard Retro Black Drop Shadow SVG Layer */}
+                    <svg
+                      viewBox="0 0 1000 600"
+                      preserveAspectRatio="none"
+                      style={{
+                        position: 'absolute',
+                        top: '5px',
+                        left: '5px',
+                        width: '100%',
+                        height: '100%',
+                        pointerEvents: 'none',
+                        zIndex: 1
+                      }}
+                    >
+                      <path d={folderSvgPath} fill="#000000" stroke="none" />
+                    </svg>
+
+                    {/* Main SVG Folder Card Container */}
+                    <div
+                      onClick={() => toggleExpand(repo.id)}
+                      style={{
+                        width: '100%',
+                        background: repo.gradient,
+                        clipPath: 'url(#folderCardShapeGithub)',
+                        WebkitClipPath: 'url(#folderCardShapeGithub)',
+                        padding: '1.4rem 1.1rem 1.8rem 1.1rem',
+                        color: '#000000',
+                        cursor: 'pointer',
+                        position: 'relative',
+                        zIndex: 2
+                      }}
+                    >
+                      {/* High-Gloss Liquid Sheen Overlay */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%)',
+                          pointerEvents: 'none'
+                        }}
+                      />
+
+                      {/* Header Badge & Icon */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem', paddingRight: '40px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <span style={{ fontSize: '1.2rem' }}>📁</span>
+                          <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', margin: 0, fontFamily: 'var(--font-mono, monospace)' }}>
+                            {repo.name}
+                          </h4>
+                        </div>
+
+                        <span style={{ fontSize: '1.5rem', userSelect: 'none' }}>
+                          {repo.icon3d}
+                        </span>
                       </div>
 
-                      <span
+                      {/* Badge Pill */}
+                      <div style={{ marginBottom: '0.85rem' }}>
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            padding: '0.2rem 0.55rem',
+                            borderRadius: '4px',
+                            background: '#ffffff',
+                            color: '#000000',
+                            fontWeight: 900,
+                            border: '1.5px solid #000000',
+                            fontFamily: 'var(--font-mono, monospace)',
+                            boxShadow: '1.5px 1.5px 0 #000000'
+                          }}
+                        >
+                          {repo.badge}
+                        </span>
+                      </div>
+
+                      {/* Short Description */}
+                      <p style={{ fontSize: '0.85rem', color: '#000000', lineHeight: 1.45, fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', marginBottom: '1rem' }}>
+                        {repo.desc}
+                      </p>
+
+                      {/* Card Footer Bar */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', borderTop: '1.5px solid #000000', paddingTop: '0.65rem' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
+                          {repo.lang}
+                        </span>
+
+                        <span>★ {repo.stars}</span>
+                        <span>⌥ {repo.forks}</span>
+                      </div>
+
+                      {/* Click Expand Trigger */}
+                      <div style={{ marginTop: '0.75rem', textAlign: 'center' }}>
+                        <span style={{ fontSize: '0.72rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', background: '#ffffff', border: '1.5px solid #000000', padding: '0.25rem 0.6rem', borderRadius: '4px', boxShadow: '1.5px 1.5px 0 #000000', display: 'inline-block' }}>
+                          {isExpanded ? 'Collapse ▲' : 'Click to Expand Inline ▼'}
+                        </span>
+                      </div>
+
+                      {/* IN-PLACE ANIMATED EXPANSION PANEL */}
+                      <div
                         style={{
-                          fontSize: '0.68rem',
-                          padding: '0.12rem 0.45rem',
-                          borderRadius: '4px',
-                          background: '#ffffff',
-                          color: '#000000',
-                          fontWeight: 900,
-                          border: '1.5px solid #000000',
-                          fontFamily: 'var(--font-mono, monospace)'
+                          maxHeight: isExpanded ? '800px' : '0px',
+                          opacity: isExpanded ? 1 : 0,
+                          overflow: 'hidden',
+                          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                          marginTop: isExpanded ? '1rem' : '0px',
+                          paddingTop: isExpanded ? '1rem' : '0px',
+                          borderTop: isExpanded ? '2px dashed #000000' : 'none'
                         }}
                       >
-                        {repo.badge}
-                      </span>
+                        {/* 3-Column Metrics Counters */}
+                        <div
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                            gap: '0.4rem',
+                            marginBottom: '0.85rem',
+                            padding: '0.65rem 0.4rem',
+                            borderRadius: '6px',
+                            background: '#ffffff',
+                            border: '1.5px solid #000000',
+                            boxShadow: '2px 2px 0 #000000'
+                          }}
+                        >
+                          {repo.metrics.map((m, mIdx) => (
+                            <div key={mIdx} style={{ textAlign: 'center' }}>
+                              <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                                {m.value}
+                              </div>
+                              <div style={{ fontSize: '0.62rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                                {m.label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Key Technical Highlights */}
+                        <div style={{ marginBottom: '0.85rem' }}>
+                          <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                            Highlights:
+                          </div>
+                          <ul style={{ paddingLeft: '1rem', margin: 0, color: '#000000', fontSize: '0.78rem', lineHeight: 1.45, display: 'flex', flexDirection: 'column', gap: '0.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                            {repo.highlights.map((h, hIdx) => (
+                              <li key={hIdx}>{h}</li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Tech Stack Pills */}
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
+                          {repo.techStack.map((tech, tIdx) => (
+                            <span
+                              key={tIdx}
+                              style={{
+                                fontSize: '0.68rem',
+                                fontFamily: 'var(--font-mono, monospace)',
+                                padding: '0.2rem 0.45rem',
+                                borderRadius: '4px',
+                                background: '#ffffff',
+                                border: '1px solid #000000',
+                                color: '#000000',
+                                fontWeight: 900
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Action CTAs */}
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                          <a
+                            href={repo.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              playRetroClick();
+                            }}
+                            style={{
+                              padding: '0.55rem 0.85rem',
+                              borderRadius: '6px',
+                              background: '#ffffff',
+                              border: '1.5px solid #000000',
+                              boxShadow: '2px 2px 0 #000000',
+                              color: '#000000',
+                              fontWeight: 900,
+                              fontSize: '0.78rem',
+                              fontFamily: 'var(--font-mono, monospace)',
+                              textDecoration: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem',
+                              flex: '1 1 auto',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            <IconGithub size={15} /> GitHub Repo
+                          </a>
+
+                          <a
+                            href={repo.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              playRetroClick();
+                            }}
+                            style={{
+                              padding: '0.55rem 0.85rem',
+                              borderRadius: '6px',
+                              background: '#ffffff',
+                              border: '1.5px solid #000000',
+                              boxShadow: '2px 2px 0 #000000',
+                              color: '#000000',
+                              fontWeight: 900,
+                              fontSize: '0.78rem',
+                              fontFamily: 'var(--font-mono, monospace)',
+                              textDecoration: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem',
+                              flex: '1 1 auto',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            <IconExternalLink size={15} /> Specs
+                          </a>
+                        </div>
+                      </div>
                     </div>
 
-                    <p style={{ fontSize: '0.82rem', color: '#000000', lineHeight: 1.4, marginBottom: '0.85rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                      {repo.desc}
-                    </p>
+                    {/* 100% Razor-Sharp Solid Black Vector Stroke Outline Overlay */}
+                    <svg
+                      viewBox="0 0 1000 600"
+                      preserveAspectRatio="none"
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        pointerEvents: 'none',
+                        zIndex: 3
+                      }}
+                    >
+                      <path
+                        d={folderSvgPath}
+                        fill="none"
+                        stroke="#000000"
+                        strokeWidth="5"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
                   </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', fontSize: '0.78rem', color: '#000000', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: repo.langColor, border: '1px solid #000000' }} />
-                      {repo.lang}
-                    </span>
-
-                    <span>★ {repo.stars}</span>
-                    <span>⌥ {repo.forks}</span>
-                  </div>
-                </a>
-              ))}
+                );
+              })}
             </div>
           </div>
 

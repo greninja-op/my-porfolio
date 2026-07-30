@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import HeroRecruiter from './HeroRecruiter';
 import GithubProfileSection from './GithubProfileSection';
 import TechStackSection from './TechStackSection';
-import ProjectsShowcaseSection from './ProjectsShowcaseSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
 import { toggleSound, isSoundEnabled, playRetroClick } from '../utils/sound';
@@ -90,7 +89,7 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             </div>
           </a>
 
-          {/* Desktop Nav Links (Hidden on small mobile screens via CSS) */}
+          {/* Desktop Nav Links */}
           <nav
             style={{
               alignItems: 'center',
@@ -102,13 +101,10 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             className="desktop-nav-links"
           >
             <a href="#github" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
-              GitHub
+              GitHub & Repos
             </a>
             <a href="#tech-stack" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Toolset
-            </a>
-            <a href="#projects" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
-              Projects
             </a>
             <a href="#contact" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
               Contact
@@ -194,8 +190,6 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
         <GithubProfileSection />
 
         <TechStackSection />
-
-        <ProjectsShowcaseSection />
 
         <ContactFooterSection />
       </main>
