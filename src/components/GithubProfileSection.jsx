@@ -60,8 +60,7 @@ export default function GithubProfileSection() {
       name: "ChronoLens",
       badge: "⚡ SRE Control Plane",
       badgeBg: "#ffffff",
-      accentBg: "#fde047",
-      gradient: "linear-gradient(135deg, #fde047 0%, #facc15 100%)",
+      bg: "#fde047",
       icon3d: "🪐",
       desc: "Closed-loop predictive SRE control plane built on SigNoz OpenTelemetry feeds with sub-10ms trace interception.",
       highlights: [
@@ -88,8 +87,7 @@ export default function GithubProfileSection() {
       name: "Memoire",
       badge: "🧠 AI Context Graph",
       badgeBg: "#ffffff",
-      accentBg: "#c084fc",
-      gradient: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+      bg: "#c084fc",
       icon3d: "🔮",
       desc: "Vector similarity memory graph and long-term context retention engine for autonomous LLM agents.",
       highlights: [
@@ -116,8 +114,7 @@ export default function GithubProfileSection() {
       name: "Nuvault",
       badge: "🔐 Zero-Knowledge Vault",
       badgeBg: "#ffffff",
-      accentBg: "#4ade80",
-      gradient: "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)",
+      bg: "#4ade80",
       icon3d: "💎",
       desc: "Zero-trust cloud vault utilizing client-side WebCrypto AES-GCM 256-bit encryption and tenant key isolation.",
       highlights: [
@@ -144,8 +141,7 @@ export default function GithubProfileSection() {
       name: "CFLS-Lock-Sync",
       badge: "🔒 Distributed Lock",
       badgeBg: "#ffffff",
-      accentBg: "#f472b6",
-      gradient: "linear-gradient(135deg, #f472b6 0%, #e11d48 100%)",
+      bg: "#f472b6",
       icon3d: "⚡",
       desc: "Real-time distributed file locking protocol ensuring atomic multi-user synchronization across remote worktrees.",
       highlights: [
@@ -413,13 +409,13 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — SIDE-BY-SIDE EXPANDING SVG FOLDER CARDS */}
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — FLAT SOLID COLOR SVG FOLDER CARDS */}
           <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
               Featured Open-Source Pinned Repositories (Click Any Folder Card to Expand)
             </div>
 
-            {/* 4 SIDE-BY-SIDE INDIVIDUAL SVG FOLDER CARDS */}
+            {/* 4 SIDE-BY-SIDE INDIVIDUAL FLAT SVG FOLDER CARDS */}
             <div
               style={{
                 display: 'grid',
@@ -450,12 +446,12 @@ export default function GithubProfileSection() {
                       <path d={folderSvgPath} fill="#000000" stroke="none" />
                     </svg>
 
-                    {/* Main SVG Folder Card Container */}
+                    {/* Main SVG Folder Card Container with FLAT SOLID COLOR */}
                     <div
                       onClick={() => toggleExpand(repo.id)}
                       style={{
                         width: '100%',
-                        background: repo.gradient,
+                        background: repo.bg,
                         clipPath: 'url(#folderCardShapeGithub)',
                         WebkitClipPath: 'url(#folderCardShapeGithub)',
                         padding: '1.4rem 1.1rem 1.8rem 1.1rem',
@@ -465,19 +461,6 @@ export default function GithubProfileSection() {
                         zIndex: 2
                       }}
                     >
-                      {/* High-Gloss Liquid Sheen Overlay */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: 'radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%)',
-                          pointerEvents: 'none'
-                        }}
-                      />
-
                       {/* Header Badge & Icon */}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem', paddingRight: '40px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
