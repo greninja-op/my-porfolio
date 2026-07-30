@@ -5,11 +5,14 @@ import { playRetroClick } from '../utils/sound';
 
 export default function GithubProfileSection() {
   const [hoveredCell, setHoveredCell] = useState(null);
-  const [expandedId, setExpandedId] = useState(null);
+  const [hoveredFolderId, setHoveredFolderId] = useState(null);
+  const [clickedFolderId, setClickedFolderId] = useState(null);
+
+  const activeFolderId = hoveredFolderId || clickedFolderId;
 
   const toggleExpand = (id) => {
     playRetroClick();
-    setExpandedId((prev) => (prev === id ? null : id));
+    setClickedFolderId((prev) => (prev === id ? null : id));
   };
 
   // Generate 52 weeks of realistic contribution activity
@@ -379,10 +382,10 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — MACINTOSH FILE MANAGER FOLDER CARDS */}
+          {/* BENTO TILE 5: FEATURED PINNED REPOSITORIES — 60FPS HOVER-TO-EXPAND FOLDER CARDS */}
           <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000000', marginBottom: '1rem', fontFamily: 'var(--font-mono, monospace)' }}>
-              Featured Open-Source Pinned Repositories (Click Any Folder Card to Expand)
+              Featured Open-Source Pinned Repositories (Hover Any Folder Card to Expand)
             </div>
 
             {/* 4 SIDE-BY-SIDE MACINTOSH FILE MANAGER FOLDER CARDS */}
@@ -395,10 +398,18 @@ export default function GithubProfileSection() {
               }}
             >
               {pinnedRepos.map((repo) => {
-                const isExpanded = expandedId === repo.id;
+                const isExpanded = activeFolderId === repo.id;
 
                 return (
-                  <div key={repo.id} style={{ position: 'relative', width: '100%' }}>
+                  <div
+                    key={repo.id}
+                    onMouseEnter={() => {
+                      playRetroClick();
+                      setHoveredFolderId(repo.id);
+                    }}
+                    onMouseLeave={() => setHoveredFolderId(null)}
+                    style={{ position: 'relative', width: '100%' }}
+                  >
                     {/* TOP FOLDER TAB */}
                     <div
                       style={{
@@ -433,12 +444,15 @@ export default function GithubProfileSection() {
                         border: '2.5px solid #000000',
                         borderRadius: '0 10px 10px 10px',
                         padding: '1.25rem 1.1rem',
-                        boxShadow: '4px 4px 0 #000000',
+                        boxShadow: isExpanded ? '6px 6px 0 #000000' : '4px 4px 0 #000000',
+                        transform: isExpanded ? 'translate3d(-2px, -2px, 0px)' : 'translate3d(0px, 0px, 0px)',
+                        transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
                         color: '#000000',
                         cursor: 'pointer',
                         position: 'relative',
                         zIndex: 2,
-                        boxSizing: 'border-box'
+                        boxSizing: 'border-box',
+                        willChange: 'transform, box-shadow'
                       }}
                     >
                       {/* Title Bar & 3D Graphic */}
@@ -488,143 +502,145 @@ export default function GithubProfileSection() {
                         <span>⌥ {repo.forks}</span>
                       </div>
 
-                      {/* Click to Expand Trigger */}
+                      {/* Hover / Click Expand Trigger Indicator */}
                       <div style={{ marginTop: '0.85rem', textAlign: 'center' }}>
                         <span style={{ fontSize: '0.74rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', background: '#ffffff', border: '1.5px solid #000000', padding: '0.3rem 0.7rem', borderRadius: '5px', boxShadow: '2px 2px 0 #000000', display: 'inline-block', color: '#000000' }}>
-                          {isExpanded ? 'Collapse ▲' : 'Click to Expand Inline ▼'}
+                          {isExpanded ? 'Hovered / Active ▲' : 'Hover to Expand ▼'}
                         </span>
                       </div>
 
-                      {/* IN-PLACE ANIMATED EXPANSION PANEL */}
+                      {/* 60FPS HARDWARE-ACCELERATED HOVER ACCORDION EXPANSION PANEL */}
                       <div
                         style={{
-                          maxHeight: isExpanded ? '800px' : '0px',
+                          display: 'grid',
+                          gridTemplateRows: isExpanded ? '1fr' : '0fr',
+                          transition: 'grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease',
                           opacity: isExpanded ? 1 : 0,
-                          overflow: 'hidden',
-                          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                          marginTop: isExpanded ? '1rem' : '0px',
-                          paddingTop: isExpanded ? '1rem' : '0px',
-                          borderTop: isExpanded ? '2px dashed #000000' : 'none'
+                          willChange: 'grid-template-rows, opacity'
                         }}
                       >
-                        {/* 3-Column Metrics Counters */}
-                        <div
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(3, 1fr)',
-                            gap: '0.4rem',
-                            marginBottom: '0.85rem',
-                            padding: '0.65rem 0.4rem',
-                            borderRadius: '6px',
-                            background: '#ffffff',
-                            border: '1.5px solid #000000',
-                            boxShadow: '2px 2px 0 #000000'
-                          }}
-                        >
-                          {repo.metrics.map((m, mIdx) => (
-                            <div key={mIdx} style={{ textAlign: 'center' }}>
-                              <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
-                                {m.value}
-                              </div>
-                              <div style={{ fontSize: '0.62rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                                {m.label}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Key Technical Highlights */}
-                        <div style={{ marginBottom: '0.85rem' }}>
-                          <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
-                            Highlights:
-                          </div>
-                          <ul style={{ paddingLeft: '1rem', margin: 0, color: '#000000', fontSize: '0.78rem', lineHeight: 1.45, display: 'flex', flexDirection: 'column', gap: '0.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
-                            {repo.highlights.map((h, hIdx) => (
-                              <li key={hIdx}>{h}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Tech Stack Pills */}
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
-                          {repo.techStack.map((tech, tIdx) => (
-                            <span
-                              key={tIdx}
+                        <div style={{ overflow: 'hidden' }}>
+                          <div style={{ paddingTop: '1rem', borderTop: '2px dashed #000000', marginTop: '1rem' }}>
+                            {/* 3-Column Metrics Counters */}
+                            <div
                               style={{
-                                fontSize: '0.68rem',
-                                fontFamily: 'var(--font-mono, monospace)',
-                                padding: '0.2rem 0.45rem',
-                                borderRadius: '4px',
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(3, 1fr)',
+                                gap: '0.4rem',
+                                marginBottom: '0.85rem',
+                                padding: '0.65rem 0.4rem',
+                                borderRadius: '6px',
                                 background: '#ffffff',
-                                border: '1px solid #000000',
-                                color: '#000000',
-                                fontWeight: 900
+                                border: '1.5px solid #000000',
+                                boxShadow: '2px 2px 0 #000000'
                               }}
                             >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                              {repo.metrics.map((m, mIdx) => (
+                                <div key={mIdx} style={{ textAlign: 'center' }}>
+                                  <div style={{ fontSize: '1.1rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                                    {m.value}
+                                  </div>
+                                  <div style={{ fontSize: '0.62rem', color: '#000000', fontWeight: 800, marginTop: '0.1rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                                    {m.label}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
 
-                        {/* Action CTAs */}
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                          <a
-                            href={repo.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              playRetroClick();
-                            }}
-                            style={{
-                              padding: '0.55rem 0.85rem',
-                              borderRadius: '6px',
-                              background: '#ffffff',
-                              border: '1.5px solid #000000',
-                              boxShadow: '2px 2px 0 #000000',
-                              color: '#000000',
-                              fontWeight: 900,
-                              fontSize: '0.78rem',
-                              fontFamily: 'var(--font-mono, monospace)',
-                              textDecoration: 'none',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '0.35rem',
-                              flex: '1 1 auto',
-                              justifyContent: 'center'
-                            }}
-                          >
-                            <IconGithub size={15} /> GitHub Repo
-                          </a>
+                            {/* Key Technical Highlights */}
+                            <div style={{ marginBottom: '0.85rem' }}>
+                              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 900, color: '#000000', marginBottom: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
+                                Highlights:
+                              </div>
+                              <ul style={{ paddingLeft: '1rem', margin: 0, color: '#000000', fontSize: '0.78rem', lineHeight: 1.45, display: 'flex', flexDirection: 'column', gap: '0.25rem', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)' }}>
+                                {repo.highlights.map((h, hIdx) => (
+                                  <li key={hIdx}>{h}</li>
+                                ))}
+                              </ul>
+                            </div>
 
-                          <a
-                            href={repo.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              playRetroClick();
-                            }}
-                            style={{
-                              padding: '0.55rem 0.85rem',
-                              borderRadius: '6px',
-                              background: '#ffffff',
-                              border: '1.5px solid #000000',
-                              boxShadow: '2px 2px 0 #000000',
-                              color: '#000000',
-                              fontWeight: 900,
-                              fontSize: '0.78rem',
-                              fontFamily: 'var(--font-mono, monospace)',
-                              textDecoration: 'none',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '0.35rem',
-                              flex: '1 1 auto',
-                              justifyContent: 'center'
-                            }}
-                          >
-                            <IconExternalLink size={15} /> Specs
-                          </a>
+                            {/* Tech Stack Pills */}
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
+                              {repo.techStack.map((tech, tIdx) => (
+                                <span
+                                  key={tIdx}
+                                  style={{
+                                    fontSize: '0.68rem',
+                                    fontFamily: 'var(--font-mono, monospace)',
+                                    padding: '0.2rem 0.45rem',
+                                    borderRadius: '4px',
+                                    background: '#ffffff',
+                                    border: '1px solid #000000',
+                                    color: '#000000',
+                                    fontWeight: 900
+                                  }}
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+
+                            {/* Action CTAs */}
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                              <a
+                                href={repo.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  playRetroClick();
+                                }}
+                                style={{
+                                  padding: '0.55rem 0.85rem',
+                                  borderRadius: '6px',
+                                  background: '#ffffff',
+                                  border: '1.5px solid #000000',
+                                  boxShadow: '2px 2px 0 #000000',
+                                  color: '#000000',
+                                  fontWeight: 900,
+                                  fontSize: '0.78rem',
+                                  fontFamily: 'var(--font-mono, monospace)',
+                                  textDecoration: 'none',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.35rem',
+                                  flex: '1 1 auto',
+                                  justifyContent: 'center'
+                                }}
+                              >
+                                <IconGithub size={15} /> GitHub Repo
+                              </a>
+
+                              <a
+                                href={repo.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  playRetroClick();
+                                }}
+                                style={{
+                                  padding: '0.55rem 0.85rem',
+                                  borderRadius: '6px',
+                                  background: '#ffffff',
+                                  border: '1.5px solid #000000',
+                                  boxShadow: '2px 2px 0 #000000',
+                                  color: '#000000',
+                                  fontWeight: 900,
+                                  fontSize: '0.78rem',
+                                  fontFamily: 'var(--font-mono, monospace)',
+                                  textDecoration: 'none',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '0.35rem',
+                                  flex: '1 1 auto',
+                                  justifyContent: 'center'
+                                }}
+                              >
+                                <IconExternalLink size={15} /> Specs
+                              </a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
