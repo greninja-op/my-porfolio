@@ -191,7 +191,7 @@ export default function GithubProfileSection() {
             gap: '1rem'
           }}
         >
-          {/* BENTO TILE 1: PROFILE HERO CARD (Yellow Box) */}
+          {/* BENTO TILE 1: PROFILE HERO CARD (Yellow Box with GitHub Avatar) */}
           <div
             style={{
               gridColumn: 'span 1',
@@ -209,20 +209,24 @@ export default function GithubProfileSection() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
               <div
                 style={{
-                  width: '50px',
-                  height: '50px',
+                  width: '54px',
+                  height: '54px',
                   borderRadius: '50%',
                   background: '#ffffff',
-                  border: '2px solid #000000',
+                  border: '2.5px solid #000000',
+                  boxShadow: '2.5px 2.5px 0 #000000',
+                  flexShrink: 0,
+                  overflow: 'hidden',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.75rem',
-                  boxShadow: '2px 2px 0 #000000',
-                  flexShrink: 0
+                  justifyContent: 'center'
                 }}
               >
-                🐸
+                <img
+                  src="/assets/profile.jpg"
+                  alt="Arjun Sabu (@greninja-op)"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
 
               <div>
