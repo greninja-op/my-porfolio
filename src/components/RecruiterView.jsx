@@ -57,6 +57,11 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
           {/* Brand Logo & Title */}
           <a
             href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              playRetroClick();
+              document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -92,21 +97,82 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
           {/* Desktop Nav Links */}
           <nav
             style={{
+              display: 'flex',
               alignItems: 'center',
-              gap: '0.85rem',
-              fontSize: '0.82rem',
+              gap: '0.5rem',
+              fontSize: '0.85rem',
               fontWeight: 800,
               fontFamily: 'var(--font-mono, monospace)'
             }}
             className="desktop-nav-links"
           >
-            <a href="#github" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a
+              href="#github"
+              onClick={(e) => {
+                e.preventDefault();
+                playRetroClick();
+                document.getElementById('github')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              style={{
+                color: '#000000',
+                textDecoration: 'none',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                background: 'transparent',
+                border: 'none',
+                boxShadow: 'none',
+                transition: 'background 0.2s ease, color 0.2s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
               GitHub & Repos
             </a>
-            <a href="#tech-stack" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a
+              href="#tech-stack"
+              onClick={(e) => {
+                e.preventDefault();
+                playRetroClick();
+                document.getElementById('tech-stack')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              style={{
+                color: '#000000',
+                textDecoration: 'none',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                background: 'transparent',
+                border: 'none',
+                boxShadow: 'none',
+                transition: 'background 0.2s ease, color 0.2s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
               Toolset
             </a>
-            <a href="#contact" onClick={() => playRetroClick()} style={{ color: '#000000', textDecoration: 'none', padding: '0.2rem 0.45rem', borderRadius: '4px', background: '#e2e8f0', border: '1.5px solid #000000' }}>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                playRetroClick();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              style={{
+                color: '#000000',
+                textDecoration: 'none',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                background: 'transparent',
+                border: 'none',
+                boxShadow: 'none',
+                transition: 'background 0.2s ease, color 0.2s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+            >
               Contact
             </a>
           </nav>

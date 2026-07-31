@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { IconGithub, IconExternalLink } from './Icons';
 import MacWindowWrapper from './MacWindowWrapper';
 import { playRetroClick } from '../utils/sound';
@@ -8,8 +8,49 @@ export default function GithubProfileSection() {
   const [hoveredFolderId, setHoveredFolderId] = useState(null);
   const [clickedFolderId, setClickedFolderId] = useState(null);
   const [isTrainPaused, setIsTrainPaused] = useState(false);
+  const [snapOffset, setSnapOffset] = useState(0);
 
+  const containerRef = useRef(null);
   const activeFolderId = hoveredFolderId || clickedFolderId;
+
+  const centerCardInView = (cardEl) => {
+    if (!containerRef.current || !cardEl) return true;
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const cardRect = cardEl.getBoundingClientRect();
+
+    // Calculate exact center offset to align card precisely at container center
+    const cardCenter = cardRect.left + cardRect.width / 2;
+    const containerCenter = containerRect.left + containerRect.width / 2;
+    const delta = containerCenter - cardCenter;
+
+    setSnapOffset(delta);
+    return true;
+  };
+
+  const handleCardHover = (e, repoId) => {
+    const isAllowed = centerCardInView(e.currentTarget);
+    if (isAllowed) {
+      playRetroClick();
+      setHoveredFolderId(repoId);
+    }
+  };
+
+  const handleCardClick = (e, repoId) => {
+    const isAllowed = centerCardInView(e.currentTarget);
+    if (isAllowed) {
+      toggleExpand(repoId);
+    }
+  };
+
+  const handleMouseLeaveContainer = () => {
+    setHoveredFolderId(null);
+    setClickedFolderId(null);
+    setSnapOffset(0);
+    // Smoothly unpause after snap offset glides back to original position
+    setTimeout(() => {
+      setIsTrainPaused(false);
+    }, 250);
+  };
 
   const toggleExpand = (id) => {
     playRetroClick();
@@ -169,8 +210,15 @@ export default function GithubProfileSection() {
     }
   ];
 
-  // Duplicate cards for 100% infinite seamless horizontal marquee looping
-  const marqueeCards = [...pinnedRepos, ...pinnedRepos];
+  // 6x duplicated cards array ensuring deep pre-rendered padding on both left and right sides
+  const marqueeCards = [
+    ...pinnedRepos,
+    ...pinnedRepos,
+    ...pinnedRepos,
+    ...pinnedRepos,
+    ...pinnedRepos,
+    ...pinnedRepos
+  ];
 
   const languages = [
     { name: "Python", percent: 38, color: "#3572A5" },
@@ -301,7 +349,7 @@ export default function GithubProfileSection() {
             </div>
           </div>
 
-          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX */}
+          {/* BENTO TILE 3: 365-DAY GREEN ACTIVITY HEATMAP MATRIX & ENG INSIGHTS */}
           <div
             style={{
               gridColumn: '1 / -1',
@@ -312,30 +360,87 @@ export default function GithubProfileSection() {
               boxShadow: '3px 3px 0 #000000'
             }}
           >
-            <div style={{ fontSize: '0.88rem', fontWeight: 900, color: '#000000', marginBottom: '0.75rem', fontFamily: 'var(--font-mono, monospace)' }}>
-              1,420 Contributions in the Last Year
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <div style={{ fontSize: '0.88rem', fontWeight: 900, color: '#000000', fontFamily: 'var(--font-mono, monospace)' }}>
+                1,420 Contributions in the Last Year
+              </div>
+
+              {/* Heatmap Intensity Legend */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.72rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', color: '#000000' }}>
+                <span>Less</span>
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#e2e8f0', border: '1px solid #000' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#86efac', border: '1px solid #000' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#4ade80', border: '1px solid #000' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#22c55e', border: '1px solid #000' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#15803d', border: '1px solid #000' }} />
+                <span>More</span>
+              </div>
             </div>
 
-            {/* Heatmap Grid Touch Scroll */}
-            <div style={{ overflowX: 'auto', paddingBottom: '0.25rem', WebkitOverflowScrolling: 'touch' }}>
-              <div style={{ display: 'flex', gap: '4px', minWidth: '720px' }}>
-                {matrix.map((week, wIdx) => (
-                  <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    {week.map((day, dIdx) => (
-                      <div
-                        key={dIdx}
-                        style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '2px',
-                          background: getHeatmapColor(day.level),
-                          border: '1px solid #000000'
-                        }}
-                        title={`${day.count} contributions`}
-                      />
-                    ))}
-                  </div>
-                ))}
+            {/* FLEX ROW: MATRIX ON LEFT + HIGH-VALUE ENG METRICS INSIGHTS ON RIGHT */}
+            <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              {/* Heatmap Grid Touch Scroll Container */}
+              <div style={{ flex: '1 1 640px', overflowX: 'auto', paddingBottom: '0.25rem', WebkitOverflowScrolling: 'touch' }}>
+                <div style={{ display: 'flex', gap: '4px', minWidth: '680px' }}>
+                  {matrix.map((week, wIdx) => (
+                    <div key={wIdx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      {week.map((day, dIdx) => (
+                        <div
+                          key={dIdx}
+                          style={{
+                            width: '10px',
+                            height: '10px',
+                            borderRadius: '2px',
+                            background: getHeatmapColor(day.level),
+                            border: '1px solid #000000'
+                          }}
+                          title={`${day.count} contributions`}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT SIDE: LEFTOVER SPACE FILLER — STATS INSIGHTS BADGE PANEL */}
+              <div
+                style={{
+                  flex: '1 1 210px',
+                  background: '#f8fafc',
+                  border: '2px solid #000000',
+                  borderRadius: '6px',
+                  padding: '0.75rem 0.9rem',
+                  boxShadow: '2.5px 2.5px 0 #000000',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  minWidth: '190px'
+                }}
+              >
+                <div style={{ fontSize: '0.75rem', fontWeight: 900, fontFamily: 'var(--font-mono, monospace)', color: '#000000', borderBottom: '1.5px solid #000000', paddingBottom: '0.3rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span>⚡ Activity Insights</span>
+                  <span style={{ background: '#4ade80', border: '1px solid #000000', padding: '0.1rem 0.35rem', borderRadius: '3px', fontSize: '0.62rem', fontWeight: 900 }}>ONLINE</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 800 }}>
+                  <span style={{ color: '#475569' }}>🔥 Active Streak:</span>
+                  <span style={{ color: '#000000', fontWeight: 900 }}>147 Days</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 800 }}>
+                  <span style={{ color: '#475569' }}>📈 Daily Avg:</span>
+                  <span style={{ color: '#000000', fontWeight: 900 }}>3.8 / day</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 800 }}>
+                  <span style={{ color: '#475569' }}>🏆 Peak Month:</span>
+                  <span style={{ color: '#000000', fontWeight: 900 }}>Nov (194)</span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.72rem', fontFamily: 'var(--font-mono, monospace)', fontWeight: 800 }}>
+                  <span style={{ color: '#475569' }}>✅ PR Velocity:</span>
+                  <span style={{ color: '#000000', fontWeight: 900 }}>Top 1%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -404,11 +509,9 @@ export default function GithubProfileSection() {
 
             {/* CONTINUOUS HORIZONTAL MARQUEE CARD TICKER CONTAINER */}
             <div
+              ref={containerRef}
               onMouseEnter={() => setIsTrainPaused(true)}
-              onMouseLeave={() => {
-                setIsTrainPaused(false);
-                setHoveredFolderId(null);
-              }}
+              onMouseLeave={handleMouseLeaveContainer}
               style={{
                 width: '100%',
                 overflow: 'hidden',
@@ -416,67 +519,72 @@ export default function GithubProfileSection() {
                 position: 'relative'
               }}
             >
-              {/* ANIMATED TICKER TRAIN TRACK */}
+              {/* SOLUTION 2: AUTO-SNAP SMOOTH TRANSFORM OFFSET WRAPPER */}
               <div
                 style={{
-                  display: 'flex',
-                  gap: '1.25rem',
-                  width: 'max-content',
-                  animationName: 'folderCardsMarqueeTrain',
-                  animationDuration: '28s',
-                  animationTimingFunction: 'linear',
-                  animationIterationCount: 'infinite',
-                  animationPlayState: isTrainPaused || activeFolderId ? 'paused' : 'running',
+                  transform: `translate3d(${snapOffset}px, 0, 0)`,
+                  transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
                   willChange: 'transform'
                 }}
               >
-                {marqueeCards.map((repo, idx) => {
-                  const uniqueKey = `${repo.id}-${idx}`;
-                  const isExpanded = activeFolderId === repo.id;
+                {/* ANIMATED TICKER TRAIN TRACK */}
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '1.25rem',
+                    width: 'max-content',
+                    animationName: 'folderCardsMarqueeTrain',
+                    animationDuration: '64s',
+                    animationTimingFunction: 'linear',
+                    animationIterationCount: 'infinite',
+                    animationPlayState: isTrainPaused || activeFolderId ? 'paused' : 'running',
+                    willChange: 'transform'
+                  }}
+                >
+                  {marqueeCards.map((repo, idx) => {
+                    const uniqueKey = `${repo.id}-${idx}`;
+                    const isExpanded = activeFolderId === repo.id;
 
-                  return (
-                    <div
-                      key={uniqueKey}
-                      onMouseEnter={() => {
-                        playRetroClick();
-                        setHoveredFolderId(repo.id);
-                      }}
-                      style={{
-                        position: 'relative',
-                        width: '320px',
-                        flexShrink: 0,
-                        zIndex: isExpanded ? 50 : 2
-                      }}
-                    >
-                      {/* SEAMLESS FOLDER TAB */}
+                    return (
                       <div
+                        key={uniqueKey}
+                        onMouseEnter={(e) => handleCardHover(e, repo.id)}
                         style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.4rem',
-                          background: repo.bg,
-                          borderLeft: '2.5px solid #000000',
-                          borderTop: '2.5px solid #000000',
-                          borderRight: '2.5px solid #000000',
-                          borderBottom: 'none',
-                          borderRadius: '8px 12px 0 0',
-                          padding: '0.35rem 0.85rem',
-                          fontWeight: 900,
-                          fontSize: '0.8rem',
-                          fontFamily: 'var(--font-mono, monospace)',
-                          color: '#000000',
                           position: 'relative',
-                          zIndex: 3,
-                          marginBottom: '-2.5px'
+                          width: '320px',
+                          flexShrink: 0,
+                          zIndex: isExpanded ? 50 : 2
                         }}
                       >
-                        <span>📁</span>
-                        <span>{repo.name}</span>
-                      </div>
+                        {/* SEAMLESS FOLDER TAB */}
+                        <div
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            background: repo.bg,
+                            borderLeft: '2.5px solid #000000',
+                            borderTop: '2.5px solid #000000',
+                            borderRight: '2.5px solid #000000',
+                            borderBottom: 'none',
+                            borderRadius: '8px 12px 0 0',
+                            padding: '0.35rem 0.85rem',
+                            fontWeight: 900,
+                            fontSize: '0.8rem',
+                            fontFamily: 'var(--font-mono, monospace)',
+                            color: '#000000',
+                            position: 'relative',
+                            zIndex: 3,
+                            marginBottom: '-2.5px'
+                          }}
+                        >
+                          <span>📁</span>
+                          <span>{repo.name}</span>
+                        </div>
 
-                      {/* MAIN FOLDER BODY CONTAINER */}
-                      <div
-                        onClick={() => toggleExpand(repo.id)}
+                        {/* MAIN FOLDER BODY CONTAINER */}
+                        <div
+                          onClick={(e) => handleCardClick(e, repo.id)}
                         style={{
                           width: '100%',
                           background: repo.bg,
@@ -689,6 +797,7 @@ export default function GithubProfileSection() {
               </div>
             </div>
           </div>
+        </div>
 
         </div>
       </MacWindowWrapper>
@@ -697,10 +806,10 @@ export default function GithubProfileSection() {
       <style>{`
         @keyframes folderCardsMarqueeTrain {
           0% {
-            transform: translate3d(0, 0, 0);
+            transform: translate3d(-33.333333%, 0, 0);
           }
           100% {
-            transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-66.666666%, 0, 0);
           }
         }
       `}</style>
