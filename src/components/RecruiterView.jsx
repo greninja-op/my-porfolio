@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HeroRecruiter from './HeroRecruiter';
-import GithubProfileSection from './GithubProfileSection';
 import TechStackSection from './TechStackSection';
 import ContactFooterSection from './ContactFooterSection';
 import ResumeMacWindow from './ResumeMacWindow';
@@ -106,29 +105,6 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
             }}
             className="desktop-nav-links"
           >
-            <a
-              href="#github"
-              onClick={(e) => {
-                e.preventDefault();
-                playRetroClick();
-                document.getElementById('github')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-              style={{
-                color: '#000000',
-                textDecoration: 'none',
-                padding: '0.35rem 0.65rem',
-                borderRadius: '6px',
-                background: 'transparent',
-                border: 'none',
-                boxShadow: 'none',
-                transition: 'background 0.2s ease, color 0.2s ease',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#f1f5f9')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-            >
-              GitHub & Repos
-            </a>
             <a
               href="#tech-stack"
               onClick={(e) => {
@@ -252,8 +228,6 @@ export default function RecruiterView({ onSwitchToOS, onOpenGateway }) {
           onSwitchToOS={onSwitchToOS}
           onOpenResume={() => setShowResumeModal(true)}
         />
-
-        <GithubProfileSection />
 
         <TechStackSection />
 
